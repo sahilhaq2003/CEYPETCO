@@ -1,0 +1,117 @@
+[
+  {
+    "name": "Ceypetco 2T JASO FC",
+    "tds": "/documents/lubricants/TDS-Ceypetco-2T-JASO-FC.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-2T-JASO-FC.pdf"
+  },
+  {
+    "name": "Ceypetco Enduro SAE 10W30, 15W40, 20W50",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Enduro-15W40.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Enduro-SAE-10W30-15W4020W50.pdf"
+  },
+  {
+    "name": "Ceypetco Power Steering Oil",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Power-Steering-Oil.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Power-Steering-Oil.pdf"
+  },
+  {
+    "name": "Ceypetco 4T JASO MA2",
+    "tds": "/documents/lubricants/TDS-Ceypetco-4T-JASO-MA2.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-4T-JASO-MA2.pdf"
+  },
+  {
+    "name": "Ceypetco ATF Dexron III",
+    "tds": "/documents/lubricants/TDS-Ceypetco-ATF-Dexron-III.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-ATF-Dexron-III.pdf"
+  },
+  {
+    "name": "Ceypetco Brake Fluid DOT3",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Brake-Fluid-DOT3.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Brake-Fluid-DOT-3.pdf"
+  },
+  {
+    "name": "Ceypetco Brake Fluid DOT4",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Brake-Fluid-DOT4.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Brake-Fluid-DOT-4.pdf"
+  },
+  {
+    "name": "Ceypetco Circulation Oil ISO VG 150",
+    "tds": null,
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Circulation-Oil-ISO-VG-150.pdf"
+  },
+  {
+    "name": "Ceypetco Coolant GREEN - RED",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Radiator-Coolant-Red.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Coolant-GREEN-RED.pdf"
+  },
+  {
+    "name": "Ceypetco Grease MP",
+    "tds": "/documents/lubricants/TDS-Ceypetco-MP-Grease.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Grease-MP.pdf"
+  },
+  {
+    "name": "Ceypetco Grease EP",
+    "tds": "/documents/lubricants/TDS-Ceypetco-EP-Grease.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Grease-EP.pdf"
+  },
+  {
+    "name": "Ceypetco HVI Hydra",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Hydra.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-HVI-Hydra.pdf"
+  },
+  {
+    "name": "Ceypetco Hypertrans IEC 60296",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Hypertrans-IEC-60296.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Hypertrans-SDS-IEC-60296-2020.pdf"
+  },
+  {
+    "name": "Ceypetco Penetrating Oil",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Penetrating-Oil.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Penetrating-Oil.pdf"
+  },
+  {
+    "name": "Ceypetco Supra",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Supra.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Supra.pdf"
+  },
+  {
+    "name": "Ceypetco Supreme XHD",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Supreme-XHD.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Supreme-XHD.pdf"
+  },
+  {
+    "name": "Ceypetco Automotive Gear Oil GL-5",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Gear-Oil-GL-5.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Automotive-Gear-Oil-GL-5.pdf"
+  },
+  {
+    "name": "Ceypetco Automotive Gear Oil GL-4",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Gear-Oil-GL-4.pdf",
+    "msds": "/documents/lubricants/MSDS-Ceypetco-Automotive-Gear-Oil-GL-4.pdf"
+  },
+  {
+    "name": "Ceypetco Universal Tractor Fluid",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Universal-Tractor-Fluid.pdf",
+    "msds": null
+  },
+  {
+    "name": "Ceypetco 4T Scooter JASO MB",
+    "tds": "/documents/lubricants/TDS-Ceypetco-4T-Scooter-JASO-MB.pdf",
+    "msds": null
+  },
+  {
+    "name": "Ceypetco Rodeo Xtra",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Rodeo-Xtra.pdf",
+    "msds": null
+  },
+  {
+    "name": "Ceypetco Platinum 0W-20",
+    "tds": "/documents/lubricants/TDS-Ceypetco-Platineum-0W-20-1.pdf",
+    "msds": null
+  },
+  {
+    "name": "Ceypetco MTF 80W-90 GL-4",
+    "tds": "/documents/lubricants/TDS-Ceypetco-MTF-80W-90-GL-4.pdf",
+    "msds": null
+  }
+]
