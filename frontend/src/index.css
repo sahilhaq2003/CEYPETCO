@@ -2985,7 +2985,7 @@ footer {
   background-size: cover;
 }
 .news-image.image-1 {
-  background-image: url('/images/refinery.jpg');
+  background-image: url('/images/refinery.png');
 }
 .news-image.image-2 {
   background-image: url('/images/hero.png');
@@ -6282,12 +6282,24 @@ footer {
 }
 
 /* Editorial home hero */
+.hero-photo {
+  filter: brightness(1.18) saturate(1.06);
+}
+
+.hero-photo-3 {
+  object-position: center 52%;
+}
+
+.hero-photo-4 {
+  object-position: center 56%;
+}
+
 .hero-shade {
   background: linear-gradient(
     90deg,
-    rgba(2, 28, 37, 0.88) 0%,
-    rgba(2, 28, 37, 0.55) 48%,
-    rgba(2, 28, 37, 0.08) 78%
+    rgba(2, 28, 37, 0.54) 0%,
+    rgba(2, 28, 37, 0.24) 48%,
+    rgba(2, 28, 37, 0) 78%
   );
 }
 .hero-copy-panel {
@@ -6393,8 +6405,8 @@ footer {
   .hero-shade {
     background: linear-gradient(
       90deg,
-      rgba(2, 28, 37, 0.9),
-      rgba(2, 28, 37, 0.35)
+      rgba(2, 28, 37, 0.58),
+      rgba(2, 28, 37, 0.12)
     );
   }
 }
@@ -9424,6 +9436,28 @@ body {
   border: 1px solid var(--line);
   border-top: 2px solid var(--red);
   box-shadow: 0 12px 30px rgba(6, 46, 59, 0.06);
+}
+
+.management-team-section .leader-photo {
+  height: 235px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-top: 14px;
+}
+
+.management-team-section .leader-photo img {
+  width: auto;
+  height: 100%;
+  max-width: 78%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+@media (max-width: 600px) {
+  .management-team-section .leader-photo {
+    height: 220px;
+  }
 }
 
 /* Compact online banking panel */

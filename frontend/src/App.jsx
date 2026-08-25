@@ -133,7 +133,7 @@ const divisions = [
   [
     'Refinery',
     'At the heart of CPC operations, strengthening the nation’s petroleum supply.',
-    '/images/refinery.jpg',
+    '/images/refinery.png',
     '/refinery',
   ],
   [
@@ -151,21 +151,6 @@ const divisions = [
 ];
 const heroSlides = [
   {
-    image: '/images/hero.png',
-    alt: 'Ceypetco operations professional at work',
-    eyebrow: 'ENERGY FOR EVERY JOURNEY',
-    title: (
-      <>
-        Powering Sri Lanka.
-        <br />
-        Every day.
-      </>
-    ),
-    copy: 'Reliable energy solutions that keep communities connected, businesses moving and national progress on course.',
-    cta: 'Discover Ceypetco',
-    href: '/about',
-  },
-  {
     image: '/images/distribution.jpg',
     alt: 'Ceypetco fuel distribution truck travelling through Sri Lanka',
     eyebrow: 'ISLANDWIDE DISTRIBUTION',
@@ -181,7 +166,7 @@ const heroSlides = [
     href: '#fuel-network',
   },
   {
-    image: '/images/refinery.jpg',
+    image: '/images/refinery.png',
     alt: 'Ceypetco refinery under a clear blue sky',
     eyebrow: 'REFINING WITH PURPOSE',
     title: (
@@ -194,6 +179,36 @@ const heroSlides = [
     copy: 'Experienced people, proven infrastructure and disciplined operations supporting a resilient energy future for Sri Lanka.',
     cta: 'Explore the refinery',
     href: '/refinery',
+  },
+  {
+    image: '/images/agro-products.jpg',
+    alt: 'Ceypetco agrochemical products supporting Sri Lankan agriculture',
+    eyebrow: 'SUPPORTING SRI LANKAN AGRICULTURE',
+    title: (
+      <>
+        Stronger crops.
+        <br />
+        Confident farmers.
+      </>
+    ),
+    copy: 'Quality crop-protection solutions, responsible production and islandwide support helping farming communities prosper.',
+    cta: 'Explore Agro Chemicals',
+    href: '/agro-chemicals',
+  },
+  {
+    image: '/images/fuel-train.jpg',
+    alt: 'Fuel transport train travelling through Sri Lanka',
+    eyebrow: 'ENERGY IN MOTION',
+    title: (
+      <>
+        Moving energy.
+        <br />
+        Connecting the nation.
+      </>
+    ),
+    copy: 'Dependable transport and distribution infrastructure helps essential petroleum products reach communities and industries across Sri Lanka.',
+    cta: 'Explore Marketing & Sales',
+    href: '/marketing-sales',
   },
 ];
 const fuelDistricts = [
@@ -486,7 +501,7 @@ const pageData = {
     title: 'Modernising Sri Lanka’s refining future.',
     intro:
       'The Sapugaskanda Oil Refinery Expansion and Modernization Project is designed to strengthen capacity, product quality and national energy resilience.',
-    image: '/images/refinery.jpg',
+    image: '/images/refinery.png',
   },
   '/annual-reports': {
     label: 'CORPORATE PUBLICATIONS · ANNUAL REPORTS',
@@ -514,7 +529,7 @@ const pageData = {
     title: 'Open and transparent opportunities.',
     intro:
       'Explore current tenders, supplier registrations and procurement documents.',
-    image: '/images/refinery.jpg',
+    image: '/images/refinery.png',
   },
   '/careers': {
     label: 'CAREERS',
@@ -2748,7 +2763,7 @@ function InnerPage({ type }) {
       title: 'Supplier Registration',
       category: 'Procurement',
       text: 'Register interest in supplying products and professional services to CPC.',
-      image: 'refinery.jpg',
+      image: 'refinery.png',
       href: '/tenders?from=services#supplier-registration',
     },
     {
@@ -4280,7 +4295,7 @@ function App() {
             <div className="hero-slides">
               {heroSlides.map((item, index) => (
                 <img
-                  className={`hero-photo ${index === slide ? 'active' : ''}`}
+                  className={`hero-photo hero-photo-${index + 1} ${index === slide ? 'active' : ''}`}
                   src={item.image}
                   alt={item.alt}
                   key={item.image}
