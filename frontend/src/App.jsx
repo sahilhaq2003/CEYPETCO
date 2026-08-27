@@ -913,11 +913,10 @@ function ManagementTeam() {
           </div>
         </div>
         <div className="leadership-grid">
-          {leaders.map(([name, role, image], i) => (
+          {leaders.map(([name, role, image]) => (
             <article key={name}>
               <div className="leader-photo">
                 <img src={`/images/${image}`} alt={name} />
-                <span>0{i + 1}</span>
               </div>
               <h3>{name}</h3>
               <p>{role}</p>
@@ -4619,41 +4618,71 @@ function App() {
         <InnerPage type={path} />
       )}
       <footer id="footer">
-        <div className="container footer-grid">
+        <div className="container footer-main">
           <div className="footer-brand">
-            <img src="/images/ceypetco-logo.png" alt="" />
-            <h3>
-              Ceylon Petroleum
-              <br />
-              Corporation
-            </h3>
-            <p>Powering progress. Serving the nation.</p>
-          </div>
-          <div>
-            <h4>Visit us</h4>
+            <div className="footer-brand-lockup">
+              <img
+                src="/images/ceypetco-logo.png"
+                alt="Ceylon Petroleum Corporation logo"
+              />
+              <div>
+                <h3>Ceylon Petroleum Corporation</h3>
+                <span>CEYPETCO · SRI LANKA</span>
+              </div>
+            </div>
             <p>
-              No. 609, Dr. Danister de Silva Mawatha,
-              <br />
-              Colombo 09, Sri Lanka.
+              Delivering dependable petroleum products and energy services that
+              support mobility, industry and national progress.
             </p>
-          </div>
-          <div>
-            <h4>Contact</h4>
-            <a href="tel:+94117296100">+94 11 7296 100</a>
-            <a href="mailto:secratariat@ceypetco.gov.lk">
-              secratariat@ceypetco.gov.lk
+            <a className="footer-brand-link" href="/about">
+              About the corporation <Icon name="arrow" size={16} />
             </a>
           </div>
-          <div>
-            <h4>Quick links</h4>
-            <a href="/services">Services</a>
-            <a href="/tenders">Tenders</a>
+          <nav className="footer-links" aria-label="Corporation links">
+            <h4>Corporation</h4>
             <a href="/about">About us</a>
+            <a href="/history">Our history</a>
+            <a href="/services">All services</a>
+            <a href="/careers">Careers</a>
+            <a href="/contact">Contact us</a>
+          </nav>
+          <nav className="footer-links" aria-label="Public resource links">
+            <h4>Public resources</h4>
+            <a href="/marketing-sales">Fuel pricing</a>
+            <a href="/tenders">Tenders</a>
+            <a href="/notices">Notices</a>
+            <a href="/annual-reports">Annual reports</a>
+            <a href="/right-to-information">Right to Information</a>
+          </nav>
+          <div className="footer-contact">
+            <h4>Head office</h4>
+            <div className="footer-contact-item">
+              <Icon name="building" size={19} />
+              <p>
+                No. 609, Dr. Danister de Silva Mawatha, Colombo 09, Sri Lanka.
+              </p>
+            </div>
+            <div className="footer-contact-item">
+              <Icon name="phone" size={19} />
+              <div>
+                <span>General line</span>
+                <a href="tel:+94117296100">+94 11 7296 100</a>
+              </div>
+            </div>
+            <div className="footer-contact-item">
+              <Icon name="globe" size={19} />
+              <div>
+                <span>Email</span>
+                <a href="mailto:secretariat@ceypetco.gov.lk">
+                  secretariat@ceypetco.gov.lk
+                </a>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="container copyright">
+        <div className="container footer-bottom">
           <span>© 2026 Ceylon Petroleum Corporation</span>
-          <span>Official information, thoughtfully redesigned.</span>
+          <span>Powering progress. Serving the nation.</span>
         </div>
       </footer>
     </div>
