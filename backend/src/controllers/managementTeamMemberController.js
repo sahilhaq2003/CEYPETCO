@@ -22,4 +22,22 @@ const getPublished = async (req, res, next) => {
   }
 };
 
-module.exports = { ...crud, getPublished };
+const getPublishedById = async (req, res, next) => {
+  try {
+    const item = await ManagementTeamMember.findOne({
+      _id: req.params.id,
+      status: "published",
+    });
+    if (!item) {
+      return res.status(404).json({
+        success: false,
+        message: "Management team member not found",
+      });
+    }
+    res.status(200).json({ success: true, data: item });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { ...crud, getPublished, getPublishedById };

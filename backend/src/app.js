@@ -21,9 +21,11 @@ const supplierSectionRoutes = require("./routes/supplierSectionRoutes");
 const annualReportRoutes = require("./routes/annualReportRoutes");
 const managementTeamMemberRoutes = require("./routes/managementTeamMemberRoutes");
 const managementContactRoutes = require("./routes/managementContactRoutes");
-const userRoutes = require("./routes/userRoutes");const errorHandler = require("./middleware/errorMiddleware");
+const userRoutes = require("./routes/userRoutes");
+const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
+const isDevelopment = process.env.NODE_ENV === "development";
 
 app.use(
   helmet({
@@ -71,17 +73,33 @@ const loginLimiter = rateLimit({
   },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: () => isDevelopment,
 });
 
-const apiLimiter = rateLimit({
+const readLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
+  max: 1000,
   message: {
     success: false,
-    message: "Too many requests, please try again later",
+    message: "Too many read requests, please try again later",
   },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) =>
+    isDevelopment || !["GET", "HEAD", "OPTIONS"].includes(req.method),
+});
+
+const writeLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  message: {
+    success: false,
+    message: "Too many changes submitted, please try again later",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+  skip: (req) =>
+    isDevelopment || ["GET", "HEAD", "OPTIONS"].includes(req.method),
 });
 
 app.get("/api/health", (req, res) => {
@@ -92,7 +110,8 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth/login", loginLimiter);
-app.use("/api", apiLimiter);
+app.use("/api", readLimiter);
+app.use("/api", writeLimiter);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/admin/dashboard", dashboardRoutes);

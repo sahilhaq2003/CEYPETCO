@@ -5,6 +5,7 @@ const { protect } = require("../middleware/authMiddleware");
 const { authorize } = require("../middleware/roleMiddleware");
 
 router.route("/active").get(c.getPublished);
+router.route("/active/:id").get(c.getPublishedById);
 
 router.use(protect);
 

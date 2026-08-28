@@ -9798,6 +9798,27 @@ body {
   min-width: 0;
 }
 
+.management-team-section .team-member-portrait {
+  min-width: 0;
+  margin: 0;
+}
+
+.management-team-section .team-member-portrait figcaption {
+  min-height: 58px;
+  padding: 14px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  background: #fff;
+  border: 1px solid #dce3e2;
+  border-top: 0;
+  font: 800 12px/1.45 'Manrope';
+  letter-spacing: 0.07em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 /* Loading and empty-state cards retain a compact standalone presentation. */
 .management-team-section .team-member-card {
   display: grid;
@@ -9906,6 +9927,29 @@ body {
   line-height: 1.75;
   color: var(--muted);
   margin: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.management-team-section .team-member-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 17px;
+  color: var(--red);
+  font: 800 12px 'Manrope';
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.management-team-section .team-member-more svg {
+  transition: transform 0.2s ease;
+}
+
+.management-team-section .team-member-more:hover svg {
+  transform: translateX(4px);
 }
 
 @keyframes shimmer {
@@ -9961,6 +10005,146 @@ body {
   }
   .management-team-section .team-member-card .team-member-info {
     padding: 22px;
+  }
+}
+
+/* Individual management profile */
+.management-profile-page {
+  min-height: 75vh;
+  background: #eef2f1;
+}
+
+.management-profile-hero {
+  padding: 52px 0 90px;
+  background:
+    linear-gradient(115deg, rgba(6, 46, 59, 0.98), rgba(9, 62, 75, 0.94)),
+    radial-gradient(circle at 85% 20%, rgba(213, 16, 28, 0.2), transparent 35%);
+}
+
+.management-profile-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 34px;
+  color: #c5d7db;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.management-profile-back svg {
+  transform: rotate(180deg);
+}
+
+.management-profile-back:hover {
+  color: #fff;
+}
+
+.management-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
+  gap: clamp(48px, 7vw, 100px);
+  align-items: start;
+}
+
+.management-profile-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin: 36px 0 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #e8eeed;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-top: 4px solid var(--red);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.25);
+}
+
+.management-profile-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
+
+.management-profile-photo span {
+  color: var(--red);
+  font: 800 42px 'Manrope';
+}
+
+.management-profile-copy {
+  max-width: 690px;
+  color: #fff;
+}
+
+.management-profile-copy h1 {
+  margin: 12px 0 10px;
+  color: #fff;
+  font: 800 clamp(38px, 5vw, 64px)/1.08 'Manrope';
+  letter-spacing: -0.045em;
+}
+
+.management-profile-role {
+  margin: 0;
+  color: #ff8d94;
+  font: 800 14px 'Manrope';
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.management-profile-divider {
+  width: 58px;
+  height: 3px;
+  margin: 32px 0;
+  background: var(--red);
+}
+
+.management-profile-copy h2 {
+  margin: 0 0 14px;
+  color: #fff;
+  font: 700 18px 'Manrope';
+}
+
+.management-profile-description {
+  margin: 0;
+  color: #c5d7db;
+  font-size: 16px;
+  line-height: 1.9;
+  white-space: pre-line;
+}
+
+.management-profile-status {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.management-profile-status h1 {
+  margin: 8px 0 24px;
+  font: 800 38px 'Manrope';
+}
+
+.management-profile-status a {
+  color: var(--red);
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .management-profile-hero {
+    padding: 34px 0 65px;
+  }
+  .management-profile-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .management-profile-photo {
+    width: min(100%, 340px);
+    margin: 0 auto;
+  }
+  .management-profile-copy h1 {
+    font-size: clamp(34px, 10vw, 48px);
+  }
+  .management-profile-description {
+    font-size: 15px;
   }
 }
 

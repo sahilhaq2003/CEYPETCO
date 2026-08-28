@@ -1079,8 +1079,11 @@ function ManagementTeam() {
               >
                 <div className="team-row-portraits">
                   {row.map((member) => (
-                    <figure className="team-member-photo" key={member._id}>
-                      {renderPhoto(member)}
+                    <figure className="team-member-portrait" key={member._id}>
+                      <div className="team-member-photo">
+                        {renderPhoto(member)}
+                      </div>
+                      <figcaption>{member.role || 'Management Team'}</figcaption>
                     </figure>
                   ))}
                 </div>
@@ -1088,11 +1091,16 @@ function ManagementTeam() {
                   {row.map((member) => (
                     <article className="team-member-info" key={member._id}>
                       <h3>{member.name}</h3>
-                      <p className="team-member-role">{member.role}</p>
                       <p className="team-member-desc">
                         {member.description ||
                           'Leadership profile details are being prepared.'}
                       </p>
+                      <a
+                        className="team-member-more"
+                        href={`/management-team/${member._id}`}
+                      >
+                        See more <Icon name="arrow" size={15} />
+                      </a>
                     </article>
                   ))}
                 </div>
@@ -1102,6 +1110,82 @@ function ManagementTeam() {
         )}
       </div>
     </section>
+  );
+}
+
+function ManagementTeamProfile({ memberId }) {
+  const [member, setMember] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    api
+      .get(`/admin/team-members/active/${memberId}`)
+      .then((res) => {
+        if (!cancelled) setMember(res.data?.data || null);
+      })
+      .catch(() => {
+        if (!cancelled) setNotFound(true);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [memberId]);
+
+  if (loading) {
+    return (
+      <main className="inner-page management-profile-page">
+        <div className="container management-profile-status">Loading profile...</div>
+      </main>
+    );
+  }
+
+  if (notFound || !member) {
+    return (
+      <main className="inner-page management-profile-page">
+        <div className="container management-profile-status">
+          <p className="eyebrow">MANAGEMENT TEAM</p>
+          <h1>Profile not found</h1>
+          <a href="/about">Back to management team</a>
+        </div>
+      </main>
+    );
+  }
+
+  return (
+    <main className="inner-page management-profile-page">
+      <section className="management-profile-hero">
+        <div className="container">
+          <a className="management-profile-back" href="/about">
+            <Icon name="arrow" size={16} /> Back to management team
+          </a>
+          <div className="management-profile-grid">
+            <figure className="management-profile-photo">
+              {member.photo ? (
+                <img src={member.photo} alt={member.name} />
+              ) : (
+                <span>{member.name.slice(0, 2).toUpperCase()}</span>
+              )}
+            </figure>
+            <article className="management-profile-copy">
+              <p className="eyebrow light">CEYPETCO LEADERSHIP</p>
+              <h1>{member.name}</h1>
+              <p className="management-profile-role">{member.role}</p>
+              <div className="management-profile-divider" />
+              <h2>Professional profile</h2>
+              <p className="management-profile-description">
+                {member.description ||
+                  'Leadership profile details are being prepared.'}
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
 
@@ -4803,6 +4887,11 @@ function App() {
         </main>
       ) : districtFromPath(path) ? (
         <FuelStationPage district={districtFromPath(path)} />
+      ) : path.startsWith('/management-team/') ? (
+        <ManagementTeamProfile
+          key={path}
+          memberId={path.split('/').pop()}
+        />
       ) : (
         <InnerPage type={path} />
       )}
