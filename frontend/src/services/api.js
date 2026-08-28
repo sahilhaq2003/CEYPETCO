@@ -9,6 +9,16 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
+    // Let the browser generate multipart/form-data including its boundary.
+    // A manually supplied Content-Type causes multer to receive an empty body
+    // on some serverless/proxy deployments.
+    if (typeof FormData !== "undefined" && config.data instanceof FormData) {
+      if (typeof config.headers?.delete === "function") {
+        config.headers.delete("Content-Type");
+      } else if (config.headers) {
+        delete config.headers["Content-Type"];
+      }
+    }
     const token = localStorage.getItem("ceypetco_token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;

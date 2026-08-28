@@ -5,10 +5,30 @@ const ManagementTeamMember = require("./models/ManagementTeamMember");
 const ManagementContact = require("./models/ManagementContact");
 
 const team = [
-  ["D J A S De S Rajakaruna", "Chairman", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg"],
-  ["Dr. Mayura Neththikumarage", "Managing Director", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/managing-director.png"],
-  ["Mahendra Garusinghe", "Director", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/director-1.jpeg"],
-  ["R M S P S Bandara", "Director", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/director-2.jpeg"],
+  [
+    "D J A S De S Rajakaruna",
+    "Chairman",
+    "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg",
+    "Leads the governing board of Ceylon Petroleum Corporation, guiding corporate strategy, governance and long-term direction of the national petroleum entity.",
+  ],
+  [
+    "Dr. Mayura Neththikumarage",
+    "Managing Director",
+    "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/managing-director.png",
+    "Oversees day-to-day operations and business management of the Corporation, driving operational efficiency, service delivery and strategic execution across all divisions.",
+  ],
+  [
+    "Mahendra Garusinghe",
+    "Director",
+    "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/director-1.jpeg",
+    "Serves on the board of directors, providing governance oversight and contributing to key decisions on refined products, commercial operations and corporate policy.",
+  ],
+  [
+    "R M S P S Bandara",
+    "Director",
+    "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/director-2.jpeg",
+    "Serves on the board of directors, supporting governance, financial stewardship and the strategic stewardship of the Corporation's operations and people.",
+  ],
 ];
 
 const contacts = [
@@ -68,16 +88,24 @@ const contacts = [
 const seed = async () => {
   await connectDB();
 
-  for (const [i, [name, role, photo]] of team.entries()) {
+  for (const [i, [name, role, photo, description]] of team.entries()) {
     const exists = await ManagementTeamMember.findOne({ name });
     if (exists) {
-      console.log(`Team member already exists: ${name}`);
+      const update = {};
+      if (description && !exists.description) update.description = description;
+      if (Object.keys(update).length > 0) {
+        await ManagementTeamMember.updateOne({ _id: exists._id }, update);
+        console.log(`Team member updated: ${name}`);
+      } else {
+        console.log(`Team member already exists: ${name}`);
+      }
       continue;
     }
     await ManagementTeamMember.create({
       name,
       role,
       photo,
+      description,
       order: i,
       status: "published",
     });

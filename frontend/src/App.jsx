@@ -1007,6 +1007,25 @@ function ManagementTeam() {
     };
   }, []);
 
+  const rows = [];
+  for (let i = 0; i < leaders.length; i += 2) {
+    rows.push(leaders.slice(i, i + 2));
+  }
+
+  const renderPhoto = (member) =>
+    member.photo ? (
+      <img src={member.photo} alt={member.name} />
+    ) : (
+      <span className="leader-photo-fallback">
+        {member.name
+          .split(' ')
+          .slice(0, 2)
+          .map((w) => w[0])
+          .join('')
+          .toUpperCase()}
+      </span>
+    );
+
   return (
     <section className="content-section management-team-section">
       <div className="container">
@@ -1016,46 +1035,71 @@ function ManagementTeam() {
             <h2>Management team</h2>
           </div>
         </div>
-        <div className="leadership-grid">
-          {loading ? (
-            <article>
-              <div className="leader-photo">
-                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg" alt="" />
-              </div>
-              <h3>Loading...</h3>
-              <p>Please wait</p>
-            </article>
-          ) : leaders.length === 0 ? (
-            <article>
-              <div className="leader-photo">
-                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg" alt="" />
-              </div>
-              <h3>No team members yet</h3>
-              <p>Check back soon</p>
-            </article>
-          ) : (
-            leaders.map((member) => (
-              <article key={member._id}>
-                <div className="leader-photo">
-                  {member.photo ? (
-                    <img src={member.photo} alt={member.name} />
-                  ) : (
-                    <span className="leader-photo-fallback">
-                      {member.name
-                        .split(' ')
-                        .slice(0, 2)
-                        .map((w) => w[0])
-                        .join('')
-                        .toUpperCase()}
-                    </span>
-                  )}
+
+        {loading ? (
+          <div className="management-team-rows">
+            <div className="team-row">
+              {Array.from({ length: 2 }).map((_, i) => (
+                <article className="team-member-card" key={i}>
+                  <div className="team-member-photo">
+                    <div className="leader-photo-loading" />
+                  </div>
+                  <div className="team-member-info">
+                    <h3>Loading...</h3>
+                    <p className="team-member-role">Please wait</p>
+                    <p className="team-member-desc">Loading team information.</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : leaders.length === 0 ? (
+          <div className="management-team-rows">
+            <div className="team-row">
+              <article className="team-member-card">
+                <div className="team-member-photo">
+                  <img src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg" alt="" />
                 </div>
-                <h3>{member.name}</h3>
-                <p>{member.role}</p>
+                <div className="team-member-info">
+                  <h3>No team members yet</h3>
+                  <p className="team-member-role">Check back soon</p>
+                  <p className="team-member-desc">
+                    Leadership information will appear here shortly.
+                  </p>
+                </div>
               </article>
-            ))
-          )}
-        </div>
+            </div>
+          </div>
+        ) : (
+          <div className="management-team-rows">
+            {rows.map((row, rowIndex) => (
+              <div
+                className={`team-row ${rowIndex % 2 ? 'team-row-reversed' : ''}`}
+                key={rowIndex}
+              >
+                <div className="team-row-portraits">
+                  {row.map((member) => (
+                    <figure className="team-member-photo" key={member._id}>
+                      {renderPhoto(member)}
+                    </figure>
+                  ))}
+                </div>
+                <div className="team-row-details">
+                  {row.map((member) => (
+                    <article className="team-member-info" key={member._id}>
+                      <h3>{member.name}</h3>
+                      <p className="team-member-role">{member.role}</p>
+                      <p className="team-member-desc">
+                        {member.description ||
+                          'Leadership profile details are being prepared.'}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -1642,17 +1686,6 @@ function RefineryPage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-      <section className="division-cta">
-        <div className="container">
-          <div>
-            <p className="eyebrow light">REFINERY INFORMATION</p>
-            <h2>Connect with our refinery team.</h2>
-          </div>
-          <a href="/contact?subject=Refinery%20Operations">
-            Contact the refinery <Icon name="arrow" size={18} />
-          </a>
         </div>
       </section>
     </>

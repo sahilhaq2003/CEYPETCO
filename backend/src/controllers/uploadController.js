@@ -1,6 +1,4 @@
 const path = require("path");
-const fs = require("fs");
-const crypto = require("crypto");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 
@@ -17,11 +15,6 @@ if (USE_CLOUDINARY && !process.env.CLOUDINARY_URL) {
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   });
-}
-
-const localUploadDir = path.resolve(__dirname, "../../uploads");
-if (!USE_CLOUDINARY && !fs.existsSync(localUploadDir)) {
-  fs.mkdirSync(localUploadDir, { recursive: true });
 }
 
 const allowedImageTypes = /jpeg|jpg|png|webp|gif|avif|svg/;
@@ -49,7 +42,8 @@ const docFilter = (_req, file, cb) => {
 const upload = multer({
   storage: multer.memoryStorage(),
   fileFilter: imageFilter,
-  limits: { fileSize: 8 * 1024 * 1024 },
+  // Vercel functions have a request body limit; keep uploads below it.
+  limits: { fileSize: 4 * 1024 * 1024 },
 });
 
 const docUpload = multer({
@@ -70,22 +64,17 @@ const uploadToCloudinary = (buffer, resourceType) =>
     stream.end(buffer);
   });
 
-const saveLocally = (buffer, originalname) => {
-  const ext = path.extname(originalname).toLowerCase();
-  const name = `${Date.now()}-${crypto.randomBytes(6).toString("hex")}${ext}`;
-  fs.writeFileSync(path.join(localUploadDir, name), buffer);
-  return `/uploads/${name}`;
-};
-
-const runUpload = (req, res, file, isDoc) => {
+const runUpload = (req, res, isDoc) => {
   const resourceType = isDoc ? "raw" : "image";
   const doUpload = async () => {
-    let url;
-    if (USE_CLOUDINARY) {
-      url = await uploadToCloudinary(req.file.buffer, resourceType);
-    } else {
-      url = saveLocally(req.file.buffer, req.file.originalname);
+    if (!USE_CLOUDINARY) {
+      return res.status(503).json({
+        success: false,
+        message:
+          "Cloudinary is not configured. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET to the deployment environment.",
+      });
     }
+    const url = await uploadToCloudinary(req.file.buffer, resourceType);
     res.status(201).json({
       success: true,
       message: isDoc
@@ -118,7 +107,7 @@ const uploadImage = (req, res, next) => {
         .status(400)
         .json({ success: false, message: "No image file uploaded" });
     }
-    runUpload(req, res, req.file, false);
+    runUpload(req, res, false);
   });
 };
 
@@ -132,7 +121,7 @@ const uploadDocument = (req, res, next) => {
         .status(400)
         .json({ success: false, message: "No document file uploaded" });
     }
-    runUpload(req, res, req.file, true);
+    runUpload(req, res, true);
   });
 };
 

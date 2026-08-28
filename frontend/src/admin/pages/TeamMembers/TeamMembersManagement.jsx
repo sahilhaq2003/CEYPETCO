@@ -5,18 +5,16 @@ import {
   Search,
   Edit3,
   Trash2,
-  Upload,
   Loader2,
   User,
   ImagePlus,
-  ExternalLink,
 } from "lucide-react";
 import api from "../../../services/api";
 import { teamMemberService } from "../../../services/contentService";
 import StatusBadge from "../../components/StatusBadge";
 import Modal from "../../components/Modal";
 import Loading from "../../components/Loading";
-import { Field, inputClass, selectClass } from "../../components/form.jsx";
+import { Field, inputClass, selectClass, textareaClass } from "../../components/form.jsx";
 
 const getApiOrigin = () =>
   (import.meta.env.VITE_API_BASE_URL || "")
@@ -27,6 +25,7 @@ const emptyForm = {
   name: "",
   role: "",
   photo: "",
+  description: "",
   order: 0,
   status: "published",
 };
@@ -76,6 +75,7 @@ const TeamMembersManagement = () => {
       name: item.name || "",
       role: item.role || "",
       photo: item.photo || "",
+      description: item.description || "",
       order: item.order ?? 0,
       status: item.status || "published",
     });
@@ -87,13 +87,21 @@ const TeamMembersManagement = () => {
   const handleUpload = async (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      toast.error("Please select a valid image file");
+      e.target.value = "";
+      return;
+    }
+    if (file.size > 4 * 1024 * 1024) {
+      toast.error("Image must be smaller than 4 MB");
+      e.target.value = "";
+      return;
+    }
     setUploading(true);
     try {
       const fd = new FormData();
-      fd.append("file", file);
-      const res = await api.post("/upload/image", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      fd.append("image", file);
+      const res = await api.post("/upload/image", fd);
       const fullUrl =
         res.data.data.url && res.data.data.url.startsWith("http")
           ? res.data.data.url
@@ -375,6 +383,16 @@ const TeamMembersManagement = () => {
               value={form.role}
               onChange={set("role")}
               placeholder="e.g. Chairman"
+            />
+          </Field>
+
+          <Field label="Description" hint="Short bio shown beside the photo on the About page.">
+            <textarea
+              className={textareaClass}
+              value={form.description}
+              onChange={set("description")}
+              placeholder="e.g. Leads the board and oversees corporate strategy..."
+              rows={4}
             />
           </Field>
 
