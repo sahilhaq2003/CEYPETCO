@@ -3197,7 +3197,7 @@ footer {
   background-position: center;
   background-size: cover;
   background-color: #eef1f3;
-  background-image: url('/images/hero.png');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/hero.png');
 }
 .news-grid-empty {
   grid-column: 1 / -1;
@@ -3209,13 +3209,13 @@ footer {
   background: #fff;
 }
 .news-image.image-1 {
-  background-image: url('/images/refinery.png');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png');
 }
 .news-image.image-2 {
-  background-image: url('/images/hero.png');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/hero.png');
 }
 .news-image.image-3 {
-  background-image: url('/images/distribution.jpg');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg');
 }
 .news-grid article > div:last-child {
   padding: 28px;
@@ -3527,13 +3527,13 @@ footer {
 
 /* Locally downloaded official Ceypetco photography */
 .news-image.image-1 {
-  background-image: url('/images/media-1.jpg');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-1.jpg');
 }
 .news-image.image-2 {
-  background-image: url('/images/media-2.jpg');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-2.jpg');
 }
 .news-image.image-3 {
-  background-image: url('/images/media-3.jpg');
+  background-image: url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-3.jpg');
 }
 .leadership-grid article {
   padding: 0 0 25px;
@@ -8110,7 +8110,7 @@ html {
   width: min(1180px, calc(100% - 48px));
   aspect-ratio: 1.58;
   margin: 55px auto 0;
-  background: #fff url('/images/lubricant-oil-types.png') center/contain
+  background: #fff url('https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/lubricant-oil-types.png') center/contain
     no-repeat;
   border: 1px solid var(--line);
   box-shadow: 0 18px 45px rgba(6, 46, 59, 0.08);

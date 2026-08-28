@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import sriLankaMap from './assets/sri-lanka-districts.svg?raw';
 import fuelStations from './data/fuelStations.json';
 import lubricantProducts from './data/lubricants.json';
@@ -139,26 +139,26 @@ const services = [
 const divisions = [
   [
     'Refinery',
-    'At the heart of CPC operations, strengthening the nationâ€™s petroleum supply.',
-    '/images/refinery.png',
+    'At the heart of CPC operations, strengthening the nation’s petroleum supply.',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
     '/refinery',
   ],
   [
     'Marketing & Sales',
     'Serving communities and industries through a trusted islandwide network.',
-    '/images/distribution.jpg',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
     '/marketing-sales',
   ],
   [
     'Aviation',
-    'Specialised aviation fuel handling supporting Sri Lankaâ€™s air transport sector.',
-    '/images/control-room.png',
+    'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector.',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/control-room.png',
     '/aviation',
   ],
 ];
 const heroSlides = [
   {
-    image: '/images/distribution.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
     alt: 'Ceypetco fuel distribution truck travelling through Sri Lanka',
     eyebrow: 'ISLANDWIDE DISTRIBUTION',
     title: (
@@ -173,7 +173,7 @@ const heroSlides = [
     href: '#fuel-network',
   },
   {
-    image: '/images/refinery.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
     alt: 'Ceypetco refinery under a clear blue sky',
     eyebrow: 'REFINING WITH PURPOSE',
     title: (
@@ -188,7 +188,7 @@ const heroSlides = [
     href: '/refinery',
   },
   {
-    image: '/images/agro-products.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg',
     alt: 'Ceypetco agrochemical products supporting Sri Lankan agriculture',
     eyebrow: 'SUPPORTING SRI LANKAN AGRICULTURE',
     title: (
@@ -203,7 +203,7 @@ const heroSlides = [
     href: '/agro-chemicals',
   },
   {
-    image: '/images/fuel-train.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/fuel-train.jpg',
     alt: 'Fuel transport train travelling through Sri Lanka',
     eyebrow: 'ENERGY IN MOTION',
     title: (
@@ -392,7 +392,7 @@ function FuelStationPage({ district }) {
               <Icon name="arrow" size={16} /> Back to district map
             </a>
             <p className="eyebrow light">
-              FUEL STATION NETWORK Â· {meta[2].toUpperCase()} PROVINCE
+              FUEL STATION NETWORK · {meta[2].toUpperCase()} PROVINCE
             </p>
             <h1>{district}</h1>
             <p>
@@ -472,127 +472,127 @@ const pageData = {
     label: 'ABOUT CEYPETCO',
     title: 'Built to power national progress.',
     intro:
-      'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lankaâ€™s energy landscape.',
-    image: '/images/about-banner.webp',
+      'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape.',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/about-banner.webp',
   },
   '/services': {
     label: 'PUBLIC SERVICES',
     title: 'Energy services made accessible.',
     intro:
       'Find official registrations, applications, specifications and information from one clear destination.',
-    image: '/images/media-2.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-2.jpg',
   },
   '/regional-offices': {
-    label: 'PUBLIC SERVICES Â· REGIONAL OFFICES',
+    label: 'PUBLIC SERVICES · REGIONAL OFFICES',
     title: 'Support across every region.',
     intro:
       'Connect directly with Ceypetco regional management teams serving customers, dealers and communities across Sri Lanka.',
-    image: '/images/head-office.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/head-office.webp',
   },
   '/consumer-registration': {
-    label: 'PUBLIC SERVICES Â· BULK CONSUMERS',
+    label: 'PUBLIC SERVICES · BULK CONSUMERS',
     title: 'Register your consumer point.',
     intro:
       'A clear registration pathway for industrial customers requiring more than 3,300 litres of fuel per month.',
-    image: '/images/distribution.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
   },
   '/notices': {
-    label: 'PUBLIC INFORMATION Â· NOTICES',
+    label: 'PUBLIC INFORMATION · NOTICES',
     title: 'Official notices and circulars.',
     intro:
       'Read current public statements, marketing circulars and institutional agreements published by Ceypetco.',
-    image: '/images/media-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-1.jpg',
   },
   '/projects': {
-    label: 'STRATEGIC PROJECTS Â· SOREM',
-    title: 'Modernising Sri Lankaâ€™s refining future.',
+    label: 'STRATEGIC PROJECTS · SOREM',
+    title: 'Modernising Sri Lanka’s refining future.',
     intro:
       'The Sapugaskanda Oil Refinery Expansion and Modernization Project is designed to strengthen capacity, product quality and national energy resilience.',
-    image: '/images/refinery.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
   },
   '/annual-reports': {
-    label: 'CORPORATE PUBLICATIONS Â· ANNUAL REPORTS',
+    label: 'CORPORATE PUBLICATIONS · ANNUAL REPORTS',
     title: 'Performance documented with clarity.',
     intro:
       'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years.',
-    image: '/images/about-banner.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/about-banner.webp',
   },
   '/right-to-information': {
-    label: 'PUBLIC INFORMATION Â· RTI',
+    label: 'PUBLIC INFORMATION · RTI',
     title: 'Information access made clear.',
     intro:
       'Contact the officers nominated by Ceylon Petroleum Corporation to support Right to Information enquiries and official information requests.',
-    image: '/images/head-office.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/head-office.webp',
   },
   '/media': {
     label: 'MEDIA CENTRE',
     title: 'News from across Ceypetco.',
     intro:
       'Access the latest corporate notices, project updates and public information.',
-    image: '/images/media-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-1.jpg',
   },
   '/tenders': {
     label: 'PROCUREMENT',
     title: 'Open and transparent opportunities.',
     intro:
       'Explore current tenders, supplier registrations and procurement documents.',
-    image: '/images/refinery.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
   },
   '/careers': {
     label: 'CAREERS',
     title: 'Power your career.',
     intro:
-      'Join Sri Lankaâ€™s energy journey and help build the systems that keep a nation moving.',
-    image: '/images/career-team.jpg',
+      'Join Sri Lanka’s energy journey and help build the systems that keep a nation moving.',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/career-team.jpg',
   },
   '/contact': {
     label: 'CONTACT US',
-    title: 'Weâ€™re here to help.',
+    title: 'We’re here to help.',
     intro:
       'Connect with our head office, customer care and specialist operating divisions.',
-    image: '/images/head-office.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/head-office.webp',
   },
   '/refinery': {
-    label: 'OUR SERVICES Â· REFINERY',
+    label: 'OUR SERVICES · REFINERY',
     title: 'Precision refining for national growth.',
     intro:
       'Transforming crude oil into quality fuels through experienced people, proven processes and rigorous standards.',
-    image: '/images/refinery-detail-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery-detail-1.jpg',
   },
   '/marketing-sales': {
-    label: 'OUR SERVICES Â· MARKETING',
+    label: 'OUR SERVICES · MARKETING',
     title: 'Fueling every part of Sri Lanka.',
     intro:
       'An islandwide dealer and distribution network serving transport, industry and communities.',
-    image: '/images/distribution.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
   },
   '/aviation': {
-    label: 'OUR SERVICES Â· AVIATION',
+    label: 'OUR SERVICES · AVIATION',
     title: 'Reliable energy for every takeoff.',
     intro:
       'Round-the-clock aviation fueling built around quality, safety and on-time service.',
-    image: '/images/aviation-hero.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/aviation-hero.jpg',
   },
   '/agro-chemicals': {
-    label: 'OUR SERVICES Â· AGRO',
+    label: 'OUR SERVICES · AGRO',
     title: 'Supporting stronger harvests.',
     intro:
-      'Quality crop-protection solutions and expert support for Sri Lankaâ€™s farming communities.',
-    image: '/images/agro-products.jpg',
+      'Quality crop-protection solutions and expert support for Sri Lanka’s farming communities.',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg',
   },
   '/lubricants': {
-    label: 'OUR SERVICES Â· LUBRICANTS',
+    label: 'OUR SERVICES · LUBRICANTS',
     title: 'Performance engineered to last.',
     intro:
       'Certified automotive and industrial lubricants meeting recognised international specifications.',
-    image: '/images/lubricants-hero.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/lubricants-hero.jpg',
   },
   '/history': {
     label: 'OUR HISTORY',
     title: 'Milestones that shaped our journey.',
     intro:
       'Explore the defining moments behind more than six decades of service to Sri Lanka.',
-    image: '/images/history-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/history-1.jpg',
   },
 };
 
@@ -643,38 +643,38 @@ const managementGroups = [
       ],
       [
         'K W Samantha Pushpalal',
-        'Deputy General Manager Â· HR & Admin',
+        'Deputy General Manager · HR & Admin',
         '+94 11 2106758',
         'dgm.hr@ceypetco.gov.lk',
       ],
       [
         'W K S Gunawardhana',
-        'Acting Deputy General Manager Â· Marketing',
+        'Acting Deputy General Manager · Marketing',
         '+94 11 2106753',
         'dgm.mkt@ceypetco.gov.lk',
       ],
       [
         'K K A Jayawikrama',
-        'Deputy General Manager Â· Commercial & Supply Chain',
+        'Deputy General Manager · Commercial & Supply Chain',
         '+94 11 2106761',
         'dgm.commercial@ceypetco.gov.lk',
       ],
       [
         'N B M P Jeewasiri',
-        'Deputy General Manager Â· Technical Services & Corporate Affairs',
+        'Deputy General Manager · Technical Services & Corporate Affairs',
         '+94 11 7296290',
         'dgm.ts@ceypetco.gov.lk',
       ],
       [
         'B T T Perera',
-        'Deputy General Manager Â· Finance',
+        'Deputy General Manager · Finance',
         '+94 11 7296146',
         'dgm.fin@ceypetco.gov.lk',
       ],
     ],
   },
   {
-    title: 'Senior Management Â· Refinery',
+    title: 'Senior Management · Refinery',
     people: [
       [
         'Deputy Refinery Manager',
@@ -690,13 +690,13 @@ const managementGroups = [
       ],
       [
         'A K Seneviratne',
-        'Acting Deputy Refinery Manager Â· Technical Services',
+        'Acting Deputy Refinery Manager · Technical Services',
         '',
         'drm.ts@ceypetco.gov.lk',
       ],
       [
         'K V J Chandrawanka',
-        'Acting Deputy Refinery Manager Â· Electrical & Instrument',
+        'Acting Deputy Refinery Manager · Electrical & Instrument',
         '+94 11 2401527',
         'mgr.electrical@ceypetco.gov.lk',
       ],
@@ -713,7 +713,7 @@ const managementGroups = [
       ],
       [
         'M C D Perera',
-        'Senior Manager Â· Finance',
+        'Senior Manager · Finance',
         '+94 11 2400435',
         'smgr.fin@ceypetco.gov.lk',
       ],
@@ -725,31 +725,31 @@ const managementGroups = [
       ],
       [
         'G P Upananda',
-        'Manager Â· Human Resource',
+        'Manager · Human Resource',
         '+94 11 7296278',
         'mgr.hr@ceypetco.gov.lk',
       ],
       [
         'G P K Wijekoon',
-        'Manager Â· Engineering & Premises',
+        'Manager · Engineering & Premises',
         '+94 11 7296132',
         'mgr.eng@ceypetco.gov.lk',
       ],
       [
         'W K S Gunawardhana',
-        'Manager Â· Research & Development',
+        'Manager · Research & Development',
         '+94 11 7296287',
         'dgm.mkt@ceypetco.gov.lk',
       ],
       [
         'W M T Wijesinghe',
-        'Acting Manager Â· Commercial',
+        'Acting Manager · Commercial',
         '+94 11 7296125',
         'dgm.commercial@ceypetco.gov.lk',
       ],
       [
         'A G D Bandara',
-        'Manager Â· Shipping',
+        'Manager · Shipping',
         '+94 11 7296300',
         'mgr.shipping@ceypetco.gov.lk',
       ],
@@ -761,55 +761,55 @@ const managementGroups = [
       ],
       [
         'K Hewagamage',
-        'Manager Â· Procurements & Stores',
+        'Manager · Procurements & Stores',
         '+94 11 7296331',
         'mgr.procurement@ceypetco.gov.lk',
       ],
       [
         'W A A C Weerasinghe',
-        'Manager Â· Human Resource Development',
+        'Manager · Human Resource Development',
         '',
         'mgr.hrd@ceypetco.gov.lk',
       ],
       [
         'V Shanmuganathan',
-        'Acting Manager Â· Marketing',
+        'Acting Manager · Marketing',
         '+94 11 7296248',
         'mgr.mkt@ceypetco.gov.lk',
       ],
       [
         'R M Ariyamanjula',
-        'Acting Manager Â· Corporate Planning & Business Development',
+        'Acting Manager · Corporate Planning & Business Development',
         '+94 11 7296292',
         'mgr.cpbd@ceypetco.gov.lk',
       ],
       [
         'I C Galagodage',
-        'Acting Manager Â· Lubricant & Special Products',
+        'Acting Manager · Lubricant & Special Products',
         '+94 11 7296346',
         'dmgr.lub@ceypetco.gov.lk',
       ],
       [
         'D L Perera',
-        'Acting Manager Â· Information Technology',
+        'Acting Manager · Information Technology',
         '+94 11 7296218',
         'lakshitha@ceypetco.gov.lk',
       ],
       [
         'U H A S Jayaweera',
-        'Acting Deputy Manager Â· Investigation',
+        'Acting Deputy Manager · Investigation',
         '+94 11 7296230',
         '',
       ],
       [
         'B M W A R Bandara',
-        'Acting Assistant Manager Â· Security',
+        'Acting Assistant Manager · Security',
         '+94 11 7296320',
         '',
       ],
       [
         'Anurudda B. Koralagedara',
-        'Acting Assistant Manager Â· Secretariat',
+        'Acting Assistant Manager · Secretariat',
         '+94 11 7296310',
         'anuruddakg@ceypetco.gov.lk',
       ],
@@ -820,19 +820,19 @@ const managementGroups = [
     people: [
       [
         'A I Wanasekara',
-        'Manager Â· Aviation Operations, Katunayake',
+        'Manager · Aviation Operations, Katunayake',
         '+94 11 2253039',
         'mgr.avi@ceypetco.gov.lk',
       ],
       [
         'A M K B Adhikari',
-        'Acting Deputy Manager Â· Sapugaskanda Terminal',
+        'Acting Deputy Manager · Sapugaskanda Terminal',
         '+94 11 2401112 / +94 11 5750880',
         '',
       ],
       [
         'B S S Perera',
-        'Manager Â· Agro Chemicals',
+        'Manager · Agro Chemicals',
         '+94 11 2694483 / +94 11 5666815',
         'mgr.agro@ceypetco.gov.lk',
       ],
@@ -1020,7 +1020,7 @@ function ManagementTeam() {
           {loading ? (
             <article>
               <div className="leader-photo">
-                <img src="/images/chairman.jpeg" alt="" />
+                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/chairman.jpeg" alt="" />
               </div>
               <h3>Loading...</h3>
               <p>Please wait</p>
@@ -1028,7 +1028,7 @@ function ManagementTeam() {
           ) : leaders.length === 0 ? (
             <article>
               <div className="leader-photo">
-                <img src="/images/chairman.jpeg" alt="" />
+                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/chairman.jpeg" alt="" />
               </div>
               <h3>No team members yet</h3>
               <p>Check back soon</p>
@@ -1071,19 +1071,19 @@ const contactLocations = [
     'ref.manager@ceypetco.gov.lk',
   ],
   [
-    'Aviation Â· Katunayake',
+    'Aviation · Katunayake',
     '+94 11 2251319 / +94 11 2253376',
     '+94 11 2252331',
     'avi.opsbia@ceypetco.gov.lk',
   ],
   [
-    'Aviation Â· Ratmalana',
+    'Aviation · Ratmalana',
     '+94 11 2637755',
     '+94 11 2637755',
     'avi.opsrat@ceypetco.gov.lk',
   ],
   [
-    'Agro Chemicals Â· Kolonnawa',
+    'Agro Chemicals · Kolonnawa',
     '+94 11 2572316',
     '+94 11 2572316',
     'agrochem@ceypetco.gov.lk',
@@ -1150,7 +1150,7 @@ function HistoryPage() {
             </div>
             <p>
               From market entry and national distribution to refinery
-              modernisation, each milestone strengthened Sri Lankaâ€™s energy
+              modernisation, each milestone strengthened Sri Lanka’s energy
               infrastructure.
             </p>
           </div>
@@ -1182,7 +1182,7 @@ function HistoryPage() {
                 key={number}
               >
                 <img
-                  src={`/images/history-${number}.jpg`}
+                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/history-${number}.jpg`}
                   alt={`Ceypetco historical archive ${index + 1}`}
                 />
                 <figcaption>
@@ -1205,9 +1205,9 @@ const divisionPages = {
     stats: [
       ['1969', 'Commissioned'],
       ['1,100+', 'Direct jobs'],
-      ['30â€“35%', 'CPC sales volume'],
+      ['30–35%', 'CPC sales volume'],
     ],
-    image: '/images/refinery-detail-2.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery-detail-2.jpg',
     features: [
       '100% Sri Lankan operating staff',
       'Foreign-exchange savings for the nation',
@@ -1233,7 +1233,7 @@ const divisionPages = {
       ['Islandwide', 'Distribution'],
       ['Since 1962', 'Marketing operations'],
     ],
-    image: '/images/media-3.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-3.jpg',
     features: [
       'Retail and commercial fuel supply',
       'Dealer and regional-office support',
@@ -1247,29 +1247,29 @@ const divisionPages = {
       ['Super Diesel Euro 4', 'Rs. 478.00 / L'],
       ['Industrial Kerosene', 'Rs. 434.00 / L'],
       ['Fuel Oil Super', 'Rs. 332.00 / L'],
-      ['Fuel Oil 1500 Â· High Sulphur', 'Rs. 332.00 / L'],
-      ['Fuel Oil 1500 Â· Low Sulphur', 'Rs. 332.00 / L'],
+      ['Fuel Oil 1500 · High Sulphur', 'Rs. 332.00 / L'],
+      ['Fuel Oil 1500 · Low Sulphur', 'Rs. 332.00 / L'],
     ],
   },
   '/aviation': {
     kicker: 'CEYPETCO AVIATION',
     heading: 'Quality fuel. The right aircraft. The right time.',
-    copy: 'Ceypetco Aviation provides round-the-clock aviation refuelling at Sri Lankaâ€™s international airports, with daytime services for domestic, executive and nominated aircraft at Ratmalana.',
+    copy: 'Ceypetco Aviation provides round-the-clock aviation refuelling at Sri Lanka’s international airports, with daytime services for domestic, executive and nominated aircraft at Ratmalana.',
     stats: [
       ['24/7', 'International service'],
       ['1.3M L', 'Daily demand'],
       ['3', 'Operating locations'],
     ],
-    image: '/images/aviation-service.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/aviation-service.jpg',
     features: [
       'JET A-1 and AV GAS availability',
       'International quality-control standards',
       'Hydrant and refueller operations',
     ],
     locations: [
-      ['Katunayake', 'Three JET A-1 tanks Â· 2.6M litres each'],
-      ['Mattala', 'Three JET A-1 tanks Â· 1.0M litres each'],
-      ['Ratmalana', 'Five tanks Â· 280,000 litres total'],
+      ['Katunayake', 'Three JET A-1 tanks · 2.6M litres each'],
+      ['Mattala', 'Three JET A-1 tanks · 1.0M litres each'],
+      ['Ratmalana', 'Five tanks · 280,000 litres total'],
     ],
   },
   '/agro-chemicals': {
@@ -1281,16 +1281,16 @@ const divisionPages = {
       ['ISO 9001', 'Quality certified'],
       ['Islandwide', 'Field support'],
     ],
-    image: '/images/agro-products.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg',
     features: [
       'Quality, environment and safety systems',
       'Guidance for farmers and agrarian centres',
       'Reasonably priced crop-protection products',
     ],
     products: [
-      ['Insecticides', 'Profenophos Â· BPMC Â· Fipronil'],
-      ['Weedicides', 'Diuron Â· Pretilachlor Â· Glyphosate'],
-      ['Fungicides', 'Tebuconazole Â· Mancozeb Â· Captan'],
+      ['Insecticides', 'Profenophos · BPMC · Fipronil'],
+      ['Weedicides', 'Diuron · Pretilachlor · Glyphosate'],
+      ['Fungicides', 'Tebuconazole · Mancozeb · Captan'],
       ['Bio-Insecticides', 'Flipper'],
     ],
   },
@@ -1303,17 +1303,17 @@ const divisionPages = {
       ['20+', 'Product families'],
       ['Automotive +', 'Industrial use'],
     ],
-    image: '/images/control-room.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/control-room.png',
     features: [
       'Internationally aligned specifications',
       'Automotive and industrial product ranges',
       'Nationwide Ceypetco brand support',
     ],
     products: [
-      ['Engine Oils', 'Enduro Â· Supreme XHD Â· Platinum'],
-      ['Transmission', 'ATF Dexron III Â· Gear Oil GL-4/GL-5'],
-      ['Speciality', 'Brake Fluid Â· Coolant Â· Grease'],
-      ['Industrial', 'Hydra Â· Hypertrans Â· Circulation Oil'],
+      ['Engine Oils', 'Enduro · Supreme XHD · Platinum'],
+      ['Transmission', 'ATF Dexron III · Gear Oil GL-4/GL-5'],
+      ['Speciality', 'Brake Fluid · Coolant · Grease'],
+      ['Industrial', 'Hydra · Hypertrans · Circulation Oil'],
     ],
   },
 };
@@ -1411,7 +1411,7 @@ function RefineryPage() {
   const importance = [
     'Operated by a 100% Sri Lankan workforce.',
     'Provides direct employment for more than 1,100 citizens.',
-    'Contributes 30â€“35% of CPCâ€™s total sales volume.',
+    'Contributes 30–35% of CPC’s total sales volume.',
     'Reduces foreign-currency outflows through domestic refining.',
     'More than five decades of continuous operating experience.',
     'Refinery training is recognised by overseas organisations.',
@@ -1424,7 +1424,7 @@ function RefineryPage() {
             <p className="eyebrow">REFINERY OPERATIONS & CAPABILITIES</p>
             <h2>
               We refine with precision and expertise, delivering quality
-              petroleum products that fuel the nationâ€™s growth.
+              petroleum products that fuel the nation’s growth.
             </h2>
           </div>
           <div className="refinery-lead">
@@ -1446,7 +1446,7 @@ function RefineryPage() {
           ].map((image, index) => (
             <figure key={image}>
               <img
-                src={`/images/${image}`}
+                src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${image}`}
                 alt={
                   [
                     'Laboratory quality testing at the refinery',
@@ -1464,7 +1464,7 @@ function RefineryPage() {
         <div className="container refinery-history-grid">
           <div className="refinery-sticky-title">
             <p className="eyebrow">SAPUGASKANDA REFINERY</p>
-            <h2>Advancing Sri Lankaâ€™s refining capability since 1969.</h2>
+            <h2>Advancing Sri Lanka’s refining capability since 1969.</h2>
             <div className="refinery-year">
               <b>1969</b>
               <span>
@@ -1480,11 +1480,11 @@ function RefineryPage() {
               of 1961 and entered the import, distribution and marketing of
               petroleum products throughout the island. The Sapugaskanda Oil
               Refinery was commissioned in August 1969 to process 38,000 barrels
-              per stream dayâ€”approximately 5,200 metric tonnes per dayâ€”of
+              per stream day—approximately 5,200 metric tonnes per day—of
               Iranian Light crude oil.
             </p>
             <p>
-              Although the crude distillerâ€™s rated capacity was 5,200 MT/day,
+              Although the crude distiller’s rated capacity was 5,200 MT/day,
               the unit was capable of processing 5,800 MT/day. Crudes with
               characteristics similar to Iranian Light, including Upper Zakum
               and Arabian Light, could be processed while meeting the required
@@ -1495,7 +1495,7 @@ function RefineryPage() {
               modified to process LPG. Special Boiling Point Solvent production
               also began using existing facilities. The Crude Distiller was
               subsequently debottlenecked, increasing refining capacity to
-              50,000 barrels per stream dayâ€”approximately 6,900 MT/day.
+              50,000 barrels per stream day—approximately 6,900 MT/day.
             </p>
             <p>
               A new Kerosene Merox unit was commissioned in 1981 to process Jet
@@ -1545,7 +1545,7 @@ function RefineryPage() {
               <h2>From crude oil to essential products.</h2>
               <p className="refining-process-intro">
                 Fractional distillation separates crude oil into useful products
-                according to boiling point and densityâ€”from LPG and petrol to
+                according to boiling point and density—from LPG and petrol to
                 diesel, lubricants and bitumen.
               </p>
             </div>
@@ -1568,10 +1568,10 @@ function RefineryPage() {
                 <span />
               </div>
               <div className="temperature-scale">
-                <span>20Â°C</span>
-                <span>120Â°C</span>
-                <span>250Â°C</span>
-                <span>370Â°C+</span>
+                <span>20°C</span>
+                <span>120°C</span>
+                <span>250°C</span>
+                <span>370°C+</span>
               </div>
               <div className="column-core">
                 {Array.from({ length: 7 }).map((_, index) => (
@@ -1588,12 +1588,12 @@ function RefineryPage() {
             </div>
             <div className="product-streams">
               {[
-                ['01', 'LPG', 'Light gases', '20Â°C'],
-                ['02', 'Petrol', 'Motor gasoline', '70Â°C'],
-                ['03', 'Jet fuel', 'Kerosene fraction', '170Â°C'],
-                ['04', 'Diesel', 'Transport fuel', '270Â°C'],
-                ['05', 'Lubricants', 'Oils & waxes', '350Â°C'],
-                ['06', 'Bitumen', 'Heavy residue', '370Â°C+'],
+                ['01', 'LPG', 'Light gases', '20°C'],
+                ['02', 'Petrol', 'Motor gasoline', '70°C'],
+                ['03', 'Jet fuel', 'Kerosene fraction', '170°C'],
+                ['04', 'Diesel', 'Transport fuel', '270°C'],
+                ['05', 'Lubricants', 'Oils & waxes', '350°C'],
+                ['06', 'Bitumen', 'Heavy residue', '370°C+'],
               ].map(([number, name, use, temperature], index) => (
                 <article
                   className="product-stream"
@@ -1630,7 +1630,7 @@ function RefineryPage() {
           <div className="unit-table">
             <div className="unit-table-head">
               <span>Unit</span>
-              <span>Capacity Â· MT/stream day</span>
+              <span>Capacity · MT/stream day</span>
             </div>
             {units.map(([unit, capacity], index) => (
               <div className="unit-row" key={unit}>
@@ -1753,7 +1753,7 @@ function MarketingSalesPage() {
             <p>
               Following the incorporation of CPC under the Act of Parliament in
               1961, marketing operations commenced on 28 April 1962. Today,
-              Ceypetco serves Sri Lankaâ€™s fuel requirements through
+              Ceypetco serves Sri Lanka’s fuel requirements through
               approximately 850 dealers.
             </p>
             <p>
@@ -1892,19 +1892,19 @@ function AviationPage() {
       '2.46',
     ],
     ['Local Contract Customer without Operating an Airline', 'JIA', '2.57'],
-    ['All Contract Customers Â· Foreign', 'BIA, CIAR & MRIA', '2.43'],
-    ['All Contract Customers Â· Foreign', 'JIA', '2.54'],
+    ['All Contract Customers · Foreign', 'BIA, CIAR & MRIA', '2.43'],
+    ['All Contract Customers · Foreign', 'JIA', '2.54'],
   ];
   const locations = [
     {
       name: 'Katunayake',
-      code: 'BIA Â· CMB / VCBI',
-      service: 'Hydrant and refueller Â· over-wing / under-wing',
-      capacity: 'Three JET A-1 tanks Â· 2.6 million litres each',
+      code: 'BIA · CMB / VCBI',
+      service: 'Hydrant and refueller · over-wing / under-wing',
+      capacity: 'Three JET A-1 tanks · 2.6 million litres each',
       avgas: '200-litre sealed drums',
       contacts: [
         [
-          'Deputy Manager Â· Aviation Operations',
+          'Deputy Manager · Aviation Operations',
           '+94 11 2253039',
           'manjular@ceypetco.gov.lk',
         ],
@@ -1917,15 +1917,15 @@ function AviationPage() {
     },
     {
       name: 'Mattala',
-      code: 'MRIA Â· HRI / VCRI',
-      service: 'Hydrant and refueller Â· over-wing / under-wing',
-      capacity: 'Three JET A-1 tanks Â· 1.0 million litres each',
+      code: 'MRIA · HRI / VCRI',
+      service: 'Hydrant and refueller · over-wing / under-wing',
+      capacity: 'Three JET A-1 tanks · 1.0 million litres each',
       avgas: '200-litre sealed drums',
       contacts: [
-        ['Assistant Manager Â· Aviation Operations', '+94 47 2031946', ''],
+        ['Assistant Manager · Aviation Operations', '+94 47 2031946', ''],
         [
           'Operations Department',
-          '+94 47 5678343 Â· +94 47 2031945 Â· +94 47 2031947',
+          '+94 47 5678343 · +94 47 2031945 · +94 47 2031947',
           'mria.ops@ceypetco.gov.lk',
         ],
       ],
@@ -1933,22 +1933,22 @@ function AviationPage() {
     {
       name: 'Ratmalana',
       code: 'RML / VCCC',
-      service: 'Daytime refueller service Â· over-wing / under-wing',
-      capacity: 'Five JET A-1 tanks Â· 280,000 litres total',
+      service: 'Daytime refueller service · over-wing / under-wing',
+      capacity: 'Five JET A-1 tanks · 280,000 litres total',
       avgas: '200-litre sealed drums',
       contacts: [
         [
           'Shift Superintendent',
-          '+94 11 2637755 Â· +94 11 5664707',
+          '+94 11 2637755 · +94 11 5664707',
           'cpcavirat@ceypetco.gov.lk',
         ],
         [
           'Commercial Manager',
-          '+94 11 5455115 Â· +94 76 3842287',
+          '+94 11 5455115 · +94 76 3842287',
           'mria.cm@ceypetco.gov.lk',
         ],
         [
-          'Accountant Â· Aviation',
+          'Accountant · Aviation',
           '+94 11 5455191',
           'acc.aviation@ceypetco.gov.lk',
         ],
@@ -1963,7 +1963,7 @@ function AviationPage() {
             <p className="eyebrow">OUR AIM</p>
             <h2>Quality fuel. The right aircraft. The right time.</h2>
             <blockquote>
-              To be the regionâ€™s leading service-oriented, customer-focused and
+              To be the region’s leading service-oriented, customer-focused and
               environmentally responsible aviation fuel supplier.
             </blockquote>
           </div>
@@ -2025,7 +2025,7 @@ function AviationPage() {
               <p className="eyebrow">AVIATION FUEL PRICING</p>
               <h2>Contract customer rates.</h2>
               <p>
-                Effective 01 February 2025 Â· Prices shown in US dollars per US
+                Effective 01 February 2025 · Prices shown in US dollars per US
                 gallon.
               </p>
             </div>
@@ -2089,7 +2089,7 @@ function AviationPage() {
               <p className="eyebrow light">TECHNICAL SERVICE PROVIDER</p>
               <h3>PETRONAS Aviation</h3>
               <p>
-                Supporting Ceypetco Aviationâ€™s commitment to specialist
+                Supporting Ceypetco Aviation’s commitment to specialist
                 handling, operational quality and international service
                 standards.
               </p>
@@ -2112,7 +2112,7 @@ function AviationPage() {
                 key={image}
               >
                 <img
-                  src={`/images/aviation-gallery-${image}.jpg`}
+                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/aviation-gallery-${image}.jpg`}
                   alt={`Ceypetco aviation fuel operation ${image}`}
                 />
                 <figcaption>
@@ -2144,7 +2144,7 @@ function AviationPage() {
             <span>COMMERCIAL & PAYMENT SUPPORT</span>
             <a href="tel:+94112253039">+94 11 2253039</a>
             <a href="tel:+94771066764">+94 77 1066764</a>
-            <p>Fax Â· +94 11 2252331</p>
+            <p>Fax · +94 11 2252331</p>
           </div>
         </div>
       </section>
@@ -2185,7 +2185,7 @@ function AviationPage() {
                     <div key={role}>
                       <b>{role}</b>
                       <a
-                        href={`tel:${phone.split('Â·')[0].replaceAll(' ', '')}`}
+                        href={`tel:${phone.split('·')[0].replaceAll(' ', '')}`}
                       >
                         {phone}
                       </a>
@@ -2219,7 +2219,7 @@ function AgroChemicalsPage() {
       [
         'Diuron 80% WP',
         'Pretilachlor 30% EC',
-        'Glyphosate 36% SL Â· Restricted',
+        'Glyphosate 36% SL · Restricted',
       ],
     ],
     [
@@ -2240,7 +2240,7 @@ function AgroChemicalsPage() {
           <div>
             <p className="eyebrow">CEYPETCO AGROCHEMICALS</p>
             <h2>
-              More than 50 years supporting Sri Lankaâ€™s farming communities.
+              More than 50 years supporting Sri Lanka’s farming communities.
             </h2>
             <p>
               Ceylon Petroleum Corporation established its Agrochemicals
@@ -2250,7 +2250,7 @@ function AgroChemicalsPage() {
             </p>
             <p>
               Ceypetco Agrochemicals is the only government-sector organisation
-              engaged in the agrochemicals business among Sri Lankaâ€™s marketing
+              engaged in the agrochemicals business among Sri Lanka’s marketing
               companies, helping maintain product quality, access and reasonable
               market pricing.
             </p>
@@ -2258,14 +2258,14 @@ function AgroChemicalsPage() {
           <div className="agro-opening-images">
             <figure>
               <img
-                src="/images/agro-production-1.webp"
+                src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-production-1.webp"
                 alt="Ceypetco agrochemical production team member wearing protective equipment"
               />
               <span>Safe production</span>
             </figure>
             <figure>
               <img
-                src="/images/agro-production-2.webp"
+                src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-production-2.webp"
                 alt="Ceypetco agrochemical automated production facility"
               />
               <span>Quality controlled</span>
@@ -2289,7 +2289,7 @@ function AgroChemicalsPage() {
               ['ISO 14001:2015', 'Environmental Management System'],
               [
                 'OHSAS 18001:2007',
-                'Employee Health & Safety Â· qualified since 2019',
+                'Employee Health & Safety · qualified since 2019',
               ],
             ].map(([standard, label], index) => (
               <article key={standard}>
@@ -2309,7 +2309,7 @@ function AgroChemicalsPage() {
               Practical crop-protection solutions across the cultivation cycle.
             </h2>
             <img
-              src="/images/agro-products.jpg"
+              src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg"
               alt="Safe application of crop-protection products in farmland"
             />
           </div>
@@ -2365,7 +2365,7 @@ function AgroChemicalsPage() {
             <p className="eyebrow light">GREEN AGRICULTURE</p>
             <h3>A progressive addition to the Ceypetco Agro portfolio.</h3>
             <p>
-              Flipper was planned as part of the organisationâ€™s response to the
+              Flipper was planned as part of the organisation’s response to the
               newly introduced Green Agriculture concept, complementing
               established insecticide, fungicide and weed-control solutions.
             </p>
@@ -2516,7 +2516,7 @@ function LubricantsPage() {
         <div className="container lubricant-intro-grid">
           <div className="lubricant-image">
             <img
-              src="/images/lubricants-hero.jpg"
+              src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/lubricants-hero.jpg"
               alt="Ceypetco lubricating oil being poured into an engine"
             />
             <span>
@@ -2536,7 +2536,7 @@ function LubricantsPage() {
               ISO 9001/2000. The Ceypetco lubricant range covers products
               developed to meet relevant international specifications from the
               American Petroleum Institute (API), MTU Friedrichshafen GmbH and
-              the European Automobile Manufacturersâ€™ Association (ACEA).
+              the European Automobile Manufacturers’ Association (ACEA).
             </p>
             <p>
               Our products serve demanding automotive and industrial
@@ -2754,44 +2754,44 @@ const bulkConsumerSteps = [
 const bulkConsumerRegions = [
   [
     'Western Province',
-    'Colombo Â· Kalutara Â· Gampaha',
+    'Colombo · Kalutara · Gampaha',
     'Mr. Chaminda Mendis',
     '0777768546',
   ],
   [
     'Northern Province',
-    'Jaffna Â· Mullaitivu Â· Kilinochchi Â· Mannar Â· Vavuniya',
+    'Jaffna · Mullaitivu · Kilinochchi · Mannar · Vavuniya',
     'Mr. Sivadaran',
     '0775023457',
   ],
   [
     'North Western Province',
-    'Kurunegala Â· Puttalam',
+    'Kurunegala · Puttalam',
     'Mr. Bandara',
     '0713473103',
   ],
   [
     'North Central Province',
-    'Anuradhapura Â· Polonnaruwa',
+    'Anuradhapura · Polonnaruwa',
     'Mr. Pethiyagoda',
     '0714395411',
   ],
   [
     'Central Province',
-    'Kandy Â· Nuwara Eliya Â· Matale',
+    'Kandy · Nuwara Eliya · Matale',
     'Mr. Rathnayake',
     '0714440471',
   ],
   [
     'Eastern Province',
-    'Batticaloa Â· Trincomalee Â· Ampara',
+    'Batticaloa · Trincomalee · Ampara',
     'Mr. Devapriya',
     '0777566455',
   ],
-  ['Uva Province', 'Badulla Â· Monaragala', 'Mr. Wimalasiri', '0774101377'],
+  ['Uva Province', 'Badulla · Monaragala', 'Mr. Wimalasiri', '0774101377'],
   [
     'Southern Province',
-    'Galle Â· Hambantota Â· Matara',
+    'Galle · Hambantota · Matara',
     'Mr. Chandimal',
     '0777440062',
   ],
@@ -2837,7 +2837,7 @@ function InnerPage({ type }) {
     {
       title: 'New Dealership Registration',
       category: 'Business Services',
-      text: 'Start an application to join Ceypetcoâ€™s islandwide retail network.',
+      text: 'Start an application to join Ceypetco’s islandwide retail network.',
       image: 'media-3.jpg',
       href: '/contact?subject=New%20Dealership%20Registration&from=services',
     },
@@ -3176,7 +3176,7 @@ function InnerPage({ type }) {
               <article>
                 <span>01</span>
                 <p className="eyebrow">OUR VISION</p>
-                <h3>To become Asiaâ€™s most trusted and premier energy brand.</h3>
+                <h3>To become Asia’s most trusted and premier energy brand.</h3>
               </article>
               <article>
                 <span>02</span>
@@ -3245,7 +3245,7 @@ function InnerPage({ type }) {
                         item.href.startsWith('http') ? 'noreferrer' : undefined
                       }
                     >
-                      <img src={`/images/${item.image}`} alt="" />
+                      <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${item.image}`} alt="" />
                       <span>0{i + 1}</span>
                     </a>
                     <div className="service-card-body">
@@ -4022,7 +4022,7 @@ function InnerPage({ type }) {
 
             <div className="tender-rfq-note">
               <div>
-                <p className="eyebrow light">REFINERY DIVISION Â· RFQ</p>
+                <p className="eyebrow light">REFINERY DIVISION · RFQ</p>
                 <h3>Request-for-quotation information</h3>
               </div>
               <a href="/contact?subject=Refinery%20Division%20RFQ">
@@ -4093,7 +4093,7 @@ function InnerPage({ type }) {
                   ['Customer Care', '+94 117 296 130'],
                   ['Head Office', '+94 117 296 100'],
                   ['Refinery', '+94 11 254 1382'],
-                  ['Aviation Â· Katunayake', '+94 11 225 1319'],
+                  ['Aviation · Katunayake', '+94 11 225 1319'],
                 ].map(([name, phone]) => (
                   <article key={name}>
                     <span>
@@ -4315,7 +4315,7 @@ function App() {
         <div className="container nav-wrap">
           <a className="brand" href="/">
             <img
-              src="/images/ceypetco-logo.png"
+              src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/ceypetco-logo.png"
               alt="Ceylon Petroleum Corporation logo"
             />
             <span>
@@ -4508,7 +4508,7 @@ function App() {
               <div className="image-composition">
                 <div className="image-main">
                   <img
-                    src="/images/distribution.jpg"
+                    src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg"
                     alt="Ceypetco fuel distribution truck in Sri Lanka"
                   />
                 </div>
@@ -4609,7 +4609,7 @@ function App() {
                 </div>
                 <p>
                   From refining and distribution to specialised sectors, our
-                  operations work together to serve Sri Lankaâ€™s energy needs.
+                  operations work together to serve Sri Lanka’s energy needs.
                 </p>
               </div>
               <div className="division-grid">
@@ -4679,7 +4679,7 @@ function App() {
                   <div>
                     <b>Secure payment access</b>
                     <small>
-                      You will continue through the selected bankâ€™s official
+                      You will continue through the selected bank’s official
                       service.
                     </small>
                   </div>
@@ -4704,7 +4704,7 @@ function App() {
                       aria-label={`Continue with ${alt}`}
                     >
                       <span className="bank-image">
-                        <img src={`/images/${src}`} alt={alt} />
+                        <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${src}`} alt={alt} />
                       </span>
                       <span className="bank-action">
                         Continue <Icon name="arrow" size={15} />
@@ -4734,7 +4734,7 @@ function App() {
                     key={src}
                     aria-label={`Continue with ${alt}`}
                   >
-                    <img src={`/images/${src}`} alt={alt} />
+                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${src}`} alt={alt} />
                   </a>
                 ))}
               </div>
@@ -4754,7 +4754,7 @@ function App() {
                   ['mastercard.svg', 'Mastercard'],
                 ].map(([src, alt]) => (
                   <div key={src}>
-                    <img src={`/images/${src}`} alt={alt} />
+                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${src}`} alt={alt} />
                   </div>
                 ))}
               </div>
@@ -4778,12 +4778,12 @@ function App() {
           <div className="footer-brand">
             <div className="footer-brand-lockup">
               <img
-                src="/images/ceypetco-logo.png"
+                src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/ceypetco-logo.png"
                 alt="Ceylon Petroleum Corporation logo"
               />
               <div>
                 <h3>Ceylon Petroleum Corporation</h3>
-                <span>CEYPETCO Â· SRI LANKA</span>
+                <span>CEYPETCO · SRI LANKA</span>
               </div>
             </div>
             <p>
