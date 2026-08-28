@@ -140,25 +140,25 @@ const divisions = [
   [
     'Refinery',
     'At the heart of CPC operations, strengthening the nation’s petroleum supply.',
-    'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
     '/refinery',
   ],
   [
     'Marketing & Sales',
     'Serving communities and industries through a trusted islandwide network.',
-    'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
     '/marketing-sales',
   ],
   [
     'Aviation',
     'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector.',
-    'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/control-room.png',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/control-room.png',
     '/aviation',
   ],
 ];
 const heroSlides = [
   {
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
     alt: 'Ceypetco fuel distribution truck travelling through Sri Lanka',
     eyebrow: 'ISLANDWIDE DISTRIBUTION',
     title: (
@@ -173,7 +173,7 @@ const heroSlides = [
     href: '#fuel-network',
   },
   {
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
     alt: 'Ceypetco refinery under a clear blue sky',
     eyebrow: 'REFINING WITH PURPOSE',
     title: (
@@ -188,7 +188,7 @@ const heroSlides = [
     href: '/refinery',
   },
   {
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
     alt: 'Ceypetco agrochemical products supporting Sri Lankan agriculture',
     eyebrow: 'SUPPORTING SRI LANKAN AGRICULTURE',
     title: (
@@ -203,7 +203,7 @@ const heroSlides = [
     href: '/agro-chemicals',
   },
   {
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/fuel-train.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/fuel-train.jpg',
     alt: 'Fuel transport train travelling through Sri Lanka',
     eyebrow: 'ENERGY IN MOTION',
     title: (
@@ -473,126 +473,126 @@ const pageData = {
     title: 'Built to power national progress.',
     intro:
       'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/about-banner.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
   },
   '/services': {
     label: 'PUBLIC SERVICES',
     title: 'Energy services made accessible.',
     intro:
       'Find official registrations, applications, specifications and information from one clear destination.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-2.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-2.jpg',
   },
   '/regional-offices': {
     label: 'PUBLIC SERVICES · REGIONAL OFFICES',
     title: 'Support across every region.',
     intro:
       'Connect directly with Ceypetco regional management teams serving customers, dealers and communities across Sri Lanka.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/head-office.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/consumer-registration': {
     label: 'PUBLIC SERVICES · BULK CONSUMERS',
     title: 'Register your consumer point.',
     intro:
       'A clear registration pathway for industrial customers requiring more than 3,300 litres of fuel per month.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
   '/notices': {
     label: 'PUBLIC INFORMATION · NOTICES',
     title: 'Official notices and circulars.',
     intro:
       'Read current public statements, marketing circulars and institutional agreements published by Ceypetco.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-1.jpg',
   },
   '/projects': {
     label: 'STRATEGIC PROJECTS · SOREM',
     title: 'Modernising Sri Lanka’s refining future.',
     intro:
       'The Sapugaskanda Oil Refinery Expansion and Modernization Project is designed to strengthen capacity, product quality and national energy resilience.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
   },
   '/annual-reports': {
     label: 'CORPORATE PUBLICATIONS · ANNUAL REPORTS',
     title: 'Performance documented with clarity.',
     intro:
       'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/about-banner.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
   },
   '/right-to-information': {
     label: 'PUBLIC INFORMATION · RTI',
     title: 'Information access made clear.',
     intro:
       'Contact the officers nominated by Ceylon Petroleum Corporation to support Right to Information enquiries and official information requests.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/head-office.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/media': {
     label: 'MEDIA CENTRE',
     title: 'News from across Ceypetco.',
     intro:
       'Access the latest corporate notices, project updates and public information.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-1.jpg',
   },
   '/tenders': {
     label: 'PROCUREMENT',
     title: 'Open and transparent opportunities.',
     intro:
       'Explore current tenders, supplier registrations and procurement documents.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
   },
   '/careers': {
     label: 'CAREERS',
     title: 'Power your career.',
     intro:
       'Join Sri Lanka’s energy journey and help build the systems that keep a nation moving.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/career-team.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/career-team.jpg',
   },
   '/contact': {
     label: 'CONTACT US',
     title: 'We’re here to help.',
     intro:
       'Connect with our head office, customer care and specialist operating divisions.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/head-office.webp',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/refinery': {
     label: 'OUR SERVICES · REFINERY',
     title: 'Precision refining for national growth.',
     intro:
       'Transforming crude oil into quality fuels through experienced people, proven processes and rigorous standards.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery-detail-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery-detail-1.jpg',
   },
   '/marketing-sales': {
     label: 'OUR SERVICES · MARKETING',
     title: 'Fueling every part of Sri Lanka.',
     intro:
       'An islandwide dealer and distribution network serving transport, industry and communities.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
   '/aviation': {
     label: 'OUR SERVICES · AVIATION',
     title: 'Reliable energy for every takeoff.',
     intro:
       'Round-the-clock aviation fueling built around quality, safety and on-time service.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/aviation-hero.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-hero.jpg',
   },
   '/agro-chemicals': {
     label: 'OUR SERVICES · AGRO',
     title: 'Supporting stronger harvests.',
     intro:
       'Quality crop-protection solutions and expert support for Sri Lanka’s farming communities.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
   },
   '/lubricants': {
     label: 'OUR SERVICES · LUBRICANTS',
     title: 'Performance engineered to last.',
     intro:
       'Certified automotive and industrial lubricants meeting recognised international specifications.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/lubricants-hero.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg',
   },
   '/history': {
     label: 'OUR HISTORY',
     title: 'Milestones that shaped our journey.',
     intro:
       'Explore the defining moments behind more than six decades of service to Sri Lanka.',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/history-1.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-1.jpg',
   },
 };
 
@@ -1020,7 +1020,7 @@ function ManagementTeam() {
           {loading ? (
             <article>
               <div className="leader-photo">
-                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/chairman.jpeg" alt="" />
+                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg" alt="" />
               </div>
               <h3>Loading...</h3>
               <p>Please wait</p>
@@ -1028,7 +1028,7 @@ function ManagementTeam() {
           ) : leaders.length === 0 ? (
             <article>
               <div className="leader-photo">
-                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/chairman.jpeg" alt="" />
+                <img src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg" alt="" />
               </div>
               <h3>No team members yet</h3>
               <p>Check back soon</p>
@@ -1182,7 +1182,7 @@ function HistoryPage() {
                 key={number}
               >
                 <img
-                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/history-${number}.jpg`}
+                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-${number}.jpg`}
                   alt={`Ceypetco historical archive ${index + 1}`}
                 />
                 <figcaption>
@@ -1207,7 +1207,7 @@ const divisionPages = {
       ['1,100+', 'Direct jobs'],
       ['30–35%', 'CPC sales volume'],
     ],
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/refinery-detail-2.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery-detail-2.jpg',
     features: [
       '100% Sri Lankan operating staff',
       'Foreign-exchange savings for the nation',
@@ -1233,7 +1233,7 @@ const divisionPages = {
       ['Islandwide', 'Distribution'],
       ['Since 1962', 'Marketing operations'],
     ],
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/media-3.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-3.jpg',
     features: [
       'Retail and commercial fuel supply',
       'Dealer and regional-office support',
@@ -1260,7 +1260,7 @@ const divisionPages = {
       ['1.3M L', 'Daily demand'],
       ['3', 'Operating locations'],
     ],
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/aviation-service.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-service.jpg',
     features: [
       'JET A-1 and AV GAS availability',
       'International quality-control standards',
@@ -1281,7 +1281,7 @@ const divisionPages = {
       ['ISO 9001', 'Quality certified'],
       ['Islandwide', 'Field support'],
     ],
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
     features: [
       'Quality, environment and safety systems',
       'Guidance for farmers and agrarian centres',
@@ -1303,7 +1303,7 @@ const divisionPages = {
       ['20+', 'Product families'],
       ['Automotive +', 'Industrial use'],
     ],
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/control-room.png',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/control-room.png',
     features: [
       'Internationally aligned specifications',
       'Automotive and industrial product ranges',
@@ -1446,7 +1446,7 @@ function RefineryPage() {
           ].map((image, index) => (
             <figure key={image}>
               <img
-                src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${image}`}
+                src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${image}`}
                 alt={
                   [
                     'Laboratory quality testing at the refinery',
@@ -2112,7 +2112,7 @@ function AviationPage() {
                 key={image}
               >
                 <img
-                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/aviation-gallery-${image}.jpg`}
+                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-gallery-${image}.jpg`}
                   alt={`Ceypetco aviation fuel operation ${image}`}
                 />
                 <figcaption>
@@ -2258,14 +2258,14 @@ function AgroChemicalsPage() {
           <div className="agro-opening-images">
             <figure>
               <img
-                src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-production-1.webp"
+                src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-production-1.webp"
                 alt="Ceypetco agrochemical production team member wearing protective equipment"
               />
               <span>Safe production</span>
             </figure>
             <figure>
               <img
-                src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-production-2.webp"
+                src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-production-2.webp"
                 alt="Ceypetco agrochemical automated production facility"
               />
               <span>Quality controlled</span>
@@ -2309,7 +2309,7 @@ function AgroChemicalsPage() {
               Practical crop-protection solutions across the cultivation cycle.
             </h2>
             <img
-              src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/agro-products.jpg"
+              src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg"
               alt="Safe application of crop-protection products in farmland"
             />
           </div>
@@ -2516,7 +2516,7 @@ function LubricantsPage() {
         <div className="container lubricant-intro-grid">
           <div className="lubricant-image">
             <img
-              src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/lubricants-hero.jpg"
+              src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg"
               alt="Ceypetco lubricating oil being poured into an engine"
             />
             <span>
@@ -3245,7 +3245,7 @@ function InnerPage({ type }) {
                         item.href.startsWith('http') ? 'noreferrer' : undefined
                       }
                     >
-                      <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${item.image}`} alt="" />
+                      <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${item.image}`} alt="" />
                       <span>0{i + 1}</span>
                     </a>
                     <div className="service-card-body">
@@ -4315,7 +4315,7 @@ function App() {
         <div className="container nav-wrap">
           <a className="brand" href="/">
             <img
-              src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/ceypetco-logo.png"
+              src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/ceypetco-logo.png"
               alt="Ceylon Petroleum Corporation logo"
             />
             <span>
@@ -4508,7 +4508,7 @@ function App() {
               <div className="image-composition">
                 <div className="image-main">
                   <img
-                    src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/distribution.jpg"
+                    src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg"
                     alt="Ceypetco fuel distribution truck in Sri Lanka"
                   />
                 </div>
@@ -4704,7 +4704,7 @@ function App() {
                       aria-label={`Continue with ${alt}`}
                     >
                       <span className="bank-image">
-                        <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${src}`} alt={alt} />
+                        <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${src}`} alt={alt} />
                       </span>
                       <span className="bank-action">
                         Continue <Icon name="arrow" size={15} />
@@ -4734,7 +4734,7 @@ function App() {
                     key={src}
                     aria-label={`Continue with ${alt}`}
                   >
-                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${src}`} alt={alt} />
+                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${src}`} alt={alt} />
                   </a>
                 ))}
               </div>
@@ -4754,7 +4754,7 @@ function App() {
                   ['mastercard.svg', 'Mastercard'],
                 ].map(([src, alt]) => (
                   <div key={src}>
-                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/${src}`} alt={alt} />
+                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${src}`} alt={alt} />
                   </div>
                 ))}
               </div>
@@ -4778,7 +4778,7 @@ function App() {
           <div className="footer-brand">
             <div className="footer-brand-lockup">
               <img
-                src="https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/ceypetco-logo.png"
+                src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/ceypetco-logo.png"
                 alt="Ceylon Petroleum Corporation logo"
               />
               <div>

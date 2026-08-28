@@ -5,10 +5,10 @@ const ManagementTeamMember = require("./models/ManagementTeamMember");
 const ManagementContact = require("./models/ManagementContact");
 
 const team = [
-  ["D J A S De S Rajakaruna", "Chairman", "https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/chairman.jpeg"],
-  ["Dr. Mayura Neththikumarage", "Managing Director", "https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/managing-director.png"],
-  ["Mahendra Garusinghe", "Director", "https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/director-1.jpeg"],
-  ["R M S P S Bandara", "Director", "https://res.cloudinary.com/e9fb61tl/image/upload/ceypetco/images/director-2.jpeg"],
+  ["D J A S De S Rajakaruna", "Chairman", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/chairman.jpeg"],
+  ["Dr. Mayura Neththikumarage", "Managing Director", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/managing-director.png"],
+  ["Mahendra Garusinghe", "Director", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/director-1.jpeg"],
+  ["R M S P S Bandara", "Director", "https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/director-2.jpeg"],
 ];
 
 const contacts = [
