@@ -208,6 +208,9 @@
   color: #fff;
   font-size: 35px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -1839,6 +1842,26 @@ footer {
   border: 1px solid #dce2e1;
 }
 
+.annual-reports-loading {
+  padding: 48px 28px;
+  background: #fff;
+  border: 1px solid #dc2626;
+  text-align: center;
+}
+
+.annual-reports-loading .eyebrow {
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.annual-reports-loading > p:not(.eyebrow) {
+  margin: 0;
+  color: var(--navy);
+  font:
+    700 15px 'Manrope',
+    sans-serif;
+}
+
 .annual-report-note > svg {
   color: var(--red);
 }
@@ -2667,6 +2690,14 @@ footer {
   opacity: 0.55;
 }
 
+.supplier-resource-empty {
+  grid-column: 1 / -1;
+  color: #e7edef;
+  font-size: 13px;
+  padding: 18px 8px;
+  opacity: 0.75;
+}
+
 .tender-division {
   margin-top: 58px;
 }
@@ -3165,6 +3196,17 @@ footer {
   height: 215px;
   background-position: center;
   background-size: cover;
+  background-color: #eef1f3;
+  background-image: url('/images/hero.png');
+}
+.news-grid-empty {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+  padding: 48px 20px;
+  border: 1px dashed var(--line);
+  background: #fff;
 }
 .news-image.image-1 {
   background-image: url('/images/refinery.png');
@@ -3195,6 +3237,28 @@ footer {
   font-size: 12px;
   font-weight: 700;
   margin-top: 20px;
+}
+.project-location {
+  color: var(--red) !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.project-doc-links {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.project-doc-links a {
+  margin-top: 0;
+  font-size: 12px;
+}
+.project-doc-links a svg {
+  width: 14px;
+  height: 14px;
 }
 .tender-list {
   border-top: 2px solid var(--navy);
@@ -3505,6 +3569,20 @@ footer {
   font-size: 10px;
   font-weight: 700;
 }
+.leader-photo .leader-photo-fallback {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  left: auto;
+  bottom: auto;
+  border-radius: 0;
+  background: transparent;
+  color: var(--navy);
+  opacity: 0.3;
+  font-size: 38px;
+}
+
 .leadership-grid article h3,
 .leadership-grid article > p {
   margin-left: 22px;
@@ -4493,6 +4571,12 @@ footer {
   opacity: 1;
   visibility: visible;
   transform: none;
+}
+.nav-group.closed .nav-dropdown {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(12px) !important;
+  pointer-events: none;
 }
 .nav-dropdown a {
   display: flex;
@@ -8087,6 +8171,34 @@ html {
   background: var(--oil-color);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--oil-color) 16%, transparent);
 }
+
+/* Isolate the dark admin sidebar from public-site global link colors. */
+.admin-sidebar { color: #f8fafc; }
+.admin-sidebar .admin-sidebar-section-toggle { color: #bae6fd; }
+.admin-sidebar .admin-sidebar-section-toggle:hover,
+.admin-sidebar .admin-sidebar-section-toggle:focus-visible { color: #fff; }
+.admin-sidebar a.admin-sidebar-link { color: #e2e8f0; border-color: transparent; }
+.admin-sidebar a.admin-sidebar-link svg { color: #a5c4cc; }
+.admin-sidebar a.admin-sidebar-link:hover,
+.admin-sidebar a.admin-sidebar-link:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.16);
+  outline: none;
+}
+.admin-sidebar a.admin-sidebar-link:hover svg,
+.admin-sidebar a.admin-sidebar-link:focus-visible svg,
+.admin-sidebar a.admin-sidebar-link-active svg { color: #fff; }
+.admin-sidebar a.admin-sidebar-link-active,
+.admin-sidebar a.admin-sidebar-link-active:hover {
+  color: #fff;
+  background: #dc2626;
+  border-color: #ef4444;
+}
+.admin-sidebar .admin-sidebar-brand-subtitle,
+.admin-sidebar .admin-sidebar-footer { color: #8fb0b7; }
+.admin-sidebar .admin-sidebar-close { color: #cbd5e1; }
+.admin-sidebar .admin-sidebar-close:hover { color: #fff; }
 .oil-types-legend span {
   font-size: 10px;
   font-weight: 600;

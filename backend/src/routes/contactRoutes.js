@@ -1,0 +1,14 @@
+const express = require("express");
+const router = express.Router();
+const c = require("../controllers/contactController");
+const { protect } = require("../middleware/authMiddleware");
+const { authorize } = require("../middleware/roleMiddleware");
+
+router.route("/").post(c.create);
+
+router.use(protect);
+
+router.route("/").get(c.getAll);
+router.route("/:id").get(c.getById).put(c.update).delete(authorize("super_admin", "admin"), c.remove);
+
+module.exports = router;

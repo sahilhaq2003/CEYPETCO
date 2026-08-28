@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import sriLankaMap from './assets/sri-lanka-districts.svg?raw';
 import fuelStations from './data/fuelStations.json';
 import lubricantProducts from './data/lubricants.json';
+import api from './api';
 
 const Icon = ({ name, size = 24 }) => {
   const paths = {
@@ -81,6 +82,12 @@ const services = [
     '/regional-offices',
   ],
   [
+    'building',
+    'Market & Sales',
+    'Explore fuel products, pricing and the dealer network.',
+    '/marketing-sales',
+  ],
+  [
     'app',
     'Mobile App',
     'Access Ceypetco services on mobile.',
@@ -132,7 +139,7 @@ const services = [
 const divisions = [
   [
     'Refinery',
-    'At the heart of CPC operations, strengthening the nation’s petroleum supply.',
+    'At the heart of CPC operations, strengthening the nationâ€™s petroleum supply.',
     '/images/refinery.png',
     '/refinery',
   ],
@@ -144,7 +151,7 @@ const divisions = [
   ],
   [
     'Aviation',
-    'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector.',
+    'Specialised aviation fuel handling supporting Sri Lankaâ€™s air transport sector.',
     '/images/control-room.png',
     '/aviation',
   ],
@@ -385,7 +392,7 @@ function FuelStationPage({ district }) {
               <Icon name="arrow" size={16} /> Back to district map
             </a>
             <p className="eyebrow light">
-              FUEL STATION NETWORK · {meta[2].toUpperCase()} PROVINCE
+              FUEL STATION NETWORK Â· {meta[2].toUpperCase()} PROVINCE
             </p>
             <h1>{district}</h1>
             <p>
@@ -465,7 +472,7 @@ const pageData = {
     label: 'ABOUT CEYPETCO',
     title: 'Built to power national progress.',
     intro:
-      'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape.',
+      'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lankaâ€™s energy landscape.',
     image: '/images/about-banner.webp',
   },
   '/services': {
@@ -476,42 +483,42 @@ const pageData = {
     image: '/images/media-2.jpg',
   },
   '/regional-offices': {
-    label: 'PUBLIC SERVICES · REGIONAL OFFICES',
+    label: 'PUBLIC SERVICES Â· REGIONAL OFFICES',
     title: 'Support across every region.',
     intro:
       'Connect directly with Ceypetco regional management teams serving customers, dealers and communities across Sri Lanka.',
     image: '/images/head-office.webp',
   },
   '/consumer-registration': {
-    label: 'PUBLIC SERVICES · BULK CONSUMERS',
+    label: 'PUBLIC SERVICES Â· BULK CONSUMERS',
     title: 'Register your consumer point.',
     intro:
       'A clear registration pathway for industrial customers requiring more than 3,300 litres of fuel per month.',
     image: '/images/distribution.jpg',
   },
   '/notices': {
-    label: 'PUBLIC INFORMATION · NOTICES',
+    label: 'PUBLIC INFORMATION Â· NOTICES',
     title: 'Official notices and circulars.',
     intro:
       'Read current public statements, marketing circulars and institutional agreements published by Ceypetco.',
     image: '/images/media-1.jpg',
   },
   '/projects': {
-    label: 'STRATEGIC PROJECTS · SOREM',
-    title: 'Modernising Sri Lanka’s refining future.',
+    label: 'STRATEGIC PROJECTS Â· SOREM',
+    title: 'Modernising Sri Lankaâ€™s refining future.',
     intro:
       'The Sapugaskanda Oil Refinery Expansion and Modernization Project is designed to strengthen capacity, product quality and national energy resilience.',
     image: '/images/refinery.png',
   },
   '/annual-reports': {
-    label: 'CORPORATE PUBLICATIONS · ANNUAL REPORTS',
+    label: 'CORPORATE PUBLICATIONS Â· ANNUAL REPORTS',
     title: 'Performance documented with clarity.',
     intro:
       'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years.',
     image: '/images/about-banner.webp',
   },
   '/right-to-information': {
-    label: 'PUBLIC INFORMATION · RTI',
+    label: 'PUBLIC INFORMATION Â· RTI',
     title: 'Information access made clear.',
     intro:
       'Contact the officers nominated by Ceylon Petroleum Corporation to support Right to Information enquiries and official information requests.',
@@ -535,46 +542,46 @@ const pageData = {
     label: 'CAREERS',
     title: 'Power your career.',
     intro:
-      'Join Sri Lanka’s energy journey and help build the systems that keep a nation moving.',
+      'Join Sri Lankaâ€™s energy journey and help build the systems that keep a nation moving.',
     image: '/images/career-team.jpg',
   },
   '/contact': {
     label: 'CONTACT US',
-    title: 'We’re here to help.',
+    title: 'Weâ€™re here to help.',
     intro:
       'Connect with our head office, customer care and specialist operating divisions.',
     image: '/images/head-office.webp',
   },
   '/refinery': {
-    label: 'OUR SERVICES · REFINERY',
+    label: 'OUR SERVICES Â· REFINERY',
     title: 'Precision refining for national growth.',
     intro:
       'Transforming crude oil into quality fuels through experienced people, proven processes and rigorous standards.',
     image: '/images/refinery-detail-1.jpg',
   },
   '/marketing-sales': {
-    label: 'OUR SERVICES · MARKETING',
+    label: 'OUR SERVICES Â· MARKETING',
     title: 'Fueling every part of Sri Lanka.',
     intro:
       'An islandwide dealer and distribution network serving transport, industry and communities.',
     image: '/images/distribution.jpg',
   },
   '/aviation': {
-    label: 'OUR SERVICES · AVIATION',
+    label: 'OUR SERVICES Â· AVIATION',
     title: 'Reliable energy for every takeoff.',
     intro:
       'Round-the-clock aviation fueling built around quality, safety and on-time service.',
     image: '/images/aviation-hero.jpg',
   },
   '/agro-chemicals': {
-    label: 'OUR SERVICES · AGRO',
+    label: 'OUR SERVICES Â· AGRO',
     title: 'Supporting stronger harvests.',
     intro:
-      'Quality crop-protection solutions and expert support for Sri Lanka’s farming communities.',
+      'Quality crop-protection solutions and expert support for Sri Lankaâ€™s farming communities.',
     image: '/images/agro-products.jpg',
   },
   '/lubricants': {
-    label: 'OUR SERVICES · LUBRICANTS',
+    label: 'OUR SERVICES Â· LUBRICANTS',
     title: 'Performance engineered to last.',
     intro:
       'Certified automotive and industrial lubricants meeting recognised international specifications.',
@@ -636,38 +643,38 @@ const managementGroups = [
       ],
       [
         'K W Samantha Pushpalal',
-        'Deputy General Manager · HR & Admin',
+        'Deputy General Manager Â· HR & Admin',
         '+94 11 2106758',
         'dgm.hr@ceypetco.gov.lk',
       ],
       [
         'W K S Gunawardhana',
-        'Acting Deputy General Manager · Marketing',
+        'Acting Deputy General Manager Â· Marketing',
         '+94 11 2106753',
         'dgm.mkt@ceypetco.gov.lk',
       ],
       [
         'K K A Jayawikrama',
-        'Deputy General Manager · Commercial & Supply Chain',
+        'Deputy General Manager Â· Commercial & Supply Chain',
         '+94 11 2106761',
         'dgm.commercial@ceypetco.gov.lk',
       ],
       [
         'N B M P Jeewasiri',
-        'Deputy General Manager · Technical Services & Corporate Affairs',
+        'Deputy General Manager Â· Technical Services & Corporate Affairs',
         '+94 11 7296290',
         'dgm.ts@ceypetco.gov.lk',
       ],
       [
         'B T T Perera',
-        'Deputy General Manager · Finance',
+        'Deputy General Manager Â· Finance',
         '+94 11 7296146',
         'dgm.fin@ceypetco.gov.lk',
       ],
     ],
   },
   {
-    title: 'Senior Management · Refinery',
+    title: 'Senior Management Â· Refinery',
     people: [
       [
         'Deputy Refinery Manager',
@@ -683,13 +690,13 @@ const managementGroups = [
       ],
       [
         'A K Seneviratne',
-        'Acting Deputy Refinery Manager · Technical Services',
+        'Acting Deputy Refinery Manager Â· Technical Services',
         '',
         'drm.ts@ceypetco.gov.lk',
       ],
       [
         'K V J Chandrawanka',
-        'Acting Deputy Refinery Manager · Electrical & Instrument',
+        'Acting Deputy Refinery Manager Â· Electrical & Instrument',
         '+94 11 2401527',
         'mgr.electrical@ceypetco.gov.lk',
       ],
@@ -706,7 +713,7 @@ const managementGroups = [
       ],
       [
         'M C D Perera',
-        'Senior Manager · Finance',
+        'Senior Manager Â· Finance',
         '+94 11 2400435',
         'smgr.fin@ceypetco.gov.lk',
       ],
@@ -718,31 +725,31 @@ const managementGroups = [
       ],
       [
         'G P Upananda',
-        'Manager · Human Resource',
+        'Manager Â· Human Resource',
         '+94 11 7296278',
         'mgr.hr@ceypetco.gov.lk',
       ],
       [
         'G P K Wijekoon',
-        'Manager · Engineering & Premises',
+        'Manager Â· Engineering & Premises',
         '+94 11 7296132',
         'mgr.eng@ceypetco.gov.lk',
       ],
       [
         'W K S Gunawardhana',
-        'Manager · Research & Development',
+        'Manager Â· Research & Development',
         '+94 11 7296287',
         'dgm.mkt@ceypetco.gov.lk',
       ],
       [
         'W M T Wijesinghe',
-        'Acting Manager · Commercial',
+        'Acting Manager Â· Commercial',
         '+94 11 7296125',
         'dgm.commercial@ceypetco.gov.lk',
       ],
       [
         'A G D Bandara',
-        'Manager · Shipping',
+        'Manager Â· Shipping',
         '+94 11 7296300',
         'mgr.shipping@ceypetco.gov.lk',
       ],
@@ -754,55 +761,55 @@ const managementGroups = [
       ],
       [
         'K Hewagamage',
-        'Manager · Procurements & Stores',
+        'Manager Â· Procurements & Stores',
         '+94 11 7296331',
         'mgr.procurement@ceypetco.gov.lk',
       ],
       [
         'W A A C Weerasinghe',
-        'Manager · Human Resource Development',
+        'Manager Â· Human Resource Development',
         '',
         'mgr.hrd@ceypetco.gov.lk',
       ],
       [
         'V Shanmuganathan',
-        'Acting Manager · Marketing',
+        'Acting Manager Â· Marketing',
         '+94 11 7296248',
         'mgr.mkt@ceypetco.gov.lk',
       ],
       [
         'R M Ariyamanjula',
-        'Acting Manager · Corporate Planning & Business Development',
+        'Acting Manager Â· Corporate Planning & Business Development',
         '+94 11 7296292',
         'mgr.cpbd@ceypetco.gov.lk',
       ],
       [
         'I C Galagodage',
-        'Acting Manager · Lubricant & Special Products',
+        'Acting Manager Â· Lubricant & Special Products',
         '+94 11 7296346',
         'dmgr.lub@ceypetco.gov.lk',
       ],
       [
         'D L Perera',
-        'Acting Manager · Information Technology',
+        'Acting Manager Â· Information Technology',
         '+94 11 7296218',
         'lakshitha@ceypetco.gov.lk',
       ],
       [
         'U H A S Jayaweera',
-        'Acting Deputy Manager · Investigation',
+        'Acting Deputy Manager Â· Investigation',
         '+94 11 7296230',
         '',
       ],
       [
         'B M W A R Bandara',
-        'Acting Assistant Manager · Security',
+        'Acting Assistant Manager Â· Security',
         '+94 11 7296320',
         '',
       ],
       [
         'Anurudda B. Koralagedara',
-        'Acting Assistant Manager · Secretariat',
+        'Acting Assistant Manager Â· Secretariat',
         '+94 11 7296310',
         'anuruddakg@ceypetco.gov.lk',
       ],
@@ -813,19 +820,19 @@ const managementGroups = [
     people: [
       [
         'A I Wanasekara',
-        'Manager · Aviation Operations, Katunayake',
+        'Manager Â· Aviation Operations, Katunayake',
         '+94 11 2253039',
         'mgr.avi@ceypetco.gov.lk',
       ],
       [
         'A M K B Adhikari',
-        'Acting Deputy Manager · Sapugaskanda Terminal',
+        'Acting Deputy Manager Â· Sapugaskanda Terminal',
         '+94 11 2401112 / +94 11 5750880',
         '',
       ],
       [
         'B S S Perera',
-        'Manager · Agro Chemicals',
+        'Manager Â· Agro Chemicals',
         '+94 11 2694483 / +94 11 5666815',
         'mgr.agro@ceypetco.gov.lk',
       ],
@@ -833,7 +840,59 @@ const managementGroups = [
   },
 ];
 
+const DIRECTORY_GROUP_ORDER = [
+  'Corporate Management',
+  'Senior Management · Refinery',
+  'Head Office',
+  'Operating Divisions',
+];
+
 function ManagementDirectory() {
+  const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setLoading(true);
+      try {
+        const res = await api.get('/admin/management-contacts/active', {
+          params: { limit: 500 },
+        });
+        const contacts = res.data && res.data.data ? res.data.data : [];
+        if (cancelled) return;
+        const map = {};
+        contacts.forEach((c) => {
+          const key = c.group || 'Other';
+          if (!map[key]) map[key] = [];
+          map[key].push(c);
+        });
+        const ordered = Object.keys(map).sort((a, b) => {
+          const ia = DIRECTORY_GROUP_ORDER.indexOf(a);
+          const ib = DIRECTORY_GROUP_ORDER.indexOf(b);
+          if (ia === -1 && ib === -1) return a.localeCompare(b);
+          if (ia === -1) return 1;
+          if (ib === -1) return -1;
+          return ia - ib;
+        });
+        setGroups(
+          ordered.map((title) => ({
+            title,
+            people: (map[title] || []).sort((a, b) => a.order - b.order),
+          }))
+        );
+      } catch (err) {
+        if (!cancelled) setGroups([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <section className="management-directory content-section">
       <div className="container">
@@ -843,49 +902,73 @@ function ManagementDirectory() {
             <h2>Corporate and operational leadership.</h2>
           </div>
           <p>
-            Official contact directory for Ceypetco’s management functions and
-            divisions.
+            Official contact directory for Ceypetco&rsquo;s management functions
+            and divisions.
           </p>
         </div>
         <div className="management-groups">
-          {managementGroups.map((group, index) => (
-            <details open={index === 0} key={group.title}>
+          {loading ? (
+            <details open>
               <summary>
                 <span>
-                  <small>{String(index + 1).padStart(2, '0')}</small>
-                  {group.title}
+                  <small>—</small>
+                  Loading directory...
                 </span>
-                <b>{String(group.people.length).padStart(2, '0')} contacts</b>
+                <b>—</b>
               </summary>
-              <div className="management-list">
-                {group.people.map(([name, role, phone, email], personIndex) => (
-                  <article key={`${group.title}-${name}-${role}`}>
-                    <span className="management-person-index">
-                      {String(personIndex + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <h3>{name}</h3>
-                      <p>{role}</p>
-                    </div>
-                    <div className="management-contact-details">
-                      {phone && (
-                        <a
-                          href={`tel:${phone.split('/')[0].replaceAll(' ', '')}`}
-                        >
-                          <Icon name="phone" size={14} /> {phone}
-                        </a>
-                      )}
-                      {email && (
-                        <a href={`mailto:${email}`}>
-                          <span>@</span> {email}
-                        </a>
-                      )}
-                    </div>
-                  </article>
-                ))}
-              </div>
             </details>
-          ))}
+          ) : groups.length === 0 ? (
+            <details open>
+              <summary>
+                <span>
+                  <small>—</small>
+                  No directory entries yet
+                </span>
+                <b>—</b>
+              </summary>
+            </details>
+          ) : (
+            groups.map((group, index) => (
+              <details open={index === 0} key={group.title}>
+                <summary>
+                  <span>
+                    <small>{String(index + 1).padStart(2, '0')}</small>
+                    {group.title}
+                  </span>
+                  <b>{String(group.people.length).padStart(2, '0')} contacts</b>
+                </summary>
+                <div className="management-list">
+                  {group.people.map((person, personIndex) => (
+                    <article key={person._id}>
+                      <span className="management-person-index">
+                        {String(personIndex + 1).padStart(2, '0')}
+                      </span>
+                      <div>
+                        <h3>{person.name}</h3>
+                        <p>{person.role}</p>
+                      </div>
+                      <div className="management-contact-details">
+                        {person.phone && (
+                          <a
+                            href={`tel:${person.phone
+                              .split('/')[0]
+                              .replaceAll(' ', '')}`}
+                          >
+                            <Icon name="phone" size={14} /> {person.phone}
+                          </a>
+                        )}
+                        {person.email && (
+                          <a href={`mailto:${person.email}`}>
+                            <span>@</span> {person.email}
+                          </a>
+                        )}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </details>
+            ))
+          )}
         </div>
       </div>
     </section>
@@ -893,16 +976,37 @@ function ManagementDirectory() {
 }
 
 function ManagementTeam() {
-  const leaders = [
-    ['D J A S De S Rajakaruna', 'Chairman', 'chairman.jpeg'],
-    [
-      'Dr. Mayura Neththikumarage',
-      'Managing Director',
-      'managing-director.png',
-    ],
-    ['Mahendra Garusinghe', 'Director', 'director-1.jpeg'],
-    ['R M S P S Bandara', 'Director', 'director-2.jpeg'],
-  ];
+  const [leaders, setLeaders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setLoading(true);
+      try {
+        const res = await api.get('/admin/team-members/active', {
+          params: { limit: 200 },
+        });
+        if (cancelled) return;
+        const items = res.data && res.data.data ? res.data.data : [];
+        setLeaders(
+          [...items].sort((a, b) =>
+            (a.order ?? 0) - (b.order ?? 0) ||
+            String(a.name).localeCompare(String(b.name))
+          )
+        );
+      } catch (err) {
+        if (!cancelled) setLeaders([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <section className="content-section management-team-section">
       <div className="container">
@@ -913,15 +1017,44 @@ function ManagementTeam() {
           </div>
         </div>
         <div className="leadership-grid">
-          {leaders.map(([name, role, image]) => (
-            <article key={name}>
+          {loading ? (
+            <article>
               <div className="leader-photo">
-                <img src={`/images/${image}`} alt={name} />
+                <img src="/images/chairman.jpeg" alt="" />
               </div>
-              <h3>{name}</h3>
-              <p>{role}</p>
+              <h3>Loading...</h3>
+              <p>Please wait</p>
             </article>
-          ))}
+          ) : leaders.length === 0 ? (
+            <article>
+              <div className="leader-photo">
+                <img src="/images/chairman.jpeg" alt="" />
+              </div>
+              <h3>No team members yet</h3>
+              <p>Check back soon</p>
+            </article>
+          ) : (
+            leaders.map((member) => (
+              <article key={member._id}>
+                <div className="leader-photo">
+                  {member.photo ? (
+                    <img src={member.photo} alt={member.name} />
+                  ) : (
+                    <span className="leader-photo-fallback">
+                      {member.name
+                        .split(' ')
+                        .slice(0, 2)
+                        .map((w) => w[0])
+                        .join('')
+                        .toUpperCase()}
+                    </span>
+                  )}
+                </div>
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+              </article>
+            ))
+          )}
         </div>
       </div>
     </section>
@@ -938,19 +1071,19 @@ const contactLocations = [
     'ref.manager@ceypetco.gov.lk',
   ],
   [
-    'Aviation · Katunayake',
+    'Aviation Â· Katunayake',
     '+94 11 2251319 / +94 11 2253376',
     '+94 11 2252331',
     'avi.opsbia@ceypetco.gov.lk',
   ],
   [
-    'Aviation · Ratmalana',
+    'Aviation Â· Ratmalana',
     '+94 11 2637755',
     '+94 11 2637755',
     'avi.opsrat@ceypetco.gov.lk',
   ],
   [
-    'Agro Chemicals · Kolonnawa',
+    'Agro Chemicals Â· Kolonnawa',
     '+94 11 2572316',
     '+94 11 2572316',
     'agrochem@ceypetco.gov.lk',
@@ -1017,7 +1150,7 @@ function HistoryPage() {
             </div>
             <p>
               From market entry and national distribution to refinery
-              modernisation, each milestone strengthened Sri Lanka’s energy
+              modernisation, each milestone strengthened Sri Lankaâ€™s energy
               infrastructure.
             </p>
           </div>
@@ -1072,7 +1205,7 @@ const divisionPages = {
     stats: [
       ['1969', 'Commissioned'],
       ['1,100+', 'Direct jobs'],
-      ['30–35%', 'CPC sales volume'],
+      ['30â€“35%', 'CPC sales volume'],
     ],
     image: '/images/refinery-detail-2.jpg',
     features: [
@@ -1114,14 +1247,14 @@ const divisionPages = {
       ['Super Diesel Euro 4', 'Rs. 478.00 / L'],
       ['Industrial Kerosene', 'Rs. 434.00 / L'],
       ['Fuel Oil Super', 'Rs. 332.00 / L'],
-      ['Fuel Oil 1500 · High Sulphur', 'Rs. 332.00 / L'],
-      ['Fuel Oil 1500 · Low Sulphur', 'Rs. 332.00 / L'],
+      ['Fuel Oil 1500 Â· High Sulphur', 'Rs. 332.00 / L'],
+      ['Fuel Oil 1500 Â· Low Sulphur', 'Rs. 332.00 / L'],
     ],
   },
   '/aviation': {
     kicker: 'CEYPETCO AVIATION',
     heading: 'Quality fuel. The right aircraft. The right time.',
-    copy: 'Ceypetco Aviation provides round-the-clock aviation refuelling at Sri Lanka’s international airports, with daytime services for domestic, executive and nominated aircraft at Ratmalana.',
+    copy: 'Ceypetco Aviation provides round-the-clock aviation refuelling at Sri Lankaâ€™s international airports, with daytime services for domestic, executive and nominated aircraft at Ratmalana.',
     stats: [
       ['24/7', 'International service'],
       ['1.3M L', 'Daily demand'],
@@ -1134,9 +1267,9 @@ const divisionPages = {
       'Hydrant and refueller operations',
     ],
     locations: [
-      ['Katunayake', 'Three JET A-1 tanks · 2.6M litres each'],
-      ['Mattala', 'Three JET A-1 tanks · 1.0M litres each'],
-      ['Ratmalana', 'Five tanks · 280,000 litres total'],
+      ['Katunayake', 'Three JET A-1 tanks Â· 2.6M litres each'],
+      ['Mattala', 'Three JET A-1 tanks Â· 1.0M litres each'],
+      ['Ratmalana', 'Five tanks Â· 280,000 litres total'],
     ],
   },
   '/agro-chemicals': {
@@ -1155,9 +1288,9 @@ const divisionPages = {
       'Reasonably priced crop-protection products',
     ],
     products: [
-      ['Insecticides', 'Profenophos · BPMC · Fipronil'],
-      ['Weedicides', 'Diuron · Pretilachlor · Glyphosate'],
-      ['Fungicides', 'Tebuconazole · Mancozeb · Captan'],
+      ['Insecticides', 'Profenophos Â· BPMC Â· Fipronil'],
+      ['Weedicides', 'Diuron Â· Pretilachlor Â· Glyphosate'],
+      ['Fungicides', 'Tebuconazole Â· Mancozeb Â· Captan'],
       ['Bio-Insecticides', 'Flipper'],
     ],
   },
@@ -1177,10 +1310,10 @@ const divisionPages = {
       'Nationwide Ceypetco brand support',
     ],
     products: [
-      ['Engine Oils', 'Enduro · Supreme XHD · Platinum'],
-      ['Transmission', 'ATF Dexron III · Gear Oil GL-4/GL-5'],
-      ['Speciality', 'Brake Fluid · Coolant · Grease'],
-      ['Industrial', 'Hydra · Hypertrans · Circulation Oil'],
+      ['Engine Oils', 'Enduro Â· Supreme XHD Â· Platinum'],
+      ['Transmission', 'ATF Dexron III Â· Gear Oil GL-4/GL-5'],
+      ['Speciality', 'Brake Fluid Â· Coolant Â· Grease'],
+      ['Industrial', 'Hydra Â· Hypertrans Â· Circulation Oil'],
     ],
   },
 };
@@ -1278,7 +1411,7 @@ function RefineryPage() {
   const importance = [
     'Operated by a 100% Sri Lankan workforce.',
     'Provides direct employment for more than 1,100 citizens.',
-    'Contributes 30–35% of CPC’s total sales volume.',
+    'Contributes 30â€“35% of CPCâ€™s total sales volume.',
     'Reduces foreign-currency outflows through domestic refining.',
     'More than five decades of continuous operating experience.',
     'Refinery training is recognised by overseas organisations.',
@@ -1291,7 +1424,7 @@ function RefineryPage() {
             <p className="eyebrow">REFINERY OPERATIONS & CAPABILITIES</p>
             <h2>
               We refine with precision and expertise, delivering quality
-              petroleum products that fuel the nation’s growth.
+              petroleum products that fuel the nationâ€™s growth.
             </h2>
           </div>
           <div className="refinery-lead">
@@ -1331,7 +1464,7 @@ function RefineryPage() {
         <div className="container refinery-history-grid">
           <div className="refinery-sticky-title">
             <p className="eyebrow">SAPUGASKANDA REFINERY</p>
-            <h2>Advancing Sri Lanka’s refining capability since 1969.</h2>
+            <h2>Advancing Sri Lankaâ€™s refining capability since 1969.</h2>
             <div className="refinery-year">
               <b>1969</b>
               <span>
@@ -1347,11 +1480,11 @@ function RefineryPage() {
               of 1961 and entered the import, distribution and marketing of
               petroleum products throughout the island. The Sapugaskanda Oil
               Refinery was commissioned in August 1969 to process 38,000 barrels
-              per stream day—approximately 5,200 metric tonnes per day—of
+              per stream dayâ€”approximately 5,200 metric tonnes per dayâ€”of
               Iranian Light crude oil.
             </p>
             <p>
-              Although the crude distiller’s rated capacity was 5,200 MT/day,
+              Although the crude distillerâ€™s rated capacity was 5,200 MT/day,
               the unit was capable of processing 5,800 MT/day. Crudes with
               characteristics similar to Iranian Light, including Upper Zakum
               and Arabian Light, could be processed while meeting the required
@@ -1362,7 +1495,7 @@ function RefineryPage() {
               modified to process LPG. Special Boiling Point Solvent production
               also began using existing facilities. The Crude Distiller was
               subsequently debottlenecked, increasing refining capacity to
-              50,000 barrels per stream day—approximately 6,900 MT/day.
+              50,000 barrels per stream dayâ€”approximately 6,900 MT/day.
             </p>
             <p>
               A new Kerosene Merox unit was commissioned in 1981 to process Jet
@@ -1412,7 +1545,7 @@ function RefineryPage() {
               <h2>From crude oil to essential products.</h2>
               <p className="refining-process-intro">
                 Fractional distillation separates crude oil into useful products
-                according to boiling point and density—from LPG and petrol to
+                according to boiling point and densityâ€”from LPG and petrol to
                 diesel, lubricants and bitumen.
               </p>
             </div>
@@ -1435,10 +1568,10 @@ function RefineryPage() {
                 <span />
               </div>
               <div className="temperature-scale">
-                <span>20°C</span>
-                <span>120°C</span>
-                <span>250°C</span>
-                <span>370°C+</span>
+                <span>20Â°C</span>
+                <span>120Â°C</span>
+                <span>250Â°C</span>
+                <span>370Â°C+</span>
               </div>
               <div className="column-core">
                 {Array.from({ length: 7 }).map((_, index) => (
@@ -1455,12 +1588,12 @@ function RefineryPage() {
             </div>
             <div className="product-streams">
               {[
-                ['01', 'LPG', 'Light gases', '20°C'],
-                ['02', 'Petrol', 'Motor gasoline', '70°C'],
-                ['03', 'Jet fuel', 'Kerosene fraction', '170°C'],
-                ['04', 'Diesel', 'Transport fuel', '270°C'],
-                ['05', 'Lubricants', 'Oils & waxes', '350°C'],
-                ['06', 'Bitumen', 'Heavy residue', '370°C+'],
+                ['01', 'LPG', 'Light gases', '20Â°C'],
+                ['02', 'Petrol', 'Motor gasoline', '70Â°C'],
+                ['03', 'Jet fuel', 'Kerosene fraction', '170Â°C'],
+                ['04', 'Diesel', 'Transport fuel', '270Â°C'],
+                ['05', 'Lubricants', 'Oils & waxes', '350Â°C'],
+                ['06', 'Bitumen', 'Heavy residue', '370Â°C+'],
               ].map(([number, name, use, temperature], index) => (
                 <article
                   className="product-stream"
@@ -1497,7 +1630,7 @@ function RefineryPage() {
           <div className="unit-table">
             <div className="unit-table-head">
               <span>Unit</span>
-              <span>Capacity · MT/stream day</span>
+              <span>Capacity Â· MT/stream day</span>
             </div>
             {units.map(([unit, capacity], index) => (
               <div className="unit-row" key={unit}>
@@ -1554,23 +1687,58 @@ function FuelPriceCards({ products, category }) {
 }
 
 function MarketingSalesPage() {
-  const whiteOil = [
-    ['Lanka Petrol 92 Octane', '414.00', '29-06-2026 · 12:00 midnight'],
-    ['Lanka Auto Diesel', '382.00', '29-06-2026 · 12:00 midnight'],
-    ['Lanka Kerosene', '285.00', '30-05-2026 · 12:00 midnight'],
-    ['Lanka Petrol 95 Octane Euro 4', '495.00', '30-05-2026 · 12:00 midnight'],
-    [
-      'Lanka Super Diesel 4 Star Euro 4',
-      '478.00',
-      '30-05-2026 · 12:00 midnight',
-    ],
-    ['Lanka Industrial Kerosene', '434.00', '01-04-2026'],
+  const [fuelPrices, setFuelPrices] = useState([]);
+  const [fuelPricesLoading, setFuelPricesLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setFuelPricesLoading(true);
+      try {
+        const res = await api.get('/admin/fuel-prices/active', {
+          params: { limit: 100 },
+        });
+        if (!cancelled)
+          setFuelPrices(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setFuelPrices([]);
+      } finally {
+        if (!cancelled) setFuelPricesLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const categoryOrder = [
+    'White Oil',
+    'Black Oil',
+    'Lubricants',
+    'Aviation Fuel',
   ];
-  const blackOil = [
-    ['Lanka Fuel Oil Super', '332.00', '01-04-2026'],
-    ['Lanka Fuel Oil 1500 Sec. · High Sulphur', '332.00', '01-04-2026'],
-    ['Lanka Fuel Oil 1500 Sec. · Low Sulphur', '332.00', '01-04-2026'],
-  ];
+  const grouped = categoryOrder
+    .map((category) => ({
+      category,
+      products: fuelPrices
+        .filter((p) => p.category === category)
+        .map((p) => [
+          p.product,
+          (p.price ?? 0).toFixed(2),
+          p.effectiveDate
+            ? new Date(p.effectiveDate)
+                .toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: '2-digit',
+                  year: 'numeric',
+                })
+                .replace(/\//g, '-')
+            : '',
+        ]),
+    }))
+    .filter((g) => g.products.length > 0);
+
   return (
     <>
       <section className="marketing-intro content-section">
@@ -1585,7 +1753,7 @@ function MarketingSalesPage() {
             <p>
               Following the incorporation of CPC under the Act of Parliament in
               1961, marketing operations commenced on 28 April 1962. Today,
-              Ceypetco serves Sri Lanka’s fuel requirements through
+              Ceypetco serves Sri Lankaâ€™s fuel requirements through
               approximately 850 dealers.
             </p>
             <p>
@@ -1639,26 +1807,43 @@ function MarketingSalesPage() {
               </div>
             </div>
           </div>
-          <div className="price-category">
-            <div className="price-category-title">
-              <span>01</span>
-              <div>
-                <p className="eyebrow">PRODUCT CATEGORY</p>
-                <h3>White Oil</h3>
+          {fuelPricesLoading ? (
+            <div className="price-category">
+              <div className="price-category-title">
+                <div>
+                  <p className="eyebrow">PRODUCT CATEGORY</p>
+                  <h3>Loading prices...</h3>
+                </div>
               </div>
             </div>
-            <FuelPriceCards products={whiteOil} category="White Oil" />
-          </div>
-          <div className="price-category black-oil">
-            <div className="price-category-title">
-              <span>02</span>
-              <div>
-                <p className="eyebrow">PRODUCT CATEGORY</p>
-                <h3>Black Oil</h3>
+          ) : grouped.length === 0 ? (
+            <div className="price-category">
+              <div className="price-category-title">
+                <div>
+                  <p className="eyebrow">PRODUCT CATEGORY</p>
+                  <h3>No prices published</h3>
+                </div>
               </div>
             </div>
-            <FuelPriceCards products={blackOil} category="Black Oil" />
-          </div>
+          ) : (
+            grouped.map((g, i) => (
+              <div
+                className={`price-category ${
+                  g.category === 'Black Oil' ? 'black-oil' : ''
+                }`}
+                key={g.category}
+              >
+                <div className="price-category-title">
+                  <span>{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p className="eyebrow">PRODUCT CATEGORY</p>
+                    <h3>{g.category}</h3>
+                  </div>
+                </div>
+                <FuelPriceCards products={g.products} category={g.category} />
+              </div>
+            ))
+          )}
           <div className="pricing-note">
             <Icon name="building" size={22} />
             <div>
@@ -1707,19 +1892,19 @@ function AviationPage() {
       '2.46',
     ],
     ['Local Contract Customer without Operating an Airline', 'JIA', '2.57'],
-    ['All Contract Customers · Foreign', 'BIA, CIAR & MRIA', '2.43'],
-    ['All Contract Customers · Foreign', 'JIA', '2.54'],
+    ['All Contract Customers Â· Foreign', 'BIA, CIAR & MRIA', '2.43'],
+    ['All Contract Customers Â· Foreign', 'JIA', '2.54'],
   ];
   const locations = [
     {
       name: 'Katunayake',
-      code: 'BIA · CMB / VCBI',
-      service: 'Hydrant and refueller · over-wing / under-wing',
-      capacity: 'Three JET A-1 tanks · 2.6 million litres each',
+      code: 'BIA Â· CMB / VCBI',
+      service: 'Hydrant and refueller Â· over-wing / under-wing',
+      capacity: 'Three JET A-1 tanks Â· 2.6 million litres each',
       avgas: '200-litre sealed drums',
       contacts: [
         [
-          'Deputy Manager · Aviation Operations',
+          'Deputy Manager Â· Aviation Operations',
           '+94 11 2253039',
           'manjular@ceypetco.gov.lk',
         ],
@@ -1732,15 +1917,15 @@ function AviationPage() {
     },
     {
       name: 'Mattala',
-      code: 'MRIA · HRI / VCRI',
-      service: 'Hydrant and refueller · over-wing / under-wing',
-      capacity: 'Three JET A-1 tanks · 1.0 million litres each',
+      code: 'MRIA Â· HRI / VCRI',
+      service: 'Hydrant and refueller Â· over-wing / under-wing',
+      capacity: 'Three JET A-1 tanks Â· 1.0 million litres each',
       avgas: '200-litre sealed drums',
       contacts: [
-        ['Assistant Manager · Aviation Operations', '+94 47 2031946', ''],
+        ['Assistant Manager Â· Aviation Operations', '+94 47 2031946', ''],
         [
           'Operations Department',
-          '+94 47 5678343 · +94 47 2031945 · +94 47 2031947',
+          '+94 47 5678343 Â· +94 47 2031945 Â· +94 47 2031947',
           'mria.ops@ceypetco.gov.lk',
         ],
       ],
@@ -1748,22 +1933,22 @@ function AviationPage() {
     {
       name: 'Ratmalana',
       code: 'RML / VCCC',
-      service: 'Daytime refueller service · over-wing / under-wing',
-      capacity: 'Five JET A-1 tanks · 280,000 litres total',
+      service: 'Daytime refueller service Â· over-wing / under-wing',
+      capacity: 'Five JET A-1 tanks Â· 280,000 litres total',
       avgas: '200-litre sealed drums',
       contacts: [
         [
           'Shift Superintendent',
-          '+94 11 2637755 · +94 11 5664707',
+          '+94 11 2637755 Â· +94 11 5664707',
           'cpcavirat@ceypetco.gov.lk',
         ],
         [
           'Commercial Manager',
-          '+94 11 5455115 · +94 76 3842287',
+          '+94 11 5455115 Â· +94 76 3842287',
           'mria.cm@ceypetco.gov.lk',
         ],
         [
-          'Accountant · Aviation',
+          'Accountant Â· Aviation',
           '+94 11 5455191',
           'acc.aviation@ceypetco.gov.lk',
         ],
@@ -1778,7 +1963,7 @@ function AviationPage() {
             <p className="eyebrow">OUR AIM</p>
             <h2>Quality fuel. The right aircraft. The right time.</h2>
             <blockquote>
-              To be the region’s leading service-oriented, customer-focused and
+              To be the regionâ€™s leading service-oriented, customer-focused and
               environmentally responsible aviation fuel supplier.
             </blockquote>
           </div>
@@ -1840,7 +2025,7 @@ function AviationPage() {
               <p className="eyebrow">AVIATION FUEL PRICING</p>
               <h2>Contract customer rates.</h2>
               <p>
-                Effective 01 February 2025 · Prices shown in US dollars per US
+                Effective 01 February 2025 Â· Prices shown in US dollars per US
                 gallon.
               </p>
             </div>
@@ -1904,7 +2089,7 @@ function AviationPage() {
               <p className="eyebrow light">TECHNICAL SERVICE PROVIDER</p>
               <h3>PETRONAS Aviation</h3>
               <p>
-                Supporting Ceypetco Aviation’s commitment to specialist
+                Supporting Ceypetco Aviationâ€™s commitment to specialist
                 handling, operational quality and international service
                 standards.
               </p>
@@ -1959,7 +2144,7 @@ function AviationPage() {
             <span>COMMERCIAL & PAYMENT SUPPORT</span>
             <a href="tel:+94112253039">+94 11 2253039</a>
             <a href="tel:+94771066764">+94 77 1066764</a>
-            <p>Fax · +94 11 2252331</p>
+            <p>Fax Â· +94 11 2252331</p>
           </div>
         </div>
       </section>
@@ -2000,7 +2185,7 @@ function AviationPage() {
                     <div key={role}>
                       <b>{role}</b>
                       <a
-                        href={`tel:${phone.split('·')[0].replaceAll(' ', '')}`}
+                        href={`tel:${phone.split('Â·')[0].replaceAll(' ', '')}`}
                       >
                         {phone}
                       </a>
@@ -2034,7 +2219,7 @@ function AgroChemicalsPage() {
       [
         'Diuron 80% WP',
         'Pretilachlor 30% EC',
-        'Glyphosate 36% SL · Restricted',
+        'Glyphosate 36% SL Â· Restricted',
       ],
     ],
     [
@@ -2055,7 +2240,7 @@ function AgroChemicalsPage() {
           <div>
             <p className="eyebrow">CEYPETCO AGROCHEMICALS</p>
             <h2>
-              More than 50 years supporting Sri Lanka’s farming communities.
+              More than 50 years supporting Sri Lankaâ€™s farming communities.
             </h2>
             <p>
               Ceylon Petroleum Corporation established its Agrochemicals
@@ -2065,7 +2250,7 @@ function AgroChemicalsPage() {
             </p>
             <p>
               Ceypetco Agrochemicals is the only government-sector organisation
-              engaged in the agrochemicals business among Sri Lanka’s marketing
+              engaged in the agrochemicals business among Sri Lankaâ€™s marketing
               companies, helping maintain product quality, access and reasonable
               market pricing.
             </p>
@@ -2104,7 +2289,7 @@ function AgroChemicalsPage() {
               ['ISO 14001:2015', 'Environmental Management System'],
               [
                 'OHSAS 18001:2007',
-                'Employee Health & Safety · qualified since 2019',
+                'Employee Health & Safety Â· qualified since 2019',
               ],
             ].map(([standard, label], index) => (
               <article key={standard}>
@@ -2180,7 +2365,7 @@ function AgroChemicalsPage() {
             <p className="eyebrow light">GREEN AGRICULTURE</p>
             <h3>A progressive addition to the Ceypetco Agro portfolio.</h3>
             <p>
-              Flipper was planned as part of the organisation’s response to the
+              Flipper was planned as part of the organisationâ€™s response to the
               newly introduced Green Agriculture concept, complementing
               established insecticide, fungicide and weed-control solutions.
             </p>
@@ -2351,7 +2536,7 @@ function LubricantsPage() {
               ISO 9001/2000. The Ceypetco lubricant range covers products
               developed to meet relevant international specifications from the
               American Petroleum Institute (API), MTU Friedrichshafen GmbH and
-              the European Automobile Manufacturers’ Association (ACEA).
+              the European Automobile Manufacturersâ€™ Association (ACEA).
             </p>
             <p>
               Our products serve demanding automotive and industrial
@@ -2569,44 +2754,44 @@ const bulkConsumerSteps = [
 const bulkConsumerRegions = [
   [
     'Western Province',
-    'Colombo · Kalutara · Gampaha',
+    'Colombo Â· Kalutara Â· Gampaha',
     'Mr. Chaminda Mendis',
     '0777768546',
   ],
   [
     'Northern Province',
-    'Jaffna · Mullaitivu · Kilinochchi · Mannar · Vavuniya',
+    'Jaffna Â· Mullaitivu Â· Kilinochchi Â· Mannar Â· Vavuniya',
     'Mr. Sivadaran',
     '0775023457',
   ],
   [
     'North Western Province',
-    'Kurunegala · Puttalam',
+    'Kurunegala Â· Puttalam',
     'Mr. Bandara',
     '0713473103',
   ],
   [
     'North Central Province',
-    'Anuradhapura · Polonnaruwa',
+    'Anuradhapura Â· Polonnaruwa',
     'Mr. Pethiyagoda',
     '0714395411',
   ],
   [
     'Central Province',
-    'Kandy · Nuwara Eliya · Matale',
+    'Kandy Â· Nuwara Eliya Â· Matale',
     'Mr. Rathnayake',
     '0714440471',
   ],
   [
     'Eastern Province',
-    'Batticaloa · Trincomalee · Ampara',
+    'Batticaloa Â· Trincomalee Â· Ampara',
     'Mr. Devapriya',
     '0777566455',
   ],
-  ['Uva Province', 'Badulla · Monaragala', 'Mr. Wimalasiri', '0774101377'],
+  ['Uva Province', 'Badulla Â· Monaragala', 'Mr. Wimalasiri', '0774101377'],
   [
     'Southern Province',
-    'Galle · Hambantota · Matara',
+    'Galle Â· Hambantota Â· Matara',
     'Mr. Chandimal',
     '0777440062',
   ],
@@ -2632,108 +2817,27 @@ const bulkConsumerResources = [
   ['Fuel Ordering Mobile App', 'https://fuelup.cpstl.lk/apk/'],
 ];
 
-const officialNotices = [
-  {
-    category: 'Corporate Statement',
-    title: 'Letter of Credit opened in relation to Shipment of Gasoline',
-    summary:
-      "A Letter of Credit with a 30-day credit period was established through People's Bank for the shipment. Following non-performance by the supplier, the Letter of Credit is null and void. The earmarked proceeds remain intact for future fuel purchases.",
-    note: 'Confirmed by a Senior Finance Officer of CPC',
-  },
-  {
-    category: 'Marketing Circular · 1041',
-    title: 'රථවාහනවල ධාවන ටැංකි හැර හාජනවලට ඉන්ධන නිකුත් කිරීම',
-    summary:
-      'රථවාහනවල ධාවන ටැංකි හැර හාජනවලට ඉන්ධන නිකුත් කිරීම පිළිබඳ අලෙවි කාර්යාංශ චක්‍රලේඛ අංක 1041.',
-    href: 'https://ceypetco.gov.lk/wp-content/uploads/2025/08/For-Dealers-Circular-No-1041.pdf',
-  },
-  {
-    category: 'Marketing Circular · 1047',
-    title:
-      'රථවාහනවල ධාවන ටැංකි හැර හාජනවලට ඉන්දන නිකුත් කිරීම සහ ලංකා භුමිතෙල් නිකුත්කිරීම',
-    summary:
-      'අලෙවි කාර්යාංශ චක්‍රලේඛ අංක 1041ට අමතරව නිකුත් කළ අලෙවි කාර්යාංශ චක්‍රලේඛ අංක 1047.',
-    note: 'The source page currently has no published document URL.',
-  },
-  {
-    category: 'Agreement',
-    title: 'Regaining Trincomalee Oil Tank Farm',
-    summary:
-      'Modalities for the possession, development and use of the China Bay Oil Tank Farm by CPC, Lanka IOC PLC and Trinco Petroleum Terminal (Pvt) Limited.',
-    href: 'https://ceypetco.gov.lk/wp-content/uploads/2025/08/MODALITIES-FOR-THE-POSSESSION-DEVELOPMENT-AND-USE-OF-THE-CHINA-BAY-OIL-TANK-FARM-BY-CEYLON-PETROLEUM-CORPORATION-CPC-LANKA-IOC-PLC-LIOC-AND-TRINCO-PETROLEUM-TERMINAL-PVT-LIMITED-JVC.pdf',
-  },
-];
-
-const annualReports = [
-  [
-    '2023',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/12/2023_ENGLISH.pdf',
-  ],
-  [
-    '2022',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/2022_English.pdf',
-  ],
-  [
-    '2021',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/2021-_English.pdf',
-  ],
-  [
-    '2020',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/3-AR-2020-English.pdf',
-  ],
-  [
-    '2019',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/3-English-2019.pdf',
-  ],
-  [
-    '2015',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual-Report_2015_Printer.pdf',
-  ],
-  [
-    '2014',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report-2014_English.pdf',
-  ],
-  [
-    '2013',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2013.pdf',
-  ],
-  [
-    '2012',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_report_2012.pdf',
-  ],
-  [
-    '2011',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2011.pdf',
-  ],
-  [
-    '2010',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2010.pdf',
-  ],
-  [
-    '2009',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2009.pdf',
-  ],
-  [
-    '2008',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2008.pdf',
-  ],
-  [
-    '2007',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2007.pdf',
-  ],
-  [
-    '2006',
-    'https://ceypetco.gov.lk/wp-content/uploads/2025/08/Annual_Report_2006.pdf',
-  ],
-];
-
 function InnerPage({ type }) {
   const page = pageData[type] || pageData['/about'];
+  const [news, setNews] = useState([]);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [tenders, setTenders] = useState([]);
+  const [tendersLoading, setTendersLoading] = useState(true);
+  const [notices, setNotices] = useState([]);
+  const [noticesLoading, setNoticesLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
+  const [projectsLoading, setProjectsLoading] = useState(true);
+  const [supplierResources, setSupplierResources] = useState([]);
+  const [supplierSection, setSupplierSection] = useState(null);
+  const [careers, setCareers] = useState([]);
+  const [careersLoading, setCareersLoading] = useState(true);
+  const [annualReports, setAnnualReports] = useState([]);
+  const [annualReportsLoading, setAnnualReportsLoading] = useState(true);
   const serviceItems = [
     {
       title: 'New Dealership Registration',
       category: 'Business Services',
-      text: 'Start an application to join Ceypetco’s islandwide retail network.',
+      text: 'Start an application to join Ceypetcoâ€™s islandwide retail network.',
       image: 'media-3.jpg',
       href: '/contact?subject=New%20Dealership%20Registration&from=services',
     },
@@ -2801,125 +2905,170 @@ function InnerPage({ type }) {
       href: '/right-to-information?from=services',
     },
   ];
-  const tenderItems = [
-    [
-      'BK/48/2026',
-      'Combined cargo of Gasoline 92 UNL & 95 UNL',
-      '01 September 2026',
-    ],
-    ['4626T', 'Carbon Steel Plates', '30 September 2026'],
-    ['4629T', 'Walkie-Talkie', '23 September 2026'],
-    ['4630T', 'Spares for Tank Sealing System', '30 September 2026'],
-    ['4634T', 'Seamless Line Pipes', '23 September 2026'],
-    ['4631T', 'Centrifugal Pump', '16 September 2026'],
-    ['4628T', 'Vertical Boring Machine', '16 September 2026'],
-    ['4625T', 'Low Range Oxygen Analyzer', '16 September 2026'],
-    [
-      'PD/SER/12/2026',
-      'Security services for refinery housing schemes',
-      '02 September 2026',
-    ],
-    [
-      'PD/SER/13/2026',
-      'රාත්‍රී රාජකාරිවල නියැලෙන සේවකයින් සඳහා කෙටි ආහාර සැපයීම',
-      '21 August 2026',
-    ],
-    ['4622T', 'Cold Filter Plugging Point Analyzer', '02 September 2026'],
-    ['4623T', 'Automatic Particle Counter', '02 September 2026'],
-    ['4624T', 'Oil In Water Analyzer', '02 September 2026'],
-    [
-      'B/54/2026',
-      'Cleaning services for Aviation Refuelling Terminal, Mattala',
-      '09 September 2026',
-    ],
-    [
-      'B/55/2026',
-      'Painting office and security buildings at MRIA Mattala',
-      '14 September 2026',
-    ],
-    [
-      'B/56/2026',
-      'Split air conditioners for CPC locations',
-      '14 September 2026',
-    ],
-    [
-      'B/57/2026',
-      'Supply of 25,000 eco-friendly PP woven bags',
-      '14 September 2026',
-    ],
-    [
-      'B/53/2026',
-      'Inspection of subsea pipeline at Colombo Port',
-      '30 September 2026',
-    ],
-    [
-      'B/52/2026',
-      'Modification of Lanka filling stations',
-      '11 September 2026',
-    ],
-    [
-      'B/50/2026',
-      'Facelifting Lanka filling stations · Sabaragamuwa',
-      '21 August 2026',
-    ],
-    [
-      'B/51/2026',
-      'Facelifting Lanka filling stations · Eastern Province',
-      '21 August 2026',
-    ],
-    [
-      'B/48/2026',
-      'Annual maintenance of CPC land at Muthurajawela',
-      '21 August 2026',
-    ],
-    [
-      'B/37/2025',
-      'Registration of local suppliers and contractors for 2026',
-      'Open',
-    ],
-  ];
-  const tenderDocumentLinks = {
-    'BK/48/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/Procurement-Document-BK482026-Gasoline-92-95-UNL.pdf',
-    '4626T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4626T.pdf',
-    '4629T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4629T.pdf',
-    '4630T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4630T.pdf',
-    '4634T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4634T.pdf',
-    '4631T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4631T.pdf',
-    '4628T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4628T.pdf',
-    '4625T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/08/4625T.pdf',
-    'PD/SER/12/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/PDSER122026.pdf',
-    'PD/SER/13/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/07/PDSER132026.pdf',
-    '4622T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/07/4622T.pdf',
-    '4623T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/07/4623T.pdf',
-    '4624T': 'https://ceypetco.gov.lk/wp-content/uploads/2026/07/4624T.pdf',
-    'B/54/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B542026.pdf',
-    'B/55/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B-55-2026.pdf',
-    'B/56/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B-56-2026.pdf',
-    'B/57/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B-57-2026.pdf',
-    'B/53/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B532026-1.pdf',
-    'B/52/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B522026.pdf',
-    'B/50/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B-50-2026.pdf',
-    'B/51/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B-51-2026.pdf',
-    'B/48/2026':
-      'https://ceypetco.gov.lk/wp-content/uploads/2026/08/B-48-2026.pdf',
-    'B/37/2025':
-      'https://ceypetco.gov.lk/wp-content/uploads/2025/10/Instruction-Guide-for-Applicant1.pdf',
-  };
   const requestedSubject =
     new URLSearchParams(window.location.search).get('subject') || '';
   const cameFromServices =
     new URLSearchParams(window.location.search).get('from') === 'services';
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadNews = async () => {
+      setNewsLoading(true);
+      try {
+        const res = await api.get('/admin/news', {
+          params: { limit: 50 },
+        });
+        if (!cancelled) setNews(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setNews([]);
+      } finally {
+        if (!cancelled) setNewsLoading(false);
+      }
+    };
+    loadNews();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadTenders = async () => {
+      setTendersLoading(true);
+      try {
+        const res = await api.get('/admin/tenders', {
+          params: { limit: 100 },
+        });
+        if (!cancelled)
+          setTenders(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setTenders([]);
+      } finally {
+        if (!cancelled) setTendersLoading(false);
+      }
+    };
+    loadTenders();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadNotices = async () => {
+      setNoticesLoading(true);
+      try {
+        const res = await api.get('/admin/notices', {
+          params: { limit: 50 },
+        });
+        if (!cancelled)
+          setNotices(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setNotices([]);
+      } finally {
+        if (!cancelled) setNoticesLoading(false);
+      }
+    };
+    loadNotices();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadProjects = async () => {
+      setProjectsLoading(true);
+      try {
+        const res = await api.get('/admin/projects', {
+          params: { limit: 50 },
+        });
+        if (!cancelled)
+          setProjects(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setProjects([]);
+      } finally {
+        if (!cancelled) setProjectsLoading(false);
+      }
+    };
+    loadProjects();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadSupplier = async () => {
+      try {
+        const [res, sec] = await Promise.all([
+          api.get('/admin/supplier-resources'),
+          api.get('/admin/supplier-section'),
+        ]);
+        if (!cancelled) {
+          const list = (res.data && res.data.data) || [];
+          setSupplierResources([...list].sort((a, b) => a.order - b.order));
+          setSupplierSection(sec.data && sec.data.data ? sec.data.data : null);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setSupplierResources([]);
+          setSupplierSection(null);
+        }
+      }
+    };
+    loadSupplier();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadCareers = async () => {
+      setCareersLoading(true);
+      try {
+        const res = await api.get('/admin/careers/active', {
+          params: { limit: 100 },
+        });
+        if (!cancelled)
+          setCareers(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setCareers([]);
+      } finally {
+        if (!cancelled) setCareersLoading(false);
+      }
+    };
+    loadCareers();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const loadAnnualReports = async () => {
+      setAnnualReportsLoading(true);
+      try {
+        const res = await api.get('/admin/annual-reports/active', {
+          params: { limit: 100 },
+        });
+        if (!cancelled)
+          setAnnualReports(
+            res.data && res.data.data ? res.data.data : []
+          );
+      } catch (err) {
+        if (!cancelled) setAnnualReports([]);
+      } finally {
+        if (!cancelled) setAnnualReportsLoading(false);
+      }
+    };
+    loadAnnualReports();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <main className="inner-page">
       <section className="page-hero">
@@ -3027,7 +3176,7 @@ function InnerPage({ type }) {
               <article>
                 <span>01</span>
                 <p className="eyebrow">OUR VISION</p>
-                <h3>To become Asia’s most trusted and premier energy brand.</h3>
+                <h3>To become Asiaâ€™s most trusted and premier energy brand.</h3>
               </article>
               <article>
                 <span>02</span>
@@ -3443,55 +3592,93 @@ function InnerPage({ type }) {
               </p>
             </div>
 
-            <article className="annual-report-featured">
-              <div className="annual-report-cover" aria-hidden="true">
-                <span>CEYPETCO</span>
-                <b>2023</b>
-                <small>ANNUAL REPORT</small>
-                <i />
-              </div>
-              <div className="annual-report-featured-copy">
+            {annualReportsLoading ? (
+              <div className="annual-reports-loading">
                 <p className="eyebrow light">LATEST AVAILABLE REPORT</p>
-                <h3>Annual Report 2023</h3>
-                <p>
-                  Review the latest available published record of Ceylon
-                  Petroleum Corporation’s performance and activities.
-                </p>
-                <div className="annual-report-meta">
+                <p>Loading reports...</p>
+              </div>
+            ) : annualReports.length === 0 ? (
+              <div className="annual-reports-loading">
+                <p className="eyebrow light">PUBLICATION ARCHIVE</p>
+                <p>No annual reports published yet.</p>
+              </div>
+            ) : (
+              <>
+                <article className="annual-report-featured">
+                  <div className="annual-report-cover" aria-hidden="true">
+                    <span>CEYPETCO</span>
+                    <b>{annualReports[0].year}</b>
+                    <small>ANNUAL REPORT</small>
+                    <i />
+                  </div>
+                  <div className="annual-report-featured-copy">
+                    <p className="eyebrow light">LATEST AVAILABLE REPORT</p>
+                    <h3>Annual Report {annualReports[0].year}</h3>
+                    <p>
+                      Review the latest available published record of Ceylon
+                      Petroleum Corporation&rsquo;s performance and activities.
+                    </p>
+                    <div className="annual-report-meta">
+                      <span>
+                        <b>{annualReports[0].year}</b> Reporting year
+                      </span>
+                      <span>
+                        <b>PDF</b> English edition
+                      </span>
+                    </div>
+                    {annualReports[0].url && (
+                      <a
+                        href={annualReports[0].url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Download latest report{' '}
+                        <Icon name="download" size={17} />
+                      </a>
+                    )}
+                  </div>
+                </article>
+
+                <div className="annual-archive-heading">
+                  <div>
+                    <p className="eyebrow">REPORT LIBRARY</p>
+                    <h3>Previous annual reports</h3>
+                  </div>
                   <span>
-                    <b>2023</b> Reporting year
-                  </span>
-                  <span>
-                    <b>PDF</b> English edition
+                    {annualReports.length} report
+                    {annualReports.length === 1 ? '' : 's'} available
                   </span>
                 </div>
-                <a href={annualReports[0][1]} target="_blank" rel="noreferrer">
-                  Download latest report <Icon name="download" size={17} />
-                </a>
-              </div>
-            </article>
+                {annualReports.length > 1 ? (
+                  <div className="annual-report-grid">
+                    {annualReports.slice(1).map((report, index) => (
+                      <a
+                        href={report.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        key={report._id}
+                        style={{ cursor: report.url ? 'pointer' : 'default' }}
+                      >
+                        <span>{String(index + 2).padStart(2, '0')}</span>
+                        <div>
+                          <small>ANNUAL REPORT</small>
+                          <strong>{report.year}</strong>
+                        </div>
+                        <div className="annual-download-icon">
+                          <Icon name="download" size={18} />
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="annual-reports-loading">
+                    <p className="eyebrow light">REPORT LIBRARY</p>
+                    <p>More reports will be added to the archive.</p>
+                  </div>
+                )}
+              </>
+            )}
 
-            <div className="annual-archive-heading">
-              <div>
-                <p className="eyebrow">REPORT LIBRARY</p>
-                <h3>Previous annual reports</h3>
-              </div>
-              <span>{annualReports.length} reports available</span>
-            </div>
-            <div className="annual-report-grid">
-              {annualReports.slice(1).map(([year, href], index) => (
-                <a href={href} target="_blank" rel="noreferrer" key={year}>
-                  <span>{String(index + 2).padStart(2, '0')}</span>
-                  <div>
-                    <small>ANNUAL REPORT</small>
-                    <strong>{year}</strong>
-                  </div>
-                  <div className="annual-download-icon">
-                    <Icon name="download" size={18} />
-                  </div>
-                </a>
-              ))}
-            </div>
             <div className="annual-report-note">
               <Icon name="globe" size={21} />
               <p>
@@ -3507,166 +3694,70 @@ function InnerPage({ type }) {
         </section>
       )}
       {type === '/projects' && (
-        <>
-          <section className="sorem-overview content-section">
-            <div className="container sorem-overview-grid">
-              <div className="sorem-title-block">
-                <p className="eyebrow">SOREM PROJECT</p>
-                <h2>Sapugaskanda Oil Refinery Expansion & Modernization.</h2>
-                <div className="sorem-capacity">
-                  <div>
-                    <b>1969</b>
-                    <span>Original refinery commissioned</span>
-                  </div>
-                  <div>
-                    <b>50,000</b>
-                    <span>Barrels per day expanded capacity</span>
-                  </div>
-                </div>
+        <section className="media-page content-section">
+          <div className="container">
+            <div className="page-title-row">
+              <div>
+                <p className="eyebrow">STRATEGIC INITIATIVES</p>
+                <h2>Projects & Development</h2>
               </div>
-              <div className="sorem-project-copy">
-                <p className="eyebrow">THE PROJECT</p>
-                <p>
-                  The existing refinery was built as a hydro-skimming refinery
-                  with an original design capacity of 35,000 barrels per day. A
-                  later limited expansion increased processing capacity to
-                  50,000 barrels per day to meet domestic petroleum-fuel demand.
-                </p>
-                <p>
-                  New conversion processes will upgrade low-value residual oil
-                  into fuels that meet current environmental standards. Once
-                  completed, the project is expected to produce substantial
-                  foreign-exchange savings for Sri Lanka.
-                </p>
-              </div>
+              <p>
+                Key infrastructure and modernization projects driving Ceypetco's
+                development.
+              </p>
             </div>
-          </section>
-
-          <section className="sorem-impact">
-            <div className="container">
-              <div className="sorem-impact-heading">
-                <p className="eyebrow light">PROJECT PURPOSE</p>
-                <h2>More value from every barrel.</h2>
+            {projectsLoading ? (
+              <div className="news-grid">
+                <div className="news-grid-empty">Loading projects...</div>
               </div>
-              <div className="sorem-impact-grid">
-                {[
-                  [
-                    '01',
-                    'Conversion capability',
-                    'Introduce modern processes that upgrade residual oil into higher-value fuels.',
-                  ],
-                  [
-                    '02',
-                    'Environmental standards',
-                    'Produce petroleum fuels aligned with current environmental requirements.',
-                  ],
-                  [
-                    '03',
-                    'National savings',
-                    'Reduce foreign-exchange outflows through stronger domestic refining capability.',
-                  ],
-                ].map(([number, title, text]) => (
-                  <article key={title}>
-                    <span>{number}</span>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
+            ) : projects.length === 0 ? (
+              <div className="news-grid">
+                <div className="news-grid-empty">No projects published yet.</div>
+              </div>
+            ) : (
+              <div className="news-grid">
+                {projects.map((project) => (
+                  <article key={project._id}>
+                    <div
+                      className="news-image"
+                      style={{
+                        backgroundImage: project.featuredImage
+                          ? `url(${project.featuredImage})`
+                          : undefined,
+                      }}
+                    ></div>
+                    <div>
+                      <p className="eyebrow">{project.category}</p>
+                      <h3>{project.title}</h3>
+                      {(project.location || project.statusLabel) && (
+                        <p className="project-location">
+                          {[project.location, project.statusLabel]
+                            .filter(Boolean)
+                            .join(' · ')}
+                        </p>
+                      )}
+                      <p>{project.summary || project.content}</p>
+                      {project.documents && project.documents.length > 0 && (
+                        <div className="project-doc-links">
+                          {project.documents.map((doc, i) => (
+                            <a
+                              key={i}
+                              href={doc.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {doc.name} <Icon name="download" size={16} />
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </article>
                 ))}
               </div>
-            </div>
-          </section>
-
-          <section className="sorem-details content-section">
-            <div className="container sorem-detail-grid">
-              <article>
-                <div className="sorem-detail-icon">
-                  <Icon name="globe" size={25} />
-                </div>
-                <p className="eyebrow">FUNDS</p>
-                <h3>Concessionary financing framework.</h3>
-                <p>
-                  The project is expected to be financed by the Government of
-                  the Islamic Republic of Iran through a concessionary loan
-                  package, under the heads of agreement signed in April 2008.
-                </p>
-                <span className="sorem-detail-meta">
-                  Heads of agreement · April 2008
-                </span>
-              </article>
-              <article>
-                <div className="sorem-detail-icon">
-                  <Icon name="building" size={25} />
-                </div>
-                <p className="eyebrow">PROJECT OFFICE</p>
-                <h3>Established at Sapugaskanda Refinery.</h3>
-                <p>
-                  The SOREM Project Office officially opened on 20 February 2009
-                  at the refinery premises. The ceremony was led by Minister A.
-                  H. M. Fowzie and attended by Minister Duminda Dissanayake,
-                  Ministry Secretary W. B. Ganegala, CPC Chairman and Managing
-                  Director Major General Asoka Thoradeniya, and other officials.
-                </p>
-                <span className="sorem-detail-meta">
-                  Official opening · 20 February 2009
-                </span>
-              </article>
-              <article>
-                <div className="sorem-detail-icon">
-                  <Icon name="shield" size={25} />
-                </div>
-                <p className="eyebrow">CONSULTANT</p>
-                <h3>Preparing the technical foundation.</h3>
-                <p>
-                  Front-End Engineering Design work is expected to commence with
-                  an internationally reputed consultancy firm after the project
-                  office becomes fully operational. Acquisition of the
-                  additional land required for the project is nearing
-                  completion.
-                </p>
-                <span className="sorem-detail-meta">
-                  FEED and land preparation
-                </span>
-              </article>
-            </div>
-          </section>
-
-          <section className="sorem-milestone content-section">
-            <div className="container">
-              <div className="bulk-section-heading split-heading">
-                <div>
-                  <p className="eyebrow">PROJECT FOUNDATION</p>
-                  <h2>Key milestones.</h2>
-                </div>
-                <p>
-                  A concise view of the project’s institutional development.
-                </p>
-              </div>
-              <div className="sorem-timeline">
-                {[
-                  ['1969', 'Original Sapugaskanda Refinery commissioned'],
-                  [
-                    'April 2008',
-                    'Heads of agreement signed for the proposed concessionary loan',
-                  ],
-                  [
-                    'February 2009',
-                    'SOREM Project Office officially opened at Sapugaskanda',
-                  ],
-                  [
-                    'Next phase',
-                    'FEED consultancy mobilisation and completion of land acquisition',
-                  ],
-                ].map(([date, milestone], index) => (
-                  <article key={date}>
-                    <span>{String(index + 1).padStart(2, '0')}</span>
-                    <b>{date}</b>
-                    <p>{milestone}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        </>
+            )}
+          </div>
+        </section>
       )}
       {type === '/notices' && (
         <section className="notices-page content-section">
@@ -3681,35 +3772,68 @@ function InnerPage({ type }) {
                 customers, dealers, partners and the public.
               </p>
             </div>
-            <div className="notices-featured">
-              <div className="notice-featured-index">01</div>
-              <div>
-                <p className="eyebrow light">{officialNotices[0].category}</p>
-                <h3>{officialNotices[0].title}</h3>
-                <p>{officialNotices[0].summary}</p>
-                <small>{officialNotices[0].note}</small>
+            {!noticesLoading && notices.length === 0 && (
+              <div className="notices-featured">
+                <div className="notice-featured-index">01</div>
+                <div>
+                  <p className="eyebrow light">PUBLIC INFORMATION</p>
+                  <h3>No notices published yet.</h3>
+                </div>
               </div>
-            </div>
-            <div className="notice-document-grid">
-              {officialNotices.slice(1).map((notice, index) => (
-                <article key={notice.title}>
-                  <div className="notice-document-top">
-                    <span>{String(index + 2).padStart(2, '0')}</span>
-                    <Icon name={notice.href ? 'download' : 'clock'} size={22} />
+            )}
+
+            {notices.length > 0 && (
+              <>
+                <div className="notices-featured">
+                  <div className="notice-featured-index">01</div>
+                  <div>
+                    <p className="eyebrow light">{notices[0].category}</p>
+                    <h3>{notices[0].title}</h3>
+                    <p>{notices[0].summary || notices[0].content}</p>
+                    {notices[0].document ? (
+                      <a
+                        href={notices[0].document}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Download document <Icon name="download" size={16} />
+                      </a>
+                    ) : (
+                      <small>Official statement</small>
+                    )}
                   </div>
-                  <p className="eyebrow">{notice.category}</p>
-                  <h3>{notice.title}</h3>
-                  <p>{notice.summary}</p>
-                  {notice.href ? (
-                    <a href={notice.href} target="_blank" rel="noreferrer">
-                      Download document <Icon name="download" size={16} />
-                    </a>
-                  ) : (
-                    <span className="notice-unavailable">{notice.note}</span>
-                  )}
-                </article>
-              ))}
-            </div>
+                </div>
+                <div className="notice-document-grid">
+                  {notices.slice(1).map((notice, index) => (
+                    <article key={notice._id}>
+                      <div className="notice-document-top">
+                        <span>{String(index + 2).padStart(2, '0')}</span>
+                        <Icon
+                          name={notice.document ? 'download' : 'clock'}
+                          size={22}
+                        />
+                      </div>
+                      <p className="eyebrow">{notice.category}</p>
+                      <h3>{notice.title}</h3>
+                      <p>{notice.summary || notice.content}</p>
+                      {notice.document ? (
+                        <a
+                          href={notice.document}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Download document <Icon name="download" size={16} />
+                        </a>
+                      ) : (
+                        <span className="notice-unavailable">
+                          Document not available
+                        </span>
+                      )}
+                    </article>
+                  ))}
+                </div>
+              </>
+            )}
             <div className="notices-support">
               <Icon name="globe" size={22} />
               <p>
@@ -3733,35 +3857,40 @@ function InnerPage({ type }) {
               </div>
             </div>
             <div className="news-grid">
-              {[
-                [
-                  'Corporate News',
-                  'Strengthening Sri Lanka’s energy security',
-                  'Updates from Ceypetco operations and national energy initiatives.',
-                ],
-                [
-                  'Public Notice',
-                  'Information for customers and partners',
-                  'Important notices, service updates and public announcements.',
-                ],
-                [
-                  'Projects',
-                  'Building tomorrow’s energy network',
-                  'Progress across refinery, distribution and infrastructure projects.',
-                ],
-              ].map(([tag, title, text], i) => (
-                <article key={title}>
-                  <div className={`news-image image-${i + 1}`}></div>
-                  <div>
-                    <p className="eyebrow">{tag}</p>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                    <a href="#footer">
-                      Read update <Icon name="arrow" size={16} />
-                    </a>
-                  </div>
-                </article>
-              ))}
+              {newsLoading ? (
+                <p className="news-grid-empty">Loading latest updates...</p>
+              ) : news.length === 0 ? (
+                <p className="news-grid-empty">
+                  No published updates available yet.
+                </p>
+              ) : (
+                news.map((item) => (
+                  <article key={item._id}>
+                    {item.featuredImage ? (
+                      <div
+                        className="news-image"
+                        style={{
+                          backgroundImage: `url(${item.featuredImage})`,
+                        }}
+                      ></div>
+                    ) : (
+                      <div className="news-image"></div>
+                    )}
+                    <div>
+                      <p className="eyebrow">
+                        {(item.category || 'News')
+                          .replace(/-/g, ' ')
+                          .replace(/\b\w/g, (c) => c.toUpperCase())}
+                      </p>
+                      <h3>{item.title}</h3>
+                      <p>{item.summary || item.content}</p>
+                      <a href="#footer">
+                        Read update <Icon name="arrow" size={16} />
+                      </a>
+                    </div>
+                  </article>
+                ))
+              )}
             </div>
           </div>
         </section>
@@ -3785,140 +3914,115 @@ function InnerPage({ type }) {
               id="supplier-registration"
             >
               <div className="supplier-registration-copy">
-                <p className="eyebrow light">SUPPLIER ACCESS</p>
-                <h3>Registration resources</h3>
+                <p className="eyebrow light">
+                  {supplierSection
+                    ? supplierSection.eyebrow
+                    : 'SUPPLIER ACCESS'}
+                </p>
+                <h3>
+                  {supplierSection
+                    ? supplierSection.title
+                    : 'Registration resources'}
+                </h3>
                 <p>
-                  Guidance and application support for oil suppliers, foreign
-                  suppliers, independent inspectors and local contractors.
+                  {supplierSection
+                    ? supplierSection.description
+                    : 'Guidance and application support for oil suppliers, foreign suppliers, independent inspectors and local contractors.'}
                 </p>
               </div>
               <div className="supplier-resource-grid">
-                {[
-                  [
-                    'General Guidelines',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2026/07/General-Guidelines-for-applying-for-oil-supplier-registration-at-CPC.pdf',
-                  ],
-                  [
-                    'Application Forms',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2026/07/Annex-1-Application-Form1.pdf',
-                  ],
-                  [
-                    'Terms & Conditions',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2026/07/Annex-2.-CPC-Standard-Terms-and-Conditions1.pdf',
-                  ],
-                  [
-                    'Approval Process',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2026/07/Approval-Process-Registration-Fee-Structure1.pdf',
-                  ],
-                  [
-                    'Bank Details',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2026/07/Bank-Details1.pdf',
-                  ],
-                  [
-                    'Cancellation of EOI',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2026/08/cancellation-EOI.jpeg',
-                  ],
-                  [
-                    'Independent Inspector Guidelines',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/12/CPC-Requirements-for-Registering-Independent-Inspectors.pdf',
-                  ],
-                  [
-                    'Foreign Supplier Registration',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/11/registrationofforeignsuppliers.pdf',
-                  ],
-                  [
-                    'Local Supplier Register · 2026',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/11/local-supplier-reg-2026.docx',
-                  ],
-                  [
-                    'Extension Notice · English',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/11/Registration-2026Ad-English-EXTENSION.pdf',
-                  ],
-                  [
-                    'Extension Notice · Sinhala',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/11/Registration-2026AdSinhala-EXTENSION.pdf',
-                  ],
-                  [
-                    'Local Registration · English',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/10/Registration-2026Ad-English.pdf',
-                  ],
-                  [
-                    'Local Registration · Sinhala',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/10/Registration-2026AdSinhala.pdf',
-                  ],
-                  [
-                    'Materials Application',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/10/Application-for-the-Material-A-2026.pdf',
-                  ],
-                  [
-                    'Services Application',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/10/Application-for-the-Services-B-2026.pdf',
-                  ],
-                  [
-                    'Applicant Instruction Guide',
-                    'https://ceypetco.gov.lk/wp-content/uploads/2025/10/Instruction-Guide-for-Applicant1.pdf',
-                  ],
-                ].map(([resource, url]) => (
-                  <a href={url} key={resource} target="_blank" rel="noreferrer">
-                    <Icon name="download" size={16} />
-                    <span>{resource}</span>
-                    <Icon name="arrow" size={14} />
-                  </a>
-                ))}
+                {supplierResources.length === 0 ? (
+                  <span className="supplier-resource-empty">
+                    No registration resources available yet.
+                  </span>
+                ) : (
+                  supplierResources.map((resource) => (
+                    <a
+                      href={resource.url || '#'}
+                      key={resource._id}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Icon name="download" size={16} />
+                      <span>{resource.title}</span>
+                      <Icon name="arrow" size={14} />
+                    </a>
+                  ))
+                )}
               </div>
             </section>
 
-            {[
-              [
-                'COMMERCIAL DIVISION',
-                tenderItems.filter(([code]) => code.startsWith('BK/')),
-              ],
-              [
-                'REFINERY DIVISION',
-                tenderItems.filter(
-                  ([code]) => /^\d/.test(code) || code.startsWith('PD/'),
-                ),
-              ],
-              [
-                'PROCUREMENTS & STORES DIVISION',
-                tenderItems.filter(([code]) => code.startsWith('B/')),
-              ],
-            ].map(([division, items]) => (
-              <section className="tender-division" key={division}>
+            {!tendersLoading && tenders.length === 0 && (
+              <div className="tender-division">
                 <div className="tender-division-heading">
-                  <p className="eyebrow">{division}</p>
-                  <span>{items.length} published opportunities</span>
+                  <p className="eyebrow">OPEN TENDERS</p>
+                  <span>No open opportunities</span>
                 </div>
-                <div className="tender-list">
-                  {items.map(([code, title, date]) => (
-                    <article key={code}>
-                      <div>
-                        <span className="status">OPEN</span>
-                        <b>{code}</b>
-                      </div>
-                      <h3>{title}</h3>
-                      <div>
-                        <small>
-                          {date === 'Open' ? 'Availability' : 'Closing date'}
-                        </small>
-                        <p>{date}</p>
-                      </div>
-                      <a
-                        href={tenderDocumentLinks[code]}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Download tender <Icon name="download" size={16} />
-                      </a>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            ))}
+              </div>
+            )}
+
+            {[
+              'COMMERCIAL DIVISION',
+              'REFINERY DIVISION',
+              'PROCUREMENTS & STORES DIVISION',
+            ].map((division) => {
+              const items = tenders.filter((t) => t.division === division);
+              if (items.length === 0) return null;
+              return (
+                <section className="tender-division" key={division}>
+                  <div className="tender-division-heading">
+                    <p className="eyebrow">{division}</p>
+                    <span>{items.length} published opportunities</span>
+                  </div>
+                  <div className="tender-list">
+                    {items.map((item) => (
+                      <article key={item._id}>
+                        <div>
+                          <span className="status">
+                            {item.status ? item.status.toUpperCase() : 'OPEN'}
+                          </span>
+                          <b>{item.reference}</b>
+                        </div>
+                        <h3>{item.title}</h3>
+                        <div>
+                          <small>
+                            {item.closingDate
+                              ? 'Closing date'
+                              : 'Availability'}
+                          </small>
+                          <p>
+                            {item.closingDate
+                              ? new Date(
+                                  item.closingDate,
+                                ).toLocaleDateString('en-GB', {
+                                  day: 'numeric',
+                                  month: 'long',
+                                  year: 'numeric',
+                                })
+                              : 'Open'}
+                          </p>
+                        </div>
+                        <a
+                          href={
+                            item.documents && item.documents.length
+                              ? item.documents[0].url
+                              : '#'
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Download tender <Icon name="download" size={16} />
+                        </a>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
 
             <div className="tender-rfq-note">
               <div>
-                <p className="eyebrow light">REFINERY DIVISION · RFQ</p>
+                <p className="eyebrow light">REFINERY DIVISION Â· RFQ</p>
                 <h3>Request-for-quotation information</h3>
               </div>
               <a href="/contact?subject=Refinery%20Division%20RFQ">
@@ -3947,20 +4051,33 @@ function InnerPage({ type }) {
                 <span>NOW HIRING</span>
                 <small>Current opportunities</small>
               </div>
-              <article>
-                <h3>Assistant Refinery Technician</h3>
-                <p>Welder · Refinery Division</p>
-                <a href="/contact?subject=Assistant%20Refinery%20Technician">
-                  <Icon name="arrow" size={18} />
-                </a>
-              </article>
-              <article>
-                <h3>Assistant Firefighter</h3>
-                <p>Safety & Emergency Response</p>
-                <a href="/contact?subject=Assistant%20Firefighter">
-                  <Icon name="arrow" size={18} />
-                </a>
-              </article>
+              {careersLoading ? (
+                <article>
+                  <h3>Loading opportunities...</h3>
+                  <p>Please wait</p>
+                </article>
+              ) : careers.length === 0 ? (
+                <article>
+                  <h3>No current openings</h3>
+                  <p>Please check back later for new vacancies.</p>
+                </article>
+              ) : (
+                careers.map((job) => (
+                  <article key={job._id}>
+                    <h3>{job.title}</h3>
+                    <p>
+                      {[job.department, job.location, job.type]
+                        .filter(Boolean)
+                        .join(' · ') || 'Ceypetco Careers'}
+                    </p>
+                    <a
+                      href={`/contact?subject=${encodeURIComponent(job.title)}`}
+                    >
+                      <Icon name="arrow" size={18} />
+                    </a>
+                  </article>
+                ))
+              )}
             </div>
           </div>
         </section>
@@ -3976,7 +4093,7 @@ function InnerPage({ type }) {
                   ['Customer Care', '+94 117 296 130'],
                   ['Head Office', '+94 117 296 100'],
                   ['Refinery', '+94 11 254 1382'],
-                  ['Aviation · Katunayake', '+94 11 225 1319'],
+                  ['Aviation Â· Katunayake', '+94 11 225 1319'],
                 ].map(([name, phone]) => (
                   <article key={name}>
                     <span>
@@ -4028,8 +4145,8 @@ function App() {
     () => window.location.pathname.replace(/\/$/, '') || '/',
   );
   const [menuOpen, setMenuOpen] = useState(false);
+  const [navDropClosed, setNavDropClosed] = useState(false);
   const [slide, setSlide] = useState(0);
-  const [sliderPaused, setSliderPaused] = useState(false);
   const changeSlide = (direction) =>
     setSlide(
       (current) =>
@@ -4062,12 +4179,14 @@ function App() {
     const url = new URL(link.href, window.location.origin);
     if (url.origin !== window.location.origin) return;
     const nextPath = url.pathname.replace(/\/$/, '') || '/';
+    if (nextPath.startsWith('/admin') || nextPath.startsWith('/login')) return;
     if (url.hash && nextPath === path) return;
     event.preventDefault();
     if (!url.hash) jumpToPageTop();
     window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
     setPath(nextPath);
     setMenuOpen(false);
+    setNavDropClosed(true);
     scrollAfterNavigation(url.hash);
   };
 
@@ -4082,10 +4201,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (sliderPaused) return undefined;
     const timer = window.setInterval(() => changeSlide(1), 5000);
     return () => window.clearInterval(timer);
-  }, [sliderPaused]);
+  }, []);
 
   useEffect(() => {
     const targets = document.querySelectorAll(
@@ -4226,10 +4344,25 @@ function App() {
               About
             </a>
             <div
-              className={`nav-group ${path === '/services' || divisionPages[path] ? 'active' : ''}`}
+              className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || divisionPages[path] ? 'active' : ''}`}
+              onMouseEnter={() => setNavDropClosed(false)}
             >
               <a href="/services">
-                Services <span className="chevron">⌄</span>
+                Services{' '}
+                <span className="chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </span>
               </a>
               <div className="nav-dropdown">
                 <div className="dropdown-heading">
@@ -4288,8 +4421,6 @@ function App() {
           <section
             className="hero"
             id="home"
-            onMouseEnter={() => setSliderPaused(true)}
-            onMouseLeave={() => setSliderPaused(false)}
           >
             <div className="hero-slides">
               {heroSlides.map((item, index) => (
@@ -4330,14 +4461,36 @@ function App() {
               onClick={() => changeSlide(-1)}
               aria-label="Previous image"
             >
-              ‹
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
             </button>
             <button
               className="slider-arrow next"
               onClick={() => changeSlide(1)}
               aria-label="Next image"
             >
-              ›
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
             </button>
             <div className="slider-dots">
               {heroSlides.map((item, index) => (
@@ -4456,7 +4609,7 @@ function App() {
                 </div>
                 <p>
                   From refining and distribution to specialised sectors, our
-                  operations work together to serve Sri Lanka’s energy needs.
+                  operations work together to serve Sri Lankaâ€™s energy needs.
                 </p>
               </div>
               <div className="division-grid">
@@ -4489,14 +4642,17 @@ function App() {
               </div>
               <div className="service-links">
                 {[
-                  'Product Specifications',
-                  'Supplier Registration',
-                  'Consumer Registration',
-                  'Annual Reports',
-                  'Right to Information',
-                  'Notices & Projects',
-                ].map((item) => (
-                  <a href="#footer" key={item}>
+                  [
+                    'Product Specifications',
+                    'https://ceypetco.gov.lk/wp-content/uploads/2026/04/Marketing-Sepecifictions.pdf',
+                  ],
+                  ['Supplier Registration', '/tenders#supplier-registration'],
+                  ['Consumer Registration', '/consumer-registration'],
+                  ['Annual Reports', '/annual-reports'],
+                  ['Right to Information', '/right-to-information'],
+                  ['Notices & Projects', '/notices'],
+                ].map(([item, href]) => (
+                  <a href={href} key={item}>
                     {item}
                     <Icon name="arrow" size={17} />
                   </a>
@@ -4523,7 +4679,7 @@ function App() {
                   <div>
                     <b>Secure payment access</b>
                     <small>
-                      You will continue through the selected bank’s official
+                      You will continue through the selected bankâ€™s official
                       service.
                     </small>
                   </div>
@@ -4627,7 +4783,7 @@ function App() {
               />
               <div>
                 <h3>Ceylon Petroleum Corporation</h3>
-                <span>CEYPETCO · SRI LANKA</span>
+                <span>CEYPETCO Â· SRI LANKA</span>
               </div>
             </div>
             <p>
@@ -4681,7 +4837,7 @@ function App() {
           </div>
         </div>
         <div className="container footer-bottom">
-          <span>© 2026 Ceylon Petroleum Corporation</span>
+          <span>Â© 2026 Ceylon Petroleum Corporation</span>
           <span>Powering progress. Serving the nation.</span>
         </div>
       </footer>
