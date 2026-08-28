@@ -11,7 +11,8 @@ const getPublished = async (req, res, next) => {
     const items = await ManagementContact.find({ status: "published" }).sort({
       group: 1,
       order: 1,
-    });
+    }).lean();
+    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
     res.status(200).json({
       success: true,
       data: items,

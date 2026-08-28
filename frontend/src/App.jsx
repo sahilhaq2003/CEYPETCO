@@ -3028,6 +3028,7 @@ function InnerPage({ type }) {
     new URLSearchParams(window.location.search).get('from') === 'services';
 
   useEffect(() => {
+    if (type !== '/media') return undefined;
     let cancelled = false;
     const loadNews = async () => {
       setNewsLoading(true);
@@ -3046,9 +3047,10 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   useEffect(() => {
+    if (type !== '/tenders') return undefined;
     let cancelled = false;
     const loadTenders = async () => {
       setTendersLoading(true);
@@ -3068,9 +3070,10 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   useEffect(() => {
+    if (type !== '/notices') return undefined;
     let cancelled = false;
     const loadNotices = async () => {
       setNoticesLoading(true);
@@ -3090,9 +3093,10 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   useEffect(() => {
+    if (type !== '/projects') return undefined;
     let cancelled = false;
     const loadProjects = async () => {
       setProjectsLoading(true);
@@ -3112,9 +3116,10 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   useEffect(() => {
+    if (type !== '/tenders') return undefined;
     let cancelled = false;
     const loadSupplier = async () => {
       try {
@@ -3138,9 +3143,10 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   useEffect(() => {
+    if (type !== '/careers') return undefined;
     let cancelled = false;
     const loadCareers = async () => {
       setCareersLoading(true);
@@ -3160,9 +3166,10 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   useEffect(() => {
+    if (type !== '/annual-reports') return undefined;
     let cancelled = false;
     const loadAnnualReports = async () => {
       setAnnualReportsLoading(true);
@@ -3184,7 +3191,7 @@ function InnerPage({ type }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [type]);
 
   return (
     <main className="inner-page">
