@@ -4278,6 +4278,8 @@ function App() {
   const [navDropClosed, setNavDropClosed] = useState(false);
   const [navAboutDropClosed, setNavAboutDropClosed] = useState(false);
   const [slide, setSlide] = useState(0);
+  const [news, setNews] = useState([]);
+  const [newsLoading, setNewsLoading] = useState(true);
   const changeSlide = (direction) =>
     setSlide(
       (current) =>
@@ -4331,6 +4333,29 @@ function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  useEffect(() => {
+    if (path !== '/') return undefined;
+    let cancelled = false;
+    const loadNews = async () => {
+      setNewsLoading(true);
+      try {
+        const res = await api.get('/admin/news', {
+          params: { limit: 3 },
+        });
+        if (!cancelled)
+          setNews(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setNews([]);
+      } finally {
+        if (!cancelled) setNewsLoading(false);
+      }
+    };
+    loadNews();
+    return () => {
+      cancelled = true;
+    };
+  }, [path]);
 
   useEffect(() => {
     const timer = window.setInterval(() => changeSlide(1), 5000);
@@ -4762,6 +4787,60 @@ function App() {
                 <a className="home-services-all" href="/services">
                   <span>Complete service directory</span>
                   <Icon name="arrow" size={22} />
+                </a>
+              </div>
+            </div>
+          </section>
+          <section className="home-news section" id="news">
+            <div className="container">
+              <div className="section-heading">
+                <div>
+                  <p className="eyebrow">LATEST UPDATES</p>
+                  <h2>News &amp; media.</h2>
+                </div>
+                <p>
+                  The latest news and announcements from across Ceypetco.
+                </p>
+              </div>
+              <div className="news-grid">
+                {newsLoading ? (
+                  <p className="news-grid-empty">Loading latest updates...</p>
+                ) : news.length === 0 ? (
+                  <p className="news-grid-empty">
+                    No published updates available yet.
+                  </p>
+                ) : (
+                  news.map((item) => (
+                    <article key={item._id}>
+                      {item.featuredImage ? (
+                        <div
+                          className="news-image"
+                          style={{
+                            backgroundImage: `url(${item.featuredImage})`,
+                          }}
+                        ></div>
+                      ) : (
+                        <div className="news-image"></div>
+                      )}
+                      <div>
+                        <p className="eyebrow">
+                          {(item.category || 'News')
+                            .replace(/-/g, ' ')
+                            .replace(/\b\w/g, (c) => c.toUpperCase())}
+                        </p>
+                        <h3>{item.title}</h3>
+                        <p>{item.summary || item.content}</p>
+                        <a className="home-news-link" href="/media">
+                          Read update <Icon name="arrow" size={16} />
+                        </a>
+                      </div>
+                    </article>
+                  ))
+                )}
+              </div>
+              <div className="home-news-footer">
+                <a className="text-link" href="/media">
+                  View all media &amp; notices <Icon name="arrow" size={17} />
                 </a>
               </div>
             </div>

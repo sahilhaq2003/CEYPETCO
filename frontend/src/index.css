@@ -624,6 +624,11 @@ a {
   color: var(--muted);
   line-height: 1.7;
 }
+.home-news-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
 .division-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
