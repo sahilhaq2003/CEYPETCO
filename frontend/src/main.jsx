@@ -4,13 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
 import AppRoutes from "./routes/AppRoutes.jsx";
+import { LanguageProvider } from "./i18n/LanguageContext.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <AppRoutes />
+        <LanguageProvider>
+          <AppRoutes />
+        </LanguageProvider>
         <Toaster
           position="top-right"
           toastOptions={{

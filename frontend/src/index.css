@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Noto+Sans+Sinhala:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap');
 @import 'tailwindcss';
 .hero-slides {
   position: absolute;
@@ -8171,6 +8171,124 @@ html {
   border-radius: 50%;
   background: var(--oil-color);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--oil-color) 16%, transparent);
+}
+
+/* Trilingual public-site controls */
+html[lang='si'] .site-shell {
+  font-family: 'Noto Sans Sinhala', 'DM Sans', sans-serif;
+}
+
+html[lang='ta'] .site-shell {
+  font-family: 'Noto Sans Tamil', 'DM Sans', sans-serif;
+}
+
+.site-language {
+  height: 38px;
+  padding: 0 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--navy);
+  background: #f5f7f7;
+  border: 1px solid #dce3e2;
+  border-radius: 4px;
+}
+
+.site-language svg {
+  flex: 0 0 auto;
+  color: var(--red);
+}
+
+.site-language select {
+  width: 72px;
+  padding: 0;
+  color: var(--navy);
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.site-language:focus-within {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(213, 16, 28, 0.12);
+}
+
+.google-translate-engine {
+  position: fixed;
+  top: 0;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-google-translate {
+  min-width: 118px;
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.site-google-translate .goog-te-gadget-simple {
+  min-height: 38px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f5f7f7;
+  border: 1px solid #dce3e2;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.site-google-translate .goog-te-gadget-simple:hover {
+  border-color: var(--red);
+}
+
+.site-google-translate .goog-te-gadget-simple > span,
+.site-google-translate .goog-te-menu-value {
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.site-google-translate .goog-te-gadget-icon {
+  margin-right: 4px;
+}
+
+@media (max-width: 1120px) and (min-width: 901px) {
+  .nav { gap: 14px; }
+  .site-language { padding: 0 7px; }
+  .site-language svg { display: none; }
+  .site-language select { width: 60px; }
+}
+
+@media (max-width: 900px) {
+  .site-language {
+    width: 100%;
+    height: 46px;
+    margin-top: 12px;
+    padding: 0 14px;
+    justify-content: flex-start;
+  }
+  .site-language select {
+    width: 100%;
+    font-size: 13px;
+  }
+  .site-google-translate {
+    width: 100%;
+    margin-top: 12px;
+  }
+  .site-google-translate .goog-te-gadget-simple {
+    width: 100%;
+    min-height: 46px;
+  }
 }
 
 /* Isolate the dark admin sidebar from public-site global link colors. */

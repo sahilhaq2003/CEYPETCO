@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import sriLankaMap from './assets/sri-lanka-districts.svg?raw';
 import fuelStations from './data/fuelStations.json';
 import lubricantProducts from './data/lubricants.json';
+import { useLanguage } from './i18n/LanguageContext.jsx';
+import GoogleTranslate from './components/GoogleTranslate.jsx';
 import api from './api';
 
 const Icon = ({ name, size = 24 }) => {
@@ -848,6 +850,7 @@ const DIRECTORY_GROUP_ORDER = [
 ];
 
 function ManagementDirectory() {
+  const { t } = useLanguage();
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -898,12 +901,11 @@ function ManagementDirectory() {
       <div className="container">
         <div className="page-title-row">
           <div>
-            <p className="eyebrow">MANAGEMENT DIRECTORY</p>
-            <h2>Corporate and operational leadership.</h2>
+            <p className="eyebrow">{t('directory')}</p>
+            <h2>{t('directoryTitle')}</h2>
           </div>
           <p>
-            Official contact directory for Ceypetco&rsquo;s management functions
-            and divisions.
+            {t('directoryCopy')}
           </p>
         </div>
         <div className="management-groups">
@@ -912,7 +914,7 @@ function ManagementDirectory() {
               <summary>
                 <span>
                   <small>—</small>
-                  Loading directory...
+                  {t('loadingDirectory')}
                 </span>
                 <b>—</b>
               </summary>
@@ -922,7 +924,7 @@ function ManagementDirectory() {
               <summary>
                 <span>
                   <small>—</small>
-                  No directory entries yet
+                  {t('emptyDirectory')}
                 </span>
                 <b>—</b>
               </summary>
@@ -935,7 +937,7 @@ function ManagementDirectory() {
                     <small>{String(index + 1).padStart(2, '0')}</small>
                     {group.title}
                   </span>
-                  <b>{String(group.people.length).padStart(2, '0')} contacts</b>
+                  <b>{String(group.people.length).padStart(2, '0')} {t('contacts')}</b>
                 </summary>
                 <div className="management-list">
                   {group.people.map((person, personIndex) => (
@@ -976,6 +978,7 @@ function ManagementDirectory() {
 }
 
 function ManagementTeam() {
+  const { t } = useLanguage();
   const [leaders, setLeaders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -1031,8 +1034,8 @@ function ManagementTeam() {
       <div className="container">
         <div className="page-title-row">
           <div>
-            <p className="eyebrow">LEADERSHIP</p>
-            <h2>Management team</h2>
+            <p className="eyebrow">{t('leadership')}</p>
+            <h2>{t('managementTeam')}</h2>
           </div>
         </div>
 
@@ -1099,7 +1102,7 @@ function ManagementTeam() {
                         className="team-member-more"
                         href={`/management-team/${member._id}`}
                       >
-                        See more <Icon name="arrow" size={15} />
+                        {t('seeMore')} <Icon name="arrow" size={15} />
                       </a>
                     </article>
                   ))}
@@ -1114,6 +1117,7 @@ function ManagementTeam() {
 }
 
 function ManagementTeamProfile({ memberId }) {
+  const { t } = useLanguage();
   const [member, setMember] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -1139,7 +1143,7 @@ function ManagementTeamProfile({ memberId }) {
   if (loading) {
     return (
       <main className="inner-page management-profile-page">
-        <div className="container management-profile-status">Loading profile...</div>
+        <div className="container management-profile-status">{t('loadingProfile')}</div>
       </main>
     );
   }
@@ -1148,9 +1152,9 @@ function ManagementTeamProfile({ memberId }) {
     return (
       <main className="inner-page management-profile-page">
         <div className="container management-profile-status">
-          <p className="eyebrow">MANAGEMENT TEAM</p>
-          <h1>Profile not found</h1>
-          <a href="/about">Back to management team</a>
+          <p className="eyebrow">{t('managementTeam')}</p>
+          <h1>{t('profileNotFound')}</h1>
+          <a href="/about">{t('backTeam')}</a>
         </div>
       </main>
     );
@@ -1161,7 +1165,7 @@ function ManagementTeamProfile({ memberId }) {
       <section className="management-profile-hero">
         <div className="container">
           <a className="management-profile-back" href="/about">
-            <Icon name="arrow" size={16} /> Back to management team
+            <Icon name="arrow" size={16} /> {t('backTeam')}
           </a>
           <div className="management-profile-grid">
             <figure className="management-profile-photo">
@@ -1172,11 +1176,11 @@ function ManagementTeamProfile({ memberId }) {
               )}
             </figure>
             <article className="management-profile-copy">
-              <p className="eyebrow light">CEYPETCO LEADERSHIP</p>
+              <p className="eyebrow light">{t('leadershipLabel')}</p>
               <h1>{member.name}</h1>
               <p className="management-profile-role">{member.role}</p>
               <div className="management-profile-divider" />
-              <h2>Professional profile</h2>
+              <h2>{t('professionalProfile')}</h2>
               <p className="management-profile-description">
                 {member.description ||
                   'Leadership profile details are being prepared.'}
@@ -2935,6 +2939,7 @@ const bulkConsumerResources = [
 ];
 
 function InnerPage({ type }) {
+  const { t } = useLanguage();
   const page = pageData[type] || pageData['/about'];
   const [news, setNews] = useState([]);
   const [newsLoading, setNewsLoading] = useState(true);
@@ -3199,13 +3204,13 @@ function InnerPage({ type }) {
         <img src={page.image} alt="" />
         <div className="page-hero-overlay"></div>
         <div className="container page-hero-copy">
-          <p className="eyebrow light">{page.label}</p>
-          <h1>{page.title}</h1>
-          <p>{page.intro}</p>
+          <p className="eyebrow light">{type === '/about' ? t('aboutLabel') : page.label}</p>
+          <h1>{type === '/about' ? t('aboutTitle') : page.title}</h1>
+          <p>{type === '/about' ? t('aboutIntro') : page.intro}</p>
           <div className="breadcrumbs">
             <a href="/">Home</a>
             <span>/</span>
-            <b>{page.label}</b>
+            <b>{type === '/about' ? t('aboutLabel') : page.label}</b>
           </div>
         </div>
       </section>
@@ -3232,11 +3237,11 @@ function InnerPage({ type }) {
       {type === '/about' && (
         <div className="subpage-nav">
           <div className="container">
-            <span>Discover Ceypetco</span>
+            <span>{t('discover')}</span>
             <a className="active" href="/about">
-              About us
+              {t('aboutUs')}
             </a>
-            <a href="/history">Our history</a>
+            <a href="/history">{t('ourHistory')}</a>
           </div>
         </div>
       )}
@@ -4265,11 +4270,13 @@ function InnerPage({ type }) {
 }
 
 function App() {
+  const { t } = useLanguage();
   const [path, setPath] = useState(
     () => window.location.pathname.replace(/\/$/, '') || '/',
   );
   const [menuOpen, setMenuOpen] = useState(false);
   const [navDropClosed, setNavDropClosed] = useState(false);
+  const [navAboutDropClosed, setNavAboutDropClosed] = useState(false);
   const [slide, setSlide] = useState(0);
   const changeSlide = (direction) =>
     setSlide(
@@ -4311,6 +4318,7 @@ function App() {
     setPath(nextPath);
     setMenuOpen(false);
     setNavDropClosed(true);
+    setNavAboutDropClosed(true);
     scrollAfterNavigation(url.hash);
   };
 
@@ -4450,7 +4458,7 @@ function App() {
           <button
             className={`menu-button ${menuOpen ? 'is-open' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation"
+            aria-label={t('menu')}
             aria-expanded={menuOpen}
           >
             <span></span>
@@ -4462,17 +4470,14 @@ function App() {
             aria-label="Primary navigation"
           >
             <a className={path === '/' ? 'active' : ''} href="/">
-              Home
-            </a>
-            <a className={path === '/about' ? 'active' : ''} href="/about">
-              About
+              {t('home')}
             </a>
             <div
-              className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || divisionPages[path] ? 'active' : ''}`}
-              onMouseEnter={() => setNavDropClosed(false)}
+              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/history' ? 'active' : ''}`}
+              onMouseEnter={() => setNavAboutDropClosed(false)}
             >
-              <a href="/services">
-                Services{' '}
+              <a href="/about">
+                {t('discover')}{' '}
                 <span className="chevron" aria-hidden="true">
                   <svg
                     width="14"
@@ -4490,52 +4495,92 @@ function App() {
               </a>
               <div className="nav-dropdown">
                 <div className="dropdown-heading">
-                  <span>CEYPETCO SERVICES</span>
-                  <b>Powering every sector.</b>
-                  <p>Explore our operations and public services.</p>
+                  <span>{t('aboutLabel')}</span>
+                  <b>{t('aboutTitle')}</b>
+                  <p>{t('aboutIntro')}</p>
+                </div>
+                <div className="dropdown-links">
+                  <a href="/about">
+                    <b>{t('aboutUs')}</b>
+                    <small>Our mission, vision and leadership</small>
+                  </a>
+                  <a href="/history">
+                    <b>{t('ourHistory')}</b>
+                    <small>Our journey through the decades</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div
+              className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || divisionPages[path] ? 'active' : ''}`}
+              onMouseEnter={() => setNavDropClosed(false)}
+            >
+              <a href="/services">
+                {t('services')}{' '}
+                <span className="chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </span>
+              </a>
+              <div className="nav-dropdown">
+                <div className="dropdown-heading">
+                  <span>{t('servicesLabel')}</span>
+                  <b>{t('servicesTitle')}</b>
+                  <p>{t('servicesCopy')}</p>
                 </div>
                 <div className="dropdown-links">
                   <a href="/services">
-                    <b>All Services</b>
+                    <b>{t('allServices')}</b>
                     <small>Applications and public access</small>
                   </a>
                   <a href="/refinery">
-                    <b>Refinery</b>
+                    <b>{t('refinery')}</b>
                     <small>Operations and capabilities</small>
                   </a>
                   <a href="/marketing-sales">
-                    <b>Marketing & Sales</b>
+                    <b>{t('marketing')}</b>
                     <small>Distribution and fuel products</small>
                   </a>
                   <a href="/aviation">
-                    <b>Ceypetco Aviation</b>
+                    <b>{t('aviation')}</b>
                     <small>Airport fueling services</small>
                   </a>
                   <a href="/agro-chemicals">
-                    <b>Agro Chemicals</b>
+                    <b>{t('agro')}</b>
                     <small>Crop-protection solutions</small>
                   </a>
                   <a href="/lubricants">
-                    <b>Ceypetco Lubricants</b>
+                    <b>{t('lubricants')}</b>
                     <small>Automotive and industrial oils</small>
                   </a>
                 </div>
               </div>
             </div>
             <a className={path === '/media' ? 'active' : ''} href="/media">
-              Media
+              {t('media')}
             </a>
             <a className={path === '/tenders' ? 'active' : ''} href="/tenders">
-              Tenders
+              {t('tenders')}
             </a>
             <a className={path === '/careers' ? 'active' : ''} href="/careers">
-              Careers
+              {t('careers')}
             </a>
+            <GoogleTranslate />
             <a
               className={`nav-cta ${path === '/contact' ? 'current' : ''}`}
               href="/contact"
             >
-              <span>Contact us</span> <Icon name="arrow" size={16} />
+              <span>{t('contact')}</span> <Icon name="arrow" size={16} />
             </a>
           </nav>
         </div>
@@ -4916,31 +4961,30 @@ function App() {
               </div>
             </div>
             <p>
-              Delivering dependable petroleum products and energy services that
-              support mobility, industry and national progress.
+              {t('footerCopy')}
             </p>
             <a className="footer-brand-link" href="/about">
-              About the corporation <Icon name="arrow" size={16} />
+              {t('footerLink')} <Icon name="arrow" size={16} />
             </a>
           </div>
           <nav className="footer-links" aria-label="Corporation links">
-            <h4>Corporation</h4>
-            <a href="/about">About us</a>
-            <a href="/history">Our history</a>
-            <a href="/services">All services</a>
-            <a href="/careers">Careers</a>
-            <a href="/contact">Contact us</a>
+            <h4>{t('corporation')}</h4>
+            <a href="/about">{t('aboutUs')}</a>
+            <a href="/history">{t('ourHistory')}</a>
+            <a href="/services">{t('allServices')}</a>
+            <a href="/careers">{t('careers')}</a>
+            <a href="/contact">{t('contact')}</a>
           </nav>
           <nav className="footer-links" aria-label="Public resource links">
-            <h4>Public resources</h4>
-            <a href="/marketing-sales">Fuel pricing</a>
-            <a href="/tenders">Tenders</a>
-            <a href="/notices">Notices</a>
-            <a href="/annual-reports">Annual reports</a>
-            <a href="/right-to-information">Right to Information</a>
+            <h4>{t('publicResources')}</h4>
+            <a href="/marketing-sales">{t('fuelPricing')}</a>
+            <a href="/tenders">{t('tenders')}</a>
+            <a href="/notices">{t('notices')}</a>
+            <a href="/annual-reports">{t('annualReports')}</a>
+            <a href="/right-to-information">{t('rightToInformation')}</a>
           </nav>
           <div className="footer-contact">
-            <h4>Head office</h4>
+            <h4>{t('headOffice')}</h4>
             <div className="footer-contact-item">
               <Icon name="building" size={19} />
               <p>
@@ -4950,14 +4994,14 @@ function App() {
             <div className="footer-contact-item">
               <Icon name="phone" size={19} />
               <div>
-                <span>General line</span>
+                <span>{t('generalLine')}</span>
                 <a href="tel:+94117296100">+94 11 7296 100</a>
               </div>
             </div>
             <div className="footer-contact-item">
               <Icon name="globe" size={19} />
               <div>
-                <span>Email</span>
+                <span>{t('email')}</span>
                 <a href="mailto:secretariat@ceypetco.gov.lk">
                   secretariat@ceypetco.gov.lk
                 </a>
@@ -4967,7 +5011,7 @@ function App() {
         </div>
         <div className="container footer-bottom">
           <span>Â© 2026 Ceylon Petroleum Corporation</span>
-          <span>Powering progress. Serving the nation.</span>
+          <span>{t('footerTagline')}</span>
         </div>
       </footer>
     </div>
