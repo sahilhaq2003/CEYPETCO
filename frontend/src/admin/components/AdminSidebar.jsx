@@ -32,7 +32,6 @@ const sidebarSections = [
   { label: "Communication", items: [{ to: "/admin/messages", icon: Mail, text: "Contact Messages" }] },
   { label: "System", items: [
     { to: "/admin/media", icon: Image, text: "Media Library" },
-    { to: "/admin/users", icon: Users, text: "Users" },
     { to: "/admin/settings", icon: Settings, text: "Site Settings" },
   ] },
 ];

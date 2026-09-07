@@ -34,4 +34,25 @@ const getPublished = async (req, res, next) => {
   }
 };
 
-module.exports = { ...crud, getPublished };
+const getPublishedById = async (req, res, next) => {
+  try {
+    const { identifier } = req.params;
+    const query = { status: "published" };
+    if (/^[0-9a-fA-F]{24}$/.test(identifier)) {
+      query._id = identifier;
+    } else {
+      query.slug = identifier;
+    }
+    const item = await News.findOne(query);
+    if (!item) {
+      return res
+        .status(404)
+        .json({ success: false, message: "News article not found" });
+    }
+    res.status(200).json({ success: true, data: item });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { ...crud, getPublished, getPublishedById };

@@ -58,6 +58,12 @@ const Icon = ({ name, size = 24 }) => {
         <path d="M5 20h14" />
       </>
     ),
+    user: (
+      <>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M5 21a7 7 0 0 1 14 0" />
+      </>
+    ),
   };
   return (
     <svg
@@ -1187,6 +1193,131 @@ function ManagementTeamProfile({ memberId }) {
               </p>
             </article>
           </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function NewsDetailPage({ newsId }) {
+  const [item, setItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setNotFound(false);
+    api
+      .get(`/admin/news/by/${newsId}`)
+      .then((res) => {
+        if (!cancelled) setItem(res.data?.data || null);
+      })
+      .catch(() => {
+        if (!cancelled) setNotFound(true);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [newsId]);
+
+  if (loading) {
+    return (
+      <main className="inner-page news-detail-page">
+        <div className="container news-detail-status">
+          <p className="eyebrow">MEDIA &amp; NOTICES</p>
+          <p>Loading update...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (notFound || !item) {
+    return (
+      <main className="inner-page news-detail-page">
+        <div className="container news-detail-status">
+          <p className="eyebrow">MEDIA &amp; NOTICES</p>
+          <h1>Update not found</h1>
+          <p>This update may have been unpublished or removed.</p>
+          <a href="/media">
+            Back to Media &amp; Notices <Icon name="arrow" size={16} />
+          </a>
+        </div>
+      </main>
+    );
+  }
+
+  const category = (item.category || 'News')
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+  const published = item.publishedDate
+    ? new Date(item.publishedDate).toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    : null;
+  const paragraphs = (item.content || '')
+    .split(/\n{2,}|\r?\n/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+
+  return (
+    <main className="inner-page news-detail-page">
+      <section
+        className="news-detail-hero"
+        style={
+          item.featuredImage
+            ? { backgroundImage: `url(${item.featuredImage})` }
+            : undefined
+        }
+      >
+        <div className="news-detail-overlay"></div>
+        <div className="container news-detail-hero-copy">
+          <a className="news-detail-back" href="/media">
+            <Icon name="arrow" size={16} /> Media &amp; Notices
+          </a>
+          <p className="eyebrow light">{category}</p>
+          <h1>{item.title}</h1>
+          <div className="news-detail-meta">
+            {published && (
+              <span>
+                <Icon name="clock" size={15} /> {published}
+              </span>
+            )}
+            {item.author && (
+              <span>
+                <Icon name="user" size={15} /> {item.author}
+              </span>
+            )}
+          </div>
+          <div className="breadcrumbs">
+            <a href="/">Home</a>
+            <span>/</span>
+            <a href="/media">Media &amp; Notices</a>
+            <span>/</span>
+            <b>{category}</b>
+          </div>
+        </div>
+      </section>
+      <section className="news-detail-body-section">
+        <div className="container news-detail-body">
+          {item.summary && (
+            <p className="news-detail-summary">{item.summary}</p>
+          )}
+          {paragraphs.length ? (
+            paragraphs.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))
+          ) : (
+            <p>
+              Full details of this update are being prepared and will be
+              published shortly.
+            </p>
+          )}
         </div>
       </section>
     </main>
@@ -4013,7 +4144,7 @@ function InnerPage({ type }) {
                       </p>
                       <h3>{item.title}</h3>
                       <p>{item.summary || item.content}</p>
-                      <a href="#footer">
+                      <a href={`/news/${item._id}`}>
                         Read update <Icon name="arrow" size={16} />
                       </a>
                     </div>
@@ -4830,7 +4961,7 @@ function App() {
                         </p>
                         <h3>{item.title}</h3>
                         <p>{item.summary || item.content}</p>
-                        <a className="home-news-link" href="/media">
+                        <a className="home-news-link" href={`/news/${item._id}`}>
                           Read update <Icon name="arrow" size={16} />
                         </a>
                       </div>
@@ -5018,11 +5149,13 @@ function App() {
         </main>
       ) : districtFromPath(path) ? (
         <FuelStationPage district={districtFromPath(path)} />
-      ) : path.startsWith('/management-team/') ? (
+) : path.startsWith('/management-team/') ? (
         <ManagementTeamProfile
           key={path}
           memberId={path.split('/').pop()}
         />
+      ) : path.startsWith('/news/') ? (
+        <NewsDetailPage key={path} newsId={path.split('/').pop()} />
       ) : (
         <InnerPage type={path} />
       )}
