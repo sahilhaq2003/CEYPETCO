@@ -86,80 +86,80 @@ const services = [
   [
     'globe',
     'Regional Offices',
-    'Find regional contacts and support.',
+    'Find regional contacts and support',
     '/regional-offices',
   ],
   [
     'building',
     'Market & Sales',
-    'Explore fuel products, pricing and the dealer network.',
+    'Explore fuel products, pricing and the dealer network',
     '/marketing-sales',
   ],
   [
     'app',
     'Mobile App',
-    'Access Ceypetco services on mobile.',
+    'Access Ceypetco services on mobile',
     'https://fuelup.cpstl.lk/apk/',
   ],
   [
     'droplet',
     'Product Specifications',
-    'Review petroleum product standards.',
+    'Review petroleum product standards',
     'https://ceypetco.gov.lk/wp-content/uploads/2026/04/Marketing-Sepecifictions.pdf',
   ],
   [
     'shield',
     'Registration of Suppliers',
-    'Supplier registration and procurement.',
+    'Supplier registration and procurement',
     '/tenders#supplier-registration',
   ],
   [
     'app',
     'Consumer Registration',
-    'Register for applicable consumer services.',
+    'Register for applicable consumer services',
     '/consumer-registration',
   ],
   [
     'clock',
     'Notices',
-    'Read current public and operational notices.',
+    'Read current public and operational notices',
     '/notices',
   ],
   [
     'building',
     'Projects',
-    'Explore current development initiatives.',
+    'Explore current development initiatives',
     '/projects',
   ],
   [
     'download',
     'Annual Reports',
-    'Access corporate performance publications.',
+    'Access corporate performance publications',
     '/annual-reports',
   ],
   [
     'globe',
     'Right to Information',
-    'Public information and RTI guidance.',
+    'Public information and RTI guidance',
     '/right-to-information',
   ],
 ];
 const divisions = [
   [
     'Refinery',
-    'At the heart of CPC operations, strengthening the nation’s petroleum supply.',
+    'At the heart of CPC operations, strengthening the nation’s petroleum supply',
     'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
     '/refinery',
   ],
   [
     'Marketing & Sales',
-    'Serving communities and industries through a trusted islandwide network.',
+    'Serving communities and industries through a trusted islandwide network',
     'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
     '/marketing-sales',
   ],
   [
     'Aviation',
-    'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector.',
+    'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector',
     'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/control-room.png',
     '/aviation',
   ],
@@ -173,10 +173,10 @@ const heroSlides = [
       <>
         Fuel where the
         <br />
-        nation needs it.
+        nation needs it
       </>
     ),
-    copy: 'An extensive distribution network delivering essential petroleum products safely and reliably across every district.',
+    copy: 'An extensive distribution network delivering essential petroleum products safely and reliably across every district',
     cta: 'Explore our network',
     href: '#fuel-network',
   },
@@ -188,10 +188,10 @@ const heroSlides = [
       <>
         Strengthening national
         <br />
-        energy security.
+        energy security
       </>
     ),
-    copy: 'Experienced people, proven infrastructure and disciplined operations supporting a resilient energy future for Sri Lanka.',
+    copy: 'Experienced people, proven infrastructure and disciplined operations supporting a resilient energy future for Sri Lanka',
     cta: 'Explore the refinery',
     href: '/refinery',
   },
@@ -201,12 +201,12 @@ const heroSlides = [
     eyebrow: 'SUPPORTING SRI LANKAN AGRICULTURE',
     title: (
       <>
-        Stronger crops.
+        Stronger crops
         <br />
-        Confident farmers.
+        Confident farmers
       </>
     ),
-    copy: 'Quality crop-protection solutions, responsible production and islandwide support helping farming communities prosper.',
+    copy: 'Quality crop-protection solutions, responsible production and islandwide support helping farming communities prosper',
     cta: 'Explore Agro Chemicals',
     href: '/agro-chemicals',
   },
@@ -216,12 +216,12 @@ const heroSlides = [
     eyebrow: 'ENERGY IN MOTION',
     title: (
       <>
-        Moving energy.
+        Moving energy
         <br />
-        Connecting the nation.
+        Connecting the nation
       </>
     ),
-    copy: 'Dependable transport and distribution infrastructure helps essential petroleum products reach communities and industries across Sri Lanka.',
+    copy: 'Dependable transport and distribution infrastructure helps essential petroleum products reach communities and industries across Sri Lanka',
     cta: 'Explore Marketing & Sales',
     href: '/marketing-sales',
   },
@@ -296,7 +296,7 @@ function FuelDistributionMap() {
   }, [selected]);
 
   return (
-    <section className="fuel-map-section section">
+    <section className="fuel-map-section section notranslate" translate="no">
       <div className="container">
         <div className="fuel-map-heading">
           <div>
@@ -304,7 +304,7 @@ function FuelDistributionMap() {
             <h2>
               Auto fuel distribution
               <br />
-              across Sri Lanka.
+              across Sri Lanka
             </h2>
           </div>
           <div className="network-total">
@@ -345,7 +345,7 @@ function FuelDistributionMap() {
                 <div className="district-empty-state">
                   <small>DISTRICT NETWORK</small>
                   <h3>Select a district</h3>
-                  <p>Use the map or district directory below.</p>
+                  <p>Use the map or district directory below</p>
                 </div>
               )}
             </div>
@@ -405,7 +405,7 @@ function FuelStationPage({ district }) {
             <h1>{district}</h1>
             <p>
               Explore Ceypetco dealers and filling stations operating across the{' '}
-              {district} District.
+              {district} District
             </p>
             <div className="breadcrumbs">
               <a href="/">Home</a>
@@ -430,7 +430,7 @@ function FuelStationPage({ district }) {
           <div className="directory-toolbar">
             <div>
               <p className="eyebrow">AUTHORIZED DEALER DIRECTORY</p>
-              <h2>Find a station in {district}.</h2>
+              <h2>Find a station in {district}</h2>
             </div>
             <label>
               <span>Search dealer, town or number</span>
@@ -443,7 +443,7 @@ function FuelStationPage({ district }) {
           </div>
           <div className="station-results">
             <div className="station-table-head">
-              <span>Dealer no.</span>
+              <span>Dealer no</span>
               <span>Address</span>
               <span>Dealer name</span>
             </div>
@@ -457,7 +457,7 @@ function FuelStationPage({ district }) {
             {filtered.length === 0 && (
               <div className="no-stations">
                 <h3>No matching stations</h3>
-                <p>Try another dealer number, town or dealer name.</p>
+                <p>Try another dealer number, town or dealer name</p>
               </div>
             )}
           </div>
@@ -478,128 +478,128 @@ function FuelStationPage({ district }) {
 const pageData = {
   '/about': {
     label: 'ABOUT CEYPETCO',
-    title: 'Built to power national progress.',
+    title: 'Built to power national progress',
     intro:
-      'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape.',
+      'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
   },
   '/services': {
     label: 'PUBLIC SERVICES',
-    title: 'Energy services made accessible.',
+    title: 'Energy services made accessible',
     intro:
-      'Find official registrations, applications, specifications and information from one clear destination.',
+      'Find official registrations, applications, specifications and information from one clear destination',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-2.jpg',
   },
   '/regional-offices': {
     label: 'PUBLIC SERVICES · REGIONAL OFFICES',
-    title: 'Support across every region.',
+    title: 'Support across every region',
     intro:
-      'Connect directly with Ceypetco regional management teams serving customers, dealers and communities across Sri Lanka.',
+      'Connect directly with Ceypetco regional management teams serving customers, dealers and communities across Sri Lanka',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/consumer-registration': {
     label: 'PUBLIC SERVICES · BULK CONSUMERS',
-    title: 'Register your consumer point.',
+    title: 'Register your consumer point',
     intro:
-      'A clear registration pathway for industrial customers requiring more than 3,300 litres of fuel per month.',
+      'A clear registration pathway for industrial customers requiring more than 3,300 litres of fuel per month',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
   '/notices': {
     label: 'PUBLIC INFORMATION · NOTICES',
-    title: 'Official notices and circulars.',
+    title: 'Official notices and circulars',
     intro:
-      'Read current public statements, marketing circulars and institutional agreements published by Ceypetco.',
+      'Read current public statements, marketing circulars and institutional agreements published by Ceypetco',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-1.jpg',
   },
   '/projects': {
     label: 'STRATEGIC PROJECTS · SOREM',
-    title: 'Modernising Sri Lanka’s refining future.',
+    title: 'Modernising Sri Lanka’s refining future',
     intro:
-      'The Sapugaskanda Oil Refinery Expansion and Modernization Project is designed to strengthen capacity, product quality and national energy resilience.',
+      'The Sapugaskanda Oil Refinery Expansion and Modernization Project is designed to strengthen capacity, product quality and national energy resilience',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
   },
   '/annual-reports': {
     label: 'CORPORATE PUBLICATIONS · ANNUAL REPORTS',
-    title: 'Performance documented with clarity.',
+    title: 'Performance documented with clarity',
     intro:
-      'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years.',
+      'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
   },
   '/right-to-information': {
     label: 'PUBLIC INFORMATION · RTI',
-    title: 'Information access made clear.',
+    title: 'Information access made clear',
     intro:
-      'Contact the officers nominated by Ceylon Petroleum Corporation to support Right to Information enquiries and official information requests.',
+      'Contact the officers nominated by Ceylon Petroleum Corporation to support Right to Information enquiries and official information requests',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/media': {
     label: 'MEDIA CENTRE',
-    title: 'News from across Ceypetco.',
+    title: 'News from across Ceypetco',
     intro:
-      'Access the latest corporate notices, project updates and public information.',
+      'Access the latest corporate notices, project updates and public information',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-1.jpg',
   },
   '/tenders': {
     label: 'PROCUREMENT',
-    title: 'Open and transparent opportunities.',
+    title: 'Open and transparent opportunities',
     intro:
-      'Explore current tenders, supplier registrations and procurement documents.',
+      'Explore current tenders, supplier registrations and procurement documents',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
   },
   '/careers': {
     label: 'CAREERS',
-    title: 'Power your career.',
+    title: 'Power your career',
     intro:
-      'Join Sri Lanka’s energy journey and help build the systems that keep a nation moving.',
+      'Join Sri Lanka’s energy journey and help build the systems that keep a nation moving',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/career-team.jpg',
   },
   '/contact': {
     label: 'CONTACT US',
-    title: 'We’re here to help.',
+    title: 'We’re here to help',
     intro:
-      'Connect with our head office, customer care and specialist operating divisions.',
+      'Connect with our head office, customer care and specialist operating divisions',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/refinery': {
     label: 'OUR SERVICES · REFINERY',
-    title: 'Precision refining for national growth.',
+    title: 'Precision refining for national growth',
     intro:
-      'Transforming crude oil into quality fuels through experienced people, proven processes and rigorous standards.',
+      'Transforming crude oil into quality fuels through experienced people, proven processes and rigorous standards',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery-detail-1.jpg',
   },
   '/marketing-sales': {
     label: 'OUR SERVICES · MARKETING',
-    title: 'Fueling every part of Sri Lanka.',
+    title: 'Fueling every part of Sri Lanka',
     intro:
-      'An islandwide dealer and distribution network serving transport, industry and communities.',
+      'An islandwide dealer and distribution network serving transport, industry and communities',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
   '/aviation': {
     label: 'OUR SERVICES · AVIATION',
-    title: 'Reliable energy for every takeoff.',
+    title: 'Reliable energy for every takeoff',
     intro:
-      'Round-the-clock aviation fueling built around quality, safety and on-time service.',
+      'Round-the-clock aviation fueling built around quality, safety and on-time service',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-hero.jpg',
   },
   '/agro-chemicals': {
     label: 'OUR SERVICES · AGRO',
-    title: 'Supporting stronger harvests.',
+    title: 'Supporting stronger harvests',
     intro:
-      'Quality crop-protection solutions and expert support for Sri Lanka’s farming communities.',
+      'Quality crop-protection solutions and expert support for Sri Lanka’s farming communities',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
   },
   '/lubricants': {
     label: 'OUR SERVICES · LUBRICANTS',
-    title: 'Performance engineered to last.',
+    title: 'Performance engineered to last',
     intro:
-      'Certified automotive and industrial lubricants meeting recognised international specifications.',
+      'Certified automotive and industrial lubricants meeting recognised international specifications',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg',
   },
   '/history': {
     label: 'OUR HISTORY',
-    title: 'Milestones that shaped our journey.',
+    title: 'Milestones that shaped our journey',
     intro:
-      'Explore the defining moments behind more than six decades of service to Sri Lanka.',
+      'Explore the defining moments behind more than six decades of service to Sri Lanka',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-1.jpg',
   },
 };
@@ -607,35 +607,35 @@ const pageData = {
 const historyMilestones = [
   [
     '1962',
-    'The Corporation commenced business in competition with the other oil companies operating in Sri Lanka at the time.',
+    'The Corporation commenced business in competition with the other oil companies operating in Sri Lanka at the time',
   ],
   [
     '1964',
-    'CPC took over the import, sale and distribution of petroleum products nationally. Kolonnawa, regional bulk depots and retail outlets were integrated and improved as one network, with added storage, fire-safety systems, internal roads and modernised gantry filling.',
+    'CPC took over the import, sale and distribution of petroleum products nationally. Kolonnawa, regional bulk depots and retail outlets were integrated and improved as one network, with added storage, fire-safety systems, internal roads and modernised gantry filling',
   ],
   [
     '1968',
-    'The Corporation continued expanding its national operating footprint and petroleum-services capabilities.',
+    'The Corporation continued expanding its national operating footprint and petroleum-services capabilities',
   ],
   [
     '1969',
-    'The refinery commenced production. Refining capacity was later increased to 50,000 BPD. A lubricating-oil blending plant was installed at Kolonnawa and CPC entered the agrochemical market.',
+    'The refinery commenced production. Refining capacity was later increased to 50,000 BPD. A lubricating-oil blending plant was installed at Kolonnawa and CPC entered the agrochemical market',
   ],
   [
     '1971',
-    'Bunkering operations at Sri Lankan ports and aviation refuelling activities were integrated into the Corporation.',
+    'Bunkering operations at Sri Lankan ports and aviation refuelling activities were integrated into the Corporation',
   ],
   [
     '1978',
-    'CPC built a Nylon 6 yarn factory for the textile, tyre and finishing industries at a cost of Rs. 603 million.',
+    'CPC built a Nylon 6 yarn factory for the textile, tyre and finishing industries at a cost of Rs. 603 million',
   ],
   [
     '1987',
-    'A Single Point Buoy Mooring facility was commissioned 9.2 kilometres offshore from Colombo Port, together with an intermediate crude-oil tank farm at Orugodawatte.',
+    'A Single Point Buoy Mooring facility was commissioned 9.2 kilometres offshore from Colombo Port, together with an intermediate crude-oil tank farm at Orugodawatte',
   ],
   [
     '1992',
-    'The refinery crude-distiller unit was revamped to modernise operations and improve efficiency at a cost of Rs. 250 million.',
+    'The refinery crude-distiller unit was revamped to modernise operations and improve efficiency at a cost of Rs. 250 million',
   ],
 ];
 
@@ -1056,7 +1056,7 @@ function ManagementTeam() {
                   <div className="team-member-info">
                     <h3>Loading...</h3>
                     <p className="team-member-role">Please wait</p>
-                    <p className="team-member-desc">Loading team information.</p>
+                    <p className="team-member-desc">Loading team information</p>
                   </div>
                 </article>
               ))}
@@ -1073,7 +1073,7 @@ function ManagementTeam() {
                   <h3>No team members yet</h3>
                   <p className="team-member-role">Check back soon</p>
                   <p className="team-member-desc">
-                    Leadership information will appear here shortly.
+                    Leadership information will appear here shortly
                   </p>
                 </div>
               </article>
@@ -1102,7 +1102,7 @@ function ManagementTeam() {
                       <h3>{member.name}</h3>
                       <p className="team-member-desc">
                         {member.description ||
-                          'Leadership profile details are being prepared.'}
+                          'Leadership profile details are being prepared'}
                       </p>
                       <a
                         className="team-member-more"
@@ -1189,7 +1189,7 @@ function ManagementTeamProfile({ memberId }) {
               <h2>{t('professionalProfile')}</h2>
               <p className="management-profile-description">
                 {member.description ||
-                  'Leadership profile details are being prepared.'}
+                  'Leadership profile details are being prepared'}
               </p>
             </article>
           </div>
@@ -1241,7 +1241,7 @@ function NewsDetailPage({ newsId }) {
         <div className="container news-detail-status">
           <p className="eyebrow">MEDIA &amp; NOTICES</p>
           <h1>Update not found</h1>
-          <p>This update may have been unpublished or removed.</p>
+          <p>This update may have been unpublished or removed</p>
           <a href="/media">
             Back to Media &amp; Notices <Icon name="arrow" size={16} />
           </a>
@@ -1315,7 +1315,7 @@ function NewsDetailPage({ newsId }) {
           ) : (
             <p>
               Full details of this update are being prepared and will be
-              published shortly.
+              published shortly
             </p>
           )}
         </div>
@@ -1360,7 +1360,7 @@ function ContactDirectory() {
         <div className="contact-directory-heading">
           <div>
             <p className="eyebrow">OFFICE DIRECTORY</p>
-            <h2>Direct contacts by location.</h2>
+            <h2>Direct contacts by location</h2>
           </div>
           <address>
             No. 609, Dr. Danister de Silva Mawatha,
@@ -1409,12 +1409,12 @@ function HistoryPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">OUR JOURNEY</p>
-              <h2>Six decades of national service.</h2>
+              <h2>Six decades of national service</h2>
             </div>
             <p>
               From market entry and national distribution to refinery
               modernisation, each milestone strengthened Sri Lanka’s energy
-              infrastructure.
+              infrastructure
             </p>
           </div>
           <div className="history-timeline">
@@ -1435,7 +1435,7 @@ function HistoryPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">HISTORICAL MOMENTS</p>
-              <h2>A visual journey through our legacy.</h2>
+              <h2>A visual journey through our legacy</h2>
             </div>
           </div>
           <div className="history-gallery">
@@ -1463,8 +1463,8 @@ function HistoryPage() {
 const divisionPages = {
   '/refinery': {
     kicker: 'REFINERY OPERATIONS',
-    heading: 'More than five decades of refining expertise.',
-    copy: 'The Sapugaskanda Refinery was commissioned in August 1969 to process 38,000 barrels per stream day. Continuous improvements have expanded capability, improved efficiency and enabled production that meets changing national requirements.',
+    heading: 'More than five decades of refining expertise',
+    copy: 'The Sapugaskanda Refinery was commissioned in August 1969 to process 38,000 barrels per stream day. Continuous improvements have expanded capability, improved efficiency and enabled production that meets changing national requirements',
     stats: [
       ['1969', 'Commissioned'],
       ['1,100+', 'Direct jobs'],
@@ -1489,8 +1489,8 @@ const divisionPages = {
   },
   '/marketing-sales': {
     kicker: 'MARKETING & SALES',
-    heading: 'An islandwide network built around access.',
-    copy: 'CPC marketing operations began in April 1962. Today, the network supplies Sri Lanka through hundreds of dealers, connecting dependable petroleum products with households, mobility and industry.',
+    heading: 'An islandwide network built around access',
+    copy: 'CPC marketing operations began in April 1962. Today, the network supplies Sri Lanka through hundreds of dealers, connecting dependable petroleum products with households, mobility and industry',
     stats: [
       ['850+', 'Dealer locations'],
       ['Islandwide', 'Distribution'],
@@ -1516,8 +1516,8 @@ const divisionPages = {
   },
   '/aviation': {
     kicker: 'CEYPETCO AVIATION',
-    heading: 'Quality fuel. The right aircraft. The right time.',
-    copy: 'Ceypetco Aviation provides round-the-clock aviation refuelling at Sri Lanka’s international airports, with daytime services for domestic, executive and nominated aircraft at Ratmalana.',
+    heading: 'Quality fuel. The right aircraft. The right time',
+    copy: 'Ceypetco Aviation provides round-the-clock aviation refuelling at Sri Lanka’s international airports, with daytime services for domestic, executive and nominated aircraft at Ratmalana',
     stats: [
       ['24/7', 'International service'],
       ['1.3M L', 'Daily demand'],
@@ -1537,8 +1537,8 @@ const divisionPages = {
   },
   '/agro-chemicals': {
     kicker: 'AGRO CHEMICALS',
-    heading: 'Trusted crop protection for over 50 years.',
-    copy: 'Established in 1969, the Agrochemicals Function supplies quality crop-protection solutions while supporting safe use, reasonable pricing and timely delivery across farming communities.',
+    heading: 'Trusted crop protection for over 50 years',
+    copy: 'Established in 1969, the Agrochemicals Function supplies quality crop-protection solutions while supporting safe use, reasonable pricing and timely delivery across farming communities',
     stats: [
       ['50+ years', 'Market service'],
       ['ISO 9001', 'Quality certified'],
@@ -1559,8 +1559,8 @@ const divisionPages = {
   },
   '/lubricants': {
     kicker: 'CEYPETCO LUBRICANTS',
-    heading: 'Certified protection for every application.',
-    copy: 'Ceypetco lubricating oils are blended in an ISO-certified plant and developed for demanding automotive and industrial uses in line with recognised API and ACEA specifications.',
+    heading: 'Certified protection for every application',
+    copy: 'Ceypetco lubricating oils are blended in an ISO-certified plant and developed for demanding automotive and industrial uses in line with recognised API and ACEA specifications',
     stats: [
       ['ISO', 'Certified blending'],
       ['20+', 'Product families'],
@@ -1618,7 +1618,7 @@ function DivisionPage({ data }) {
         <div className="container division-detail-grid">
           <div>
             <p className="eyebrow">WHY IT MATTERS</p>
-            <h2>Built around quality, reliability and service.</h2>
+            <h2>Built around quality, reliability and service</h2>
             <ul>
               {data.features.map((item) => (
                 <li key={item}>
@@ -1649,7 +1649,7 @@ function DivisionPage({ data }) {
         <div className="container">
           <div>
             <p className="eyebrow light">NEED MORE INFORMATION?</p>
-            <h2>Connect with the right Ceypetco team.</h2>
+            <h2>Connect with the right Ceypetco team</h2>
           </div>
           <a href={`/contact?subject=${encodeURIComponent(data.kicker)}`}>
             Contact this division <Icon name="arrow" size={18} />
@@ -1672,12 +1672,12 @@ function RefineryPage() {
     ['Bitumen Blowing Unit', '350'],
   ];
   const importance = [
-    'Operated by a 100% Sri Lankan workforce.',
-    'Provides direct employment for more than 1,100 citizens.',
-    'Contributes 30–35% of CPC’s total sales volume.',
-    'Reduces foreign-currency outflows through domestic refining.',
-    'More than five decades of continuous operating experience.',
-    'Refinery training is recognised by overseas organisations.',
+    'Operated by a 100% Sri Lankan workforce',
+    'Provides direct employment for more than 1,100 citizens',
+    'Contributes 30–35% of CPC’s total sales volume',
+    'Reduces foreign-currency outflows through domestic refining',
+    'More than five decades of continuous operating experience',
+    'Refinery training is recognised by overseas organisations',
   ];
   return (
     <>
@@ -1687,17 +1687,17 @@ function RefineryPage() {
             <p className="eyebrow">REFINERY OPERATIONS & CAPABILITIES</p>
             <h2>
               We refine with precision and expertise, delivering quality
-              petroleum products that fuel the nation’s growth.
+              petroleum products that fuel the nation’s growth
             </h2>
           </div>
           <div className="refinery-lead">
             <strong>
               Our refinery transforms crude oil into high-quality fuels and
-              products that keep Sri Lanka moving.
+              products that keep Sri Lanka moving
             </strong>
             <p>
               We combine proven technology with strict safety and quality
-              standards to deliver reliable energy every day.
+              standards to deliver reliable energy every day
             </p>
           </div>
         </div>
@@ -1727,7 +1727,7 @@ function RefineryPage() {
         <div className="container refinery-history-grid">
           <div className="refinery-sticky-title">
             <p className="eyebrow">SAPUGASKANDA REFINERY</p>
-            <h2>Advancing Sri Lanka’s refining capability since 1969.</h2>
+            <h2>Advancing Sri Lanka’s refining capability since 1969</h2>
             <div className="refinery-year">
               <b>1969</b>
               <span>
@@ -1744,21 +1744,21 @@ function RefineryPage() {
               petroleum products throughout the island. The Sapugaskanda Oil
               Refinery was commissioned in August 1969 to process 38,000 barrels
               per stream day—approximately 5,200 metric tonnes per day—of
-              Iranian Light crude oil.
+              Iranian Light crude oil
             </p>
             <p>
               Although the crude distiller’s rated capacity was 5,200 MT/day,
               the unit was capable of processing 5,800 MT/day. Crudes with
               characteristics similar to Iranian Light, including Upper Zakum
               and Arabian Light, could be processed while meeting the required
-              specifications.
+              specifications
             </p>
             <p>
               LPG production commenced in 1971, with the Naphtha Merox unit
               modified to process LPG. Special Boiling Point Solvent production
               also began using existing facilities. The Crude Distiller was
               subsequently debottlenecked, increasing refining capacity to
-              50,000 barrels per stream day—approximately 6,900 MT/day.
+              50,000 barrels per stream day—approximately 6,900 MT/day
             </p>
             <p>
               A new Kerosene Merox unit was commissioned in 1981 to process Jet
@@ -1766,12 +1766,12 @@ function RefineryPage() {
               crudes such as Miri Light, while Naphtha Unifiner capacity
               increased to 1,100 MT/day in 1992. The Platformer was revamped in
               1999 to reach 650 MT/day, meet growing gasoline demand and support
-              the phase-out of lead in gasoline.
+              the phase-out of lead in gasoline
             </p>
             <p>
               The existing Kerosene Unifiner was converted to process diesel,
               and the Gas Oil Unifiner was rehabilitated in 2003 to meet a
-              diesel sulphur specification of 0.3% by weight.
+              diesel sulphur specification of 0.3% by weight
             </p>
             <p>
               Small and medium-scale energy-conservation projects have improved
@@ -1779,7 +1779,7 @@ function RefineryPage() {
               electricity, water, steam and instrument air required for plant
               operations. The refinery contains 65 tanks for crude oil, finished
               products and intermediate products, supported by four additional
-              crude-oil tanks at the Orugodawatta tank farm.
+              crude-oil tanks at the Orugodawatta tank farm
             </p>
           </div>
         </div>
@@ -1788,7 +1788,7 @@ function RefineryPage() {
         <div className="container">
           <div className="refinery-importance-heading">
             <p className="eyebrow light">NATIONAL VALUE</p>
-            <h2>Why the refinery matters.</h2>
+            <h2>Why the refinery matters</h2>
           </div>
           <div className="refinery-importance-grid">
             {importance.map((item, index) => (
@@ -1805,11 +1805,11 @@ function RefineryPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">REFINING PROCESS</p>
-              <h2>From crude oil to essential products.</h2>
+              <h2>From crude oil to essential products</h2>
               <p className="refining-process-intro">
                 Fractional distillation separates crude oil into useful products
                 according to boiling point and density—from LPG and petrol to
-                diesel, lubricants and bitumen.
+                diesel, lubricants and bitumen
               </p>
             </div>
           </div>
@@ -1887,8 +1887,8 @@ function RefineryPage() {
         <div className="container process-units-grid">
           <div>
             <p className="eyebrow">PROCESS UNITS</p>
-            <h2>Installed production capacity.</h2>
-            <p>Rated capacity in metric tonnes per stream day.</p>
+            <h2>Installed production capacity</h2>
+            <p>Rated capacity in metric tonnes per stream day</p>
           </div>
           <div className="unit-table">
             <div className="unit-table-head">
@@ -1922,7 +1922,7 @@ function FuelPriceCards({ products, category }) {
           </div>
           <h3>{name}</h3>
           <div className="price-value">
-            <span>Rs.</span>
+            <span>Rs</span>
             <b>{price}</b>
             <small>per litre</small>
           </div>
@@ -1998,7 +1998,7 @@ function MarketingSalesPage() {
           <div>
             <p className="eyebrow">MARKETING & SALES</p>
             <h2>
-              Serving every fuel need through an islandwide dealer network.
+              Serving every fuel need through an islandwide dealer network
             </h2>
           </div>
           <div>
@@ -2006,11 +2006,11 @@ function MarketingSalesPage() {
               Following the incorporation of CPC under the Act of Parliament in
               1961, marketing operations commenced on 28 April 1962. Today,
               Ceypetco serves Sri Lanka’s fuel requirements through
-              approximately 850 dealers.
+              approximately 850 dealers
             </p>
             <p>
               Outstation spot prices incorporate the applicable transport
-              differential.
+              differential
             </p>
           </div>
         </div>
@@ -2046,9 +2046,9 @@ function MarketingSalesPage() {
           <div className="pricing-heading">
             <div>
               <p className="eyebrow">FUEL PRICING</p>
-              <h2>Current market rates.</h2>
+              <h2>Current market rates</h2>
               <p>
-                Current rates for Ceylon Petroleum Corporation fuel products.
+                Current rates for Ceylon Petroleum Corporation fuel products
               </p>
             </div>
             <div className="pricing-status">
@@ -2102,7 +2102,7 @@ function MarketingSalesPage() {
               <b>Outstation pricing</b>
               <p>
                 Outstation spot prices incorporate the applicable transport
-                differential.
+                differential
               </p>
             </div>
           </div>
@@ -2112,7 +2112,7 @@ function MarketingSalesPage() {
         <div className="container">
           <div>
             <p className="eyebrow light">MARKETING RESOURCES</p>
-            <h2>More product information.</h2>
+            <h2>More product information</h2>
           </div>
           <div className="marketing-resource-links">
             <a href="/lubricants">
@@ -2213,10 +2213,10 @@ function AviationPage() {
         <div className="container aviation-opening-grid">
           <div>
             <p className="eyebrow">OUR AIM</p>
-            <h2>Quality fuel. The right aircraft. The right time.</h2>
+            <h2>Quality fuel. The right aircraft. The right time</h2>
             <blockquote>
               To be the region’s leading service-oriented, customer-focused and
-              environmentally responsible aviation fuel supplier.
+              environmentally responsible aviation fuel supplier
             </blockquote>
           </div>
           <div>
@@ -2225,13 +2225,13 @@ function AviationPage() {
               Bandaranaike International Airport and Mattala Rajapaksa
               International Airport, together with daytime service for domestic
               flights, corporate and executive jets, and nominated aircraft at
-              Colombo Airport, Ratmalana.
+              Colombo Airport, Ratmalana
             </p>
             <p>
               Clean, dry aviation fuel and rigorous contamination control are
               essential to aircraft safety, engine life and maintenance
               performance. Ceypetco applies international-quality handling
-              standards throughout its into-plane operation.
+              standards throughout its into-plane operation
             </p>
           </div>
         </div>
@@ -2275,10 +2275,10 @@ function AviationPage() {
           <div className="aviation-price-heading">
             <div>
               <p className="eyebrow">AVIATION FUEL PRICING</p>
-              <h2>Contract customer rates.</h2>
+              <h2>Contract customer rates</h2>
               <p>
                 Effective 01 February 2025 · Prices shown in US dollars per US
-                gallon.
+                gallon
               </p>
             </div>
             <div className="aviation-price-unit">
@@ -2308,11 +2308,11 @@ function AviationPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">FUEL & QUALITY</p>
-              <h2>International specifications at every location.</h2>
+              <h2>International specifications at every location</h2>
             </div>
             <p>
               JET A-1 and Aviation Gasoline 100LL are supported across all three
-              aviation locations.
+              aviation locations
             </p>
           </div>
           <div className="aviation-fuel-grid">
@@ -2333,7 +2333,7 @@ function AviationPage() {
               <p>
                 Supplied to the latest British Ministry of Defence DEF STAN
                 91-90 specification and made available in sealed 200-litre drums
-                with prior notice.
+                with prior notice
               </p>
               <small>Available on prior notice</small>
             </article>
@@ -2343,7 +2343,7 @@ function AviationPage() {
               <p>
                 Supporting Ceypetco Aviation’s commitment to specialist
                 handling, operational quality and international service
-                standards.
+                standards
               </p>
             </article>
           </div>
@@ -2354,7 +2354,7 @@ function AviationPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">OPERATIONS GALLERY</p>
-              <h2>Aviation fuel in action.</h2>
+              <h2>Aviation fuel in action</h2>
             </div>
           </div>
           <div className="aviation-gallery">
@@ -2379,17 +2379,17 @@ function AviationPage() {
         <div className="container aviation-payment-grid">
           <div>
             <p className="eyebrow light">PAYMENT SCHEMES</p>
-            <h2>Flexible arrangements for aviation customers.</h2>
+            <h2>Flexible arrangements for aviation customers</h2>
             <p>
               Contract customers are served through arrangements with the
               Ceypetco Commercial Manager. International credit cards, cash in
               USD, Air BP cards and UVair are accepted according to the
-              applicable customer arrangement.
+              applicable customer arrangement
             </p>
             <small>
               Customers should maintain a backup payment or third-party fuelling
               nomination and contact operations in advance to prevent
-              last-minute disruption.
+              last-minute disruption
             </small>
           </div>
           <div className="aviation-payment-contact">
@@ -2405,7 +2405,7 @@ function AviationPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">OPERATING LOCATIONS</p>
-              <h2>Airport services and contacts.</h2>
+              <h2>Airport services and contacts</h2>
             </div>
           </div>
           <div className="aviation-location-grid">
@@ -2492,19 +2492,19 @@ function AgroChemicalsPage() {
           <div>
             <p className="eyebrow">CEYPETCO AGROCHEMICALS</p>
             <h2>
-              More than 50 years supporting Sri Lanka’s farming communities.
+              More than 50 years supporting Sri Lanka’s farming communities
             </h2>
             <p>
               Ceylon Petroleum Corporation established its Agrochemicals
               Function in 1969. As a strategic business unit within the
               Marketing Function, it has served the national agrochemicals
-              market for more than five decades.
+              market for more than five decades
             </p>
             <p>
               Ceypetco Agrochemicals is the only government-sector organisation
               engaged in the agrochemicals business among Sri Lanka’s marketing
               companies, helping maintain product quality, access and reasonable
-              market pricing.
+              market pricing
             </p>
           </div>
           <div className="agro-opening-images">
@@ -2529,10 +2529,10 @@ function AgroChemicalsPage() {
         <div className="container">
           <div className="agro-standards-heading">
             <p className="eyebrow light">CERTIFIED SYSTEMS</p>
-            <h2>Quality, environment and occupational safety.</h2>
+            <h2>Quality, environment and occupational safety</h2>
             <p>
               Experienced staff maintain the product range under guidance from
-              the Sri Lanka Standards Institution.
+              the Sri Lanka Standards Institution
             </p>
           </div>
           <div className="agro-cert-grid">
@@ -2558,7 +2558,7 @@ function AgroChemicalsPage() {
           <div>
             <p className="eyebrow">FROM PREPARATION TO HARVEST</p>
             <h2>
-              Practical crop-protection solutions across the cultivation cycle.
+              Practical crop-protection solutions across the cultivation cycle
             </h2>
             <img
               src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg"
@@ -2570,26 +2570,26 @@ function AgroChemicalsPage() {
               Ceypetco Agrochemicals provides solutions from land and bed
               preparation through harvest by controlling or eradicating pests,
               fungi and weeds. The range includes insecticides, fungicides and
-              weedicides for diverse cultivation requirements.
+              weedicides for diverse cultivation requirements
             </p>
             <p>
               Our primary goal is to strengthen a marketing strategy based on
               consistently high quality, reasonable prices and dependable
               on-time delivery. Professionally qualified field officers located
-              around the island work directly with farming communities.
+              around the island work directly with farming communities
             </p>
             <p>
               Since December 2018, restricted Ceypetco Glyphosate has been
               distributed to approved planters at reasonable prices, supporting
               efforts to reduce production costs in the tea and rubber
-              plantation sectors.
+              plantation sectors
             </p>
             <p>
               Ceypetco imports quality agrochemicals, formulates, repacks,
               stores and markets them while working closely with the Registrar
               of Pesticides, Department of Agriculture, agrarian service
               centres, farmer organisations and other agricultural institutions
-              to promote safe use.
+              to promote safe use
             </p>
           </div>
         </div>
@@ -2602,7 +2602,7 @@ function AgroChemicalsPage() {
             <p>
               Supporting the transition toward greener agriculture with a
               new-generation bio-insecticide solution for modern crop
-              protection.
+              protection
             </p>
             <a
               href="/documents/agro/Flipper.pdf"
@@ -2615,11 +2615,11 @@ function AgroChemicalsPage() {
           </div>
           <div>
             <p className="eyebrow light">GREEN AGRICULTURE</p>
-            <h3>A progressive addition to the Ceypetco Agro portfolio.</h3>
+            <h3>A progressive addition to the Ceypetco Agro portfolio</h3>
             <p>
               Flipper was planned as part of the organisation’s response to the
               newly introduced Green Agriculture concept, complementing
-              established insecticide, fungicide and weed-control solutions.
+              established insecticide, fungicide and weed-control solutions
             </p>
           </div>
         </div>
@@ -2629,11 +2629,11 @@ function AgroChemicalsPage() {
           <div className="page-title-row">
             <div>
               <p className="eyebrow">PRODUCT RANGE</p>
-              <h2>Solutions for healthier cultivation.</h2>
+              <h2>Solutions for healthier cultivation</h2>
             </div>
             <p>
               Ceypetco agrochemical products are available across the Sri Lankan
-              market at reasonable prices.
+              market at reasonable prices
             </p>
           </div>
           <div className="agro-product-grid">
@@ -2659,7 +2659,7 @@ function AgroChemicalsPage() {
             <p className="eyebrow">OUR BUSINESS STRATEGY</p>
             <h2>
               Quality products, reasonable pricing and delivery when farmers
-              need it.
+              need it
             </h2>
           </div>
           <div>
@@ -2668,13 +2668,13 @@ function AgroChemicalsPage() {
               strengthens the competitiveness of the Ceypetco range. The
               organisation continues to preserve farmer confidence by providing
               current guidance to sellers, farmer organisations, agrarian
-              service centres and intermediaries.
+              service centres and intermediaries
             </p>
             <p>
               Ceypetco maintains health-care facilities, HSE practices and a
               supportive working environment for agrochemical staff, helping the
               strategic business unit fulfil its national responsibilities and
-              sustain goodwill across farming communities.
+              sustain goodwill across farming communities
             </p>
           </div>
         </div>
@@ -2683,7 +2683,7 @@ function AgroChemicalsPage() {
         <div className="container">
           <div>
             <p className="eyebrow light">AGROCHEMICAL SUPPORT</p>
-            <h2>Connect with our islandwide field team.</h2>
+            <h2>Connect with our islandwide field team</h2>
           </div>
           <a href="/contact?subject=Ceypetco%20Agrochemicals">
             Contact Agrochemicals <Icon name="arrow" size={18} />
@@ -2717,10 +2717,10 @@ function OilTypesChart() {
       <div className="container oil-types-layout">
         <div className="oil-types-copy">
           <p className="eyebrow">PRODUCT COVERAGE</p>
-          <h2>Oil types distribution.</h2>
+          <h2>Oil types distribution</h2>
           <p>
             A broad lubricant portfolio developed for mobility, industry,
-            agriculture, marine operations and specialist applications.
+            agriculture, marine operations and specialist applications
           </p>
           <div className="oil-types-legend">
             {oilTypes.map(([name, color], index) => (
@@ -2781,19 +2781,19 @@ function LubricantsPage() {
             <p className="eyebrow">THE BEST FROM THE BEST</p>
             <h2>
               Internationally aligned protection for automotive and industrial
-              performance.
+              performance
             </h2>
             <p>
               All Ceypetco lubricating oils are blended in a plant certified to
               ISO 9001/2000. The Ceypetco lubricant range covers products
               developed to meet relevant international specifications from the
               American Petroleum Institute (API), MTU Friedrichshafen GmbH and
-              the European Automobile Manufacturers’ Association (ACEA).
+              the European Automobile Manufacturers’ Association (ACEA)
             </p>
             <p>
               Our products serve demanding automotive and industrial
               applications with a focus on quality, consistency and dependable
-              protection.
+              protection
             </p>
             <div className="lubricant-standards">
               <span>API</span>
@@ -2811,13 +2811,13 @@ function LubricantsPage() {
             <p className="eyebrow">OUR MISSION</p>
             <h3>
               Deliver quality products and total solutions through professional
-              expertise, technology and innovation.
+              expertise, technology and innovation
             </h3>
             <p>
               To achieve excellence in petroleum refining, sales and marketing
               while meeting stakeholder expectations through a dedicated team,
               an efficient dealer network, high ethical standards and the
-              highest concern for health, safety and the environment.
+              highest concern for health, safety and the environment
             </p>
           </article>
           <article>
@@ -2825,11 +2825,11 @@ function LubricantsPage() {
             <p className="eyebrow">OUR VISION</p>
             <h3>
               A premier, customer-driven and environmentally responsible
-              petroleum enterprise.
+              petroleum enterprise
             </h3>
             <p>
               To lead petroleum and related industries in the region while
-              contributing meaningfully to the prosperity of Sri Lanka.
+              contributing meaningfully to the prosperity of Sri Lanka
             </p>
           </article>
         </div>
@@ -2840,10 +2840,10 @@ function LubricantsPage() {
           <div className="lubricant-products-heading">
             <div>
               <p className="eyebrow">PRODUCT INDEX</p>
-              <h2>Technical product documents.</h2>
+              <h2>Technical product documents</h2>
               <p>
                 Access locally stored product information and material safety
-                datasheets.
+                datasheets
               </p>
             </div>
             <label>
@@ -2890,7 +2890,7 @@ function LubricantsPage() {
             {filtered.length === 0 && (
               <div className="no-lubricants">
                 <h3>No matching products</h3>
-                <p>Try a different product name or specification.</p>
+                <p>Try a different product name or specification</p>
               </div>
             )}
           </div>
@@ -2993,14 +2993,14 @@ const regionalOffices = [
 ];
 
 const bulkConsumerSteps = [
-  'Download and submit the duly completed CPC application form.',
-  'Submit every supporting document listed in the Documents Required guide.',
-  'A CPC officer will visit the location and certify the premises.',
-  'CPC will create an account number and issue mobile-app credentials.',
-  'Sign the Bulk Consumer Agreement and submit the required bank guarantee.',
-  'Install the fuel-ordering application on an Android mobile device.',
-  'Pay for monthly fuel requirements through the available online platforms.',
-  'Place fuel orders using the registered mobile application.',
+  'Download and submit the duly completed CPC application form',
+  'Submit every supporting document listed in the Documents Required guide',
+  'A CPC officer will visit the location and certify the premises',
+  'CPC will create an account number and issue mobile-app credentials',
+  'Sign the Bulk Consumer Agreement and submit the required bank guarantee',
+  'Install the fuel-ordering application on an Android mobile device',
+  'Pay for monthly fuel requirements through the available online platforms',
+  'Place fuel orders using the registered mobile application',
 ];
 
 const bulkConsumerRegions = [
@@ -3090,70 +3090,70 @@ function InnerPage({ type }) {
     {
       title: 'New Dealership Registration',
       category: 'Business Services',
-      text: 'Start an application to join Ceypetco’s islandwide retail network.',
+      text: 'Start an application to join Ceypetco’s islandwide retail network',
       image: 'media-3.jpg',
       href: '/contact?subject=New%20Dealership%20Registration&from=services',
     },
     {
       title: 'Regional Offices',
       category: 'Islandwide Support',
-      text: 'Find regional contacts serving communities and dealers across Sri Lanka.',
+      text: 'Find regional contacts serving communities and dealers across Sri Lanka',
       image: 'head-office.webp',
       href: '/regional-offices?from=services',
     },
     {
       title: 'Fuel Station Services',
       category: 'Digital Services',
-      text: 'Access information and support for Ceypetco fuel station operations.',
+      text: 'Access information and support for Ceypetco fuel station operations',
       image: 'distribution.jpg',
       href: '/#fuel-network',
     },
     {
       title: 'Product Specifications',
       category: 'Technical Information',
-      text: 'Review quality and technical information for marketed petroleum products.',
+      text: 'Review quality and technical information for marketed petroleum products',
       image: 'media-1.jpg',
       href: 'https://ceypetco.gov.lk/wp-content/uploads/2026/04/Marketing-Sepecifictions.pdf',
     },
     {
       title: 'Supplier Registration',
       category: 'Procurement',
-      text: 'Register interest in supplying products and professional services to CPC.',
+      text: 'Register interest in supplying products and professional services to CPC',
       image: 'refinery.png',
       href: '/tenders?from=services#supplier-registration',
     },
     {
       title: 'Consumer Registration',
       category: 'Customer Services',
-      text: 'Submit consumer information and connect with the appropriate service team.',
+      text: 'Submit consumer information and connect with the appropriate service team',
       image: 'hero.png',
       href: '/consumer-registration?from=services',
     },
     {
       title: 'Notices',
       category: 'Public Information',
-      text: 'Follow important notices and updates from current infrastructure projects.',
+      text: 'Follow important notices and updates from current infrastructure projects',
       image: 'media-2.jpg',
       href: '/notices?from=services',
     },
     {
       title: 'Projects',
       category: 'Strategic Development',
-      text: 'Explore refinery modernization and infrastructure initiatives.',
+      text: 'Explore refinery modernization and infrastructure initiatives',
       image: 'refinery-detail-1.jpg',
       href: '/projects?from=services',
     },
     {
       title: 'Annual Reports',
       category: 'Corporate Publications',
-      text: 'Request access to annual reports and key corporate publications.',
+      text: 'Request access to annual reports and key corporate publications',
       image: 'about-banner.webp',
       href: '/annual-reports?from=services',
     },
     {
       title: 'Right to Information',
       category: 'Public Access',
-      text: 'Learn how to submit an official request for public information.',
+      text: 'Learn how to submit an official request for public information',
       image: 'career-team.jpg',
       href: '/right-to-information?from=services',
     },
@@ -3414,19 +3414,19 @@ function InnerPage({ type }) {
             <div className="container story-grid">
               <div>
                 <p className="eyebrow">WHO WE ARE</p>
-                <h2>Energy security at the heart of everything.</h2>
+                <h2>Energy security at the heart of everything</h2>
               </div>
               <div>
                 <p>
                   CPC carries on business as an importer, exporter, seller,
                   supplier and distributor of petroleum products, while
                   supporting exploration, production and refining activities
-                  that advance the nation.
+                  that advance the nation
                 </p>
                 <p>
                   Established under Act No. 28 of 1961, the Corporation
                   continues to serve households, transport, aviation and
-                  industry across Sri Lanka.
+                  industry across Sri Lanka
                 </p>
               </div>
             </div>
@@ -3436,14 +3436,14 @@ function InnerPage({ type }) {
               <article>
                 <span>01</span>
                 <p className="eyebrow">OUR VISION</p>
-                <h3>To become Asia’s most trusted and premier energy brand.</h3>
+                <h3>To become Asia’s most trusted and premier energy brand</h3>
               </article>
               <article>
                 <span>02</span>
                 <p className="eyebrow">OUR MISSION</p>
                 <h3>
                   To deliver sustainable energy solutions meeting the highest
-                  Quality, Health, Safety and Environment standards.
+                  Quality, Health, Safety and Environment standards
                 </h3>
               </article>
             </div>
@@ -3489,7 +3489,7 @@ function InnerPage({ type }) {
                 </div>
                 <p>
                   Direct access to frequently used Ceypetco services and
-                  information.
+                  information
                 </p>
               </div>
               <div className="directory-grid">
@@ -3540,14 +3540,14 @@ function InnerPage({ type }) {
             <div className="container bulk-consumer-intro-grid">
               <div>
                 <p className="eyebrow">CONSUMER POINT REGISTRATION</p>
-                <h2>Bulk customer registration.</h2>
+                <h2>Bulk customer registration</h2>
               </div>
               <div>
                 <p>
                   Customers consuming more than{' '}
                   <strong>3,300 litres per month</strong> of Industrial Diesel,
                   Industrial Kerosene, Furnace Oil or SBP must register with CPC
-                  as Bulk Consumers.
+                  as Bulk Consumers
                 </p>
                 <div className="bulk-fuel-tags">
                   {[
@@ -3567,7 +3567,7 @@ function InnerPage({ type }) {
             <div className="container">
               <div className="bulk-section-heading">
                 <p className="eyebrow">REGISTRATION PROCESS</p>
-                <h2>How to become a bulk consumer.</h2>
+                <h2>How to become a bulk consumer</h2>
               </div>
               <div className="bulk-step-grid">
                 {bulkConsumerSteps.map((step, index) => (
@@ -3589,7 +3589,7 @@ function InnerPage({ type }) {
                     days. The order must be placed through the mobile app and
                     sufficient funds must be available in the CPC account when
                     allocation is generated. Delivery remains subject to
-                    capacity.
+                    capacity
                   </p>
                 </div>
               </aside>
@@ -3601,9 +3601,9 @@ function InnerPage({ type }) {
               <div className="bulk-section-heading split-heading">
                 <div>
                   <p className="eyebrow">DOWNLOADS & RESOURCES</p>
-                  <h2>Everything needed to apply.</h2>
+                  <h2>Everything needed to apply</h2>
                 </div>
-                <p>Official forms and resources open in a new browser tab.</p>
+                <p>Official forms and resources open in a new browser tab</p>
               </div>
               <div className="bulk-resource-grid">
                 {bulkConsumerResources.map(([label, href], index) => (
@@ -3623,7 +3623,7 @@ function InnerPage({ type }) {
               <div className="bulk-contact-summary">
                 <div>
                   <p className="eyebrow light">FURTHER ASSISTANCE</p>
-                  <h2>Bulk consumer support.</h2>
+                  <h2>Bulk consumer support</h2>
                 </div>
                 <a href="mailto:ccu@ceypetco.gov.lk">
                   <span>Email</span>
@@ -3674,7 +3674,7 @@ function InnerPage({ type }) {
                 <p className="eyebrow">FREQUENTLY ASKED QUESTION</p>
                 <h3>Which fuels are available to industrial customers?</h3>
                 <p>
-                  Industrial Diesel, Industrial Kerosene, Furnace Oil and SBP.
+                  Industrial Diesel, Industrial Kerosene, Furnace Oil and SBP
                 </p>
               </div>
             </div>
@@ -3691,7 +3691,7 @@ function InnerPage({ type }) {
               </div>
               <p>
                 Contact the regional team responsible for customer, dealer and
-                operational support in your area.
+                operational support in your area
               </p>
             </div>
             <div className="regional-office-grid">
@@ -3727,7 +3727,7 @@ function InnerPage({ type }) {
               <Icon name="globe" size={21} />
               <p>
                 For general enquiries or assistance identifying the appropriate
-                regional office, contact the Ceypetco head office.
+                regional office, contact the Ceypetco head office
               </p>
               <a href="/contact">
                 Contact head office <Icon name="arrow" size={16} />
@@ -3742,11 +3742,11 @@ function InnerPage({ type }) {
             <div className="rti-heading">
               <div>
                 <p className="eyebrow">RIGHT TO INFORMATION</p>
-                <h2>Nominated and Information Officers.</h2>
+                <h2>Nominated and Information Officers</h2>
               </div>
               <p>
                 Official points of contact for information requests addressed to
-                Ceylon Petroleum Corporation.
+                Ceylon Petroleum Corporation
               </p>
             </div>
 
@@ -3759,7 +3759,7 @@ function InnerPage({ type }) {
                 <h3>Report of nominated and information officers</h3>
                 <p>
                   Use the contact details below to reach the appropriate officer
-                  regarding an official Right to Information enquiry.
+                  regarding an official Right to Information enquiry
                 </p>
               </div>
               <span>No. 609, Dr. Danister de Silva Road, Colombo 09</span>
@@ -3824,11 +3824,11 @@ function InnerPage({ type }) {
               </div>
               <div>
                 <p className="eyebrow">CONTACT GUIDANCE</p>
-                <h3>Direct your enquiry to the Information Officer.</h3>
+                <h3>Direct your enquiry to the Information Officer</h3>
                 <p>
                   For general assistance with CPC services, use the main contact
                   directory. For RTI correspondence, use the official officer
-                  details shown above.
+                  details shown above
                 </p>
               </div>
               <a href="/contact?subject=Right%20to%20Information">
@@ -3844,11 +3844,11 @@ function InnerPage({ type }) {
             <div className="annual-reports-heading">
               <div>
                 <p className="eyebrow">PUBLICATION ARCHIVE</p>
-                <h2>Annual reports.</h2>
+                <h2>Annual reports</h2>
               </div>
               <p>
                 A chronological archive of CPC corporate reports covering
-                operational performance, governance and financial reporting.
+                operational performance, governance and financial reporting
               </p>
             </div>
 
@@ -3860,7 +3860,7 @@ function InnerPage({ type }) {
             ) : annualReports.length === 0 ? (
               <div className="annual-reports-loading">
                 <p className="eyebrow light">PUBLICATION ARCHIVE</p>
-                <p>No annual reports published yet.</p>
+                <p>No annual reports published yet</p>
               </div>
             ) : (
               <>
@@ -3876,7 +3876,7 @@ function InnerPage({ type }) {
                     <h3>Annual Report {annualReports[0].year}</h3>
                     <p>
                       Review the latest available published record of Ceylon
-                      Petroleum Corporation&rsquo;s performance and activities.
+                      Petroleum Corporation&rsquo;s performance and activities
                     </p>
                     <div className="annual-report-meta">
                       <span>
@@ -3933,7 +3933,7 @@ function InnerPage({ type }) {
                 ) : (
                   <div className="annual-reports-loading">
                     <p className="eyebrow light">REPORT LIBRARY</p>
-                    <p>More reports will be added to the archive.</p>
+                    <p>More reports will be added to the archive</p>
                   </div>
                 )}
               </>
@@ -3944,7 +3944,7 @@ function InnerPage({ type }) {
               <p>
                 Reports are presented in the years currently available in the
                 CPC publication archive. Selecting a report opens the official
-                PDF in a new browser tab.
+                PDF in a new browser tab
               </p>
               <a href="/contact?subject=Annual%20report%20enquiry">
                 Publication enquiry <Icon name="arrow" size={16} />
@@ -3963,7 +3963,7 @@ function InnerPage({ type }) {
               </div>
               <p>
                 Key infrastructure and modernization projects driving Ceypetco's
-                development.
+                development
               </p>
             </div>
             {projectsLoading ? (
@@ -3972,7 +3972,7 @@ function InnerPage({ type }) {
               </div>
             ) : projects.length === 0 ? (
               <div className="news-grid">
-                <div className="news-grid-empty">No projects published yet.</div>
+                <div className="news-grid-empty">No projects published yet</div>
               </div>
             ) : (
               <div className="news-grid">
@@ -4025,11 +4025,11 @@ function InnerPage({ type }) {
             <div className="notices-heading">
               <div>
                 <p className="eyebrow">PUBLIC INFORMATION</p>
-                <h2>Notices, circulars and agreements.</h2>
+                <h2>Notices, circulars and agreements</h2>
               </div>
               <p>
                 Official statements and downloadable documents published for
-                customers, dealers, partners and the public.
+                customers, dealers, partners and the public
               </p>
             </div>
             {!noticesLoading && notices.length === 0 && (
@@ -4037,7 +4037,7 @@ function InnerPage({ type }) {
                 <div className="notice-featured-index">01</div>
                 <div>
                   <p className="eyebrow light">PUBLIC INFORMATION</p>
-                  <h3>No notices published yet.</h3>
+                  <h3>No notices published yet</h3>
                 </div>
               </div>
             )}
@@ -4098,7 +4098,7 @@ function InnerPage({ type }) {
               <Icon name="globe" size={22} />
               <p>
                 Need clarification about a notice or circular? Contact Ceypetco
-                customer care for assistance.
+                customer care for assistance
               </p>
               <a href="/contact?subject=Public%20notice%20enquiry">
                 Request clarification <Icon name="arrow" size={16} />
@@ -4121,7 +4121,7 @@ function InnerPage({ type }) {
                 <p className="news-grid-empty">Loading latest updates...</p>
               ) : news.length === 0 ? (
                 <p className="news-grid-empty">
-                  No published updates available yet.
+                  No published updates available yet
                 </p>
               ) : (
                 news.map((item) => (
@@ -4161,11 +4161,11 @@ function InnerPage({ type }) {
             <div className="tenders-heading">
               <div>
                 <p className="eyebrow">PROCUREMENT PORTAL</p>
-                <h2>Tenders and supplier registration.</h2>
+                <h2>Tenders and supplier registration</h2>
               </div>
               <p>
                 Commercial, refinery and procurement opportunities, supported by
-                supplier registration guidance and application resources.
+                supplier registration guidance and application resources
               </p>
             </div>
 
@@ -4187,13 +4187,13 @@ function InnerPage({ type }) {
                 <p>
                   {supplierSection
                     ? supplierSection.description
-                    : 'Guidance and application support for oil suppliers, foreign suppliers, independent inspectors and local contractors.'}
+                    : 'Guidance and application support for oil suppliers, foreign suppliers, independent inspectors and local contractors'}
                 </p>
               </div>
               <div className="supplier-resource-grid">
                 {supplierResources.length === 0 ? (
                   <span className="supplier-resource-empty">
-                    No registration resources available yet.
+                    No registration resources available yet
                   </span>
                 ) : (
                   supplierResources.map((resource) => (
@@ -4297,10 +4297,10 @@ function InnerPage({ type }) {
           <div className="container career-grid">
             <div>
               <p className="eyebrow">WORK WITH US</p>
-              <h2>Build the future of energy.</h2>
+              <h2>Build the future of energy</h2>
               <p>
                 Be at the forefront of national development with a team
-                committed to safety, reliability and meaningful public service.
+                committed to safety, reliability and meaningful public service
               </p>
               <a className="career-button" href="#opportunities">
                 View current opportunities <Icon name="arrow" size={17} />
@@ -4319,7 +4319,7 @@ function InnerPage({ type }) {
               ) : careers.length === 0 ? (
                 <article>
                   <h3>No current openings</h3>
-                  <p>Please check back later for new vacancies.</p>
+                  <p>Please check back later for new vacancies</p>
                 </article>
               ) : (
                 careers.map((job) => (
@@ -4347,7 +4347,7 @@ function InnerPage({ type }) {
           <div className="container contact-grid">
             <div>
               <p className="eyebrow">CONTACT INFORMATION</p>
-              <h2>Find the right team.</h2>
+              <h2>Find the right team</h2>
               <div className="contact-cards">
                 {[
                   ['Customer Care', '+94 117 296 130'],
@@ -4601,7 +4601,7 @@ function App() {
     <div className="site-shell" onClick={handleHeaderNavigation}>
       <header className="header">
         <div className="container nav-wrap">
-          <a className="brand" href="/">
+          <a className="brand notranslate" href="/" translate="no">
             <img
               src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/ceypetco-logo.png"
               alt="Ceylon Petroleum Corporation logo"
@@ -4622,8 +4622,9 @@ function App() {
             <span></span>
           </button>
           <nav
-            className={menuOpen ? 'nav open' : 'nav'}
+            className={`nav notranslate ${menuOpen ? 'open' : ''}`}
             aria-label="Primary navigation"
+            translate="no"
           >
             <a className={path === '/' ? 'active' : ''} href="/">
               {t('home')}
@@ -4856,28 +4857,28 @@ function App() {
                 <h2>
                   Every drop powers
                   <br />
-                  national progress.
+                  national progress
                 </h2>
                 <p>
                   Ceylon Petroleum Corporation plays a vital role in the
                   national economy through the continuous supply of petroleum
                   products. We are committed to assuring uninterrupted fuel
                   supply so Sri Lanka can keep moving toward resilient economic
-                  growth.
+                  growth
                 </p>
                 <div className="promise-grid">
                   <div>
                     <Icon name="shield" size={30} />
                     <h3>Energy Security</h3>
                     <p>
-                      Safeguarding a reliable petroleum supply for the country.
+                      Safeguarding a reliable petroleum supply for the country
                     </p>
                   </div>
                   <div>
                     <Icon name="droplet" size={30} />
                     <h3>Trusted Supply</h3>
                     <p>
-                      Supporting transport, commerce and communities islandwide.
+                      Supporting transport, commerce and communities islandwide
                     </p>
                   </div>
                 </div>
@@ -4892,11 +4893,11 @@ function App() {
               <div className="home-services-heading">
                 <div>
                   <p className="eyebrow">PUBLIC ACCESS</p>
-                  <h2>Services and resources.</h2>
+                  <h2>Services and resources</h2>
                 </div>
                 <p>
                   Applications, digital tools, publications and information for
-                  customers, dealers and business partners.
+                  customers, dealers and business partners
                 </p>
               </div>
               <div className="home-services-grid">
@@ -4927,10 +4928,10 @@ function App() {
               <div className="section-heading">
                 <div>
                   <p className="eyebrow">LATEST UPDATES</p>
-                  <h2>News &amp; media.</h2>
+                  <h2>News &amp; media</h2>
                 </div>
                 <p>
-                  The latest news and announcements from across Ceypetco.
+                  The latest news and announcements from across Ceypetco
                 </p>
               </div>
               <div className="news-grid">
@@ -4938,7 +4939,7 @@ function App() {
                   <p className="news-grid-empty">Loading latest updates...</p>
                 ) : news.length === 0 ? (
                   <p className="news-grid-empty">
-                    No published updates available yet.
+                    No published updates available yet
                   </p>
                 ) : (
                   news.map((item) => (
@@ -4982,13 +4983,13 @@ function App() {
                 <div>
                   <p className="eyebrow">OUR OPERATIONS</p>
                   <h2>
-                    One corporation.
-                    <br />A nation in motion.
+                    One corporation
+                    <br />A nation in motion
                   </h2>
                 </div>
                 <p>
                   From refining and distribution to specialised sectors, our
-                  operations work together to serve Sri Lanka’s energy needs.
+                  operations work together to serve Sri Lanka’s energy needs
                 </p>
               </div>
               <div className="division-grid">
@@ -5016,7 +5017,7 @@ function App() {
                 <h2>
                   Everything you need,
                   <br />
-                  in one place.
+                  in one place
                 </h2>
               </div>
               <div className="service-links">
@@ -5046,10 +5047,10 @@ function App() {
             <div className="container banking-panel">
               <div className="banking-copy">
                 <p className="eyebrow">ONLINE BANKING</p>
-                <h2>Pay with confidence.</h2>
+                <h2>Pay with confidence</h2>
                 <p>
                   Access secure online payment services through our trusted
-                  banking partners.
+                  banking partners
                 </p>
                 <div className="secure-note">
                   <span>
@@ -5059,7 +5060,7 @@ function App() {
                     <b>Secure payment access</b>
                     <small>
                       You will continue through the selected bank’s official
-                      service.
+                      service
                     </small>
                   </div>
                 </div>
@@ -5099,7 +5100,7 @@ function App() {
               <div className="payment-heading">
                 <p className="eyebrow">SECURE PAYMENT OPTIONS</p>
                 <h2>Online banking</h2>
-                <p>Continue with one of our official banking partners.</p>
+                <p>Continue with one of our official banking partners</p>
               </div>
               <div className="payment-logo-row bank-payment-row">
                 {[
@@ -5122,7 +5123,7 @@ function App() {
                 <h3>Aviation fuelling</h3>
                 <span />
                 <p>
-                  Accepted card networks for eligible aviation transactions.
+                  Accepted card networks for eligible aviation transactions
                 </p>
               </div>
               <div className="payment-logo-row card-payment-row">
@@ -5141,7 +5142,7 @@ function App() {
                 <Icon name="shield" size={17} />
                 <span>
                   Payment availability is subject to the selected service and
-                  customer arrangement.
+                  customer arrangement
                 </span>
               </div>
             </div>
@@ -5200,7 +5201,7 @@ function App() {
             <div className="footer-contact-item">
               <Icon name="building" size={19} />
               <p>
-                No. 609, Dr. Danister de Silva Mawatha, Colombo 09, Sri Lanka.
+                No. 609, Dr. Danister de Silva Mawatha, Colombo 09, Sri Lanka
               </p>
             </div>
             <div className="footer-contact-item">
