@@ -19,6 +19,7 @@ import FuelStationManagement from "../admin/pages/FuelStations/FuelStationManage
 import RegionalOfficeManagement from "../admin/pages/RegionalOffices/RegionalOfficeManagement";
 import ContactMessages from "../admin/pages/Messages/ContactMessages";
 import UserManagement from "../admin/pages/Users/UserManagement";
+import HomeServiceManagement from "../admin/pages/Home/HomeServiceManagement";
 
 const AppRoutes = () => {
   return (
@@ -52,7 +53,7 @@ const AppRoutes = () => {
         <Route path="media" element={<Placeholder />} />
         <Route path="users" element={<UserManagement />} />
         <Route path="settings" element={<Placeholder />} />
-        <Route path="home" element={<Placeholder />} />
+        <Route path="home" element={<HomeServiceManagement />} />
       </Route>
 
       <Route path="*" element={<PublicSite />} />

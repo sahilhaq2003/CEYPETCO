@@ -27,7 +27,7 @@ const pageTitles = {
   "/admin/media": "Media Library",
   "/admin/users": "User Management",
   "/admin/settings": "Site Settings",
-  "/admin/home": "Home Page",
+  "/admin/home": "Home Page Services",
   "/admin/about": "About Page",
 };
 

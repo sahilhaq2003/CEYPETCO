@@ -37,6 +37,7 @@ const fuelPriceService = createResourceService("/admin/fuel-prices");
 const fuelStationService = createResourceService("/admin/fuel-stations");
 const regionalOfficeService = createResourceService("/admin/regional-offices");
 const userService = createResourceService("/admin/users");
+const homeServiceService = createResourceService("/admin/home-services");
 
 const getDashboardStats = async () => {
   const response = await api.get("/admin/dashboard/stats");
@@ -79,6 +80,7 @@ export {
   fuelStationService,
   regionalOfficeService,
   userService,
+  homeServiceService,
   getDashboardStats,
   getActiveFuelPrices,
 };

@@ -7,7 +7,8 @@
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
     "seed": "node src/seedAdmin.js",
-    "seed:operations": "node src/seedOperations.js"
+    "seed:operations": "node src/seedOperations.js",
+    "seed:home-services": "node src/seedHomeServices.js"
   },
   "keywords": [],
   "author": "",

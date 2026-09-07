@@ -22,6 +22,7 @@ const annualReportRoutes = require("./routes/annualReportRoutes");
 const managementTeamMemberRoutes = require("./routes/managementTeamMemberRoutes");
 const managementContactRoutes = require("./routes/managementContactRoutes");
 const userRoutes = require("./routes/userRoutes");
+const homeServiceRoutes = require("./routes/homeServiceRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -131,6 +132,7 @@ app.use("/api/admin/fuel-stations", fuelStationRoutes);
 app.use("/api/admin/regional-offices", regionalOfficeRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/admin/users", userRoutes);
+app.use("/api/admin/home-services", homeServiceRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

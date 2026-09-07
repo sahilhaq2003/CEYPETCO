@@ -82,67 +82,67 @@ const Icon = ({ name, size = 24 }) => {
   );
 };
 
-const services = [
-  [
-    'globe',
-    'Regional Offices',
-    'Find regional contacts and support',
-    '/regional-offices',
-  ],
-  [
-    'building',
-    'Market & Sales',
-    'Explore fuel products, pricing and the dealer network',
-    '/marketing-sales',
-  ],
-  [
-    'app',
-    'Mobile App',
-    'Access Ceypetco services on mobile',
-    'https://fuelup.cpstl.lk/apk/',
-  ],
-  [
-    'droplet',
-    'Product Specifications',
-    'Review petroleum product standards',
-    'https://ceypetco.gov.lk/wp-content/uploads/2026/04/Marketing-Sepecifictions.pdf',
-  ],
-  [
-    'shield',
-    'Registration of Suppliers',
-    'Supplier registration and procurement',
-    '/tenders#supplier-registration',
-  ],
-  [
-    'app',
-    'Consumer Registration',
-    'Register for applicable consumer services',
-    '/consumer-registration',
-  ],
-  [
-    'clock',
-    'Notices',
-    'Read current public and operational notices',
-    '/notices',
-  ],
-  [
-    'building',
-    'Projects',
-    'Explore current development initiatives',
-    '/projects',
-  ],
-  [
-    'download',
-    'Annual Reports',
-    'Access corporate performance publications',
-    '/annual-reports',
-  ],
-  [
-    'globe',
-    'Right to Information',
-    'Public information and RTI guidance',
-    '/right-to-information',
-  ],
+const fallbackServices = [
+  {
+    icon: 'globe',
+    title: 'Regional Offices',
+    description: 'Find regional contacts and support',
+    link: '/regional-offices',
+  },
+  {
+    icon: 'building',
+    title: 'Market & Sales',
+    description: 'Explore fuel products, pricing and the dealer network',
+    link: '/marketing-sales',
+  },
+  {
+    icon: 'app',
+    title: 'Mobile App',
+    description: 'Access Ceypetco services on mobile',
+    link: 'https://fuelup.cpstl.lk/apk/',
+  },
+  {
+    icon: 'droplet',
+    title: 'Product Specifications',
+    description: 'Review petroleum product standards',
+    link: 'https://ceypetco.gov.lk/wp-content/uploads/2026/04/Marketing-Sepecifictions.pdf',
+  },
+  {
+    icon: 'shield',
+    title: 'Registration of Suppliers',
+    description: 'Supplier registration and procurement',
+    link: '/tenders#supplier-registration',
+  },
+  {
+    icon: 'app',
+    title: 'Consumer Registration',
+    description: 'Register for applicable consumer services',
+    link: '/consumer-registration',
+  },
+  {
+    icon: 'clock',
+    title: 'Notices',
+    description: 'Read current public and operational notices',
+    link: '/notices',
+  },
+  {
+    icon: 'building',
+    title: 'Projects',
+    description: 'Explore current development initiatives',
+    link: '/projects',
+  },
+  {
+    icon: 'download',
+    title: 'Annual Reports',
+    description: 'Access corporate performance publications',
+    link: '/annual-reports',
+  },
+  {
+    icon: 'globe',
+    title: 'Right to Information',
+    description: 'Public information and RTI guidance',
+    link: '/right-to-information',
+  },
 ];
 const divisions = [
   [
@@ -4411,6 +4411,7 @@ function App() {
   const [slide, setSlide] = useState(0);
   const [news, setNews] = useState([]);
   const [newsLoading, setNewsLoading] = useState(true);
+  const [homeServices, setHomeServices] = useState([]);
   const changeSlide = (direction) =>
     setSlide(
       (current) =>
@@ -4483,6 +4484,28 @@ function App() {
       }
     };
     loadNews();
+    return () => {
+      cancelled = true;
+    };
+  }, [path]);
+
+  useEffect(() => {
+    if (path !== '/') return undefined;
+    let cancelled = false;
+    const loadHomeServices = async () => {
+      try {
+        const res = await api.get('/admin/home-services', {
+          params: { limit: 50 },
+        });
+        if (!cancelled)
+          setHomeServices(
+            res.data && res.data.data ? res.data.data : [],
+          );
+      } catch (err) {
+        if (!cancelled) setHomeServices([]);
+      }
+    };
+    loadHomeServices();
     return () => {
       cancelled = true;
     };
@@ -4901,21 +4924,27 @@ function App() {
                 </p>
               </div>
               <div className="home-services-grid">
-                {services.map(([icon, title, text, href], index) => (
-                  <a className="home-service-card" href={href} key={title}>
-                    <span className="home-service-icon">
-                      <Icon name={icon} size={25} />
-                    </span>
-                    <span className="home-service-index">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <h3>{title}</h3>
-                    <p>{text}</p>
-                    <span className="home-service-link">
-                      Access service <Icon name="arrow" size={15} />
-                    </span>
-                  </a>
-                ))}
+                {(homeServices.length > 0 ? homeServices : fallbackServices).map(
+                  (service, index) => (
+                    <a
+                      className="home-service-card"
+                      href={service.link}
+                      key={service._id || service.title}
+                    >
+                      <span className="home-service-icon">
+                        <Icon name={service.icon} size={25} />
+                      </span>
+                      <span className="home-service-index">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h3>{service.title}</h3>
+                      <p>{service.description}</p>
+                      <span className="home-service-link">
+                        Access service <Icon name="arrow" size={15} />
+                      </span>
+                    </a>
+                  ),
+                )}
                 <a className="home-services-all" href="/services">
                   <span>Complete service directory</span>
                   <Icon name="arrow" size={22} />
