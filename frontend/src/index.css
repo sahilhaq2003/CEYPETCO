@@ -4054,7 +4054,7 @@ footer {
   position: relative;
   z-index: 4;
   padding: 86px 0 96px;
-  background: #f5f7f6;
+  background: #ffd400;
 }
 
 .home-services-heading {
@@ -4076,7 +4076,7 @@ footer {
 
 .home-services-heading > p {
   margin: 0 0 4px;
-  color: var(--muted);
+  color: #000;
   font-size: 14px;
   line-height: 1.7;
 }

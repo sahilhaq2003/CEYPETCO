@@ -5022,11 +5022,10 @@ function App() {
                 </p>
               </div>
               <div className="division-grid">
-                {divisions.map(([title, text, image, href], i) => (
+                {divisions.map(([title, text, image, href]) => (
                   <article className="division-card" key={title}>
                     <img src={image} alt="" />
                     <div className="division-overlay"></div>
-                    <span className="division-index">0{i + 1}</span>
                     <div className="division-content">
                       <h3>{title}</h3>
                       <p>{text}</p>
