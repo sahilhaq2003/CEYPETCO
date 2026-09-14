@@ -1,9 +1,10 @@
-const HomeService = require("../models/HomeService");
+const Service = require("../models/Service");
 const createCrudController = require("./crudController");
 
-const crud = createCrudController(HomeService, {
-  searchFields: ["title", "description"],
+const crud = createCrudController(Service, {
+  searchFields: ["title", "category", "text"],
   sortBy: "order",
+  assetFields: [{ field: "image" }],
 });
 
 const getPublished = async (req, res, next) => {
@@ -15,12 +16,16 @@ const getPublished = async (req, res, next) => {
 
     const query = { status: "published" };
     if (search) {
-      query.$or = [{ title: { $regex: search, $options: "i" } }, { description: { $regex: search, $options: "i" } }];
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { category: { $regex: search, $options: "i" } },
+        { text: { $regex: search, $options: "i" } },
+      ];
     }
 
     const [items, total] = await Promise.all([
-      HomeService.find(query).sort("order").skip(skip).limit(limit),
-      HomeService.countDocuments(query),
+      Service.find(query).sort("order").skip(skip).limit(limit),
+      Service.countDocuments(query),
     ]);
 
     res.status(200).json({

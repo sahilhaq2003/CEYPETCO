@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import {
   Fuel, LayoutDashboard, FileText, FolderOpen, GraduationCap, BookOpen,
-  Wrench, Package, Droplets, MapPin, Building2, Mail, Image, Users,
-  Settings, ChevronDown, ChevronRight, X, Newspaper, ClipboardList, BadgeAlert,
+  Wrench, Droplets, MapPin, Building2, Mail, Users,
+  ChevronDown, ChevronRight, X, Newspaper, ClipboardList, BadgeAlert,
+  Megaphone, Layers,
 } from "lucide-react";
 
 const sidebarSections = [
@@ -12,7 +14,7 @@ const sidebarSections = [
     { to: "/admin/home", icon: FileText, text: "Home" },
     { to: "/admin/about", icon: FileText, text: "About" },
     { to: "/admin/services-page", icon: Wrench, text: "Services" },
-    { to: "/admin/products-page", icon: Package, text: "Products" },
+    { to: "/admin/services-page/divisions", icon: Layers, text: "Division Pages" },
   ] },
   { label: "Content", items: [
     { to: "/admin/news", icon: Newspaper, text: "News" },
@@ -31,13 +33,17 @@ const sidebarSections = [
   ] },
   { label: "Communication", items: [{ to: "/admin/messages", icon: Mail, text: "Contact Messages" }] },
   { label: "System", items: [
-    { to: "/admin/media", icon: Image, text: "Media Library" },
-    { to: "/admin/settings", icon: Settings, text: "Site Settings" },
+    { to: "/admin/users", icon: Users, text: "User Management", roles: ["super_admin", "admin"] },
+    { to: "/admin/popup-notices", icon: Megaphone, text: "Popup Notices", roles: ["super_admin", "admin"] },
   ] },
 ];
 
-const SidebarSection = ({ section }) => {
+const SidebarSection = ({ section, role }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const items = section.items.filter(
+    (item) => !item.roles || item.roles.includes(role)
+  );
+  if (items.length === 0) return null;
   return (
     <div className="mb-1">
       <button onClick={() => setIsOpen((open) => !open)} className="admin-sidebar-section-toggle w-full flex items-center justify-between px-5 py-2.5 text-[11px] font-extrabold tracking-[0.1em] uppercase transition-colors">
@@ -46,7 +52,7 @@ const SidebarSection = ({ section }) => {
       </button>
       {isOpen && (
         <div className="space-y-0.5">
-          {section.items.map((item) => (
+          {items.map((item) => (
             <NavLink key={item.to} to={item.to} end={item.end} className={({ isActive }) => `admin-sidebar-link flex items-center gap-3 px-4 py-3 mx-2 rounded-lg border text-sm font-semibold transition-all duration-150 ${isActive ? "admin-sidebar-link-active shadow-md shadow-black/20" : ""}`}>
               <item.icon className="w-[19px] h-[19px] shrink-0" strokeWidth={2.25} />
               <span>{item.text}</span>
@@ -58,21 +64,25 @@ const SidebarSection = ({ section }) => {
   );
 };
 
-const AdminSidebar = ({ isOpen, onClose }) => (
-  <>
-    {isOpen && <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={onClose} />}
-    <aside className={`admin-sidebar fixed top-0 left-0 h-full w-[260px] bg-[#062e3b] z-50 flex flex-col transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
-      <div className="h-[72px] flex items-center justify-between px-5 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center"><Fuel className="w-[18px] h-[18px] text-red-600" /></div>
-          <div><h1 className="text-white font-extrabold text-sm tracking-wider font-['Manrope'] leading-tight">CEYPETCO</h1><p className="admin-sidebar-brand-subtitle text-[9px] tracking-[0.12em] uppercase font-bold font-['Manrope']">Administration</p></div>
+const AdminSidebar = ({ isOpen, onClose }) => {
+  const { user } = useAuth();
+  const role = user?.role;
+  return (
+    <>
+      {isOpen && <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={onClose} />}
+      <aside className={`admin-sidebar fixed top-0 left-0 h-full w-[260px] bg-[#062e3b] z-50 flex flex-col transition-transform duration-300 lg:translate-x-0 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="h-[72px] flex items-center justify-between px-5 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-white rounded-full flex items-center justify-center"><Fuel className="w-[18px] h-[18px] text-red-600" /></div>
+            <div><h1 className="text-white font-extrabold text-sm tracking-wider font-['Manrope'] leading-tight">CEYPETCO</h1><p className="admin-sidebar-brand-subtitle text-[9px] tracking-[0.12em] uppercase font-bold font-['Manrope']">Administration</p></div>
+          </div>
+          <button onClick={onClose} className="admin-sidebar-close lg:hidden p-1"><X className="w-5 h-5" /></button>
         </div>
-        <button onClick={onClose} className="admin-sidebar-close lg:hidden p-1"><X className="w-5 h-5" /></button>
-      </div>
-      <nav className="flex-1 overflow-y-auto py-3">{sidebarSections.map((section) => <SidebarSection key={section.label} section={section} />)}</nav>
-      <div className="admin-sidebar-footer p-4 border-t border-white/10"><p className="text-[10px] text-center">CEYPETCO CMS v1.0</p></div>
-    </aside>
-  </>
-);
+        <nav className="flex-1 overflow-y-auto py-3">{sidebarSections.map((section) => <SidebarSection key={section.label} section={section} role={role} />)}</nav>
+        <div className="admin-sidebar-footer p-4 border-t border-white/10"><p className="text-[10px] text-center">CEYPETCO CMS v1.0</p></div>
+      </aside>
+    </>
+  );
+};
 
 export default AdminSidebar;

@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import { Plus, Search, Edit3, Trash2, User as UserIcon, Pencil } from "lucide-react";
 import { userService } from "../../../services/contentService";
@@ -13,12 +13,26 @@ const emptyForm = {
   name: "",
   email: "",
   password: "",
+  confirmPassword: "",
   role: "admin",
   status: "active",
 };
 
 const UserManagement = () => {
   const { user: currentUser } = useAuth();
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [search, setSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [form, setForm] = useState(emptyForm);
+  const [saving, setSaving] = useState(false);
+  const [showDelete, setShowDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -52,6 +66,7 @@ const UserManagement = () => {
       name: item.name || "",
       email: item.email || "",
       password: "",
+      confirmPassword: "",
       role: item.role || "admin",
       status: item.status || "active",
     });
@@ -60,9 +75,14 @@ const UserManagement = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (form.password !== form.confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
     setSaving(true);
     try {
       const payload = { ...form };
+      delete payload.confirmPassword;
       if (!payload.password) delete payload.password;
       if (editing) {
         await userService.update(editing._id, payload);
@@ -234,6 +254,9 @@ const UserManagement = () => {
           </Field>
           <Field label={editing ? "New Password (leave blank to keep)" : "Password"} required={!editing}>
             <input type="password" className={inputClass} value={form.password} onChange={set("password")} placeholder={editing ? "••••••••" : "Minimum 6 characters"} required={!editing} minLength={editing ? undefined : 6} />
+          </Field>
+          <Field label={editing ? "Confirm New Password" : "Re-enter Password"} required={!editing}>
+            <input type="password" className={inputClass} value={form.confirmPassword} onChange={set("confirmPassword")} placeholder="Re-enter password" required={!editing} />
           </Field>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Field label="Role">

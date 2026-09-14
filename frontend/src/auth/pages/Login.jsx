@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { Fuel, Eye, EyeOff, Loader2, AlertCircle } from "lucide-react";
 
@@ -16,8 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   if (isAuthenticated) {
-    navigate("/admin", { replace: true });
-    return null;
+    return <Navigate to="/admin" replace />;
   }
 
   const validate = () => {

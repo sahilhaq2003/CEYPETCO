@@ -26,6 +26,7 @@ const GoogleTranslate = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    document.documentElement.lang = selected;
     document.documentElement.classList.toggle(
       "ceypetco-translated",
       selected !== "en",

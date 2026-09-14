@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import sriLankaMap from './assets/sri-lanka-districts.svg?raw';
 import fuelStations from './data/fuelStations.json';
 import lubricantProducts from './data/lubricants.json';
 import { useLanguage } from './i18n/LanguageContext.jsx';
 import GoogleTranslate from './components/GoogleTranslate.jsx';
+import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
 
 const Icon = ({ name, size = 24 }) => {
@@ -80,6 +81,31 @@ const Icon = ({ name, size = 24 }) => {
       {paths[name]}
     </svg>
   );
+};
+
+const useDivision = (slug, defaults) => {
+  const defaultsRef = useRef(defaults);
+  const [div, setDiv] = useState(() => defaultsRef.current);
+
+  useEffect(() => {
+    let cancelled = false;
+    api
+      .get(`/admin/divisions/slug/${slug}`)
+      .then((res) => {
+        if (!cancelled) {
+          const remote = res.data && res.data.data ? res.data.data : {};
+          setDiv({ ...defaultsRef.current, ...remote });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) setDiv(defaultsRef.current);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  return div;
 };
 
 const fallbackServices = [
@@ -1661,63 +1687,75 @@ function DivisionPage({ data }) {
 }
 
 function RefineryPage() {
-  const units = [
-    ['Crude distiller', '5,200'],
-    ['Naphtha Unifiner', '940'],
-    ['Platformer', '285'],
-    ['Gas oil Unifiner', '450'],
-    ['Visbreaker', '2,000'],
-    ['Merox unit', '70'],
-    ['Vacuum Unit', '950'],
-    ['Bitumen Blowing Unit', '350'],
-  ];
-  const importance = [
-    'Operated by a 100% Sri Lankan workforce',
-    'Provides direct employment for more than 1,100 citizens',
-    'Contributes 30–35% of CPC’s total sales volume',
-    'Reduces foreign-currency outflows through domestic refining',
-    'More than five decades of continuous operating experience',
-    'Refinery training is recognised by overseas organisations',
-  ];
+  const div = useDivision('refinery', {
+    kicker: 'REFINERY OPERATIONS & CAPABILITIES',
+    heading:
+      'We refine with precision and expertise, delivering quality petroleum products that fuel the nation\u2019s growth',
+    copy: [
+      'Our refinery transforms crude oil into high-quality fuels and products that keep Sri Lanka moving',
+      'We combine proven technology with strict safety and quality standards to deliver reliable energy every day',
+    ],
+    gallery: ['refinery-card-1.jpg', 'refinery-card-2.jpg', 'refinery-card-3.jpg'],
+    paragraphs: [
+      'The Ceylon Petroleum Corporation was established under Act No. 28 of 1961 and entered the import, distribution and marketing of petroleum products throughout the island. The Sapugaskanda Oil Refinery was commissioned in August 1969 to process 38,000 barrels per stream day\u2014approximately 5,200 metric tonnes per day\u2014of Iranian Light crude oil',
+      'Although the crude distiller\u2019s rated capacity was 5,200 MT/day, the unit was capable of processing 5,800 MT/day. Crudes with characteristics similar to Iranian Light, including Upper Zakum and Arabian Light, could be processed while meeting the required specifications',
+      'LPG production commenced in 1971, with the Naphtha Merox unit modified to process LPG. Special Boiling Point Solvent production also began using existing facilities. The Crude Distiller was subsequently debottlenecked, increasing refining capacity to 50,000 barrels per stream day\u2014approximately 6,900 MT/day',
+      'A new Kerosene Merox unit was commissioned in 1981 to process Jet A-1. The crude distiller was later revamped to process Far Eastern crudes such as Miri Light, while Naphtha Unifiner capacity increased to 1,100 MT/day in 1992. The Platformer was revamped in 1999 to reach 650 MT/day, meet growing gasoline demand and support the phase-out of lead in gasoline',
+      'The existing Kerosene Unifiner was converted to process diesel, and the Gas Oil Unifiner was rehabilitated in 2003 to meet a diesel sulphur specification of 0.3% by weight',
+      'Small and medium-scale energy-conservation projects have improved operational efficiency. The Utilities section supplies the electricity, water, steam and instrument air required for plant operations. The refinery contains 65 tanks for crude oil, finished products and intermediate products, supported by four additional crude-oil tanks at the Orugodawatta tank farm',
+    ],
+    keyFacts: [
+      'Operated by a 100% Sri Lankan workforce',
+      'Provides direct employment for more than 1,100 citizens',
+      'Contributes 30\u201335% of CPC\u2019s total sales volume',
+      'Reduces foreign-currency outflows through domestic refining',
+      'More than five decades of continuous operating experience',
+      'Refinery training is recognised by overseas organisations',
+    ],
+    detailRows: [
+      ['Crude distiller', '5,200'],
+      ['Naphtha Unifiner', '940'],
+      ['Platformer', '285'],
+      ['Gas oil Unifiner', '450'],
+      ['Visbreaker', '2,000'],
+      ['Merox unit', '70'],
+      ['Vacuum Unit', '950'],
+      ['Bitumen Blowing Unit', '350'],
+    ],
+  });
+  const gallery = div.gallery || [];
+  const paragraphs = div.paragraphs || [];
+  const importance = div.keyFacts || [];
+  const copy = div.copy || [];
+  const units =
+    div.detailRows && Array.isArray(div.detailRows) && div.detailRows[0] && 'name' in div.detailRows[0]
+      ? div.detailRows.map((r) => [r.name, r.value])
+      : div.detailRows || [];
+  const galleryImage = (img) =>
+    img && img.startsWith('http')
+      ? img
+      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
   return (
     <>
       <section className="refinery-opening content-section">
         <div className="container refinery-opening-grid">
           <div>
-            <p className="eyebrow">REFINERY OPERATIONS & CAPABILITIES</p>
-            <h2>
-              We refine with precision and expertise, delivering quality
-              petroleum products that fuel the nation’s growth
-            </h2>
+            <p className="eyebrow">{div.kicker}</p>
+            <h2>{div.heading}</h2>
           </div>
           <div className="refinery-lead">
-            <strong>
-              Our refinery transforms crude oil into high-quality fuels and
-              products that keep Sri Lanka moving
-            </strong>
-            <p>
-              We combine proven technology with strict safety and quality
-              standards to deliver reliable energy every day
-            </p>
+            <strong>{copy[0]}</strong>
+            <p>{copy[1]}</p>
           </div>
         </div>
         <div className="container refinery-photo-strip">
           {[
-            'refinery-card-1.jpg',
-            'refinery-card-2.jpg',
-            'refinery-card-3.jpg',
-          ].map((image, index) => (
-            <figure key={image}>
-              <img
-                src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${image}`}
-                alt={
-                  [
-                    'Laboratory quality testing at the refinery',
-                    'Maintenance work at the refinery',
-                    'Skilled refinery welding operations',
-                  ][index]
-                }
-              />
+            'Laboratory quality testing at the refinery',
+            'Maintenance work at the refinery',
+            'Skilled refinery welding operations',
+          ].map((alt, index) => (
+            <figure key={gallery[index] || index}>
+              {gallery[index] && <img src={galleryImage(gallery[index])} alt={alt} />}
               <span>0{index + 1}</span>
             </figure>
           ))}
@@ -1727,7 +1765,7 @@ function RefineryPage() {
         <div className="container refinery-history-grid">
           <div className="refinery-sticky-title">
             <p className="eyebrow">SAPUGASKANDA REFINERY</p>
-            <h2>Advancing Sri Lanka’s refining capability since 1969</h2>
+            <h2>Advancing Sri Lanka\u2019s refining capability since 1969</h2>
             <div className="refinery-year">
               <b>1969</b>
               <span>
@@ -1738,49 +1776,9 @@ function RefineryPage() {
             </div>
           </div>
           <div className="refinery-narrative">
-            <p>
-              The Ceylon Petroleum Corporation was established under Act No. 28
-              of 1961 and entered the import, distribution and marketing of
-              petroleum products throughout the island. The Sapugaskanda Oil
-              Refinery was commissioned in August 1969 to process 38,000 barrels
-              per stream day—approximately 5,200 metric tonnes per day—of
-              Iranian Light crude oil
-            </p>
-            <p>
-              Although the crude distiller’s rated capacity was 5,200 MT/day,
-              the unit was capable of processing 5,800 MT/day. Crudes with
-              characteristics similar to Iranian Light, including Upper Zakum
-              and Arabian Light, could be processed while meeting the required
-              specifications
-            </p>
-            <p>
-              LPG production commenced in 1971, with the Naphtha Merox unit
-              modified to process LPG. Special Boiling Point Solvent production
-              also began using existing facilities. The Crude Distiller was
-              subsequently debottlenecked, increasing refining capacity to
-              50,000 barrels per stream day—approximately 6,900 MT/day
-            </p>
-            <p>
-              A new Kerosene Merox unit was commissioned in 1981 to process Jet
-              A-1. The crude distiller was later revamped to process Far Eastern
-              crudes such as Miri Light, while Naphtha Unifiner capacity
-              increased to 1,100 MT/day in 1992. The Platformer was revamped in
-              1999 to reach 650 MT/day, meet growing gasoline demand and support
-              the phase-out of lead in gasoline
-            </p>
-            <p>
-              The existing Kerosene Unifiner was converted to process diesel,
-              and the Gas Oil Unifiner was rehabilitated in 2003 to meet a
-              diesel sulphur specification of 0.3% by weight
-            </p>
-            <p>
-              Small and medium-scale energy-conservation projects have improved
-              operational efficiency. The Utilities section supplies the
-              electricity, water, steam and instrument air required for plant
-              operations. The refinery contains 65 tanks for crude oil, finished
-              products and intermediate products, supported by four additional
-              crude-oil tanks at the Orugodawatta tank farm
-            </p>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -1942,6 +1940,22 @@ function MarketingSalesPage() {
   const [fuelPrices, setFuelPrices] = useState([]);
   const [fuelPricesLoading, setFuelPricesLoading] = useState(true);
 
+  const div = useDivision('marketing-sales', {
+    kicker: 'MARKETING & SALES',
+    heading: 'Serving every fuel need through an islandwide dealer network',
+    copy: [
+      'Following the incorporation of CPC under the Act of Parliament in 1961, marketing operations commenced on 28 April 1962. Today, Ceypetco serves Sri Lanka\u2019s fuel requirements through approximately 850 dealers',
+      'Outstation spot prices incorporate the applicable transport differential',
+    ],
+    stats: [
+      { value: '1962', label: 'Marketing operations commenced' },
+      { value: '850', label: 'Dealers serving Sri Lanka' },
+      { value: 'Islandwide', label: 'Retail and commercial fuel access' },
+    ],
+  });
+  const stats = div.stats || [];
+  const copy = div.copy || [];
+
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
@@ -1996,49 +2010,21 @@ function MarketingSalesPage() {
       <section className="marketing-intro content-section">
         <div className="container marketing-intro-grid">
           <div>
-            <p className="eyebrow">MARKETING & SALES</p>
-            <h2>
-              Serving every fuel need through an islandwide dealer network
-            </h2>
+            <p className="eyebrow">{div.kicker}</p>
+            <h2>{div.heading}</h2>
           </div>
           <div>
-            <p>
-              Following the incorporation of CPC under the Act of Parliament in
-              1961, marketing operations commenced on 28 April 1962. Today,
-              Ceypetco serves Sri Lanka’s fuel requirements through
-              approximately 850 dealers
-            </p>
-            <p>
-              Outstation spot prices incorporate the applicable transport
-              differential
-            </p>
+            <p>{copy[0]}</p>
+            <p>{copy[1]}</p>
           </div>
         </div>
         <div className="container marketing-stats">
-          <div>
-            <b>1962</b>
-            <span>
-              Marketing operations
-              <br />
-              commenced
-            </span>
-          </div>
-          <div>
-            <b>850</b>
-            <span>
-              Dealers serving
-              <br />
-              Sri Lanka
-            </span>
-          </div>
-          <div>
-            <b>Islandwide</b>
-            <span>
-              Retail and commercial
-              <br />
-              fuel access
-            </span>
-          </div>
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <b>{stat.value}</b>
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </section>
       <section className="fuel-pricing content-section">
@@ -2100,33 +2086,8 @@ function MarketingSalesPage() {
             <Icon name="building" size={22} />
             <div>
               <b>Outstation pricing</b>
-              <p>
-                Outstation spot prices incorporate the applicable transport
-                differential
-              </p>
+              <p>{copy[1]}</p>
             </div>
-          </div>
-        </div>
-      </section>
-      <section className="marketing-resources">
-        <div className="container">
-          <div>
-            <p className="eyebrow light">MARKETING RESOURCES</p>
-            <h2>More product information</h2>
-          </div>
-          <div className="marketing-resource-links">
-            <a href="/lubricants">
-              <span>Ceypetco Lubricants</span>
-              <Icon name="arrow" size={18} />
-            </a>
-            <a href="/contact?subject=Historical%20Fuel%20Prices">
-              <span>Historical Prices</span>
-              <Icon name="arrow" size={18} />
-            </a>
-            <a href="/contact?subject=Marketing%20Circulars">
-              <span>Marketing Circulars</span>
-              <Icon name="arrow" size={18} />
-            </a>
           </div>
         </div>
       </section>
@@ -2135,139 +2096,107 @@ function MarketingSalesPage() {
 }
 
 function AviationPage() {
-  const prices = [
-    ['Local Customer with AOC Document', 'BIA, CIAR & MRIA', '2.43'],
-    ['Local Customer with AOC Document', 'JIA', '2.54'],
-    [
-      'Local Contract Customer without Operating an Airline',
-      'BIA, CIAR & MRIA',
-      '2.46',
+  const div = useDivision('aviation', {
+    kicker: 'OUR AIM',
+    heading: 'Quality fuel. The right aircraft. The right time',
+    mission: {
+      heading: 'Our Vision',
+      text: 'To be the region\u2019s leading service-oriented, customer-focused and environmentally responsible aviation fuel supplier',
+    },
+    copy: [
+      'Ceypetco Aviation provides round-the-clock refuelling at Bandaranaike International Airport and Mattala Rajapaksa International Airport, together with daytime service for domestic flights, corporate and executive jets, and nominated aircraft at Colombo Airport, Ratmalana',
+      'Clean, dry aviation fuel and rigorous contamination control are essential to aircraft safety, engine life and maintenance performance. Ceypetco applies international-quality handling standards throughout its into-plane operation',
     ],
-    ['Local Contract Customer without Operating an Airline', 'JIA', '2.57'],
-    ['All Contract Customers · Foreign', 'BIA, CIAR & MRIA', '2.43'],
-    ['All Contract Customers · Foreign', 'JIA', '2.54'],
+    stats: [
+      { value: '24/7', label: 'International airport refuelling' },
+      { value: '1.3M L', label: 'Current daily demand' },
+      { value: '03', label: 'Operating locations' },
+      { value: 'Sole', label: 'Into-plane operator in Sri Lanka' },
+    ],
+    gallery: [1, 2, 3, 4, 5, 6].map(
+      (n) =>
+        `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-gallery-${n}.jpg`,
+    ),
+    locations: [
+      {
+        name: 'Katunayake',
+        code: 'BIA · CMB / VCBI',
+        service: 'Hydrant and refueller · over-wing / under-wing',
+        capacity: 'Three JET A-1 tanks · 2.6 million litres each',
+        avgas: '200-litre sealed drums',
+        contacts: [
+          { role: 'Deputy Manager · Aviation Operations', phone: '+94 11 2253039', email: 'manjular@ceypetco.gov.lk' },
+          { role: 'Operations Department', phone: '+94 11 5756955', email: 'avi.opsbia@ceypetco.gov.lk' },
+        ],
+      },
+      {
+        name: 'Mattala',
+        code: 'MRIA · HRI / VCRI',
+        service: 'Hydrant and refueller · over-wing / under-wing',
+        capacity: 'Three JET A-1 tanks · 1.0 million litres each',
+        avgas: '200-litre sealed drums',
+        contacts: [
+          { role: 'Assistant Manager · Aviation Operations', phone: '+94 47 2031946', email: '' },
+          {
+            role: 'Operations Department',
+            phone: '+94 47 5678343 · +94 47 2031945 · +94 47 2031947',
+            email: 'mria.ops@ceypetco.gov.lk',
+          },
+        ],
+      },
+      {
+        name: 'Ratmalana',
+        code: 'RML / VCCC',
+        service: 'Daytime refueller service · over-wing / under-wing',
+        capacity: 'Five JET A-1 tanks · 280,000 litres total',
+        avgas: '200-litre sealed drums',
+        contacts: [
+          { role: 'Shift Superintendent', phone: '+94 11 2637755 · +94 11 5664707', email: 'cpcavirat@ceypetco.gov.lk' },
+          { role: 'Commercial Manager', phone: '+94 11 5455115 · +94 76 3842287', email: 'mria.cm@ceypetco.gov.lk' },
+          { role: 'Accountant · Aviation', phone: '+94 11 5455191', email: 'acc.aviation@ceypetco.gov.lk' },
+        ],
+      },
+    ],
+  });
+  const prices = [
+    { customer: 'Local Customer with AOC Document', location: 'BIA, CIAR & MRIA', price: '2.43' },
+    { customer: 'Local Customer with AOC Document', location: 'JIA', price: '2.54' },
+    { customer: 'Local Contract Customer without Operating an Airline', location: 'BIA, CIAR & MRIA', price: '2.46' },
+    { customer: 'Local Contract Customer without Operating an Airline', location: 'JIA', price: '2.57' },
+    { customer: 'All Contract Customers · Foreign', location: 'BIA, CIAR & MRIA', price: '2.43' },
+    { customer: 'All Contract Customers · Foreign', location: 'JIA', price: '2.54' },
   ];
-  const locations = [
-    {
-      name: 'Katunayake',
-      code: 'BIA · CMB / VCBI',
-      service: 'Hydrant and refueller · over-wing / under-wing',
-      capacity: 'Three JET A-1 tanks · 2.6 million litres each',
-      avgas: '200-litre sealed drums',
-      contacts: [
-        [
-          'Deputy Manager · Aviation Operations',
-          '+94 11 2253039',
-          'manjular@ceypetco.gov.lk',
-        ],
-        [
-          'Operations Department',
-          '+94 11 5756955',
-          'avi.opsbia@ceypetco.gov.lk',
-        ],
-      ],
-    },
-    {
-      name: 'Mattala',
-      code: 'MRIA · HRI / VCRI',
-      service: 'Hydrant and refueller · over-wing / under-wing',
-      capacity: 'Three JET A-1 tanks · 1.0 million litres each',
-      avgas: '200-litre sealed drums',
-      contacts: [
-        ['Assistant Manager · Aviation Operations', '+94 47 2031946', ''],
-        [
-          'Operations Department',
-          '+94 47 5678343 · +94 47 2031945 · +94 47 2031947',
-          'mria.ops@ceypetco.gov.lk',
-        ],
-      ],
-    },
-    {
-      name: 'Ratmalana',
-      code: 'RML / VCCC',
-      service: 'Daytime refueller service · over-wing / under-wing',
-      capacity: 'Five JET A-1 tanks · 280,000 litres total',
-      avgas: '200-litre sealed drums',
-      contacts: [
-        [
-          'Shift Superintendent',
-          '+94 11 2637755 · +94 11 5664707',
-          'cpcavirat@ceypetco.gov.lk',
-        ],
-        [
-          'Commercial Manager',
-          '+94 11 5455115 · +94 76 3842287',
-          'mria.cm@ceypetco.gov.lk',
-        ],
-        [
-          'Accountant · Aviation',
-          '+94 11 5455191',
-          'acc.aviation@ceypetco.gov.lk',
-        ],
-      ],
-    },
-  ];
+  const locations = (div.locations || []).map((loc) => ({
+    ...loc,
+    contacts: (loc.contacts || []).map((c) => (Array.isArray(c) ? c : [c.role, c.phone, c.email])),
+  }));
+  const vision = (div.vision && div.vision.text) || div.mission.text;
+  const copy = div.copy || [];
+  const stats = div.stats || [];
+  const gallery = div.gallery || [];
+  const galleryImage = (img) =>
+    img && img.startsWith('http') ? img : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
   return (
     <>
       <section className="aviation-opening content-section">
         <div className="container aviation-opening-grid">
           <div>
-            <p className="eyebrow">OUR AIM</p>
-            <h2>Quality fuel. The right aircraft. The right time</h2>
-            <blockquote>
-              To be the region’s leading service-oriented, customer-focused and
-              environmentally responsible aviation fuel supplier
-            </blockquote>
+            <p className="eyebrow">{div.kicker}</p>
+            <h2>{div.heading}</h2>
+            <blockquote>{vision}</blockquote>
           </div>
           <div>
-            <p>
-              Ceypetco Aviation provides round-the-clock refuelling at
-              Bandaranaike International Airport and Mattala Rajapaksa
-              International Airport, together with daytime service for domestic
-              flights, corporate and executive jets, and nominated aircraft at
-              Colombo Airport, Ratmalana
-            </p>
-            <p>
-              Clean, dry aviation fuel and rigorous contamination control are
-              essential to aircraft safety, engine life and maintenance
-              performance. Ceypetco applies international-quality handling
-              standards throughout its into-plane operation
-            </p>
+            <p>{copy[0]}</p>
+            <p>{copy[1]}</p>
           </div>
         </div>
         <div className="container aviation-stats">
-          <div>
-            <b>24/7</b>
-            <span>
-              International airport
-              <br />
-              refuelling
-            </span>
-          </div>
-          <div>
-            <b>1.3M L</b>
-            <span>
-              Current daily
-              <br />
-              demand
-            </span>
-          </div>
-          <div>
-            <b>03</b>
-            <span>
-              Operating
-              <br />
-              locations
-            </span>
-          </div>
-          <div>
-            <b>Sole</b>
-            <span>
-              Into-plane operator
-              <br />
-              in Sri Lanka
-            </span>
-          </div>
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <b>{stat.value}</b>
+              <span>{stat.label}</span>
+            </div>
+          ))}
         </div>
       </section>
       <section className="aviation-price-section content-section">
@@ -2292,12 +2221,12 @@ function AviationPage() {
               <span>Location</span>
               <span>Revised price</span>
             </div>
-            {prices.map(([customer, location, price], index) => (
-              <article key={`${customer}-${location}`}>
+            {prices.map((price, index) => (
+              <article key={`${price.customer}-${price.location}`}>
                 <small>{String(index + 1).padStart(2, '0')}</small>
-                <strong>{customer}</strong>
-                <span>{location}</span>
-                <b>${price}</b>
+                <strong>{price.customer}</strong>
+                <span>{price.location}</span>
+                <b>${price.price}</b>
               </article>
             ))}
           </div>
@@ -2358,14 +2287,14 @@ function AviationPage() {
             </div>
           </div>
           <div className="aviation-gallery">
-            {[1, 2, 3, 4, 5, 6].map((image, index) => (
+            {gallery.map((image, index) => (
               <figure
                 className={index === 0 || index === 3 ? 'wide' : ''}
-                key={image}
+                key={image || index}
               >
                 <img
-                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-gallery-${image}.jpg`}
-                  alt={`Ceypetco aviation fuel operation ${image}`}
+                  src={galleryImage(image)}
+                  alt={`Ceypetco aviation fuel operation ${index + 1}`}
                 />
                 <figcaption>
                   Operation {String(index + 1).padStart(2, '0')}
@@ -2455,73 +2384,79 @@ function AviationPage() {
 }
 
 function AgroChemicalsPage() {
-  const productGroups = [
-    [
-      'Insecticides',
-      [
-        'Profenophos 50% EC',
-        'B.P.M.C. 50% EC',
-        'Fipronil 0.3% G',
-        'Fipronil 50g/l SC',
-        'Imidacloprid 200g/l SC',
-      ],
+  const div = useDivision('agro-chemicals', {
+    kicker: 'CEYPETCO AGROCHEMICALS',
+    heading: 'More than 50 years supporting Sri Lanka\u2019s farming communities',
+    copy: [
+      'Ceylon Petroleum Corporation established its Agrochemicals Function in 1969. As a strategic business unit within the Marketing Function, it has served the national agrochemicals market for more than five decades',
+      'Ceypetco Agrochemicals is the only government-sector organisation engaged in the agrochemicals business among Sri Lanka\u2019s marketing companies, helping maintain product quality, access and reasonable market pricing',
     ],
-    [
-      'Weedicides',
-      [
-        'Diuron 80% WP',
-        'Pretilachlor 30% EC',
-        'Glyphosate 36% SL · Restricted',
-      ],
+    image:
+      'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
+    gallery: [
+      'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-production-1.webp',
+      'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-production-2.webp',
     ],
-    [
-      'Fungicides',
-      [
-        'Tebuconazole 25% EW',
-        'Mancozeb 80% WP',
-        'Captan 50% WP',
-        'Sulphur 80% WG',
-      ],
+    certs: [
+      { standard: 'ISO 9001:2015', label: 'Quality Management System' },
+      { standard: 'ISO 14001:2015', label: 'Environmental Management System' },
+      {
+        standard: 'OHSAS 18001:2007',
+        label: 'Employee Health & Safety · qualified since 2019',
+      },
     ],
-    ['Bio-Insecticides', ['Flipper']],
+    paragraphs: [
+      'Ceypetco Agrochemicals provides solutions from land and bed preparation through harvest by controlling or eradicating pests, fungi and weeds. The range includes insecticides, fungicides and weedicides for diverse cultivation requirements',
+      'Our primary goal is to strengthen a marketing strategy based on consistently high quality, reasonable prices and dependable on-time delivery. Professionally qualified field officers located around the island work directly with farming communities',
+      'Since December 2018, restricted Ceypetco Glyphosate has been distributed to approved planters at reasonable prices, supporting efforts to reduce production costs in the tea and rubber plantation sectors',
+      'Ceypetco imports quality agrochemicals, formulates, repacks, stores and markets them while working closely with the Registrar of Pesticides, Department of Agriculture, agrarian service centres, farmer organisations and other agricultural institutions to promote safe use',
+    ],
+    keyFacts: [
+      'Automated production equipment supports defect-free output and strengthens the competitiveness of the Ceypetco range. The organisation continues to preserve farmer confidence by providing current guidance to sellers, farmer organisations, agrarian service centres and intermediaries',
+      'Ceypetco maintains health-care facilities, HSE practices and a supportive working environment for agrochemical staff, helping the strategic business unit fulfil its national responsibilities and sustain goodwill across farming communities',
+    ],
+    productGroups: [
+      { group: 'Insecticides', products: ['Profenophos 50% EC', 'B.P.M.C. 50% EC', 'Fipronil 0.3% G', 'Fipronil 50g/l SC', 'Imidacloprid 200g/l SC'] },
+      { group: 'Weedicides', products: ['Diuron 80% WP', 'Pretilachlor 30% EC', 'Glyphosate 36% SL · Restricted'] },
+      { group: 'Fungicides', products: ['Tebuconazole 25% EW', 'Mancozeb 80% WP', 'Captan 50% WP', 'Sulphur 80% WG'] },
+      { group: 'Bio-Insecticides', products: ['Flipper'] },
+    ],
+  });
+  const rawGroups = div.productGroups || [];
+  const productGroups = rawGroups.map((g) =>
+    Array.isArray(g) ? g : [g.group, g.products || []],
+  );
+  const certs = div.certs || [];
+  const paragraphs = div.paragraphs || [];
+  const keyFacts = div.keyFacts || [];
+  const copy = div.copy || [];
+  const gallery = div.gallery || [];
+  const openingImages = [
+    { src: gallery[0], alt: 'Ceypetco agrochemical production team member wearing protective equipment', caption: 'Safe production' },
+    { src: gallery[1], alt: 'Ceypetco agrochemical automated production facility', caption: 'Quality controlled' },
   ];
+  const image = div.image;
+  const imageSrc = (img) =>
+    img && img.startsWith('http')
+      ? img
+      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
   return (
     <>
       <section className="agro-opening content-section">
         <div className="container agro-opening-grid">
           <div>
-            <p className="eyebrow">CEYPETCO AGROCHEMICALS</p>
-            <h2>
-              More than 50 years supporting Sri Lanka’s farming communities
-            </h2>
-            <p>
-              Ceylon Petroleum Corporation established its Agrochemicals
-              Function in 1969. As a strategic business unit within the
-              Marketing Function, it has served the national agrochemicals
-              market for more than five decades
-            </p>
-            <p>
-              Ceypetco Agrochemicals is the only government-sector organisation
-              engaged in the agrochemicals business among Sri Lanka’s marketing
-              companies, helping maintain product quality, access and reasonable
-              market pricing
-            </p>
+            <p className="eyebrow">{div.kicker}</p>
+            <h2>{div.heading}</h2>
+            <p>{copy[0]}</p>
+            <p>{copy[1]}</p>
           </div>
           <div className="agro-opening-images">
-            <figure>
-              <img
-                src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-production-1.webp"
-                alt="Ceypetco agrochemical production team member wearing protective equipment"
-              />
-              <span>Safe production</span>
-            </figure>
-            <figure>
-              <img
-                src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-production-2.webp"
-                alt="Ceypetco agrochemical automated production facility"
-              />
-              <span>Quality controlled</span>
-            </figure>
+            {openingImages.map((figure) => (
+              <figure key={figure.caption}>
+                <img src={imageSrc(figure.src)} alt={figure.alt} />
+                <span>{figure.caption}</span>
+              </figure>
+            ))}
           </div>
         </div>
       </section>
@@ -2536,18 +2471,11 @@ function AgroChemicalsPage() {
             </p>
           </div>
           <div className="agro-cert-grid">
-            {[
-              ['ISO 9001:2015', 'Quality Management System'],
-              ['ISO 14001:2015', 'Environmental Management System'],
-              [
-                'OHSAS 18001:2007',
-                'Employee Health & Safety · qualified since 2019',
-              ],
-            ].map(([standard, label], index) => (
-              <article key={standard}>
+            {certs.map((cert, index) => (
+              <article key={cert.standard}>
                 <span>0{index + 1}</span>
-                <h3>{standard}</h3>
-                <p>{label}</p>
+                <h3>{cert.standard}</h3>
+                <p>{cert.label}</p>
               </article>
             ))}
           </div>
@@ -2561,36 +2489,14 @@ function AgroChemicalsPage() {
               Practical crop-protection solutions across the cultivation cycle
             </h2>
             <img
-              src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg"
+              src={imageSrc(image)}
               alt="Safe application of crop-protection products in farmland"
             />
           </div>
           <div className="agro-role-copy">
-            <p>
-              Ceypetco Agrochemicals provides solutions from land and bed
-              preparation through harvest by controlling or eradicating pests,
-              fungi and weeds. The range includes insecticides, fungicides and
-              weedicides for diverse cultivation requirements
-            </p>
-            <p>
-              Our primary goal is to strengthen a marketing strategy based on
-              consistently high quality, reasonable prices and dependable
-              on-time delivery. Professionally qualified field officers located
-              around the island work directly with farming communities
-            </p>
-            <p>
-              Since December 2018, restricted Ceypetco Glyphosate has been
-              distributed to approved planters at reasonable prices, supporting
-              efforts to reduce production costs in the tea and rubber
-              plantation sectors
-            </p>
-            <p>
-              Ceypetco imports quality agrochemicals, formulates, repacks,
-              stores and markets them while working closely with the Registrar
-              of Pesticides, Department of Agriculture, agrarian service
-              centres, farmer organisations and other agricultural institutions
-              to promote safe use
-            </p>
+            {paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -2663,31 +2569,10 @@ function AgroChemicalsPage() {
             </h2>
           </div>
           <div>
-            <p>
-              Automated production equipment supports defect-free output and
-              strengthens the competitiveness of the Ceypetco range. The
-              organisation continues to preserve farmer confidence by providing
-              current guidance to sellers, farmer organisations, agrarian
-              service centres and intermediaries
-            </p>
-            <p>
-              Ceypetco maintains health-care facilities, HSE practices and a
-              supportive working environment for agrochemical staff, helping the
-              strategic business unit fulfil its national responsibilities and
-              sustain goodwill across farming communities
-            </p>
+            {keyFacts.map((fact) => (
+              <p key={fact.slice(0, 40)}>{fact}</p>
+            ))}
           </div>
-        </div>
-      </section>
-      <section className="division-cta">
-        <div className="container">
-          <div>
-            <p className="eyebrow light">AGROCHEMICAL SUPPORT</p>
-            <h2>Connect with our islandwide field team</h2>
-          </div>
-          <a href="/contact?subject=Ceypetco%20Agrochemicals">
-            Contact Agrochemicals <Icon name="arrow" size={18} />
-          </a>
         </div>
       </section>
     </>
@@ -2758,19 +2643,43 @@ function OilTypesChart() {
 }
 
 function LubricantsPage() {
+  const div = useDivision('lubricants', {
+    kicker: 'THE BEST FROM THE BEST',
+    heading:
+      'Internationally aligned protection for automotive and industrial performance',
+    copy: [
+      'All Ceypetco lubricating oils are blended in a plant certified to ISO 9001/2000. The Ceypetco lubricant range covers products developed to meet relevant international specifications from the American Petroleum Institute (API), MTU Friedrichshafen GmbH and the European Automobile Manufacturers\u2019 Association (ACEA)',
+      'Our products serve demanding automotive and industrial applications with a focus on quality, consistency and dependable protection',
+    ],
+    image:
+      'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg',
+    standards: ['API', 'ACEA', 'MTU', 'ISO'],
+    mission: {
+      heading:
+        'Deliver quality products and total solutions through professional expertise, technology and innovation',
+      text: 'To achieve excellence in petroleum refining, sales and marketing while meeting stakeholder expectations through a dedicated team, an efficient dealer network, high ethical standards and the highest concern for health, safety and the environment',
+    },
+    vision: {
+      heading: 'A premier, customer-driven and environmentally responsible petroleum enterprise',
+      text: 'To lead petroleum and related industries in the region while contributing meaningfully to the prosperity of Sri Lanka',
+    },
+  });
   const [query, setQuery] = useState('');
   const filtered = lubricantProducts.filter(({ name }) =>
     name.toLowerCase().includes(query.toLowerCase()),
   );
+  const copy = div.copy || [];
+  const standards = div.standards || [];
+  const heroImage =
+    div.image && div.image.startsWith('http')
+      ? div.image
+      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${div.image}`;
   return (
     <>
       <section className="lubricant-intro content-section">
         <div className="container lubricant-intro-grid">
           <div className="lubricant-image">
-            <img
-              src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg"
-              alt="Ceypetco lubricating oil being poured into an engine"
-            />
+            <img src={heroImage} alt="Ceypetco lubricating oil being poured into an engine" />
             <span>
               ISO
               <br />
@@ -2778,28 +2687,14 @@ function LubricantsPage() {
             </span>
           </div>
           <div>
-            <p className="eyebrow">THE BEST FROM THE BEST</p>
-            <h2>
-              Internationally aligned protection for automotive and industrial
-              performance
-            </h2>
-            <p>
-              All Ceypetco lubricating oils are blended in a plant certified to
-              ISO 9001/2000. The Ceypetco lubricant range covers products
-              developed to meet relevant international specifications from the
-              American Petroleum Institute (API), MTU Friedrichshafen GmbH and
-              the European Automobile Manufacturers’ Association (ACEA)
-            </p>
-            <p>
-              Our products serve demanding automotive and industrial
-              applications with a focus on quality, consistency and dependable
-              protection
-            </p>
+            <p className="eyebrow">{div.kicker}</p>
+            <h2>{div.heading}</h2>
+            <p>{copy[0]}</p>
+            <p>{copy[1]}</p>
             <div className="lubricant-standards">
-              <span>API</span>
-              <span>ACEA</span>
-              <span>MTU</span>
-              <span>ISO</span>
+              {standards.map((standard) => (
+                <span key={standard}>{standard}</span>
+              ))}
             </div>
           </div>
         </div>
@@ -2809,28 +2704,14 @@ function LubricantsPage() {
           <article>
             <span>01</span>
             <p className="eyebrow">OUR MISSION</p>
-            <h3>
-              Deliver quality products and total solutions through professional
-              expertise, technology and innovation
-            </h3>
-            <p>
-              To achieve excellence in petroleum refining, sales and marketing
-              while meeting stakeholder expectations through a dedicated team,
-              an efficient dealer network, high ethical standards and the
-              highest concern for health, safety and the environment
-            </p>
+            <h3>{div.mission.heading}</h3>
+            <p>{div.mission.text}</p>
           </article>
           <article>
             <span>02</span>
             <p className="eyebrow">OUR VISION</p>
-            <h3>
-              A premier, customer-driven and environmentally responsible
-              petroleum enterprise
-            </h3>
-            <p>
-              To lead petroleum and related industries in the region while
-              contributing meaningfully to the prosperity of Sri Lanka
-            </p>
+            <h3>{div.vision.heading}</h3>
+            <p>{div.vision.text}</p>
           </article>
         </div>
       </section>
@@ -2900,17 +2781,6 @@ function LubricantsPage() {
             </span>
             <span>Documents open from this website</span>
           </div>
-        </div>
-      </section>
-      <section className="division-cta">
-        <div className="container">
-          <div>
-            <p className="eyebrow light">PRODUCT SUPPORT</p>
-            <h2>Need help selecting a lubricant?</h2>
-          </div>
-          <a href="/contact?subject=Ceypetco%20Lubricants">
-            Contact product support <Icon name="arrow" size={18} />
-          </a>
         </div>
       </section>
     </>
@@ -3086,6 +2956,8 @@ function InnerPage({ type }) {
   const [careersLoading, setCareersLoading] = useState(true);
   const [annualReports, setAnnualReports] = useState([]);
   const [annualReportsLoading, setAnnualReportsLoading] = useState(true);
+  const [services, setServices] = useState([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
   const serviceItems = [
     {
       title: 'New Dealership Registration',
@@ -3158,6 +3030,14 @@ function InnerPage({ type }) {
       href: '/right-to-information?from=services',
     },
   ];
+  const serviceList =
+    services.length > 0
+      ? services.map((s) => ({ ...s, href: s.link }))
+      : serviceItems;
+  const resolveServiceImage = (item) =>
+    item.image && item.image.startsWith('http')
+      ? item.image
+      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${item.image}`;
   const requestedSubject =
     new URLSearchParams(window.location.search).get('subject') || '';
   const cameFromServices =
@@ -3329,6 +3209,29 @@ function InnerPage({ type }) {
     };
   }, [type]);
 
+  useEffect(() => {
+    if (type !== '/services') return undefined;
+    let cancelled = false;
+    const loadServices = async () => {
+      setServicesLoading(true);
+      try {
+        const res = await api.get('/admin/services', {
+          params: { limit: 100 },
+        });
+        if (!cancelled)
+          setServices(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setServices([]);
+      } finally {
+        if (!cancelled) setServicesLoading(false);
+      }
+    };
+    loadServices();
+    return () => {
+      cancelled = true;
+    };
+  }, [type]);
+
   return (
     <main className="inner-page">
       <section className="page-hero">
@@ -3493,7 +3396,7 @@ function InnerPage({ type }) {
                 </p>
               </div>
               <div className="directory-grid">
-                {serviceItems.map((item, i) => (
+                {serviceList.map((item, i) => (
                   <article className="service-card" key={item.title}>
                     <a
                       className="service-card-image"
@@ -3505,7 +3408,7 @@ function InnerPage({ type }) {
                         item.href.startsWith('http') ? 'noreferrer' : undefined
                       }
                     >
-                      <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${item.image}`} alt="" />
+                      <img src={resolveServiceImage(item)} alt="" />
                       <span>0{i + 1}</span>
                     </a>
                     <div className="service-card-body">
@@ -4212,6 +4115,48 @@ function InnerPage({ type }) {
               </div>
             </section>
 
+            {tendersLoading && (
+              <div className="tender-loading" aria-label="Loading tenders">
+                {['COMMERCIAL DIVISION', 'REFINERY DIVISION'].map(
+                  (division, di) => (
+                    <section className="tender-division" key={division}>
+                      <div className="tender-division-heading">
+                        <p className="eyebrow skeleton-text">{division}</p>
+                        <span
+                          className="skeleton-text"
+                          style={{ width: 160 }}
+                        >
+                          Loading opportunities
+                        </span>
+                      </div>
+                      <div className="tender-list">
+                        {[0, 1, 2].map((row, ri) => (
+                          <article
+                            className="tender-skeleton-row"
+                            key={row}
+                            style={{
+                              '--skeleton-delay': `${(di * 3 + ri) * 70}ms`,
+                            }}
+                          >
+                            <div className="tender-skeleton-block">
+                              <span className="skeleton-pill" />
+                              <span className="skeleton-line skeleton-short" />
+                            </div>
+                            <span className="skeleton-line skeleton-title" />
+                            <div className="tender-skeleton-block">
+                              <span className="skeleton-line skeleton-short" />
+                              <span className="skeleton-line" />
+                            </div>
+                            <span className="skeleton-line skeleton-link" />
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  ),
+                )}
+              </div>
+            )}
+
             {!tendersLoading && tenders.length === 0 && (
               <div className="tender-division">
                 <div className="tender-division-heading">
@@ -4225,18 +4170,28 @@ function InnerPage({ type }) {
               'COMMERCIAL DIVISION',
               'REFINERY DIVISION',
               'PROCUREMENTS & STORES DIVISION',
-            ].map((division) => {
+            ].map((division, di) => {
               const items = tenders.filter((t) => t.division === division);
               if (items.length === 0) return null;
               return (
-                <section className="tender-division" key={division}>
+                <section
+                  className="tender-division"
+                  key={division}
+                  style={{ '--tender-section-delay': `${di * 140}ms` }}
+                >
                   <div className="tender-division-heading">
                     <p className="eyebrow">{division}</p>
                     <span>{items.length} published opportunities</span>
                   </div>
                   <div className="tender-list">
-                    {items.map((item) => (
-                      <article key={item._id}>
+                    {items.map((item, index) => (
+                      <article
+                        className="tender-card"
+                        key={item._id}
+                        style={{
+                          '--tender-delay': `${index * 70}ms`,
+                        }}
+                      >
                         <div>
                           <span className="status">
                             {item.status ? item.status.toUpperCase() : 'OPEN'}
@@ -4620,6 +4575,40 @@ function App() {
     targets.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, [path]);
+
+  useEffect(() => {
+    const selectors = ['.home-news .news-grid article'];
+    if (path === '/media') {
+      selectors.push('section.content-section .news-grid article');
+    }
+    const cards = document.querySelectorAll(selectors.join(','));
+    if (!cards.length) return undefined;
+
+    cards.forEach((element, index) => {
+      element.classList.add('reveal-item');
+      element.style.setProperty('--reveal-delay', `${(index % 4) * 70}ms`);
+    });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      cards.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -45px' },
+    );
+
+    cards.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, [path, news]);
   return (
     <div className="site-shell" onClick={handleHeaderNavigation}>
       <header className="header">
@@ -4876,7 +4865,6 @@ function App() {
                 </div>
               </div>
               <div className="about-copy">
-                <p className="eyebrow">ABOUT CEYPETCO</p>
                 <h2>
                   Every drop powers
                   <br />
@@ -5255,6 +5243,7 @@ function App() {
           <span>{t('footerTagline')}</span>
         </div>
       </footer>
+      <PopupNotice />
     </div>
   );
 }

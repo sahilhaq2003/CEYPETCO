@@ -20,6 +20,10 @@ import RegionalOfficeManagement from "../admin/pages/RegionalOffices/RegionalOff
 import ContactMessages from "../admin/pages/Messages/ContactMessages";
 import UserManagement from "../admin/pages/Users/UserManagement";
 import HomeServiceManagement from "../admin/pages/Home/HomeServiceManagement";
+import ServicesManagement from "../admin/pages/Services/ServicesManagement";
+import DivisionManagement from "../admin/pages/Services/DivisionManagement";
+import DivisionEditor from "../admin/pages/Services/DivisionEditor";
+import PopupNoticeManagement from "../admin/pages/Popups/PopupNoticeManagement";
 
 const AppRoutes = () => {
   return (
@@ -44,7 +48,9 @@ const AppRoutes = () => {
         <Route path="publications" element={<AnnualReportsManagement />} />
         <Route path="team-members" element={<TeamMembersManagement />} />
         <Route path="about" element={<ManagementContactsManagement />} />
-        <Route path="services-page" element={<Placeholder />} />
+        <Route path="services-page" element={<ServicesManagement />} />
+        <Route path="services-page/divisions" element={<DivisionManagement />} />
+        <Route path="services-page/divisions/:slug" element={<DivisionEditor />} />
         <Route path="products-page" element={<Placeholder />} />
         <Route path="fuel-prices" element={<FuelPriceManagement />} />
         <Route path="fuel-stations" element={<FuelStationManagement />} />
@@ -52,6 +58,7 @@ const AppRoutes = () => {
         <Route path="messages" element={<ContactMessages />} />
         <Route path="media" element={<Placeholder />} />
         <Route path="users" element={<UserManagement />} />
+        <Route path="popup-notices" element={<PopupNoticeManagement />} />
         <Route path="settings" element={<Placeholder />} />
         <Route path="home" element={<HomeServiceManagement />} />
       </Route>

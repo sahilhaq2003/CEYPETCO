@@ -1,4 +1,8 @@
 const cloudinary = require("cloudinary").v2;
+const fs = require("fs");
+const path = require("path");
+
+const uploadsDir = path.resolve(__dirname, "../../uploads");
 
 const isConfigured = () =>
   Boolean(
@@ -52,12 +56,43 @@ const deleteAsset = async (url) => {
   }
 };
 
+const isLocalUploadUrl = (url) => {
+  try {
+    return new URL(url, "http://localhost").pathname.startsWith("/uploads/");
+  } catch {
+    return false;
+  }
+};
+
+const deleteLocalAsset = (url) => {
+  try {
+    const pathname = decodeURIComponent(new URL(url, "http://localhost").pathname);
+    const rel = pathname.replace(/^\/uploads\//, "");
+    const abs = path.resolve(uploadsDir, rel);
+    if (!abs.startsWith(uploadsDir + path.sep)) {
+      return { deleted: false, reason: "outside-uploads" };
+    }
+    if (!fs.existsSync(abs)) return { deleted: false, reason: "not-found" };
+    fs.unlinkSync(abs);
+    return { deleted: true, file: pathname };
+  } catch (err) {
+    return { deleted: false, reason: err.message };
+  }
+};
+
 const deleteAssets = async (urls) => {
   const results = [];
   for (const url of urls || []) {
-    if (typeof url === "string") results.push(await deleteAsset(url));
+    if (typeof url !== "string") continue;
+    if (isLocalUploadUrl(url)) {
+      results.push(deleteLocalAsset(url));
+    } else if (isCloudinaryUrl(url)) {
+      results.push(await deleteAsset(url));
+    } else {
+      results.push({ deleted: false, reason: "skipped" });
+    }
   }
   return results;
 };
 
-module.exports = { isConfigured, isCloudinaryUrl, parse, deleteAsset, deleteAssets };
+module.exports = { isConfigured, isCloudinaryUrl, isLocalUploadUrl, parse, deleteAsset, deleteAssets };

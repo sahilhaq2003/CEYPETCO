@@ -23,6 +23,9 @@ const managementTeamMemberRoutes = require("./routes/managementTeamMemberRoutes"
 const managementContactRoutes = require("./routes/managementContactRoutes");
 const userRoutes = require("./routes/userRoutes");
 const homeServiceRoutes = require("./routes/homeServiceRoutes");
+const serviceRoutes = require("./routes/serviceRoutes");
+const divisionRoutes = require("./routes/divisionRoutes");
+const popupNoticeRoutes = require("./routes/popupNoticeRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -133,6 +136,9 @@ app.use("/api/admin/regional-offices", regionalOfficeRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/admin/users", userRoutes);
 app.use("/api/admin/home-services", homeServiceRoutes);
+app.use("/api/admin/services", serviceRoutes);
+app.use("/api/admin/divisions", divisionRoutes);
+app.use("/api/admin/popup-notices", popupNoticeRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

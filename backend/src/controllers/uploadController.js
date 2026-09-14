@@ -1,6 +1,9 @@
 const path = require("path");
+const fs = require("fs");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
+
+const UPLOADS_DIR = path.resolve(__dirname, "../../uploads");
 
 const USE_CLOUDINARY = Boolean(
   process.env.CLOUDINARY_URL ||
@@ -64,14 +67,33 @@ const uploadToCloudinary = (buffer, resourceType) =>
     stream.end(buffer);
   });
 
+const saveToDisk = (req, isDoc) => {
+  const folder = isDoc ? "docs" : "images";
+  const ext = path.extname(req.file.originalname).toLowerCase();
+  const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
+  const targetDir = path.resolve(UPLOADS_DIR, folder);
+  fs.mkdirSync(targetDir, { recursive: true });
+  fs.writeFileSync(path.join(targetDir, fileName), req.file.buffer);
+  const base = `${req.protocol}://${req.get("host")}`;
+  return {
+    filename: fileName,
+    originalname: req.file.originalname,
+    size: req.file.size,
+    mimetype: req.file.mimetype,
+    url: `${base}/uploads/${folder}/${fileName}`,
+  };
+};
+
 const runUpload = (req, res, isDoc) => {
   const resourceType = isDoc ? "raw" : "image";
   const doUpload = async () => {
     if (!USE_CLOUDINARY) {
-      return res.status(503).json({
-        success: false,
-        message:
-          "Cloudinary is not configured. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET to the deployment environment.",
+      return res.status(201).json({
+        success: true,
+        message: isDoc
+          ? "Document uploaded successfully"
+          : "Image uploaded successfully",
+        data: saveToDisk(req, isDoc),
       });
     }
     const url = await uploadToCloudinary(req.file.buffer, resourceType);

@@ -38,6 +38,27 @@ const fuelStationService = createResourceService("/admin/fuel-stations");
 const regionalOfficeService = createResourceService("/admin/regional-offices");
 const userService = createResourceService("/admin/users");
 const homeServiceService = createResourceService("/admin/home-services");
+const serviceService = createResourceService("/admin/services");
+
+const divisionService = {
+  ...createResourceService("/admin/divisions"),
+  getBySlug: async (slug) => {
+    const response = await api.get(`/admin/divisions/slug/${slug}`);
+    return response.data;
+  },
+};
+
+const popupNoticeService = {
+  ...createResourceService("/admin/popup-notices"),
+  updateStatus: async (id, status) => {
+    const response = await api.patch(`/admin/popup-notices/${id}/status`, { status });
+    return response.data;
+  },
+  resetVisibility: async (id) => {
+    const response = await api.post(`/admin/popup-notices/${id}/reset-visibility`);
+    return response.data;
+  },
+};
 
 const getDashboardStats = async () => {
   const response = await api.get("/admin/dashboard/stats");
@@ -46,6 +67,11 @@ const getDashboardStats = async () => {
 
 const getActiveFuelPrices = async () => {
   const response = await api.get("/admin/fuel-prices/active");
+  return response.data;
+};
+
+const getActivePopupNotice = async () => {
+  const response = await api.get("/admin/popup-notices/active");
   return response.data;
 };
 
@@ -81,6 +107,10 @@ export {
   regionalOfficeService,
   userService,
   homeServiceService,
+  serviceService,
+  divisionService,
+  popupNoticeService,
   getDashboardStats,
   getActiveFuelPrices,
+  getActivePopupNotice,
 };

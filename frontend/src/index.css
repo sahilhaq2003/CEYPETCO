@@ -2748,6 +2748,91 @@ footer {
   color: var(--red);
 }
 
+.tender-loading .tender-division-heading p,
+.tender-loading .tender-division-heading span {
+  opacity: 0.75;
+}
+
+.tender-skeleton-row {
+  pointer-events: none;
+}
+
+.tender-skeleton-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-pill {
+  width: 74px;
+  height: 18px;
+  border-radius: 15px;
+}
+
+.skeleton-text,
+.skeleton-pill,
+.skeleton-line {
+  display: block;
+  background: linear-gradient(100deg, #eef1f0 30%, #e2e8e6 50%, #eef1f0 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.3s infinite var(--skeleton-delay, 0ms);
+}
+
+.tender-skeleton-row .skeleton-line {
+  height: 12px;
+  border-radius: 4px;
+}
+
+.tender-skeleton-row .skeleton-short {
+  width: 92px;
+}
+
+.tender-skeleton-row .skeleton-title {
+  width: min(78%, 520px);
+}
+
+.tender-skeleton-row .skeleton-link {
+  width: 118px;
+  justify-self: end;
+}
+
+.skeleton-text {
+  height: 10px;
+  border-radius: 4px;
+}
+
+.tender-division {
+  animation: tenderSectionIn 0.65s cubic-bezier(0.22, 1, 0.36, 1)
+    var(--tender-section-delay, 0ms) both;
+}
+
+.tender-card {
+  animation: tenderCardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1)
+    var(--tender-delay, 0ms) both;
+}
+
+@keyframes tenderSectionIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tenderCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .tender-rfq-note {
   display: flex;
   align-items: center;
@@ -8185,6 +8270,7 @@ html[lang='si'] .site-shell {
 
 html[lang='ta'] .site-shell {
   font-family: 'Noto Sans Tamil', 'DM Sans', sans-serif;
+  font-size-adjust: 0.46;
 }
 
 .site-language {
@@ -11089,4 +11175,184 @@ html[lang="ta"] .nav-group > a,
 html[lang="ta"] .nav-cta,
 html[lang="ta"] .site-language {
   font-family: "Manrope", "Noto Sans Tamil", "Noto Sans", sans-serif;
+}
+
+/* ===== Popup Notice ===== */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(6, 46, 59, 0.62);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+.popup-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.popup-overlay.is-closing {
+  opacity: 0;
+  visibility: hidden;
+}
+.popup-card {
+  position: relative;
+  width: min(520px, 100%);
+  max-height: min(90vh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 32px 80px rgba(3, 25, 33, 0.45);
+  transform: translateY(24px) scale(0.96);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+}
+.popup-overlay.is-open .popup-card {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+.popup-overlay.is-closing .popup-card {
+  transform: translateY(12px) scale(0.98);
+  opacity: 0;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+.popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(6, 46, 59, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+.popup-close:hover {
+  background: rgba(6, 46, 59, 0.85);
+  transform: rotate(90deg);
+}
+.popup-visual {
+  width: 100%;
+  max-height: 240px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--cream);
+}
+.popup-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 240px;
+  object-fit: cover;
+}
+.popup-body {
+  padding: 28px 28px 26px;
+  overflow-y: auto;
+}
+.popup-title {
+  margin: 0 0 10px;
+  font: 800 clamp(20px, 4.5vw, 26px) / 1.25 "Manrope";
+  color: var(--ink);
+}
+.popup-desc {
+  margin: 0 0 22px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #44555c;
+  white-space: pre-line;
+}
+.popup-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border: none;
+  border-radius: 10px;
+  background: var(--red);
+  color: #fff;
+  font: 700 14px "Manrope";
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.popup-action:hover {
+  background: #b90e18;
+}
+.popup-brand {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font: 700 10px / 1 "Manrope";
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.popup-brand b {
+  color: var(--navy);
+}
+
+@media (max-width: 560px) {
+  .popup-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .popup-card {
+    width: 100%;
+    max-height: 88vh;
+    border-radius: 18px 18px 0 0;
+    transform: translateY(100%);
+  }
+  .popup-overlay.is-open .popup-card {
+    transform: translateY(0);
+  }
+  .popup-overlay.is-closing .popup-card {
+    transform: translateY(100%);
+  }
+  .popup-body {
+    padding: 22px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popup-overlay,
+  .popup-card {
+    transition: none;
+  }
+  .popup-card {
+    transform: none;
+  }
+  .popup-overlay.is-open .popup-card,
+  .popup-overlay.is-closing .popup-card {
+    transform: none;
+  }
+  .tender-division,
+  .tender-card {
+    animation: none;
+  }
+  .skeleton-text,
+  .skeleton-pill,
+  .skeleton-line {
+    animation: none;
+  }
 }
