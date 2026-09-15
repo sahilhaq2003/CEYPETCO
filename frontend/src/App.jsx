@@ -520,6 +520,13 @@ const pageData = {
       'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
   },
+  '/management': {
+    label: 'OUR LEADERSHIP',
+    title: 'Leadership with purpose',
+    intro:
+      'Meet the leadership team guiding Ceylon Petroleum Corporation and find key management contacts across the organisation',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
+  },
   '/services': {
     label: 'PUBLIC SERVICES',
     title: 'Energy services made accessible',
@@ -1204,7 +1211,7 @@ function ManagementTeamProfile({ memberId }) {
         <div className="container management-profile-status">
           <p className="eyebrow">{t('managementTeam')}</p>
           <h1>{t('profileNotFound')}</h1>
-          <a href="/about">{t('backTeam')}</a>
+          <a href="/management">{t('backTeam')}</a>
         </div>
       </main>
     );
@@ -3718,23 +3725,17 @@ function InnerPage({ type }) {
           </div>
         </div>
       )}
-      {type === '/about' && (
+      {['/about', '/management', '/history'].includes(type) && (
         <div className="subpage-nav">
           <div className="container">
-            <span>{t('discover')}</span>
-            <a className="active" href="/about">
+            <span>{type === '/history' ? 'Discover Ceypetco' : t('discover')}</span>
+            <a className={type === '/about' ? 'active' : ''} href="/about">
               {t('aboutUs')}
             </a>
-            <a href="/history">{t('ourHistory')}</a>
-          </div>
-        </div>
-      )}
-      {type === '/history' && (
-        <div className="subpage-nav">
-          <div className="container">
-            <span>Discover Ceypetco</span>
-            <a href="/about">About us</a>
-            <a className="active" href="/history">
+            <a className={type === '/management' ? 'active' : ''} href="/management">
+              Management
+            </a>
+            <a className={type === '/history' ? 'active' : ''} href="/history">
               Our history
             </a>
           </div>
@@ -3754,7 +3755,7 @@ function InnerPage({ type }) {
       {type === '/agro-chemicals' && <AgroChemicalsPage />}
       {type === '/lubricants' && <LubricantsPage />}
       {type === '/history' && <HistoryPage />}
-      {type === '/about' && (
+      {type === '/management' && (
         <>
           <ManagementTeam />
           <ManagementDirectory />
@@ -5092,7 +5093,7 @@ function App() {
               {t('home')}
             </a>
             <div
-              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/history' ? 'active' : ''}`}
+              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/management' || path === '/history' ? 'active' : ''}`}
               onMouseEnter={() => setNavAboutDropClosed(false)}
             >
               <a href="/about">
@@ -5123,7 +5124,7 @@ function App() {
                     <b>{t('aboutUs')}</b>
                     <small>Our mission, vision and leadership</small>
                   </a>
-                  <a href="/about">
+                  <a href="/management">
                     <b>Management</b>
                     <small>Corporate and operational leadership</small>
                   </a>
@@ -5655,6 +5656,7 @@ function App() {
           <nav className="footer-links" aria-label="Corporation links">
             <h4>{t('corporation')}</h4>
             <a href="/about">{t('aboutUs')}</a>
+            <a href="/management">Management</a>
             <a href="/history">{t('ourHistory')}</a>
             <a href="/services">{t('allServices')}</a>
             <a href="/careers">{t('careers')}</a>
