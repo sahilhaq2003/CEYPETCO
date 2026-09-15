@@ -3697,9 +3697,7 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-      <section
-        className={`page-hero${['/about', '/management', '/history'].includes(type) ? ' page-hero--red' : ''}`}
-      >
+      <section className="page-hero page-hero--red">
         <img src={page.image} alt="" />
         <div className="page-hero-overlay"></div>
         <div className="container page-hero-copy">
@@ -4820,8 +4818,8 @@ function App() {
     () => window.location.pathname.replace(/\/$/, '') || '/',
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const [navDropClosed, setNavDropClosed] = useState(false);
-  const [navAboutDropClosed, setNavAboutDropClosed] = useState(false);
+  const [navDropClosed, setNavDropClosed] = useState(true);
+  const [navAboutDropClosed, setNavAboutDropClosed] = useState(true);
   const [slide, setSlide] = useState(0);
   const [news, setNews] = useState([]);
   const [newsLoading, setNewsLoading] = useState(true);
@@ -4844,6 +4842,7 @@ function App() {
   };
 
   const handleHeaderNavigation = (event) => {
+    if (event.defaultPrevented) return;
     const link = event.target.closest('a');
     if (
       !link ||
@@ -4879,6 +4878,26 @@ function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const closeMenu = (event) => {
+      if (event.type === 'keydown' && event.key !== 'Escape') return;
+      if (event.type === 'resize' && window.innerWidth <= 900) return;
+      setMenuOpen(false);
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeMenu);
+    window.addEventListener('resize', closeMenu);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeMenu);
+      window.removeEventListener('resize', closeMenu);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     if (path !== '/') return undefined;
@@ -5083,16 +5102,19 @@ function App() {
             </span>
           </a>
           <button
+            type="button"
             className={`menu-button ${menuOpen ? 'is-open' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={t('menu')}
             aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
           >
             <span></span>
             <span></span>
             <span></span>
           </button>
           <nav
+            id="primary-navigation"
             className={`nav notranslate ${menuOpen ? 'open' : ''}`}
             aria-label="Primary navigation"
             translate="no"
@@ -5104,7 +5126,16 @@ function App() {
               className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/management' || path === '/history' ? 'active' : ''}`}
               onMouseEnter={() => setNavAboutDropClosed(false)}
             >
-              <a href="/about">
+              <a
+                href="/about"
+                aria-expanded={!navAboutDropClosed}
+                onClick={(event) => {
+                  if (!window.matchMedia('(max-width: 900px)').matches) return;
+                  event.preventDefault();
+                  setNavAboutDropClosed((closed) => !closed);
+                  setNavDropClosed(true);
+                }}
+              >
                 {t('discover')}{' '}
                 <span className="chevron" aria-hidden="true">
                   <svg
@@ -5147,7 +5178,16 @@ function App() {
               className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || divisionPages[path] ? 'active' : ''}`}
               onMouseEnter={() => setNavDropClosed(false)}
             >
-              <a href="/services">
+              <a
+                href="/services"
+                aria-expanded={!navDropClosed}
+                onClick={(event) => {
+                  if (!window.matchMedia('(max-width: 900px)').matches) return;
+                  event.preventDefault();
+                  setNavDropClosed((closed) => !closed);
+                  setNavAboutDropClosed(true);
+                }}
+              >
                 {t('services')}{' '}
                 <span className="chevron" aria-hidden="true">
                   <svg
