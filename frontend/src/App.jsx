@@ -189,16 +189,22 @@ const divisions = [
     '/refinery',
   ],
   [
-    'Marketing & Sales',
-    'Serving communities and industries through a trusted islandwide network',
-    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
-    '/marketing-sales',
-  ],
-  [
     'Aviation',
     'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector',
     'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/control-room.png',
     '/aviation',
+  ],
+  [
+    'Lubricants',
+    'High-performance automotive and industrial oils engineered for lasting protection',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg',
+    '/lubricants',
+  ],
+  [
+    'Agro Chemicals',
+    'Quality crop-protection solutions supporting stronger and more sustainable harvests',
+    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
+    '/agro-chemicals',
   ],
 ];
 const heroSlides = [

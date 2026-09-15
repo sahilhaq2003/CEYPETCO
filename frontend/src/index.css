@@ -631,7 +631,7 @@ a {
 }
 .division-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 22px;
 }
 .division-card {
@@ -3122,6 +3122,11 @@ footer {
     rgba(8, 91, 139, 0.58) 66%,
     rgba(14, 111, 166, 0.28)
   );
+}
+@media (max-width: 1100px) and (min-width: 901px) {
+  .division-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .page-hero-copy {
   height: 100%;
