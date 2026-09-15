@@ -5301,8 +5301,8 @@ function App() {
               <div className="image-composition">
                 <div className="image-main">
                   <img
-                    src="https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg"
-                    alt="Ceypetco fuel distribution truck in Sri Lanka"
+                    src="/images/fuel-nozzle-oil-drop.png"
+                    alt="Fuel pump nozzle dispensing a single amber oil drop"
                   />
                 </div>
                 <div className="experience">
