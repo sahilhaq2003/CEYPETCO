@@ -3123,6 +3123,15 @@ footer {
     rgba(14, 111, 166, 0.28)
   );
 }
+
+.page-hero--red .page-hero-overlay {
+  background: linear-gradient(
+    90deg,
+    rgba(145, 4, 15, 0.94),
+    rgba(190, 10, 24, 0.62) 66%,
+    rgba(213, 16, 28, 0.32)
+  );
+}
 @media (max-width: 1100px) and (min-width: 901px) {
   .division-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -4204,7 +4213,7 @@ footer {
   position: relative;
   z-index: 4;
   padding: 86px 0 96px;
-  background: var(--red);
+  background: #a9474d;
 }
 
 .home-services-heading {
@@ -4215,9 +4224,17 @@ footer {
   margin-bottom: 36px;
 }
 
+.home-services-heading h2,
+.home-services-heading .eyebrow,
+.home-services-heading > p {
+  color: #fff;
+  opacity: 1;
+  filter: none;
+  text-shadow: none;
+}
+
 .home-services-heading h2 {
   margin: 8px 0 0;
-  color: #fff;
   font:
     800 42px/1.12 'Manrope',
     sans-serif;
@@ -4225,12 +4242,11 @@ footer {
 }
 
 .home-services-heading .eyebrow {
-  color: #fff;
+  font-weight: 800;
 }
 
 .home-services-heading > p {
   margin: 0 0 4px;
-  color: #fff;
   font-size: 14px;
   line-height: 1.7;
 }

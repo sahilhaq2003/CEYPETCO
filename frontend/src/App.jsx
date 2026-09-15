@@ -3697,7 +3697,9 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-      <section className="page-hero">
+      <section
+        className={`page-hero${['/about', '/management', '/history'].includes(type) ? ' page-hero--red' : ''}`}
+      >
         <img src={page.image} alt="" />
         <div className="page-hero-overlay"></div>
         <div className="container page-hero-copy">
