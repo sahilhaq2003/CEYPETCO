@@ -191,7 +191,7 @@ const divisions = [
   [
     'Aviation',
     'Specialised aviation fuel handling supporting Sri Lanka’s air transport sector',
-    'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/control-room.png',
+    '/images/aviation-mattala-refuelling.png',
     '/aviation',
   ],
   [
@@ -629,7 +629,7 @@ const pageData = {
     title: 'Reliable energy for every takeoff',
     intro:
       'Round-the-clock aviation fueling built around quality, safety and on-time service',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/aviation-hero.jpg',
+    image: '/images/aviation-mattala-refuelling.png',
   },
   '/agro-chemicals': {
     label: 'OUR SERVICES · AGRO',
