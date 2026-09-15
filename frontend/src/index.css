@@ -5254,6 +5254,7 @@ footer {
   height: 82px;
 }
 .nav-wrap {
+  width: calc(100% - 32px);
   gap: 42px;
 }
 .brand {
