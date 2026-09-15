@@ -27,7 +27,7 @@ const seedHomeServices = async () => {
       title: "Mobile App",
       description: "Access Ceypetco services on mobile",
       icon: "app",
-      link: "https://fuelup.cpstl.lk/apk/",
+      link: "/mobile-app",
       order: 3,
       status: "published",
     },

@@ -26,6 +26,7 @@ const homeServiceRoutes = require("./routes/homeServiceRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const divisionRoutes = require("./routes/divisionRoutes");
 const popupNoticeRoutes = require("./routes/popupNoticeRoutes");
+const mobileAppRoutes = require("./routes/mobileAppRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -139,6 +140,7 @@ app.use("/api/admin/home-services", homeServiceRoutes);
 app.use("/api/admin/services", serviceRoutes);
 app.use("/api/admin/divisions", divisionRoutes);
 app.use("/api/admin/popup-notices", popupNoticeRoutes);
+app.use("/api/admin/mobile-apps", mobileAppRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

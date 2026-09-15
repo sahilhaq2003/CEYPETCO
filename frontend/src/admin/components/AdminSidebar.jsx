@@ -5,7 +5,7 @@ import {
   Fuel, LayoutDashboard, FileText, FolderOpen, GraduationCap, BookOpen,
   Wrench, Droplets, MapPin, Building2, Mail, Users,
   ChevronDown, ChevronRight, X, Newspaper, ClipboardList, BadgeAlert,
-  Megaphone, Layers,
+  Megaphone, Layers, Smartphone,
 } from "lucide-react";
 
 const sidebarSections = [
@@ -15,6 +15,7 @@ const sidebarSections = [
     { to: "/admin/about", icon: FileText, text: "About" },
     { to: "/admin/services-page", icon: Wrench, text: "Services" },
     { to: "/admin/services-page/divisions", icon: Layers, text: "Division Pages" },
+    { to: "/admin/mobile-apps", icon: Smartphone, text: "Mobile Apps" },
   ] },
   { label: "Content", items: [
     { to: "/admin/news", icon: Newspaper, text: "News" },

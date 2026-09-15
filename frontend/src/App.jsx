@@ -83,6 +83,17 @@ const Icon = ({ name, size = 24 }) => {
   );
 };
 
+const mergeDivision = (base, remote) => {
+  const next = { ...base };
+  Object.entries(remote || {}).forEach(([key, value]) => {
+    if (value === null || value === undefined) return;
+    if (Array.isArray(value) && value.length === 0) return;
+    if (typeof value === 'string' && value.trim() === '') return;
+    next[key] = value;
+  });
+  return next;
+};
+
 const useDivision = (slug, defaults) => {
   const defaultsRef = useRef(defaults);
   const [div, setDiv] = useState(() => defaultsRef.current);
@@ -94,7 +105,7 @@ const useDivision = (slug, defaults) => {
       .then((res) => {
         if (!cancelled) {
           const remote = res.data && res.data.data ? res.data.data : {};
-          setDiv({ ...defaultsRef.current, ...remote });
+          setDiv(mergeDivision(defaultsRef.current, remote));
         }
       })
       .catch(() => {
@@ -125,7 +136,7 @@ const fallbackServices = [
     icon: 'app',
     title: 'Mobile App',
     description: 'Access Ceypetco services on mobile',
-    link: 'https://fuelup.cpstl.lk/apk/',
+    link: '/mobile-app',
   },
   {
     icon: 'droplet',
@@ -627,6 +638,13 @@ const pageData = {
     intro:
       'Explore the defining moments behind more than six decades of service to Sri Lanka',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-1.jpg',
+  },
+  '/mobile-app': {
+    label: 'PUBLIC SERVICES · MOBILE APPS',
+    title: 'Official mobile apps',
+    intro:
+      'Download the official Ceypetco application and access public services, fuel-station information and product updates from your mobile device',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
 };
 
@@ -1486,6 +1504,423 @@ function HistoryPage() {
   );
 }
 
+const mobileAppPlatforms = {
+  android: { label: 'Android', hint: 'Get it on', badge: 'APK download' },
+  ios: { label: 'iOS', hint: 'Download on the', badge: 'App Store' },
+  web: { label: 'Web', hint: 'Continues in', badge: 'Your browser' },
+};
+
+const fallbackMobileApps = [
+  {
+    _id: 'fallback-fuelup',
+    title: 'FuelUP',
+    description:
+      'Ceypetco\u2019s official mobile application for finding fuel stations, checking product availability and accessing public services on the move.',
+    platform: 'android',
+    downloadUrl: 'https://fuelup.cpstl.lk/apk/',
+    storeUrl: '',
+    order: 1,
+    featured: true,
+    status: 'published',
+  },
+];
+
+function MobileAppsPage() {
+  const [apps, setApps] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const page = pageData['/mobile-app'];
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const res = await api.get('/admin/mobile-apps', {
+          params: { limit: 50 },
+        });
+        if (!cancelled)
+          setApps(res.data && res.data.data ? res.data.data : []);
+      } catch (err) {
+        if (!cancelled) setApps([]);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const platformOf = (app) =>
+    mobileAppPlatforms[app.platform] || mobileAppPlatforms.android;
+  const storeTarget = (app) => app.downloadUrl || app.storeUrl || '';
+  const visibleApps = (apps.length ? apps : fallbackMobileApps).sort(
+    (a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || a.order - b.order,
+  );
+  const featured = visibleApps[0] || fallbackMobileApps[0];
+  const others = visibleApps.slice(1);
+
+  const stats = [
+    {
+      icon: 'shield',
+      value: '100% official',
+      label: 'Released under the Ceypetco brand',
+    },
+    {
+      icon: 'globe',
+      value: 'Nationwide',
+      label: 'Station coverage across Sri Lanka',
+    },
+    {
+      icon: 'download',
+      value: 'Free to get',
+      label: 'No account required to explore',
+    },
+    {
+      icon: 'clock',
+      value: 'Always current',
+      label: 'Fresh product and service updates',
+    },
+  ];
+
+  const highlights = [
+    {
+      icon: 'station',
+      title: 'Fuel station finder',
+      text: 'Locate approved Ceypetco stations and key product information with ease',
+    },
+    {
+      icon: 'clock',
+      title: 'Up-to-date information',
+      text: 'See the latest product and service updates as soon as they are published',
+    },
+    {
+      icon: 'shield',
+      title: 'Trusted standards',
+      text: 'The same quality and security Ceypetco applies across the nation\u2019s fuel supply',
+    },
+    {
+      icon: 'download',
+      title: 'Direct, fast install',
+      text: 'Download from the official source or your device app store in seconds',
+    },
+  ];
+
+  const steps = [
+    {
+      icon: 'app',
+      title: 'Choose your app',
+      text: 'Select the release for your device platform from the catalogue below',
+    },
+    {
+      icon: 'download',
+      title: 'Download securely',
+      text: 'Install from the official link or your device app store',
+    },
+    {
+      icon: 'station',
+      title: 'Start exploring',
+      text: 'Find stations and check the latest updates right away',
+    },
+  ];
+
+  const renderAppIcon = (app, options = {}) => {
+    const { size = '', dark = false } = options;
+    const cls = [
+      'mobile-app-icon-glyph',
+      size ? `mobile-app-icon-glyph-${size}` : '',
+      dark ? 'mobile-app-icon-glyph-dark' : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
+    return app.appIcon ? (
+      <img
+        className={`mobile-app-icon-img${size ? ` mobile-app-icon-img-${size}` : ''}`}
+        src={app.appIcon}
+        alt={`${app.title} icon`}
+        loading="lazy"
+      />
+    ) : (
+      <span className={cls}>
+        <Icon name="app" size={size === 'lg' ? 30 : 22} />
+      </span>
+    );
+  };
+
+  const renderStoreButton = (app) => (
+    <a
+      key={app._id}
+      className="mobile-store-button"
+      href={storeTarget(app)}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <Icon name="app" size={18} />
+      <span>
+        <small>{platformOf(app).hint}</small>
+        <b>{platformOf(app).label}</b>
+      </span>
+    </a>
+  );
+
+  const renderAppActions = (app) => (
+    <div className="mobile-app-actions">
+      {app.downloadUrl ? (
+        <a
+          className="mobile-app-download"
+          href={app.downloadUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Icon name="download" size={16} />
+          {app.featured ? 'Download now' : 'Download'}
+        </a>
+      ) : null}
+      {app.storeUrl && (
+        <a
+          className="mobile-app-store"
+          href={app.storeUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          View in store
+        </a>
+      )}
+      {!app.downloadUrl && !app.storeUrl && (
+        <span className="mobile-app-coming">Coming soon</span>
+      )}
+    </div>
+  );
+
+  return (
+    <main className="inner-page mobile-apps-page">
+      <section className="mobile-apps-hero">
+        <span className="mobile-apps-hero-bg" aria-hidden="true"></span>
+        <div className="container mobile-apps-hero-grid">
+          <div className="mobile-apps-hero-copy">
+            <p className="eyebrow light">{page.label}</p>
+            <h1>{page.title}</h1>
+            <p className="mobile-apps-hero-lead">{page.intro}</p>
+            <div className="breadcrumbs">
+              <a href="/">Home</a>
+              <span>/</span>
+              <b>Mobile Apps</b>
+            </div>
+            {visibleApps.filter((app) => storeTarget(app)).length > 0 && (
+              <div className="mobile-apps-hero-stores">
+                {visibleApps
+                  .filter((app) => storeTarget(app))
+                  .map(renderStoreButton)}
+              </div>
+            )}
+            <div className="mobile-apps-hero-chips">
+              <span>
+                <Icon name="shield" size={14} /> Official Ceypetco release
+              </span>
+              <span>
+                <Icon name="app" size={14} /> Mobile &amp; web access
+              </span>
+            </div>
+          </div>
+          <div className="mobile-apps-hero-visual">
+            <div className="mobile-apps-phone">
+              <span className="mobile-apps-phone-notch"></span>
+              <div className="mobile-apps-phone-screen">
+                <div className="mobile-apps-phone-app">
+                  {renderAppIcon(featured, { size: 'lg', dark: true })}
+                </div>
+                <p className="mobile-apps-phone-title">{featured.title}</p>
+                <small className="mobile-apps-phone-byline">
+                  Ceypetco public services
+                </small>
+                <div className="mobile-apps-phone-row">
+                  <span className="mobile-apps-phone-pill active">
+                    <Icon name="station" size={13} /> Station finder
+                  </span>
+                </div>
+                <div className="mobile-apps-phone-lines">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </div>
+                <div className="mobile-apps-phone-card mobile-apps-phone-card-a">
+                  <Icon name="shield" size={16} />
+                  <span>
+                    <b>Verified</b>
+                    <small>By Ceypetco</small>
+                  </span>
+                </div>
+                <div className="mobile-apps-phone-card mobile-apps-phone-card-b">
+                  <Icon name="clock" size={16} />
+                  <span>
+                    <b>Updated today</b>
+                    <small>Live product info</small>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mobile-apps-stats">
+        <div className="container mobile-apps-stats-grid">
+          {stats.map((stat) => (
+            <div className="mobile-apps-stat" key={stat.value}>
+              <span className="mobile-apps-stat-icon">
+                <Icon name={stat.icon} size={18} />
+              </span>
+              <div>
+                <b>{stat.value}</b>
+                <small>{stat.label}</small>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mobile-apps-intro content-section">
+        <div className="container mobile-apps-intro-grid">
+          <div className="mobile-apps-intro-head">
+            <p className="eyebrow">ABOUT THE EXPERIENCE</p>
+            <h2>
+              One app. The whole network
+              <br />
+              at your fingertips
+            </h2>
+            <p className="mobile-apps-intro-lead">
+              The official Ceypetco application brings station locations,
+              product information and public service updates together in a
+              single, trusted place — available on mobile and the web.
+            </p>
+          </div>
+          <div className="mobile-apps-highlights">
+            {highlights.map((highlight) => (
+              <article className="mobile-apps-highlight" key={highlight.title}>
+                <span className="mobile-apps-highlight-icon">
+                  <Icon name={highlight.icon} size={18} />
+                </span>
+                <div>
+                  <h3>{highlight.title}</h3>
+                  <p>{highlight.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mobile-apps-section">
+        <div className="container">
+          {loading ? (
+            <div className="mobile-apps-empty">
+              <p className="eyebrow">MOBILE APPS</p>
+              <h2>Loading mobile apps…</h2>
+            </div>
+          ) : visibleApps.length === 0 ? (
+            <div className="mobile-apps-empty">
+              <p className="eyebrow">MOBILE APPS</p>
+              <h2>Official mobile apps coming soon</h2>
+              <p>
+                Downloadable Ceypetco applications will be listed here shortly
+              </p>
+            </div>
+          ) : (
+            <>
+              <div className="page-title-row">
+                <div>
+                  <p className="eyebrow">OUR MOBILE APPS</p>
+                  <h2>Choose the experience that works for you</h2>
+                </div>
+                <p>
+                  Each official application is released under the Ceypetco brand
+                  and follows the same quality and security standards
+                </p>
+              </div>
+              <div className="mobile-apps-grid">
+                {featured && (
+                  <article className="mobile-app-card mobile-app-card-featured">
+                    <div className="mobile-app-card-top">
+                      {renderAppIcon(featured, { size: 'lg', dark: true })}
+                      <div className="mobile-app-meta">
+                        <span
+                          className={`mobile-app-badge mobile-app-badge-${featured.platform}`}
+                        >
+                          {platformOf(featured).label}
+                        </span>
+                        <small className="mobile-app-official">
+                          <Icon name="shield" size={12} /> Official application
+                        </small>
+                      </div>
+                    </div>
+                    <div className="mobile-app-card-body">
+                      <h3>{featured.title}</h3>
+                      <p className="mobile-app-card-copy">
+                        {featured.description}
+                      </p>
+                      {renderAppActions(featured)}
+                    </div>
+                  </article>
+                )}
+                {others.map((app) => (
+                  <article className="mobile-app-card" key={app._id}>
+                    <div className="mobile-app-card-top">
+                      {renderAppIcon(app)}
+                      <div className="mobile-app-meta">
+                        <span
+                          className={`mobile-app-badge mobile-app-badge-${app.platform}`}
+                        >
+                          {platformOf(app).label}
+                        </span>
+                        <small className="mobile-app-official">
+                          <Icon name="shield" size={12} /> Official
+                        </small>
+                      </div>
+                    </div>
+                    <h3>{app.title}</h3>
+                    <p className="mobile-app-card-copy">{app.description}</p>
+                    {renderAppActions(app)}
+                  </article>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      <section className="mobile-apps-steps content-section">
+        <div className="container">
+          <div className="page-title-row">
+            <div>
+              <p className="eyebrow">GETTING STARTED</p>
+              <h2>Up and running in three steps</h2>
+            </div>
+            <p>
+              Official applications are released under the Ceypetco brand and
+              follow the same quality and security standards across every
+              release
+            </p>
+          </div>
+          <div className="mobile-apps-steps-grid">
+            {steps.map((step, index) => (
+              <article key={step.title}>
+                <span className="mobile-apps-step-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div className="mobile-apps-step-icon">
+                  <Icon name={step.icon} size={20} />
+                </div>
+                <h3>{step.title}</h3>
+                <p>{step.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 const divisionPages = {
   '/refinery': {
     kicker: 'REFINERY OPERATIONS',
@@ -1732,9 +2167,11 @@ function RefineryPage() {
       ? div.detailRows.map((r) => [r.name, r.value])
       : div.detailRows || [];
   const galleryImage = (img) =>
-    img && img.startsWith('http')
-      ? img
-      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
+    !img
+      ? ''
+      : img.startsWith('http')
+        ? img
+        : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
   return (
     <>
       <section className="refinery-opening content-section">
@@ -2175,7 +2612,11 @@ function AviationPage() {
   const stats = div.stats || [];
   const gallery = div.gallery || [];
   const galleryImage = (img) =>
-    img && img.startsWith('http') ? img : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
+    !img
+      ? ''
+      : img.startsWith('http')
+        ? img
+        : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
   return (
     <>
       <section className="aviation-opening content-section">
@@ -2437,9 +2878,11 @@ function AgroChemicalsPage() {
   ];
   const image = div.image;
   const imageSrc = (img) =>
-    img && img.startsWith('http')
-      ? img
-      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
+    !img
+      ? ''
+      : img.startsWith('http')
+        ? img
+        : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${img}`;
   return (
     <>
       <section className="agro-opening content-section">
@@ -2451,12 +2894,14 @@ function AgroChemicalsPage() {
             <p>{copy[1]}</p>
           </div>
           <div className="agro-opening-images">
-            {openingImages.map((figure) => (
-              <figure key={figure.caption}>
-                <img src={imageSrc(figure.src)} alt={figure.alt} />
-                <span>{figure.caption}</span>
-              </figure>
-            ))}
+            {openingImages
+              .filter((figure) => figure.src)
+              .map((figure) => (
+                <figure key={figure.caption}>
+                  <img src={imageSrc(figure.src)} alt={figure.alt} />
+                  <span>{figure.caption}</span>
+                </figure>
+              ))}
           </div>
         </div>
       </section>
@@ -2488,10 +2933,12 @@ function AgroChemicalsPage() {
             <h2>
               Practical crop-protection solutions across the cultivation cycle
             </h2>
-            <img
-              src={imageSrc(image)}
-              alt="Safe application of crop-protection products in farmland"
-            />
+            {image && (
+              <img
+                src={imageSrc(image)}
+                alt="Safe application of crop-protection products in farmland"
+              />
+            )}
           </div>
           <div className="agro-role-copy">
             {paragraphs.map((paragraph) => (
@@ -2670,10 +3117,11 @@ function LubricantsPage() {
   );
   const copy = div.copy || [];
   const standards = div.standards || [];
-  const heroImage =
-    div.image && div.image.startsWith('http')
+  const heroImage = div.image
+    ? div.image.startsWith('http')
       ? div.image
-      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${div.image}`;
+      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${div.image}`
+    : '';
   return (
     <>
       <section className="lubricant-intro content-section">
@@ -3035,9 +3483,11 @@ function InnerPage({ type }) {
       ? services.map((s) => ({ ...s, href: s.link }))
       : serviceItems;
   const resolveServiceImage = (item) =>
-    item.image && item.image.startsWith('http')
-      ? item.image
-      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${item.image}`;
+    !item.image
+      ? ''
+      : item.image.startsWith('http')
+        ? item.image
+        : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${item.image}`;
   const requestedSubject =
     new URLSearchParams(window.location.search).get('subject') || '';
   const cameFromServices =
@@ -4673,6 +5123,10 @@ function App() {
                     <b>{t('aboutUs')}</b>
                     <small>Our mission, vision and leadership</small>
                   </a>
+                  <a href="/about">
+                    <b>Management</b>
+                    <small>Corporate and operational leadership</small>
+                  </a>
                   <a href="/history">
                     <b>{t('ourHistory')}</b>
                     <small>Our journey through the decades</small>
@@ -5173,6 +5627,8 @@ function App() {
         />
       ) : path.startsWith('/news/') ? (
         <NewsDetailPage key={path} newsId={path.split('/').pop()} />
+      ) : path === '/mobile-app' ? (
+        <MobileAppsPage />
       ) : (
         <InnerPage type={path} />
       )}

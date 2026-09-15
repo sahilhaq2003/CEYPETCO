@@ -10,7 +10,8 @@
     "seed:operations": "node src/seedOperations.js",
     "seed:home-services": "node src/seedHomeServices.js",
     "seed:services": "node src/seedServices.js",
-    "seed:divisions": "node src/seedDivisions.js"
+    "seed:divisions": "node src/seedDivisions.js",
+    "seed:mobile-apps": "node src/seedMobileApps.js"
   },
   "keywords": [],
   "author": "",

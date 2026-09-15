@@ -39,6 +39,7 @@ const regionalOfficeService = createResourceService("/admin/regional-offices");
 const userService = createResourceService("/admin/users");
 const homeServiceService = createResourceService("/admin/home-services");
 const serviceService = createResourceService("/admin/services");
+const mobileAppService = createResourceService("/admin/mobile-apps");
 
 const divisionService = {
   ...createResourceService("/admin/divisions"),
@@ -108,6 +109,7 @@ export {
   userService,
   homeServiceService,
   serviceService,
+  mobileAppService,
   divisionService,
   popupNoticeService,
   getDashboardStats,

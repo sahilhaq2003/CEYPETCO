@@ -20,6 +20,7 @@ import RegionalOfficeManagement from "../admin/pages/RegionalOffices/RegionalOff
 import ContactMessages from "../admin/pages/Messages/ContactMessages";
 import UserManagement from "../admin/pages/Users/UserManagement";
 import HomeServiceManagement from "../admin/pages/Home/HomeServiceManagement";
+import MobileAppManagement from "../admin/pages/MobileApps/MobileAppManagement";
 import ServicesManagement from "../admin/pages/Services/ServicesManagement";
 import DivisionManagement from "../admin/pages/Services/DivisionManagement";
 import DivisionEditor from "../admin/pages/Services/DivisionEditor";
@@ -61,6 +62,7 @@ const AppRoutes = () => {
         <Route path="popup-notices" element={<PopupNoticeManagement />} />
         <Route path="settings" element={<Placeholder />} />
         <Route path="home" element={<HomeServiceManagement />} />
+        <Route path="mobile-apps" element={<MobileAppManagement />} />
       </Route>
 
       <Route path="*" element={<PublicSite />} />
