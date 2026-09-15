@@ -4139,7 +4139,7 @@ footer {
   position: relative;
   z-index: 4;
   padding: 86px 0 96px;
-  background: #ffd400;
+  background: #e3222e;
 }
 
 .home-services-heading {
@@ -4152,16 +4152,20 @@ footer {
 
 .home-services-heading h2 {
   margin: 8px 0 0;
-  color: var(--navy);
+  color: #fff;
   font:
     800 42px/1.12 'Manrope',
     sans-serif;
   letter-spacing: -0.035em;
 }
 
+.home-services-heading .eyebrow {
+  color: #fff;
+}
+
 .home-services-heading > p {
   margin: 0 0 4px;
-  color: #000;
+  color: #fff;
   font-size: 14px;
   line-height: 1.7;
 }
