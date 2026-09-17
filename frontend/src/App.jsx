@@ -226,6 +226,10 @@ const divisions = [
     'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/agro-products.jpg',
     '/agro-chemicals',
   ],
+  ['Bunkering', 'Marine fuel supply supporting vessels and port operations', '/images/operations/bunkering.jpg', '/bunkering'],
+  ['EV Charging', 'Explore electric mobility and charging information', '/images/operations/ev-charging.jpg', '/ev-charging'],
+  ['Special Chemicals', 'Specialist petroleum products for industrial applications', '/images/operations/special-chemicals.jpg', '/special-chemicals'],
+  ['Bitumen', 'Petroleum bitumen for road and industrial applications', '/images/operations/bitumen.jpg', '/bitumen'],
 ];
 const heroSlides = [
   {
@@ -560,6 +564,30 @@ const pageData = {
       'Find official registrations, applications, specifications and information from one clear destination',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-2.jpg',
   },
+  '/bunkering': {
+    label: 'OUR OPERATIONS · MARINE FUELS',
+    title: 'Bunkering',
+    intro: 'Marine fuel information for vessel operators and partners',
+    image: '/images/operations/bunkering.jpg',
+  },
+  '/ev-charging': {
+    label: 'OUR OPERATIONS · ELECTRIC MOBILITY',
+    title: 'EV Charging',
+    intro: 'Explore electric mobility and request current charging information',
+    image: '/images/operations/ev-charging.jpg',
+  },
+  '/special-chemicals': {
+    label: 'OUR OPERATIONS · INDUSTRIAL PRODUCTS',
+    title: 'Special Chemicals',
+    intro: 'Specialist petroleum products for industrial applications',
+    image: '/images/operations/special-chemicals.jpg',
+  },
+  '/bitumen': {
+    label: 'OUR OPERATIONS · BITUMEN',
+    title: 'Bitumen',
+    intro: 'Petroleum bitumen for roads and industrial requirements',
+    image: '/images/operations/bitumen.jpg',
+  },
   '/online-banking': {
     label: 'PUBLIC SERVICES · BANKING INFORMATION',
     title: 'Online banking information',
@@ -677,6 +705,12 @@ const pageData = {
     intro:
       'Explore the defining moments behind more than six decades of service to Sri Lanka',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-1.jpg',
+  },
+  '/subsidiaries': {
+    label: 'DISCOVER CEYPETCO · SUBSIDIARIES',
+    title: 'Our subsidiaries',
+    intro: 'The companies supporting petroleum storage, distribution and terminal development in Sri Lanka',
+    image: '/images/distribution.jpg',
   },
   '/mobile-app': {
     label: 'PUBLIC SERVICES · MOBILE APPS',
@@ -2199,6 +2233,125 @@ const divisionPages = {
   },
 };
 
+const additionalOperationPages = {
+  '/bunkering': {
+    eyebrow: 'MARINE FUEL SERVICES',
+    heading: 'Supporting vessels at sea and in port',
+    copy: 'CEYPETCO includes bunkering among its marine fuel activities. Its published business reports identify marine diesel and fuel oil within this area. For current products, specifications and supply arrangements, contact the corporation directly.',
+    image: '/images/operations/bunkering.jpg',
+    points: ['Marine fuel enquiries', 'Product specifications and supply arrangements', 'Coordination with the relevant operations team'],
+  },
+  '/ev-charging': {
+    eyebrow: 'ELECTRIC MOBILITY',
+    heading: 'Information for a changing transport landscape',
+    copy: 'Electric vehicle charging is part of the broader energy transition. Contact CEYPETCO for current information about any charging services, locations or partnerships. This page does not list live chargers or accept payments.',
+    image: '/images/operations/ev-charging.jpg',
+    points: ['Current service information on request', 'Location and availability confirmation', 'Electric mobility enquiries'],
+  },
+  '/special-chemicals': {
+    eyebrow: 'INDUSTRIAL PRODUCTS',
+    heading: 'Specialist products for industry',
+    copy: 'CEYPETCO’s industrial product portfolio has included solvents such as SBP alongside other petroleum products. Contact the team for current product availability, specifications and handling information.',
+    image: '/images/operations/special-chemicals.jpg',
+    points: ['Solvent and specialist product enquiries', 'Technical specifications', 'Industrial customer support'],
+  },
+  '/bitumen': {
+    eyebrow: 'BITUMEN',
+    heading: 'Materials that support infrastructure',
+    copy: 'CEYPETCO supplies petroleum bitumen for industrial and road applications. Product grades, specifications and availability should be confirmed with the corporation before planning a purchase.',
+    image: '/images/operations/bitumen.jpg',
+    points: ['Bitumen product enquiries', 'Grade and specification guidance', 'Supply information for customers'],
+  },
+};
+
+const subsidiaries = [
+  {
+    shortName: 'CPSTL',
+    name: 'Ceylon Petroleum Storage Terminals Limited',
+    role: 'Petroleum storage and distribution',
+    description: 'CPSTL manages common-user petroleum storage and distribution infrastructure. Its network connects the Kolonnawa and Muthurajawela installations with regional bulk depots, supporting the movement of fuel to customers across Sri Lanka.',
+    facts: ['Two main installations', '11 regional bulk depots', 'Storage, quality assurance and distribution'],
+    website: 'https://www.cpstl.lk/cpstl/aboutus',
+  },
+  {
+    shortName: 'TPTL',
+    name: 'Trinco Petroleum Terminal (Pvt) Ltd',
+    role: 'China Bay tank farm development',
+    description: 'TPTL is a joint venture between Ceylon Petroleum Corporation and Lanka IOC PLC. It is responsible for developing the allocated Upper Tank Farm facilities at China Bay, Trincomalee, to strengthen petroleum storage infrastructure.',
+    facts: ['CPC–Lanka IOC joint venture', 'Upper Tank Farm, China Bay', '61 tanks allocated for development'],
+    website: 'https://trincopetroleum.com/',
+  },
+];
+
+function SubsidiariesPage() {
+  return (
+    <section className="subsidiaries-section content-section">
+      <div className="container">
+        <div className="subsidiaries-intro">
+          <p className="eyebrow">OUR GROUP</p>
+          <h2>Working together for reliable energy infrastructure</h2>
+          <p>CEYPETCO works through specialist companies to support the storage, handling and distribution of petroleum products. Explore their roles and visit their official websites for current information.</p>
+        </div>
+        <div className="subsidiaries-grid">
+          {subsidiaries.map((company, index) => (
+            <article className="subsidiary-card" key={company.shortName}>
+              <div className="subsidiary-card-top">
+                <span className="subsidiary-number">0{index + 1}</span>
+                <span className="subsidiary-short-name">{company.shortName}</span>
+              </div>
+              <p className="eyebrow">{company.role}</p>
+              <h3>{company.name}</h3>
+              <p className="subsidiary-description">{company.description}</p>
+              <ul>
+                {company.facts.map((fact) => <li key={fact}>{fact}</li>)}
+              </ul>
+              <a href={company.website} target="_blank" rel="noopener noreferrer">
+                Visit official website <Icon name="arrow" size={17} />
+              </a>
+            </article>
+          ))}
+        </div>
+        <p className="subsidiaries-source">
+          Ownership information: <a href="https://ceypetco.gov.lk/wp-content/uploads/2025/08/Audited-Financial-Statements-2022.pdf" target="_blank" rel="noopener noreferrer">CPC audited financial statements</a>.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function AdditionalOperationPage({ data }) {
+  return (
+    <>
+      <section className="content-section additional-operation">
+        <div className="container division-story">
+          <div className="additional-operation-copy">
+            <p className="eyebrow">{data.eyebrow}</p>
+            <h2>{data.heading}</h2>
+            <p>{data.copy}</p>
+            <a className="text-link" href={`/contact?subject=${encodeURIComponent(data.eyebrow)}`}>
+              Contact CEYPETCO <Icon name="arrow" size={17} />
+            </a>
+          </div>
+          <div className="division-feature-image">
+            <img src={data.image} alt="Illustrative view of this service area" />
+          </div>
+        </div>
+      </section>
+      <section className="additional-operation-info content-section">
+        <div className="container">
+          <p className="eyebrow">HOW WE CAN HELP</p>
+          <h2>Find the information you need</h2>
+          <div className="additional-operation-points">
+            {data.points.map((point) => (
+              <div key={point}><Icon name="shield" size={20} /><span>{point}</span></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function DivisionPage({ data }) {
   const details = data.table || data.prices || data.locations || data.products;
   const detailTitle = data.table
@@ -3653,19 +3806,32 @@ function InnerPage({ type }) {
     image: 'head-office.webp',
     href: '/online-banking?from=services',
   };
+  const operationServiceItems = divisions.slice(4).map(([title, text, image, href]) => ({
+    title,
+    category: 'Our Operations',
+    text,
+    image,
+    href: `${href}?from=services`,
+  }));
   const availableServices =
     services.length > 0
       ? services.map((s) => ({ ...s, href: s.link }))
       : serviceItems;
   const serviceList = [
-    ...availableServices.filter((item) => !item.href?.startsWith('/online-banking')),
+    ...availableServices.filter((item) =>
+      !item.href?.startsWith('/online-banking') &&
+      !operationServiceItems.some(({ href }) => item.href?.startsWith(href.split('?')[0]))
+    ),
     onlineBankingService,
+    ...operationServiceItems,
   ];
   const resolveServiceImage = (item) =>
     !item.image
       ? ''
       : item.image.startsWith('http')
         ? item.image
+        : item.image.startsWith('/')
+          ? item.image
         : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${item.image}`;
   const requestedSubject =
     new URLSearchParams(window.location.search).get('subject') || '';
@@ -3863,9 +4029,8 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-      <section className="page-hero page-hero--red">
+      <section className="page-hero">
         <img src={page.image} alt="" />
-        <div className="page-hero-overlay"></div>
         <div className="container page-hero-copy">
           <p className="eyebrow light">{type === '/about' ? t('aboutLabel') : page.label}</p>
           <h1>{type === '/about' ? t('aboutTitle') : page.title}</h1>
@@ -3898,7 +4063,7 @@ function InnerPage({ type }) {
           </div>
         </div>
       )}
-      {['/about', '/management', '/history'].includes(type) && (
+      {['/about', '/management', '/history', '/subsidiaries'].includes(type) && (
         <div className="subpage-nav">
           <div className="container">
             <span>{type === '/history' ? 'Discover Ceypetco' : t('discover')}</span>
@@ -3911,6 +4076,9 @@ function InnerPage({ type }) {
             <a className={type === '/history' ? 'active' : ''} href="/history">
               Our history
             </a>
+            <a className={type === '/subsidiaries' ? 'active' : ''} href="/subsidiaries">
+              Subsidiaries
+            </a>
           </div>
         </div>
       )}
@@ -3922,12 +4090,14 @@ function InnerPage({ type }) {
           '/agro-chemicals',
           '/lubricants',
         ].includes(type) && <DivisionPage data={divisionPages[type]} />}
+      {additionalOperationPages[type] && <AdditionalOperationPage data={additionalOperationPages[type]} />}
       {type === '/refinery' && <RefineryPage />}
       {type === '/marketing-sales' && <MarketingSalesPage />}
       {type === '/aviation' && <AviationPage />}
       {type === '/agro-chemicals' && <AgroChemicalsPage />}
       {type === '/lubricants' && <LubricantsPage />}
       {type === '/history' && <HistoryPage data={historyPage} />}
+      {type === '/subsidiaries' && <SubsidiariesPage />}
       {type === '/management' && (
         <>
           <ManagementTeam />
@@ -5362,7 +5532,7 @@ function App() {
               {t('home')}
             </a>
             <div
-              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/management' || path === '/history' ? 'active' : ''}`}
+              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/management' || path === '/history' || path === '/subsidiaries' ? 'active' : ''}`}
               onMouseEnter={() => setNavAboutDropClosed(false)}
             >
               <a
@@ -5410,11 +5580,15 @@ function App() {
                     <b>{t('ourHistory')}</b>
                     <small>Our journey through the decades</small>
                   </a>
+                  <a href="/subsidiaries">
+                    <b>Subsidiaries</b>
+                    <small>CPSTL and TPTL</small>
+                  </a>
                 </div>
               </div>
             </div>
             <div
-              className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || path === '/online-banking' || divisionPages[path] ? 'active' : ''}`}
+              className={`nav-group services-nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || path === '/online-banking' || divisionPages[path] || additionalOperationPages[path] ? 'active' : ''}`}
               onMouseEnter={() => setNavDropClosed(false)}
             >
               <a
@@ -5473,6 +5647,22 @@ function App() {
                   <a href="/lubricants">
                     <b>{t('lubricants')}</b>
                     <small>Automotive and industrial oils</small>
+                  </a>
+                  <a href="/bunkering">
+                    <b>Bunkering</b>
+                    <small>Marine fuel information</small>
+                  </a>
+                  <a href="/ev-charging">
+                    <b>EV Charging</b>
+                    <small>Electric mobility enquiries</small>
+                  </a>
+                  <a href="/special-chemicals">
+                    <b>Special Chemicals</b>
+                    <small>Industrial specialty products</small>
+                  </a>
+                  <a href="/bitumen">
+                    <b>Bitumen</b>
+                    <small>Road and industrial materials</small>
                   </a>
                 </div>
               </div>
@@ -5754,12 +5944,12 @@ function App() {
               <div className="division-grid">
                 {divisions.map(([title, text, image, href]) => (
                   <article className="division-card" key={title}>
-                    <img src={image} alt="" />
+                    <img src={image} alt="" loading="lazy" decoding="async" />
                     <div className="division-overlay"></div>
                     <div className="division-content">
                       <h3>{title}</h3>
                       <p>{text}</p>
-                      <a href={href}>
+                      <a href={href} aria-label={`Explore ${title}`}>
                         <Icon name="arrow" size={20} />
                       </a>
                     </div>
@@ -5841,6 +6031,7 @@ function App() {
             <a href="/about">{t('aboutUs')}</a>
             <a href="/management">Management</a>
             <a href="/history">{t('ourHistory')}</a>
+            <a href="/subsidiaries">Subsidiaries</a>
             <a href="/services">{t('allServices')}</a>
             <a href="/careers">{t('careers')}</a>
             <a href="/contact">{t('contact')}</a>
