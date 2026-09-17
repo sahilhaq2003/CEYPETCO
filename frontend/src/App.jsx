@@ -231,6 +231,16 @@ const divisions = [
   ['Special Chemicals', 'Specialist petroleum products for industrial applications', '/images/operations/special-chemicals.jpg', '/special-chemicals'],
   ['Bitumen', 'Petroleum bitumen for road and industrial applications', '/images/operations/bitumen.jpg', '/bitumen'],
 ];
+const brandLogos = [
+  { name: 'Lanka Bunkering', image: '/images/brand-logos/bunkering.webp', href: '/bunkering' },
+  { name: 'Lanka Agro Solutions', image: '/images/brand-logos/agro-solutions.webp', href: '/agro-chemicals' },
+  { name: 'Lanka Lubricants', image: '/images/brand-logos/lubricants.webp', href: '/lubricants' },
+  { name: 'Sustainable Fuel', image: '/images/brand-logos/sustainable-fuel.webp', href: '/services' },
+  { name: 'Lanka Bitumen', image: '/images/brand-logos/bitumen.webp', href: '/bitumen' },
+  { name: 'Lanka Aviation', image: '/images/brand-logos/aviation.webp', href: '/aviation' },
+  { name: 'Refining', image: '/images/brand-logos/refining.webp', href: '/refinery' },
+  { name: 'Lanka EV Solutions', image: '/images/brand-logos/ev-solutions.webp', href: '/ev-charging' },
+];
 const heroSlides = [
   {
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
@@ -687,7 +697,7 @@ const pageData = {
     title: 'Precision refining for national growth',
     intro:
       'Transforming crude oil into quality fuels through experienced people, proven processes and rigorous standards',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery-detail-1.jpg',
+    image: 'https://ceypetco.gov.lk/wp-content/uploads/2025/03/ref9.jpg',
   },
   '/marketing-sales': {
     label: 'OUR SERVICES · MARKETING',
@@ -732,7 +742,7 @@ const pageData = {
   },
   '/energy-ministries': {
     label: 'DISCOVER CEYPETCO · PUBLIC INSTITUTIONS',
-    title: 'Energy ministries & agencies',
+    title: 'Related ministries & agencies',
     intro: 'Explore the public institutions connected to Sri Lanka’s energy, transport and infrastructure sectors',
     image: '/images/about-banner.webp',
   },
@@ -2262,6 +2272,7 @@ const additionalOperationPages = {
     theme: 'marine',
     eyebrow: 'MARINE FUEL SERVICES',
     heading: 'Fuel support for vessels and port operations',
+    cardsTitle: 'Marine fuel and supply coordination',
     copy: 'Ceypetco has identified bunkering as a marine fuel business and reported sales of marine diesel and marine fuel oil to ships. Our team can confirm current product availability, specifications and supply arrangements for a planned call.',
     facts: ['Marine diesel', 'Marine fuel oil', 'Vessel supply enquiries'],
     cards: [
@@ -2271,13 +2282,34 @@ const additionalOperationPages = {
     ],
     steps: ['Identify the vessel and port of call', 'Provide fuel type, grade and estimated quantity', 'Confirm timing and delivery arrangements with Ceypetco'],
     note: 'Products, delivery locations and commercial terms are confirmed for each enquiry.',
+    overviewTitle: 'Planning a marine fuel supply',
+    overview: 'A bunker request depends on the vessel, fuel specification, quantity and delivery window. Early coordination gives the supply team time to confirm the product and arrangements for the port call.',
+    detailItems: [
+      { title: 'Vessel and voyage', text: 'Provide the vessel name, IMO number where available, port of call and estimated arrival and departure times.' },
+      { title: 'Fuel requirement', text: 'State the marine diesel or fuel oil grade, required quantity and technical specification.' },
+      { title: 'Delivery planning', text: 'Confirm the preferred delivery window, receiving arrangements and port contact.' },
+      { title: 'Quality documents', text: 'Request the current product specification and delivery documents needed by the vessel operator.' },
+    ],
+    specTitle: 'Products and request details',
+    specIntro: 'CPC has reported marine diesel and marine fuel oil sales to ships. A specific grade or delivery method must be confirmed for each request.',
+    specRows: [
+      ['Marine diesel', 'Share the required grade and technical specification.'],
+      ['Marine fuel oil', 'Confirm the requested grade and vessel requirements.'],
+      ['Supply window', 'Provide port, ETA, estimated quantity and preferred timing.'],
+    ],
+    faqs: [
+      { question: 'Can I see a live bunker price here?', answer: 'No. Pricing and commercial terms are confirmed for individual enquiries.' },
+      { question: 'Is supply available at every port?', answer: 'Location and delivery arrangements need confirmation for each port call.' },
+      { question: 'What should I send first?', answer: 'Send vessel details, port and ETA, product and grade, estimated quantity and contact details.' },
+    ],
     source: { label: 'CPC Annual Report 2021 · Bunkering Business', href: 'https://ceypetco.gov.lk/wp-content/uploads/2025/08/2021-_English.pdf' },
   },
   '/ev-charging': {
     theme: 'electric',
     eyebrow: 'ELECTRIC MOBILITY',
     heading: 'Explore the next chapter of mobility',
-    copy: 'Electric vehicle charging is an evolving part of Sri Lanka’s energy landscape. For any Ceypetco charging initiative, location or partnership, ask our team for the latest confirmed information before planning a visit.',
+    cardsTitle: 'Charging information to check',
+    copy: 'Ceypetco is developing a role in electric mobility alongside its established energy services. The Ministry of Energy reported an initial programme for charging facilities at ten CPC-owned filling stations; confirm the status of any individual location before travelling.',
     facts: ['Charging enquiries', 'Location confirmation', 'Partnership discussions'],
     cards: [
       { title: 'Charging locations', text: 'Ask whether a Ceypetco charging location is currently available and confirm its opening hours.' },
@@ -2285,13 +2317,34 @@ const additionalOperationPages = {
       { title: 'Future collaboration', text: 'Organisations can enquire about electric mobility and potential service partnerships.' },
     ],
     steps: ['Tell us your location or proposed site', 'Include your vehicle or charging requirements', 'Request confirmation of current availability and access'],
-    note: 'This page is informational. It is not a live charger map, booking service or payment gateway.',
-    source: { label: 'Sri Lanka Sustainable Energy Authority · EV charging initiatives', href: 'https://www.energy.gov.lk/en/' },
+    note: 'Charging locations, equipment and opening dates can change. This page does not provide live availability, bookings or payments.',
+    overviewTitle: 'Plan a charging visit with confidence',
+    overview: 'A useful charging stop starts with verified site information. Drivers should check that a station is operating, that its connector works with their vehicle and that access is available when they plan to arrive.',
+    detailItems: [
+      { title: 'Location and status', text: 'Confirm the exact address and whether the charger is commissioned and available to the public.' },
+      { title: 'Connector compatibility', text: 'Check the connector standard and whether the charger supports the vehicle and charging cable.' },
+      { title: 'Charging speed', text: 'Ask whether equipment is AC or DC and confirm rated power; actual speed also depends on the vehicle.' },
+      { title: 'Access and payment', text: 'Check operating hours, access conditions and the payment method with the site before setting out.' },
+    ],
+    specTitle: 'What the published programme says',
+    specIntro: 'The Ministry of Energy’s 2024 progress report describes steps toward charging centres at CPC-owned filling stations. It is a programme update, not a live list of operating chargers.',
+    specRows: [
+      ['Initial scope', 'Ten CPC-owned filling stations were identified for the first stage.'],
+      ['Equipment', 'Connector and power rating must be checked per site.'],
+      ['Live status', 'Confirm commissioning, opening hours and access before travel.'],
+    ],
+    faqs: [
+      { question: 'Does this page show live chargers?', answer: 'No. Contact the station or Ceypetco to confirm current status.' },
+      { question: 'Will my vehicle be compatible?', answer: 'Compatibility depends on connector type, charging standard and the vehicle. Check with the site operator.' },
+      { question: 'Can I book or pay on this website?', answer: 'No. Booking and payment are not available on this website.' },
+    ],
+    source: { label: 'Ministry of Energy · 2024 Progress Report', href: 'https://energymin.gov.lk/power/wp-content/uploads/2025/07/Ministry-of-Energy_E.pdf' },
   },
   '/special-chemicals': {
     theme: 'chemicals',
     eyebrow: 'INDUSTRIAL PRODUCTS',
     heading: 'Specialist petroleum products for industry',
+    cardsTitle: 'Support for industrial customers',
     copy: 'Ceypetco identifies Special Boiling Point (SBP) solvent among its industrial products. Industrial customers can request current specifications, availability and the appropriate route for supply.',
     facts: ['SBP solvent', 'Technical information', 'Bulk customer guidance'],
     cards: [
@@ -2301,12 +2354,34 @@ const additionalOperationPages = {
     ],
     steps: ['Describe the product and intended industrial use', 'State the quantity and delivery location', 'Request current technical documents and supply guidance'],
     note: 'Product suitability and safe handling should be checked against the current official documents.',
+    overviewTitle: 'Technical supply starts with the right specification',
+    overview: 'Special Boiling Point solvent is a specialist petroleum product. Industrial buyers should match the current specification to their process and review safety information before ordering, storing or using it.',
+    detailItems: [
+      { title: 'Product identification', text: 'Identify the required SBP solvent and describe the industrial application so the appropriate specification can be checked.' },
+      { title: 'Technical review', text: 'Request the latest product specification and safety data sheet. Check relevant properties against process requirements.' },
+      { title: 'Bulk consumer route', text: 'CPC states that users of SBP and certain fuels above 3,300 litres per month must register as bulk consumers.' },
+      { title: 'Storage and handling', text: 'Plan suitable storage, transport and workplace controls using the current safety data sheet.' },
+    ],
+    specTitle: 'Information to prepare',
+    specIntro: 'This page introduces the product category. Current grades, packaging, availability and technical limits should be confirmed through CPC’s product documents.',
+    specRows: [
+      ['Product', 'Special Boiling Point (SBP) solvent.'],
+      ['Documents', 'Ask for the current specification and safety data sheet.'],
+      ['Demand', 'Provide expected monthly volume and delivery location.'],
+      ['Registration', 'Bulk consumer registration may be required above 3,300 litres per month.'],
+    ],
+    faqs: [
+      { question: 'Is SBP solvent suitable for my process?', answer: 'Suitability depends on the process and current product specification. Review technical documents before purchase.' },
+      { question: 'When is bulk registration needed?', answer: 'CPC states that users of SBP and specified fuels consuming more than 3,300 litres per month are required to register.' },
+      { question: 'Where is registration information?', answer: 'Use the Consumer Registration page in the Services menu.' },
+    ],
     source: { label: 'CPC · Bulk Consumer Registration', href: 'https://ceypetco.gov.lk/consumer-reg/' },
   },
   '/bitumen': {
     theme: 'bitumen',
     eyebrow: 'BITUMEN',
     heading: 'The material behind durable infrastructure',
+    cardsTitle: 'Grades and project planning',
     copy: 'Petroleum bitumen is used in road construction and other industrial applications. Ceypetco’s published specifications include penetration grades 60/70 and 80/100; confirm the grade, current specification and supply terms for your project.',
     facts: ['Grade 60/70', 'Grade 80/100', 'Project supply enquiries'],
     cards: [
@@ -2316,6 +2391,27 @@ const additionalOperationPages = {
     ],
     steps: ['Specify the bitumen grade and quantity', 'Share the project location and delivery schedule', 'Confirm current specification, packaging and availability'],
     note: 'Grades shown here are based on published CPC specifications and do not indicate live stock.',
+    overviewTitle: 'Choosing a grade for the project',
+    overview: 'Penetration grade is one part of a bitumen specification. Project teams should follow the contract or engineer’s required grade, then compare the current product document, delivery form and schedule before procurement.',
+    detailItems: [
+      { title: 'Road construction', text: 'Bitumen is used as a binder in asphalt mixtures. The selected grade must follow the road design and project specification.' },
+      { title: 'Grade selection', text: 'CPC’s published procurement specification includes 60/70 and 80/100 penetration grades, each with its own test limits.' },
+      { title: 'Quality review', text: 'Check penetration, softening point, flash point and other required properties against the current specification.' },
+      { title: 'Delivery planning', text: 'Confirm quantity, packaging or bulk handling, destination and required delivery dates before ordering.' },
+    ],
+    specTitle: 'Published grade reference',
+    specIntro: 'These are selected limits from CPC’s published procurement specification. Use the full current document and project requirements for technical decisions.',
+    specRows: [
+      ['60/70 penetration', '60–70 (0.1 mm at 25°C, 100 g, 5 seconds); softening point 48–56°C.'],
+      ['80/100 penetration', '80–100 (0.1 mm at 25°C, 100 g, 5 seconds); softening point 45–55°C.'],
+      ['Flash point', 'Minimum 250°C for 60/70; minimum 232°C for 80/100 in the cited specification.'],
+      ['Supply status', 'Published specifications do not establish current stock, price or delivery availability.'],
+    ],
+    faqs: [
+      { question: 'What do 60/70 and 80/100 mean?', answer: 'They identify penetration ranges measured under specified test conditions. Check project requirements before selecting a grade.' },
+      { question: 'Can I use these figures for a tender?', answer: 'Use the full current CPC specification and project contract documents. The figures here are a summary.' },
+      { question: 'Does this page show current prices?', answer: 'No. Grade, price, packaging and delivery terms must be confirmed for each enquiry.' },
+    ],
     source: { label: 'CPC · Bitumen 60/70 and 80/100 specifications', href: 'https://ceypetco.gov.lk/wp-content/uploads/2026/01/AS-02-2026.pdf' },
   },
 };
@@ -2478,7 +2574,7 @@ function AdditionalOperationPage({ data }) {
       <section className="additional-operation-info content-section">
         <div className="container">
           <p className="eyebrow">SERVICE INFORMATION</p>
-          <h2>What to explore</h2>
+          <h2>{data.cardsTitle}</h2>
           <div className="additional-operation-points">
             {data.cards.map((card, index) => (
               <article key={card.title}>
@@ -2486,6 +2582,55 @@ function AdditionalOperationPage({ data }) {
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="additional-operation-detail content-section">
+        <div className="container">
+          <div className="additional-operation-section-heading">
+            <p className="eyebrow">IN PRACTICE</p>
+            <h2>{data.overviewTitle}</h2>
+            <p>{data.overview}</p>
+          </div>
+          <div className="additional-operation-detail-grid">
+            {data.detailItems.map((item, index) => (
+              <article key={item.title}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="additional-operation-spec content-section">
+        <div className="container additional-operation-spec-grid">
+          <div>
+            <p className="eyebrow">REFERENCE GUIDE</p>
+            <h2>{data.specTitle}</h2>
+            <p>{data.specIntro}</p>
+          </div>
+          <dl>
+            {data.specRows.map(([label, value]) => (
+              <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+            ))}
+          </dl>
+        </div>
+      </section>
+      <section className="additional-operation-faq content-section">
+        <div className="container additional-operation-faq-grid">
+          <div>
+            <p className="eyebrow">HELPFUL ANSWERS</p>
+            <h2>Frequently asked questions</h2>
+            <p>Essential information to help you plan the next step.</p>
+          </div>
+          <div>
+            {data.faqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}<span aria-hidden="true">+</span></summary>
+                <p>{faq.answer}</p>
+              </details>
             ))}
           </div>
         </div>
@@ -3592,17 +3737,18 @@ function LubricantsPage() {
   );
   const copy = div.copy || [];
   const standards = div.standards || [];
-  const heroImage = div.image
-    ? div.image.startsWith('http')
+  const legacyLubricantImage = 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/lubricants-hero.jpg';
+  const heroImage = !div.image || div.image === legacyLubricantImage || div.image === 'lubricants-hero.jpg'
+    ? '/images/lubricant-intro-generated.webp'
+    : div.image.startsWith('http') || div.image.startsWith('/')
       ? div.image
-      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${div.image}`
-    : '';
+      : `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${div.image}`;
   return (
     <>
       <section className="lubricant-intro content-section">
         <div className="container lubricant-intro-grid">
           <div className="lubricant-image">
-            <img src={heroImage} alt="Ceypetco lubricating oil being poured into an engine" />
+            <img src={heroImage} alt="Amber lubricating oil being poured into an engine" />
             <span>
               ISO
               <br />
@@ -4200,7 +4346,7 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-      <section className="page-hero">
+      <section className={`page-hero${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}`}>
         <img src={page.image} alt="" />
         <div className="container page-hero-copy">
           <p className="eyebrow light">{type === '/about' ? t('aboutLabel') : page.label}</p>
@@ -4266,7 +4412,7 @@ function InnerPage({ type }) {
               Subsidiaries
             </a>
             <a className={type === '/energy-ministries' ? 'active' : ''} href="/energy-ministries">
-              Energy ministries
+              Related ministries
             </a>
           </div>
         </div>
@@ -5849,7 +5995,7 @@ function App() {
                     <small>CPSTL and TPTL</small>
                   </a>
                   <a href="/energy-ministries">
-                    <b>Energy ministries</b>
+                    <b>Related ministries</b>
                     <small>Related public institutions</small>
                   </a>
                 </div>
@@ -6287,6 +6433,33 @@ function App() {
               </div>
             </div>
           </section>
+          <section className="home-brands section" aria-labelledby="home-brands-heading">
+            <div className="container">
+              <div className="section-heading">
+                <div>
+                  <p className="eyebrow">CEYPETCO BRANDS</p>
+                  <h2 id="home-brands-heading">Built for every journey</h2>
+                </div>
+                <p>
+                  Explore the Ceypetco brands serving industry, transport,
+                  agriculture and emerging energy needs.
+                </p>
+              </div>
+              <div className="home-brands-grid">
+                {brandLogos.map(({ name, image, href }) => (
+                  <a className="home-brand-card" href={href} key={name} aria-label={`Explore ${name}`}>
+                    <span className="home-brand-artwork">
+                      <img src={image} alt={`${name} logo`} loading="lazy" decoding="async" />
+                    </span>
+                    <span className="home-brand-footer">
+                      <span>{name}</span>
+                      <Icon name="arrow" size={18} />
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
           <section className="service-band">
             <div className="container service-band-inner">
               <div>
@@ -6361,7 +6534,7 @@ function App() {
             <a href="/management">Management</a>
             <a href="/history">{t('ourHistory')}</a>
             <a href="/subsidiaries">Subsidiaries</a>
-            <a href="/energy-ministries">Energy ministries</a>
+            <a href="/energy-ministries">Related ministries</a>
             <a href="/services">{t('allServices')}</a>
             <a href="/careers">{t('careers')}</a>
             <a href="/contact">{t('contact')}</a>

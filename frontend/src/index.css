@@ -690,6 +690,75 @@ a {
   color: var(--red);
   border-radius: 50%;
 }
+.home-brands {
+  background: #fff;
+}
+.home-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.home-brand-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e4e9e9;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--navy);
+  text-decoration: none;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.home-brand-card:hover,
+.home-brand-card:focus-visible {
+  border-color: #cdd8d9;
+  box-shadow: 0 16px 36px #102f3a12;
+  transform: translateY(-3px);
+}
+.home-brand-card:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+.home-brand-artwork {
+  display: grid;
+  place-items: center;
+  height: 215px;
+  padding: 18px;
+  background: #f7f9f8;
+}
+.home-brand-artwork img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.home-brand-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 62px;
+  padding: 15px 18px;
+  font-weight: 700;
+  font-size: 14px;
+}
+.home-brand-footer svg {
+  flex: none;
+  color: var(--red);
+}
+@media (max-width: 1050px) {
+  .home-brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .home-brands-grid { gap: 12px; }
+  .home-brand-artwork { height: 165px; padding: 10px; }
+  .home-brand-footer { min-height: 58px; padding: 12px; font-size: 12px; }
+}
+@media (max-width: 390px) {
+  .home-brands-grid { grid-template-columns: 1fr; }
+  .home-brand-artwork { height: 205px; }
+}
 .service-band {
   background: var(--red);
   color: #fff;
@@ -8392,50 +8461,54 @@ html {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--oil-color) 16%, transparent);
 }
 
-/* Lubricants page: dark orange with warm, restrained accents. */
+/* Lubricants page: bright orange theme built around #ff7300. */
 :is(.lubricant-intro, .lubricant-purpose, .oil-types-section, .lubricant-products) .eyebrow {
-  color: #9a410c;
+  color: #d25d00;
 }
 .lubricant-image > span,
 .lubricant-purpose article:nth-child(2),
 .lubricant-table-head {
-  background: #9a410c;
+  background: #ff7300;
+  color: #fff;
 }
 .lubricant-purpose article:nth-child(2) {
-  border-color: #9a410c;
+  border-color: #ff7300;
+}
+.lubricant-purpose article:nth-child(2) > span {
+  color: rgba(255, 255, 255, 0.22);
 }
 .lubricant-purpose {
-  background: #fff2e7;
+  background: #ffecd6;
 }
 .lubricant-purpose article:first-child {
-  border-color: #d98235;
-  background: #fff8f1;
+  border-color: #ff7300;
+  background: #fff6ea;
 }
 .lubricant-purpose article:nth-child(2) .eyebrow {
-  color: #ffe0be;
+  color: rgba(255, 255, 255, 0.88);
 }
 .lubricant-purpose article:nth-child(2) > p:last-child {
-  color: #ffead7;
+  color: rgba(255, 255, 255, 0.92);
 }
 .lubricant-standards span {
-  border-color: #f0bb91;
-  color: #9a410c;
-  background: #fff8f1;
+  border-color: #ff7300;
+  color: #ff7300;
+  background: #fff;
 }
 .lubricant-products-heading input:focus {
-  border-color: #9a410c;
-  box-shadow: 0 0 0 3px rgba(154, 65, 12, 0.12);
+  border-color: #ff7300;
+  box-shadow: 0 0 0 3px rgba(255, 115, 0, 0.15);
 }
 .lubricant-table article:hover {
-  background: #fff7ef;
+  background: #fff1e0;
 }
 .lubricant-table article > div:not(:first-child) a {
-  border-color: #efbc93;
-  color: #9a410c;
+  border-color: #ffb877;
+  color: #d25d00;
 }
 .lubricant-table article > div:not(:first-child) a:hover {
-  background: #9a410c;
-  border-color: #9a410c;
+  background: #ff7300;
+  border-color: #ff7300;
   color: #fff;
 }
 
@@ -14919,25 +14992,140 @@ html[lang="ta"] .site-language {
   font-size: 13px;
   font-weight: 700;
 }
+.additional-operation-section-heading {
+  max-width: 800px;
+  margin-bottom: 36px;
+}
+.additional-operation-section-heading h2,
+.additional-operation-spec h2,
+.additional-operation-faq h2 {
+  margin: 9px 0 17px;
+  font: 800 clamp(30px, 3.3vw, 44px)/1.17 'Manrope', sans-serif;
+  letter-spacing: -0.03em;
+}
+.additional-operation-section-heading > p:last-child,
+.additional-operation-spec-grid > div > p:last-child,
+.additional-operation-faq-grid > div:first-child > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+.additional-operation-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.additional-operation-detail-grid article {
+  min-height: 245px;
+  padding: clamp(22px, 2.5vw, 32px);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+}
+.additional-operation-detail-grid article > span {
+  color: var(--operation-accent);
+  font: 800 12px 'Manrope', sans-serif;
+}
+.additional-operation-detail-grid h3 {
+  margin: 34px 0 11px;
+  font: 750 18px/1.35 'Manrope', sans-serif;
+}
+.additional-operation-detail-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.additional-operation-spec {
+  background: var(--operation-tint);
+}
+.additional-operation-spec-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr);
+  gap: clamp(35px, 6vw, 100px);
+  align-items: start;
+}
+.additional-operation-spec dl {
+  margin: 0;
+  border-top: 2px solid var(--operation-accent);
+}
+.additional-operation-spec dl > div {
+  display: grid;
+  grid-template-columns: minmax(150px, .43fr) 1fr;
+  gap: 25px;
+  padding: 19px 0;
+  border-bottom: 1px solid #d9e0e2;
+}
+.additional-operation-spec dt {
+  color: var(--ink);
+  font: 800 13px/1.5 'Manrope', sans-serif;
+}
+.additional-operation-spec dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.additional-operation-faq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr);
+  gap: clamp(35px, 7vw, 110px);
+}
+.additional-operation-faq details {
+  border-bottom: 1px solid var(--line);
+}
+.additional-operation-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 21px 0;
+  color: var(--ink);
+  cursor: pointer;
+  list-style: none;
+  font: 750 15px/1.5 'Manrope', sans-serif;
+}
+.additional-operation-faq summary::-webkit-details-marker { display: none; }
+.additional-operation-faq summary span {
+  flex: none;
+  color: var(--operation-accent);
+  font-size: 24px;
+  line-height: 1;
+}
+.additional-operation-faq details[open] summary span { transform: rotate(45deg); }
+.additional-operation-faq details p {
+  margin: 0 0 22px;
+  max-width: 610px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
 @media (max-width: 800px) {
   .additional-operation-intro,
-  .additional-operation-enquiry-grid {
+  .additional-operation-enquiry-grid,
+  .additional-operation-spec-grid,
+  .additional-operation-faq-grid {
     grid-template-columns: 1fr;
   }
-  .additional-operation-points {
+  .additional-operation-points,
+  .additional-operation-detail-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 600px) {
-  .additional-operation-points {
+  .additional-operation-points,
+  .additional-operation-detail-grid {
     grid-template-columns: 1fr;
   }
-  .additional-operation-points article {
+  .additional-operation-points article,
+  .additional-operation-detail-grid article {
     min-height: 0;
   }
   .additional-operation-facts {
     padding: 28px;
   }
+  .additional-operation-spec dl > div { grid-template-columns: 1fr; gap: 5px; }
 }
 
 @media (max-width: 700px) {
@@ -15455,6 +15643,23 @@ html[lang="ta"] .site-language {
 }
 
 /* Careers */
+.page-hero--refinery > img { object-position: center 28%; }
+.page-hero--lubricants::after {
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255, 216, 161, .97) 0%, rgba(255, 216, 161, .9) 38%, rgba(255, 216, 161, .3) 70%, transparent 100%);
+}
+.page-hero--lubricants .page-hero-copy {
+  color: #3a2c17;
+  text-shadow: none;
+}
+.page-hero--lubricants .page-hero-copy .eyebrow,
+.page-hero--lubricants .breadcrumbs span { color: #e96400; }
+.page-hero--lubricants .page-hero-copy > p:not(.eyebrow) { color: #52462f; }
+.lubricant-intro, .lubricant-products { background: #fff8f0; }
+.oil-types-section { background: #ffe9cf; }
+@media (max-width: 650px) {
+  .page-hero--lubricants::after { background: linear-gradient(90deg, rgba(255, 216, 161, .97), rgba(255, 216, 161, .72)); }
+}
 .careers-nav-group .nav-dropdown { right: -70px; grid-template-columns: 180px 1fr; }
 .careers-nav-group .dropdown-links { grid-template-columns: 1fr; }
 .careers-nav-group .dropdown-links a { min-height: 58px; }
