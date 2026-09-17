@@ -709,8 +709,8 @@ a {
   animation-play-state: paused;
 }
 @keyframes brand-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
 }
 .home-brand-chip {
   flex: none;
@@ -3199,10 +3199,8 @@ footer {
 }
 .page-hero-logo {
   position: absolute;
-  right: 6vw;
-  top: 0;
-  bottom: 0;
-  margin: auto 0;
+  right: 4vw;
+  top: 28px;
   height: fit-content;
   z-index: 2;
   display: inline-flex;
@@ -15683,25 +15681,8 @@ html[lang="ta"] .site-language {
 
 /* Careers */
 .page-hero--refinery > img { object-position: center 28%; }
-.page-hero--lubricants::after {
-  width: 100%;
-  background: linear-gradient(90deg, rgba(254, 80, 0, .5) 0%, rgba(254, 80, 0, .42) 38%, rgba(254, 80, 0, .22) 70%, transparent 100%);
-}
-.page-hero--lubricants .page-hero-copy {
-  color: #3a2c17;
-  text-shadow: none;
-}
-.page-hero--lubricants .page-hero-copy .eyebrow { color: #d95000; }
-.page-hero--lubricants .page-hero-copy > p:not(.eyebrow) { color: #000; }
-.page-hero--lubricants .breadcrumbs,
-.page-hero--lubricants .breadcrumbs a,
-.page-hero--lubricants .breadcrumbs span,
-.page-hero--lubricants .breadcrumbs b { color: #000; }
 .lubricant-intro, .lubricant-products { background: #fff5ea; }
 .oil-types-section { background: #ffe1c2; }
-@media (max-width: 650px) {
-  .page-hero--lubricants::after { background: linear-gradient(90deg, rgba(254, 80, 0, .5), rgba(254, 80, 0, .34)); }
-}
 .careers-nav-group .nav-dropdown { right: -70px; grid-template-columns: 180px 1fr; }
 .careers-nav-group .dropdown-links { grid-template-columns: 1fr; }
 .careers-nav-group .dropdown-links a { min-height: 58px; }
