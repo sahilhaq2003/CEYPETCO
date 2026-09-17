@@ -693,71 +693,59 @@ a {
 .home-brands {
   background: #fff;
 }
-.home-brands-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
-}
-.home-brand-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
+.home-brands-marquee {
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.home-brands-track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: max-content;
+  animation: brand-scroll 32s linear infinite;
+}
+.home-brands-marquee:hover .home-brands-track {
+  animation-play-state: paused;
+}
+@keyframes brand-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.home-brand-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 34px;
   border: 1px solid #e4e9e9;
-  border-radius: 14px;
+  border-radius: 999px;
   background: #fff;
   color: var(--navy);
+  font-weight: 700;
+  font-size: 19px;
   text-decoration: none;
-  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  white-space: nowrap;
+  transition: border-color .2s ease, box-shadow .2s ease;
 }
-.home-brand-card:hover,
-.home-brand-card:focus-visible {
+.home-brand-chip img {
+  height: 48px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: block;
+}
+.home-brand-chip:hover,
+.home-brand-chip:focus-visible {
   border-color: #cdd8d9;
-  box-shadow: 0 16px 36px #102f3a12;
-  transform: translateY(-3px);
+  box-shadow: 0 12px 28px #102f3a18;
 }
-.home-brand-card:focus-visible {
+.home-brand-chip:focus-visible {
   outline: 3px solid var(--red);
   outline-offset: 3px;
 }
-.home-brand-artwork {
-  display: grid;
-  place-items: center;
-  height: 215px;
-  padding: 18px;
-  background: #f7f9f8;
-}
-.home-brand-artwork img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.home-brand-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  min-height: 62px;
-  padding: 15px 18px;
-  font-weight: 700;
-  font-size: 14px;
-}
-.home-brand-footer svg {
-  flex: none;
-  color: var(--red);
-}
-@media (max-width: 1050px) {
-  .home-brands-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 600px) {
-  .home-brands-grid { gap: 12px; }
-  .home-brand-artwork { height: 165px; padding: 10px; }
-  .home-brand-footer { min-height: 58px; padding: 12px; font-size: 12px; }
-}
-@media (max-width: 390px) {
-  .home-brands-grid { grid-template-columns: 1fr; }
-  .home-brand-artwork { height: 205px; }
+@media (prefers-reduced-motion: reduce) {
+  .home-brands-track { animation: none; width: 100%; flex-wrap: wrap; justify-content: center; }
 }
 .service-band {
   background: var(--red);
@@ -3209,6 +3197,38 @@ footer {
   justify-content: center;
   text-shadow: 0 2px 16px rgba(0, 20, 28, 0.9), 0 1px 3px rgba(0, 20, 28, 0.95);
 }
+.page-hero-logo {
+  position: absolute;
+  right: 6vw;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  height: fit-content;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 18px;
+  padding: 10px 14px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+}
+.page-hero-logo img {
+  height: 140px;
+  width: auto;
+  max-width: 430px;
+  object-fit: contain;
+  display: block;
+}
+.page-hero--bunkering .page-hero-logo,
+.page-hero--ev-charging .page-hero-logo,
+.page-hero--bitumen .page-hero-logo,
+.page-hero--refinery .page-hero-logo,
+.page-hero--aviation .page-hero-logo,
+.page-hero--agro-chemicals .page-hero-logo,
+.page-hero--lubricants .page-hero-logo { background: transparent; }
 .page-hero h1 {
   max-width: 700px;
   margin: 0;
@@ -4209,6 +4229,9 @@ footer {
 }
 .page-hero-copy > * {
   animation: heroCopyEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.page-hero-logo {
+  animation: heroCopyEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
 }
 .page-hero-copy .eyebrow {
   animation-delay: 0.1s;
@@ -8461,28 +8484,28 @@ html {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--oil-color) 16%, transparent);
 }
 
-/* Lubricants page: bright orange theme built around #ff7300. */
+/* Lubricants page: bright orange theme built around PANTONE 021 C (#FE5000). */
 :is(.lubricant-intro, .lubricant-purpose, .oil-types-section, .lubricant-products) .eyebrow {
-  color: #d25d00;
+  color: #d95000;
 }
 .lubricant-image > span,
 .lubricant-purpose article:nth-child(2),
 .lubricant-table-head {
-  background: #ff7300;
+  background: #FE5000;
   color: #fff;
 }
 .lubricant-purpose article:nth-child(2) {
-  border-color: #ff7300;
+  border-color: #FE5000;
 }
 .lubricant-purpose article:nth-child(2) > span {
   color: rgba(255, 255, 255, 0.22);
 }
 .lubricant-purpose {
-  background: #ffecd6;
+  background: #ffe6d1;
 }
 .lubricant-purpose article:first-child {
-  border-color: #ff7300;
-  background: #fff6ea;
+  border-color: #FE5000;
+  background: #fff3e6;
 }
 .lubricant-purpose article:nth-child(2) .eyebrow {
   color: rgba(255, 255, 255, 0.88);
@@ -8491,24 +8514,24 @@ html {
   color: rgba(255, 255, 255, 0.92);
 }
 .lubricant-standards span {
-  border-color: #ff7300;
-  color: #ff7300;
+  border-color: #FE5000;
+  color: #FE5000;
   background: #fff;
 }
 .lubricant-products-heading input:focus {
-  border-color: #ff7300;
-  box-shadow: 0 0 0 3px rgba(255, 115, 0, 0.15);
+  border-color: #FE5000;
+  box-shadow: 0 0 0 3px rgba(254, 80, 0, 0.15);
 }
 .lubricant-table article:hover {
-  background: #fff1e0;
+  background: #ffead8;
 }
 .lubricant-table article > div:not(:first-child) a {
-  border-color: #ffb877;
-  color: #d25d00;
+  border-color: #ffa978;
+  color: #d95000;
 }
 .lubricant-table article > div:not(:first-child) a:hover {
-  background: #ff7300;
-  border-color: #ff7300;
+  background: #FE5000;
+  border-color: #FE5000;
   color: #fff;
 }
 
@@ -13901,9 +13924,24 @@ html[lang="ta"] .site-language {
     width: 100%;
   }
 
-  .page-hero-copy {
+.page-hero-copy {
     justify-content: flex-end;
     padding-bottom: 42px;
+  }
+
+  .page-hero-logo {
+    right: 20px;
+    top: 20px;
+    bottom: auto;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 14px;
+    background: transparent;
+  }
+
+  .page-hero-logo img {
+    height: 64px;
+    max-width: 200px;
   }
 
   .page-hero h1 {
@@ -15517,9 +15555,6 @@ html[lang="ta"] .site-language {
 /* Media centre navigation and landing page */
 .media-nav-group .nav-dropdown {
   width: 360px;
-  right: auto;
-  left: 50%;
-  margin-left: -180px;
   grid-template-columns: 150px 1fr;
 }
 .media-nav-group .dropdown-links {
@@ -15650,19 +15685,22 @@ html[lang="ta"] .site-language {
 .page-hero--refinery > img { object-position: center 28%; }
 .page-hero--lubricants::after {
   width: 100%;
-  background: linear-gradient(90deg, rgba(255, 216, 161, .97) 0%, rgba(255, 216, 161, .9) 38%, rgba(255, 216, 161, .3) 70%, transparent 100%);
+  background: linear-gradient(90deg, rgba(254, 80, 0, .5) 0%, rgba(254, 80, 0, .42) 38%, rgba(254, 80, 0, .22) 70%, transparent 100%);
 }
 .page-hero--lubricants .page-hero-copy {
   color: #3a2c17;
   text-shadow: none;
 }
-.page-hero--lubricants .page-hero-copy .eyebrow,
-.page-hero--lubricants .breadcrumbs span { color: #e96400; }
-.page-hero--lubricants .page-hero-copy > p:not(.eyebrow) { color: #52462f; }
-.lubricant-intro, .lubricant-products { background: #fff8f0; }
-.oil-types-section { background: #ffe9cf; }
+.page-hero--lubricants .page-hero-copy .eyebrow { color: #d95000; }
+.page-hero--lubricants .page-hero-copy > p:not(.eyebrow) { color: #000; }
+.page-hero--lubricants .breadcrumbs,
+.page-hero--lubricants .breadcrumbs a,
+.page-hero--lubricants .breadcrumbs span,
+.page-hero--lubricants .breadcrumbs b { color: #000; }
+.lubricant-intro, .lubricant-products { background: #fff5ea; }
+.oil-types-section { background: #ffe1c2; }
 @media (max-width: 650px) {
-  .page-hero--lubricants::after { background: linear-gradient(90deg, rgba(255, 216, 161, .97), rgba(255, 216, 161, .72)); }
+  .page-hero--lubricants::after { background: linear-gradient(90deg, rgba(254, 80, 0, .5), rgba(254, 80, 0, .34)); }
 }
 .careers-nav-group .nav-dropdown { right: -70px; grid-template-columns: 180px 1fr; }
 .careers-nav-group .dropdown-links { grid-template-columns: 1fr; }

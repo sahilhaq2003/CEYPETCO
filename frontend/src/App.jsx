@@ -238,9 +238,18 @@ const brandLogos = [
   { name: 'Sustainable Fuel', image: '/images/brand-logos/sustainable-fuel.webp', href: '/services' },
   { name: 'Lanka Bitumen', image: '/images/brand-logos/bitumen.webp', href: '/bitumen' },
   { name: 'Lanka Aviation', image: '/images/brand-logos/aviation.webp', href: '/aviation' },
-  { name: 'Refining', image: '/images/brand-logos/refining.webp', href: '/refinery' },
+{ name: 'Refining', image: '/images/brand-logos/refining.webp', href: '/refinery' },
   { name: 'Lanka EV Solutions', image: '/images/brand-logos/ev-solutions.webp', href: '/ev-charging' },
 ];
+const pageBrandLogos = {
+  '/bunkering': '/images/brand-logos/bunkering.webp',
+  '/agro-chemicals': '/images/brand-logos/agro-solutions.webp',
+  '/lubricants': '/images/brand-logos/lubricants.webp',
+  '/bitumen': '/images/brand-logos/bitumen.webp',
+  '/aviation': '/images/brand-logos/aviation.webp',
+  '/refinery': '/images/brand-logos/refining.webp',
+  '/ev-charging': '/images/brand-logos/ev-solutions.webp',
+};
 const heroSlides = [
   {
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
@@ -4346,8 +4355,13 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-      <section className={`page-hero${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}`}>
+<section className={`page-hero${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
         <img src={page.image} alt="" />
+        {pageBrandLogos[type] && (
+          <div className="page-hero-logo">
+            <img src={pageBrandLogos[type]} alt={`${page.title} logo`} />
+          </div>
+        )}
         <div className="container page-hero-copy">
           <p className="eyebrow light">{type === '/about' ? t('aboutLabel') : page.label}</p>
           <h1>{type === '/about' ? t('aboutTitle') : page.title}</h1>
@@ -6445,18 +6459,15 @@ function App() {
                   agriculture and emerging energy needs.
                 </p>
               </div>
-              <div className="home-brands-grid">
-                {brandLogos.map(({ name, image, href }) => (
-                  <a className="home-brand-card" href={href} key={name} aria-label={`Explore ${name}`}>
-                    <span className="home-brand-artwork">
+              <div className="home-brands-marquee">
+                <div className="home-brands-track">
+                  {[...brandLogos, ...brandLogos].map(({ name, image, href }, i) => (
+                    <a className="home-brand-chip" href={href} key={`${name}-${i}`} aria-label={`Explore ${name}`}>
                       <img src={image} alt={`${name} logo`} loading="lazy" decoding="async" />
-                    </span>
-                    <span className="home-brand-footer">
                       <span>{name}</span>
-                      <Icon name="arrow" size={18} />
-                    </span>
-                  </a>
-                ))}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
