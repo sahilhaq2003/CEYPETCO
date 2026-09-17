@@ -100,6 +100,15 @@ const seedServices = async () => {
       order: 10,
       status: "published",
     },
+    {
+      title: "Online Banking",
+      category: "Banking Information",
+      text: "View bank and branch information. No payments are processed on this website.",
+      image: CLOUD + "head-office.webp",
+      link: "/online-banking?from=services",
+      order: 11,
+      status: "published",
+    },
   ];
 
   for (const item of data) {

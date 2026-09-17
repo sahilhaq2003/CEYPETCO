@@ -8,6 +8,25 @@ import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
 import displayImageUrl from './utils/displayImageUrl.js';
 
+const paymentBanks = [
+  { name: 'Bank of Ceylon', branch: 'City Office', logo: 'boc.svg' },
+  { name: 'Commercial Bank PLC', branch: 'Foreign', logo: 'commercial.svg' },
+  { name: 'DFCC Vardhana Bank Ltd', branch: 'City Office', logo: 'dfcc.png' },
+  { name: 'Hatton National Bank PLC', branch: 'City Office', logo: 'hnb.png' },
+  { name: 'National Development Bank PLC', branch: 'Head Office', logo: 'ndb.svg' },
+  { name: 'Nations Trust Bank PLC', branch: 'Cinnamon Gardens', logo: 'nations-trust.svg' },
+  { name: 'Peoples Bank', branch: 'Union Place', logo: 'peoples.png' },
+  { name: 'Sampath Bank PLC', branch: 'City Office', logo: 'sampath.jpg' },
+  { name: 'Seylan Bank PLC', branch: 'Millennium', logo: 'seylan.png' },
+];
+
+const aviationCardNetworks = [
+  { name: 'Visa', logo: 'visa.svg' },
+  { name: 'UnionPay', logo: 'unionpay.svg' },
+  { name: 'JCB', logo: 'jcb.svg' },
+  { name: 'Mastercard', logo: 'mastercard.svg' },
+];
+
 const Icon = ({ name, size = 24 }) => {
   const paths = {
     clock: (
@@ -540,6 +559,12 @@ const pageData = {
     intro:
       'Find official registrations, applications, specifications and information from one clear destination',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-2.jpg',
+  },
+  '/online-banking': {
+    label: 'PUBLIC SERVICES · BANKING INFORMATION',
+    title: 'Online banking information',
+    intro: 'Find the banks and branches listed for CEYPETCO transactions. This website does not process payments.',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/head-office.webp',
   },
   '/regional-offices': {
     label: 'PUBLIC SERVICES · REGIONAL OFFICES',
@@ -3621,10 +3646,21 @@ function InnerPage({ type }) {
       href: '/right-to-information?from=services',
     },
   ];
-  const serviceList =
+  const onlineBankingService = {
+    title: 'Online Banking',
+    category: 'Banking Information',
+    text: 'View bank and branch information. No payments are processed on this website.',
+    image: 'head-office.webp',
+    href: '/online-banking?from=services',
+  };
+  const availableServices =
     services.length > 0
       ? services.map((s) => ({ ...s, href: s.link }))
       : serviceItems;
+  const serviceList = [
+    ...availableServices.filter((item) => !item.href?.startsWith('/online-banking')),
+    onlineBankingService,
+  ];
   const resolveServiceImage = (item) =>
     !item.image
       ? ''
@@ -3849,6 +3885,7 @@ function InnerPage({ type }) {
         '/annual-reports',
         '/right-to-information',
         '/tenders',
+        '/online-banking',
       ].includes(type) && (
         <div className="public-access-backbar">
           <div className="container">
@@ -3973,7 +4010,7 @@ function InnerPage({ type }) {
           <section className="services-intro">
             <div className="container services-stats">
               <div>
-                <b>09</b>
+                <b>{String(serviceList.length).padStart(2, '0')}</b>
                 <span>
                   Essential public
                   <br />
@@ -4051,6 +4088,50 @@ function InnerPage({ type }) {
             </div>
           </section>
         </>
+      )}
+      {type === '/online-banking' && (
+        <section className="payment-options online-banking-directory content-section">
+          <div className="container">
+            <div className="payment-heading">
+              <p className="eyebrow">BANKING REFERENCE</p>
+              <h2>Bank and branch directory</h2>
+              <p>Find the bank and branch names listed for CEYPETCO transactions.</p>
+            </div>
+            <div className="online-banking-info" role="note">
+              <Icon name="shield" size={23} />
+              <p>
+                <strong>Information only.</strong> This website does not accept or process
+                payments. Confirm account details using official CEYPETCO payment
+                instructions before making a transfer through your own bank.
+              </p>
+            </div>
+            <div className="payment-logo-row bank-payment-row">
+              {paymentBanks.map(({ name, branch, logo }) => (
+                <div className="bank-entry" key={name}>
+                  <span className="bank-entry-logo">
+                    <img src={`/images/banks/${logo}`} alt={`${name} logo`} loading="lazy" />
+                  </span>
+                  <span className="bank-entry-name">{name}</span>
+                  <span className="bank-entry-branch">{branch}</span>
+                </div>
+              ))}
+            </div>
+            <div className="aviation-payment-heading">
+              <span aria-hidden="true" />
+              <h3>Aviation fuelling</h3>
+              <span aria-hidden="true" />
+              <p>Card networks listed for eligible aviation fuelling arrangements. Confirm acceptance with CEYPETCO before payment.</p>
+            </div>
+            <div className="payment-logo-row card-payment-row aviation-card-row" aria-label="Aviation fuelling card networks">
+              {aviationCardNetworks.map(({ name, logo }) => (
+                <div className="aviation-card-entry" key={name}>
+                  <img src={`/images/${logo}`} alt={`${name} logo`} loading="lazy" />
+                  <span>{name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       )}
       {type === '/consumer-registration' && (
         <>
@@ -5333,7 +5414,7 @@ function App() {
               </div>
             </div>
             <div
-              className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || divisionPages[path] ? 'active' : ''}`}
+              className={`nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || path === '/online-banking' || divisionPages[path] ? 'active' : ''}`}
               onMouseEnter={() => setNavDropClosed(false)}
             >
               <a
@@ -5720,110 +5801,6 @@ function App() {
           <div id="fuel-network">
             <FuelDistributionMap />
           </div>
-          <section className="banking section legacy-banking">
-            <div className="container banking-panel">
-              <div className="banking-copy">
-                <p className="eyebrow">ONLINE BANKING</p>
-                <h2>Pay with confidence</h2>
-                <p>
-                  Access secure online payment services through our trusted
-                  banking partners
-                </p>
-                <div className="secure-note">
-                  <span>
-                    <Icon name="shield" size={18} />
-                  </span>
-                  <div>
-                    <b>Secure payment access</b>
-                    <small>
-                      You will continue through the selected bank’s official
-                      service
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <div className="banking-partners">
-                <div className="partners-heading">
-                  <span>SELECT YOUR BANK</span>
-                  <small>Official payment partners</small>
-                </div>
-                <div className="bank-logos">
-                  {[
-                    ['boc.png', 'Bank of Ceylon'],
-                    ['peoples.png', "People's Bank"],
-                    ['hnb.png', 'HNB'],
-                    ['sampath.png', 'Sampath Bank'],
-                  ].map(([src, alt]) => (
-                    <a
-                      href="#footer"
-                      className="bank-card"
-                      key={src}
-                      aria-label={`Continue with ${alt}`}
-                    >
-                      <span className="bank-image">
-                        <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${src}`} alt={alt} />
-                      </span>
-                      <span className="bank-action">
-                        Continue <Icon name="arrow" size={15} />
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="payment-options section">
-            <div className="container">
-              <div className="payment-heading">
-                <p className="eyebrow">SECURE PAYMENT OPTIONS</p>
-                <h2>Online banking</h2>
-                <p>Continue with one of our official banking partners</p>
-              </div>
-              <div className="payment-logo-row bank-payment-row">
-                {[
-                  ['boc.png', 'Bank of Ceylon'],
-                  ['peoples.png', "People's Bank"],
-                  ['hnb.png', 'HNB'],
-                  ['sampath.png', 'Sampath Bank'],
-                ].map(([src, alt]) => (
-                  <a
-                    href="#footer"
-                    key={src}
-                    aria-label={`Continue with ${alt}`}
-                  >
-                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${src}`} alt={alt} />
-                  </a>
-                ))}
-              </div>
-              <div className="aviation-payment-heading">
-                <span />
-                <h3>Aviation fuelling</h3>
-                <span />
-                <p>
-                  Accepted card networks for eligible aviation transactions
-                </p>
-              </div>
-              <div className="payment-logo-row card-payment-row">
-                {[
-                  ['visa.svg', 'Visa'],
-                  ['unionpay.svg', 'UnionPay'],
-                  ['jcb.svg', 'JCB'],
-                  ['mastercard.svg', 'Mastercard'],
-                ].map(([src, alt]) => (
-                  <div key={src}>
-                    <img src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/${src}`} alt={alt} />
-                  </div>
-                ))}
-              </div>
-              <div className="payment-security-note">
-                <Icon name="shield" size={17} />
-                <span>
-                  Payment availability is subject to the selected service and
-                  customer arrangement
-                </span>
-              </div>
-            </div>
-          </section>
         </main>
       ) : districtFromPath(path) ? (
         <FuelStationPage district={districtFromPath(path)} />
