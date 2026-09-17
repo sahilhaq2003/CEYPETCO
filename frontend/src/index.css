@@ -11202,6 +11202,8 @@ body {
   color: #4b5c62;
   font-size: clamp(17px, 2vw, 21px);
   line-height: 1.65;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .news-detail-meta {
@@ -11264,7 +11266,7 @@ body {
 }
 
 .news-detail-copy {
-  max-width: 760px;
+  width: 100%;
 }
 
 .news-detail-copy p {
@@ -11272,6 +11274,8 @@ body {
   color: #34464d;
   font-size: 17px;
   line-height: 1.95;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .news-detail-copy p:last-child {
