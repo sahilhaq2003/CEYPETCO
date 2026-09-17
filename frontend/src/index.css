@@ -15516,9 +15516,11 @@ html[lang="ta"] .site-language {
 
 /* Media centre navigation and landing page */
 .media-nav-group .nav-dropdown {
-  width: 500px;
-  right: -125px;
-  grid-template-columns: 180px 1fr;
+  width: 360px;
+  right: auto;
+  left: 50%;
+  margin-left: -180px;
+  grid-template-columns: 150px 1fr;
 }
 .media-nav-group .dropdown-links {
   grid-template-columns: 1fr;
@@ -15620,10 +15622,12 @@ html[lang="ta"] .site-language {
   font-weight: 600;
 }
 @media (max-width: 900px) {
-  .media-nav-group .nav-dropdown {
+.media-nav-group .nav-dropdown {
     width: 100%;
     grid-template-columns: 1fr;
     right: auto;
+    left: 0;
+    margin-left: 0;
   }
   .media-hub-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
