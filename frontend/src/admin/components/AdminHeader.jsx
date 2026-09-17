@@ -31,6 +31,7 @@ const pageTitles = {
   "/admin/settings": "Site Settings",
   "/admin/home": "Home Page Services",
   "/admin/about": "About Page",
+  "/admin/history": "History Page",
 };
 
 const AdminHeader = ({ onToggleSidebar }) => {

@@ -13,6 +13,7 @@ const sidebarSections = [
   { label: "Website", items: [
     { to: "/admin/home", icon: FileText, text: "Home" },
     { to: "/admin/about", icon: FileText, text: "About" },
+    { to: "/admin/history", icon: BookOpen, text: "History" },
     { to: "/admin/services-page", icon: Wrench, text: "Services" },
     { to: "/admin/services-page/divisions", icon: Layers, text: "Division Pages" },
     { to: "/admin/mobile-apps", icon: Smartphone, text: "Mobile Apps" },

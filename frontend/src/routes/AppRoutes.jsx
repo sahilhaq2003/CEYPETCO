@@ -25,6 +25,7 @@ import ServicesManagement from "../admin/pages/Services/ServicesManagement";
 import DivisionManagement from "../admin/pages/Services/DivisionManagement";
 import DivisionEditor from "../admin/pages/Services/DivisionEditor";
 import PopupNoticeManagement from "../admin/pages/Popups/PopupNoticeManagement";
+import HistoryManagement from "../admin/pages/History/HistoryManagement";
 
 const AppRoutes = () => {
   return (
@@ -49,6 +50,7 @@ const AppRoutes = () => {
         <Route path="publications" element={<AnnualReportsManagement />} />
         <Route path="team-members" element={<TeamMembersManagement />} />
         <Route path="about" element={<ManagementContactsManagement />} />
+        <Route path="history" element={<HistoryManagement />} />
         <Route path="services-page" element={<ServicesManagement />} />
         <Route path="services-page/divisions" element={<DivisionManagement />} />
         <Route path="services-page/divisions/:slug" element={<DivisionEditor />} />

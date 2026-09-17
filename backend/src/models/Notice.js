@@ -19,4 +19,8 @@ const noticeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+noticeSchema.pre("validate", function () {
+  if (!this.slug) this.slug = `notice-${this._id}`;
+});
+
 module.exports = mongoose.model("Notice", noticeSchema);

@@ -6,6 +6,7 @@ import { useLanguage } from './i18n/LanguageContext.jsx';
 import GoogleTranslate from './components/GoogleTranslate.jsx';
 import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
+import displayImageUrl from './utils/displayImageUrl.js';
 
 const Icon = ({ name, size = 24 }) => {
   const paths = {
@@ -696,6 +697,25 @@ const historyMilestones = [
   ],
 ];
 
+const defaultHistoryPage = {
+  heroLabel: pageData['/history'].label,
+  heroTitle: pageData['/history'].title,
+  heroIntro: pageData['/history'].intro,
+  heroImage: pageData['/history'].image,
+  journeyLabel: 'OUR JOURNEY',
+  journeyTitle: 'Six decades of national service',
+  journeyIntro: 'From market entry and national distribution to refinery modernisation, each milestone strengthened Sri Lanka’s energy infrastructure',
+  galleryLabel: 'HISTORICAL MOMENTS',
+  galleryTitle: 'A visual journey through our legacy',
+  milestones: historyMilestones.map(([year, text]) => ({ year, text })),
+  gallery: [1, 2, 3, 4, 6, 7, 8, 9].map((number, index) => ({
+    image: `https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-${number}.jpg`,
+    alt: `Ceypetco historical archive ${index + 1}`,
+    caption: `Archive ${String(index + 1).padStart(2, '0')}`,
+    wide: index === 0 || index === 5,
+  })),
+};
+
 const managementGroups = [
   {
     title: 'Corporate Management',
@@ -1256,15 +1276,75 @@ function ManagementTeamProfile({ memberId }) {
   );
 }
 
+function getNewsPreview(item) {
+  const text = (item.summary?.trim() || item.content || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const maxLength = 160;
+
+  if (text.length <= maxLength) return text;
+
+  const excerpt = text.slice(0, maxLength + 1);
+  const lastSpace = excerpt.lastIndexOf(' ');
+  return `${excerpt.slice(0, lastSpace > 0 ? lastSpace : maxLength).trimEnd()}…`;
+}
+
 function NewsDetailPage({ newsId }) {
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [activePhotoIndex, setActivePhotoIndex] = useState(null);
+  const photoTriggerRef = useRef(null);
+  const lightboxRef = useRef(null);
+  const closePhotoRef = useRef(null);
+  const galleryImages = Array.isArray(item?.images) ? item.images.filter(Boolean) : [];
+  const isPhotoOpen = activePhotoIndex !== null && galleryImages.length > 0;
+
+  const closePhoto = () => {
+    setActivePhotoIndex(null);
+    requestAnimationFrame(() => photoTriggerRef.current?.focus());
+  };
+
+  useEffect(() => {
+    if (!isPhotoOpen) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closePhotoRef.current?.focus();
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setActivePhotoIndex(null);
+        requestAnimationFrame(() => photoTriggerRef.current?.focus());
+      } else if (event.key === 'ArrowRight' && galleryImages.length > 1) {
+        event.preventDefault();
+        setActivePhotoIndex((index) => (index + 1) % galleryImages.length);
+      } else if (event.key === 'ArrowLeft' && galleryImages.length > 1) {
+        event.preventDefault();
+        setActivePhotoIndex((index) => (index - 1 + galleryImages.length) % galleryImages.length);
+      } else if (event.key === 'Tab') {
+        const buttons = [...(lightboxRef.current?.querySelectorAll('button:not([disabled])') || [])];
+        if (!buttons.length) return;
+        if (event.shiftKey && document.activeElement === buttons[0]) {
+          event.preventDefault();
+          buttons[buttons.length - 1].focus();
+        } else if (!event.shiftKey && document.activeElement === buttons[buttons.length - 1]) {
+          event.preventDefault();
+          buttons[0].focus();
+        }
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isPhotoOpen, galleryImages.length]);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     setNotFound(false);
+    setActivePhotoIndex(null);
     api
       .get(`/admin/news/by/${newsId}`)
       .then((res) => {
@@ -1321,62 +1401,108 @@ function NewsDetailPage({ newsId }) {
     .split(/\n{2,}|\r?\n/)
     .map((p) => p.trim())
     .filter(Boolean);
-
   return (
     <main className="inner-page news-detail-page">
-      <section
-        className="news-detail-hero"
-        style={
-          item.featuredImage
-            ? { backgroundImage: `url(${item.featuredImage})` }
-            : undefined
-        }
-      >
-        <div className="news-detail-overlay"></div>
-        <div className="container news-detail-hero-copy">
-          <a className="news-detail-back" href="/media">
-            <Icon name="arrow" size={16} /> Media &amp; Notices
-          </a>
-          <p className="eyebrow light">{category}</p>
+      <header className="news-detail-header">
+        <div className="container news-detail-header-inner">
+          <nav className="news-detail-breadcrumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span aria-hidden="true">/</span>
+            <a href="/media">Media &amp; Notices</a>
+            <span aria-hidden="true">/</span>
+            <span>News</span>
+          </nav>
+          <span className="news-detail-category">{category}</span>
           <h1>{item.title}</h1>
+          {item.summary && <p className="news-detail-lead">{item.summary}</p>}
           <div className="news-detail-meta">
             {published && (
-              <span>
-                <Icon name="clock" size={15} /> {published}
-              </span>
+              <time dateTime={item.publishedDate}>
+                <Icon name="clock" size={16} /> {published}
+              </time>
             )}
             {item.author && (
               <span>
-                <Icon name="user" size={15} /> {item.author}
+                <Icon name="user" size={16} /> {item.author}
               </span>
             )}
           </div>
-          <div className="breadcrumbs">
-            <a href="/">Home</a>
-            <span>/</span>
-            <a href="/media">Media &amp; Notices</a>
-            <span>/</span>
-            <b>{category}</b>
+        </div>
+      </header>
+      {item.featuredImage && (
+        <div className="container news-detail-feature-wrap">
+          <figure className="news-detail-feature">
+            <img src={displayImageUrl(item.featuredImage)} alt={item.title} />
+          </figure>
+        </div>
+      )}
+      <section className="news-detail-content-section">
+        <div className="container news-detail-layout">
+          <article className="news-detail-article">
+            <div className="news-detail-copy">
+              {paragraphs.length ? (
+                paragraphs.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))
+              ) : (
+                <p>Full details of this update are being prepared and will be published shortly.</p>
+              )}
+            </div>
+          </article>
+          <aside className="news-detail-aside" aria-label="Article information">
+            <p className="news-detail-aside-heading">Article information</p>
+            <dl>
+              <div><dt>Category</dt><dd>{category}</dd></div>
+              {published && <div><dt>Published</dt><dd>{published}</dd></div>}
+              {item.author && <div><dt>Author</dt><dd>{item.author}</dd></div>}
+            </dl>
+            <a href="/media" className="news-detail-back">
+              <Icon name="arrow" size={16} /> Back to all updates
+            </a>
+          </aside>
+        </div>
+        {galleryImages.length > 0 && (
+          <section className="container news-detail-gallery" aria-labelledby="news-gallery-title">
+            <div className="news-detail-gallery-heading">
+              <p className="eyebrow">FROM THE STORY</p>
+              <h2 id="news-gallery-title">Photo gallery</h2>
+            </div>
+            <div className="news-detail-gallery-grid" tabIndex={0} aria-label="Article photos; scroll to see more">
+              {galleryImages.map((image, index) => (
+                <figure key={`${image}-${index}`}>
+                  <button type="button" onClick={(event) => { photoTriggerRef.current = event.currentTarget; setActivePhotoIndex(index); }} aria-label={`View photo ${index + 1} of ${galleryImages.length}`}>
+                    <img src={displayImageUrl(image)} alt={`${item.title} — image ${index + 1}`} loading="lazy" />
+                  </button>
+                </figure>
+              ))}
+            </div>
+          </section>
+        )}
+      </section>
+      {isPhotoOpen && (
+        <div className="news-photo-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" onClick={closePhoto}>
+          <div className="news-photo-lightbox-panel" ref={lightboxRef} onClick={(event) => event.stopPropagation()}>
+            <div className="news-photo-lightbox-top">
+              <span>Photo {activePhotoIndex + 1} of {galleryImages.length}</span>
+              <button ref={closePhotoRef} type="button" className="news-photo-lightbox-close" onClick={closePhoto} aria-label="Close photo viewer">×</button>
+            </div>
+            <div className="news-photo-lightbox-stage">
+              {galleryImages.length > 1 && (
+                <button type="button" className="news-photo-lightbox-nav" onClick={() => setActivePhotoIndex((index) => (index - 1 + galleryImages.length) % galleryImages.length)} aria-label="Previous photo">
+                  <Icon name="arrow" size={25} />
+                </button>
+              )}
+              <img src={displayImageUrl(galleryImages[activePhotoIndex])} alt={`${item.title} — image ${activePhotoIndex + 1}`} />
+              {galleryImages.length > 1 && (
+                <button type="button" className="news-photo-lightbox-nav" onClick={() => setActivePhotoIndex((index) => (index + 1) % galleryImages.length)} aria-label="Next photo">
+                  <Icon name="arrow" size={25} />
+                </button>
+              )}
+            </div>
+            <p className="news-photo-lightbox-hint">Use the arrow keys to browse · Esc to close</p>
           </div>
         </div>
-      </section>
-      <section className="news-detail-body-section">
-        <div className="container news-detail-body">
-          {item.summary && (
-            <p className="news-detail-summary">{item.summary}</p>
-          )}
-          {paragraphs.length ? (
-            paragraphs.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))
-          ) : (
-            <p>
-              Full details of this update are being prepared and will be
-              published shortly
-            </p>
-          )}
-        </div>
-      </section>
+      )}
     </main>
   );
 }
@@ -1457,31 +1583,26 @@ function ContactDirectory() {
   );
 }
 
-function HistoryPage() {
-  const gallery = [1, 2, 3, 4, 6, 7, 8, 9];
+function HistoryPage({ data }) {
   return (
     <>
       <section className="content-section history-section">
         <div className="container">
           <div className="page-title-row">
             <div>
-              <p className="eyebrow">OUR JOURNEY</p>
-              <h2>Six decades of national service</h2>
+              <p className="eyebrow">{data.journeyLabel}</p>
+              <h2>{data.journeyTitle}</h2>
             </div>
-            <p>
-              From market entry and national distribution to refinery
-              modernisation, each milestone strengthened Sri Lanka’s energy
-              infrastructure
-            </p>
+            <p>{data.journeyIntro}</p>
           </div>
           <div className="history-timeline">
-            {historyMilestones.map(([year, text], index) => (
-              <article key={year}>
+            {data.milestones.map((item, index) => (
+              <article key={item._id || index}>
                 <div className="history-year">
-                  <span>0{index + 1}</span>
-                  <b>{year}</b>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <b>{item.year}</b>
                 </div>
-                <p>{text}</p>
+                <p>{item.text}</p>
               </article>
             ))}
           </div>
@@ -1491,23 +1612,21 @@ function HistoryPage() {
         <div className="container">
           <div className="page-title-row">
             <div>
-              <p className="eyebrow">HISTORICAL MOMENTS</p>
-              <h2>A visual journey through our legacy</h2>
+              <p className="eyebrow">{data.galleryLabel}</p>
+              <h2>{data.galleryTitle}</h2>
             </div>
           </div>
           <div className="history-gallery">
-            {gallery.map((number, index) => (
+            {data.gallery.map((item, index) => (
               <figure
-                className={index === 0 || index === 5 ? 'wide' : ''}
-                key={number}
+                className={item.wide ? 'wide' : ''}
+                key={item._id || index}
               >
                 <img
-                  src={`https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/history-${number}.jpg`}
-                  alt={`Ceypetco historical archive ${index + 1}`}
+                  src={item.image}
+                  alt={item.alt || ''}
                 />
-                <figcaption>
-                  Archive {String(index + 1).padStart(2, '0')}
-                </figcaption>
+                {item.caption && <figcaption>{item.caption}</figcaption>}
               </figure>
             ))}
           </div>
@@ -3402,7 +3521,18 @@ const bulkConsumerResources = [
 
 function InnerPage({ type }) {
   const { t } = useLanguage();
-  const page = pageData[type] || pageData['/about'];
+  const [historyPage, setHistoryPage] = useState(defaultHistoryPage);
+  const page = type === '/history'
+    ? { label: historyPage.heroLabel, title: historyPage.heroTitle, intro: historyPage.heroIntro, image: historyPage.heroImage }
+    : pageData[type] || pageData['/about'];
+  useEffect(() => {
+    if (type !== '/history') return undefined;
+    let cancelled = false;
+    api.get('/admin/history-page').then((res) => {
+      if (!cancelled && res.data?.data) setHistoryPage(res.data.data);
+    }).catch(() => {});
+    return () => { cancelled = true; };
+  }, [type]);
   const [news, setNews] = useState([]);
   const [newsLoading, setNewsLoading] = useState(true);
   const [tenders, setTenders] = useState([]);
@@ -3760,7 +3890,7 @@ function InnerPage({ type }) {
       {type === '/aviation' && <AviationPage />}
       {type === '/agro-chemicals' && <AgroChemicalsPage />}
       {type === '/lubricants' && <LubricantsPage />}
-      {type === '/history' && <HistoryPage />}
+      {type === '/history' && <HistoryPage data={historyPage} />}
       {type === '/management' && (
         <>
           <ManagementTeam />
@@ -3806,6 +3936,34 @@ function InnerPage({ type }) {
                   Quality, Health, Safety and Environment standards
                 </h3>
               </article>
+            </div>
+          </section>
+          <section className="about-video-section" aria-labelledby="about-video-title">
+            <div className="container">
+              <div className="about-video-heading">
+                <p className="eyebrow">CEYPETCO IN FOCUS</p>
+                <h2 id="about-video-title">Get to know Ceypetco</h2>
+                <p>See the people, operations and purpose behind the energy that keeps Sri Lanka moving.</p>
+              </div>
+              <div className="about-video-frame">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster="/images/about-banner.webp"
+                  aria-label="Ceypetco promotional video"
+                >
+                  <source
+                    src="https://ceypetco.gov.lk/wp-content/uploads/2024/12/promo-video.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support video playback.{' '}
+                  <a href="https://ceypetco.gov.lk/wp-content/uploads/2024/12/promo-video.mp4">
+                    Watch the Ceypetco video
+                  </a>
+                  .
+                </video>
+              </div>
             </div>
           </section>
         </>
@@ -4490,7 +4648,7 @@ function InnerPage({ type }) {
                       <div
                         className="news-image"
                         style={{
-                          backgroundImage: `url(${item.featuredImage})`,
+                          backgroundImage: `url(${displayImageUrl(item.featuredImage)})`,
                         }}
                       ></div>
                     ) : (
@@ -4503,7 +4661,7 @@ function InnerPage({ type }) {
                           .replace(/\b\w/g, (c) => c.toUpperCase())}
                       </p>
                       <h3>{item.title}</h3>
-                      <p>{item.summary || item.content}</p>
+                      <p className="news-preview">{getNewsPreview(item)}</p>
                       <a href={`/news/${item._id}`}>
                         Read update <Icon name="arrow" size={16} />
                       </a>
@@ -5468,7 +5626,7 @@ function App() {
                         <div
                           className="news-image"
                           style={{
-                            backgroundImage: `url(${item.featuredImage})`,
+                            backgroundImage: `url(${displayImageUrl(item.featuredImage)})`,
                           }}
                         ></div>
                       ) : (
@@ -5481,7 +5639,7 @@ function App() {
                             .replace(/\b\w/g, (c) => c.toUpperCase())}
                         </p>
                         <h3>{item.title}</h3>
-                        <p>{item.summary || item.content}</p>
+                        <p className="news-preview">{getNewsPreview(item)}</p>
                         <a className="home-news-link" href={`/news/${item._id}`}>
                           Read update <Icon name="arrow" size={16} />
                         </a>

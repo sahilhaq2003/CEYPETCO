@@ -4,7 +4,7 @@ const createCrudController = require("./crudController");
 const crud = createCrudController(News, {
   searchFields: ["title", "summary", "category", "author"],
   sortBy: "-publishedDate",
-  assetFields: [{ field: "featuredImage" }],
+  assetFields: [{ field: "featuredImage" }, { field: "images" }],
 });
 
 const getPublished = async (req, res, next) => {

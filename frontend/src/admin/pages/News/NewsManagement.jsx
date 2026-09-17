@@ -17,6 +17,8 @@ import Pagination from "../../components/Pagination";
 import Modal from "../../components/Modal";
 import Loading from "../../components/Loading";
 import { Field, inputClass, textareaClass, selectClass } from "../../components/form.jsx";
+import displayImageUrl from "../../../utils/displayImageUrl.js";
+import compressImageForUpload from "../../../utils/compressImageForUpload.js";
 
 const emptyForm = {
   title: "",
@@ -24,6 +26,7 @@ const emptyForm = {
   content: "",
   category: "general",
   featuredImage: "",
+  images: [],
   author: "",
   publishedDate: "",
   status: "draft",
@@ -54,7 +57,7 @@ const NewsManagement = () => {
   const [deleting, setDeleting] = useState(false);
   const fileInputRef = useRef(null);
   const [uploading, setUploading] = useState(false);
-  const [imagePreview, setImagePreview] = useState("");
+  const [galleryUrl, setGalleryUrl] = useState("");
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -79,7 +82,7 @@ const NewsManagement = () => {
   const openCreate = () => {
     setEditing(null);
     setForm(emptyForm);
-    setImagePreview("");
+    setGalleryUrl("");
     setShowModal(true);
   };
 
@@ -91,11 +94,12 @@ const NewsManagement = () => {
       content: item.content || "",
       category: item.category || "general",
       featuredImage: item.featuredImage || "",
+      images: item.images || [],
       author: item.author || "",
       publishedDate: item.publishedDate?.split("T")[0] || "",
       status: item.status || "draft",
     });
-    setImagePreview(item.featuredImage || "");
+    setGalleryUrl("");
     setShowModal(true);
   };
 
@@ -104,8 +108,9 @@ const NewsManagement = () => {
     if (!file) return;
     setUploading(true);
     try {
+      const readyFile = await compressImageForUpload(file);
       const fd = new FormData();
-      fd.append("image", file);
+      fd.append("image", readyFile);
       const res = await api.post("/upload/image", fd, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -115,14 +120,72 @@ const NewsManagement = () => {
           ? res.data.data.url
           : `${origin}${res.data.data.url}`;
       setForm((f) => ({ ...f, featuredImage: fullUrl }));
-      setImagePreview(fullUrl);
-      toast.success("Image uploaded successfully");
+      toast.success(readyFile === file ? "Image uploaded successfully" : "Image compressed and uploaded successfully");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to upload image");
+      toast.error(err.response?.data?.message || err.message || "Failed to upload image");
     } finally {
       setUploading(false);
       if (fileInputRef.current) fileInputRef.current.value = "";
     }
+  };
+
+  const handleGalleryUpload = async (event) => {
+    const files = Array.from(event.target.files || []);
+    if (!files.length) return;
+    setUploading(true);
+    try {
+      const urls = [];
+      let compressedCount = 0;
+      for (const file of files) {
+        const readyFile = await compressImageForUpload(file);
+        if (readyFile !== file) compressedCount += 1;
+        const body = new FormData();
+        body.append("image", readyFile);
+        const response = await api.post("/upload/image", body);
+        const origin = (import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api")
+          .replace(/\/+$/, "").replace(/\/api$/, "");
+        const url = response.data.data.url;
+        urls.push(url.startsWith("http") ? url : `${origin}${url}`);
+        setForm((current) => ({ ...current, images: [...current.images, urls[urls.length - 1]] }));
+      }
+      toast.success(`${urls.length} image${urls.length === 1 ? "" : "s"} uploaded${compressedCount ? ` (${compressedCount} compressed)` : ""}`);
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message || "Failed to upload gallery images");
+    } finally {
+      setUploading(false);
+      event.target.value = "";
+    }
+  };
+
+  const addGalleryUrl = () => {
+    const url = galleryUrl.trim();
+    if (!url) return;
+    try {
+      const parsed = new URL(url);
+      if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("Invalid image URL");
+    } catch {
+      toast.error("Enter a valid image URL");
+      return;
+    }
+    setForm((current) => ({ ...current, images: [...current.images, url] }));
+    setGalleryUrl("");
+  };
+
+  const removeGalleryImage = (index) => {
+    setForm((current) => ({
+      ...current,
+      images: current.images.filter((_, itemIndex) => itemIndex !== index),
+    }));
+  };
+
+  const moveGalleryImage = (index, direction) => {
+    setForm((current) => {
+      const images = [...current.images];
+      const target = index + direction;
+      if (target < 0 || target >= images.length) return current;
+      [images[index], images[target]] = [images[target], images[index]];
+      return { ...current, images };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -381,7 +444,7 @@ const NewsManagement = () => {
             </Field>
           </div>
 
-          <Field label="Featured Image" hint="Upload an image or provide a URL">
+          <Field label="Featured Image" hint="Upload an image, provide an image URL, or paste a Google Drive link shared as Anyone with the link.">
             <div className="space-y-3">
               <div className="flex items-stretch gap-2">
                 <input
@@ -411,13 +474,40 @@ const NewsManagement = () => {
                   className="hidden"
                 />
               </div>
-              {imagePreview && (
+              {form.featuredImage && (
                 <img
-                  src={imagePreview}
+                  src={displayImageUrl(form.featuredImage)}
                   alt="Featured image preview"
                   className="w-full max-h-48 object-cover rounded-lg border border-slate-200"
                 />
               )}
+            </div>
+          </Field>
+
+          <Field label="Article images" hint="These appear below the article text. Upload images or add Google Drive links shared as Anyone with the link, then arrange their order.">
+            <div className="space-y-3">
+              <label className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold text-[#092f3b] cursor-pointer ${uploading ? "opacity-50 pointer-events-none" : ""}`}>
+                {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Upload className="w-4 h-4" />}
+                {uploading ? "Uploading..." : "Upload images"}
+                <input type="file" accept="image/*" multiple onChange={handleGalleryUpload} disabled={uploading} className="hidden" />
+              </label>
+              <div className="flex gap-2">
+                <input className={inputClass} type="url" value={galleryUrl} onChange={(event) => setGalleryUrl(event.target.value)} placeholder="https://example.com/photo.jpg" />
+                <button type="button" onClick={addGalleryUrl} disabled={!galleryUrl.trim()} className="px-4 rounded-lg border border-slate-200 text-sm font-semibold text-[#092f3b] disabled:opacity-50">Add URL</button>
+              </div>
+              {form.images.length > 0 && <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {form.images.map((url, index) => <div key={`${url}-${index}`} className="rounded-lg border border-slate-200 overflow-hidden">
+                  <img src={displayImageUrl(url)} alt={`Article image ${index + 1} preview`} className="w-full h-36 object-cover" />
+                  <div className="flex items-center justify-between gap-2 p-2">
+                    <span className="text-xs text-slate-600">Image {index + 1}</span>
+                    <div className="flex gap-1">
+                      <button type="button" onClick={() => moveGalleryImage(index, -1)} disabled={index === 0} aria-label="Move image left" className="p-1.5 text-slate-600 disabled:opacity-30">←</button>
+                      <button type="button" onClick={() => moveGalleryImage(index, 1)} disabled={index === form.images.length - 1} aria-label="Move image right" className="p-1.5 text-slate-600 disabled:opacity-30">→</button>
+                      <button type="button" onClick={() => removeGalleryImage(index)} aria-label="Remove image" className="p-1.5 text-red-600"><Trash2 className="w-4 h-4" /></button>
+                    </div>
+                  </div>
+                </div>)}
+              </div>}
             </div>
           </Field>
 
@@ -450,7 +540,7 @@ const NewsManagement = () => {
             </button>
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || uploading}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-sm font-semibold transition-colors disabled:opacity-50"
             >
               <Pencil className="w-4 h-4" />

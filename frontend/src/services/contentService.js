@@ -40,6 +40,10 @@ const userService = createResourceService("/admin/users");
 const homeServiceService = createResourceService("/admin/home-services");
 const serviceService = createResourceService("/admin/services");
 const mobileAppService = createResourceService("/admin/mobile-apps");
+const historyPageService = {
+  get: async () => (await api.get("/admin/history-page")).data,
+  update: async (data) => (await api.put("/admin/history-page", data)).data,
+};
 
 const divisionService = {
   ...createResourceService("/admin/divisions"),
@@ -110,6 +114,7 @@ export {
   homeServiceService,
   serviceService,
   mobileAppService,
+  historyPageService,
   divisionService,
   popupNoticeService,
   getDashboardStats,
