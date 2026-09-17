@@ -673,7 +673,7 @@ const pageData = {
     title: 'Open and transparent opportunities',
     intro:
       'Explore current tenders, supplier registrations and procurement documents',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/refinery.png',
+    image: '/images/tenders-hero.webp',
   },
   '/careers': {
     label: 'CAREERS',
@@ -4355,7 +4355,7 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-<section className={`page-hero${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
+<section className={`page-hero${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${type === '/tenders' ? ' page-hero--tenders' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
         <img src={page.image} alt="" />
         {pageBrandLogos[type] && (
           <div className="page-hero-logo">

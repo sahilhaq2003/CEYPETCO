@@ -4376,6 +4376,7 @@ footer {
 
 .home-services-heading .eyebrow {
   font-weight: 800;
+  color: var(--red);
 }
 
 .home-services-heading > p {
@@ -15741,4 +15742,10 @@ html[lang="ta"] .site-language {
   .corporate-life-cta, .current-opportunities-heading, .career-vacancy-top { flex-direction: column; align-items: flex-start; }
   .career-deadline { text-align: left; }
   .corporate-life-cta .career-button { margin-top: 4px; }
+}
+
+@media (max-width: 600px) {
+  .page-hero--tenders > img {
+    object-position: 74% center;
+  }
 }
