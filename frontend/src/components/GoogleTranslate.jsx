@@ -16,14 +16,34 @@ const LANGUAGE_BUTTON_LABEL = {
   ta: "தமிழ்",
 };
 
+const isSupportedLanguage = (code) => LANGUAGE_OPTIONS.some((option) => option.code === code);
+
+const getInitialLanguage = () => {
+  const translationCookie = document.cookie
+    .split("; ")
+    .find((cookie) => cookie.startsWith("googtrans="));
+  let cookieLanguage = null;
+  if (translationCookie) {
+    try {
+      cookieLanguage = decodeURIComponent(translationCookie.slice("googtrans=".length)).split("/").at(-1);
+    } catch {
+      // Ignore malformed cookies and use the saved preference instead.
+    }
+  }
+  if (isSupportedLanguage(cookieLanguage)) return cookieLanguage;
+
+  const savedLanguage = localStorage.getItem("ceypetco_google_language");
+  return isSupportedLanguage(savedLanguage) ? savedLanguage : "en";
+};
+
 const GoogleTranslate = () => {
   const { setLanguage } = useLanguage();
-  const [selected, setSelected] = useState(
-    () => localStorage.getItem("ceypetco_google_language") || "en",
-  );
+  const [selected, setSelected] = useState(getInitialLanguage);
   const [isOpen, setIsOpen] = useState(false);
   const selectedRef = useRef(selected);
   const containerRef = useRef(null);
+  const widgetSelectRef = useRef(null);
+  const widgetChangeHandlerRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.lang = selected;
@@ -33,6 +53,20 @@ const GoogleTranslate = () => {
     );
   }, [selected]);
 
+  const watchWidgetSelect = (select) => {
+    if (widgetSelectRef.current === select) return;
+    widgetSelectRef.current?.removeEventListener("change", widgetChangeHandlerRef.current);
+    const handleChange = () => {
+      if (!isSupportedLanguage(select.value)) return;
+      selectedRef.current = select.value;
+      setSelected(select.value);
+      localStorage.setItem("ceypetco_google_language", select.value);
+    };
+    select.addEventListener("change", handleChange);
+    widgetSelectRef.current = select;
+    widgetChangeHandlerRef.current = handleChange;
+  };
+
   const applyLanguage = (language, attempts = 0) => {
     const select = document.querySelector(".goog-te-combo");
     if (!select) {
@@ -41,10 +75,12 @@ const GoogleTranslate = () => {
       }
       return;
     }
+    watchWidgetSelect(select);
     if (language === "en" && !select.querySelector('option[value="en"]')) {
+      const hadTranslationCookie = document.cookie.split("; ").some((cookie) => cookie.startsWith("googtrans="));
       document.cookie = "googtrans=; Max-Age=0; path=/";
       document.cookie = `googtrans=; Max-Age=0; path=/; domain=.${window.location.hostname}`;
-      window.location.reload();
+      if (hadTranslationCookie) window.location.reload();
       return;
     }
     select.value = language;
@@ -72,15 +108,14 @@ const GoogleTranslate = () => {
       if (host.childElementCount) host.replaceChildren();
       new window.google.translate.TranslateElement(
         {
-          pageLanguage: "en",
+          pageLanguage: "auto",
           includedLanguages: "en,si,ta",
+          multilanguagePage: true,
           autoDisplay: false,
         },
         "google_translate_element",
       );
-      if (selectedRef.current !== "en") {
-        applyLanguage(selectedRef.current);
-      }
+      applyLanguage(selectedRef.current);
     };
     window[CALLBACK_NAME] = initialize;
     if (window.google?.translate?.TranslateElement) initialize();
@@ -91,6 +126,10 @@ const GoogleTranslate = () => {
       script.async = true;
       document.head.appendChild(script);
     }
+    return () => {
+      widgetSelectRef.current?.removeEventListener("change", widgetChangeHandlerRef.current);
+      widgetSelectRef.current = null;
+    };
   }, [setLanguage]);
 
   useEffect(() => {
