@@ -609,11 +609,11 @@ const pageData = {
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
   '/notices': {
-    label: 'PUBLIC INFORMATION · NOTICES',
+    label: 'MEDIA CENTRE · NOTICES',
     title: 'Official notices and circulars',
     intro:
-      'Read current public statements, marketing circulars and institutional agreements published by Ceypetco',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-1.jpg',
+      'Read current notices and official documents published by Ceypetco',
+    image: '/images/media-3.jpg',
   },
   '/projects': {
     label: 'STRATEGIC PROJECTS · SOREM',
@@ -638,10 +638,16 @@ const pageData = {
   },
   '/media': {
     label: 'MEDIA CENTRE',
-    title: 'News from across Ceypetco',
+    title: 'Information from Ceypetco',
     intro:
-      'Access the latest corporate notices, project updates and public information',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-1.jpg',
+      'Explore our latest news, official notices and corporate publications',
+    image: '/images/media-1.jpg',
+  },
+  '/news': {
+    label: 'MEDIA CENTRE · NEWS',
+    title: 'Latest news and stories',
+    intro: 'Follow Ceypetco announcements, activities and stories from across the corporation',
+    image: '/images/media-2.jpg',
   },
   '/tenders': {
     label: 'PROCUREMENT',
@@ -655,6 +661,18 @@ const pageData = {
     title: 'Power your career',
     intro:
       'Join Sri Lanka’s energy journey and help build the systems that keep a nation moving',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/career-team.jpg',
+  },
+  '/corporate-life': {
+    label: 'CAREERS · CORPORATE LIFE',
+    title: 'A career with purpose',
+    intro: 'Discover the people, disciplines and shared responsibilities behind Sri Lanka’s energy supply',
+    image: '/images/head-office.webp',
+  },
+  '/current-opportunities': {
+    label: 'CAREERS · CURRENT OPPORTUNITIES',
+    title: 'Find your next opportunity',
+    intro: 'Explore open roles across Ceylon Petroleum Corporation and review each vacancy before applying',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/career-team.jpg',
   },
   '/contact': {
@@ -711,6 +729,12 @@ const pageData = {
     title: 'Our subsidiaries',
     intro: 'The companies supporting petroleum storage, distribution and terminal development in Sri Lanka',
     image: '/images/distribution.jpg',
+  },
+  '/energy-ministries': {
+    label: 'DISCOVER CEYPETCO · PUBLIC INSTITUTIONS',
+    title: 'Energy ministries & agencies',
+    intro: 'Explore the public institutions connected to Sri Lanka’s energy, transport and infrastructure sectors',
+    image: '/images/about-banner.webp',
   },
   '/mobile-app': {
     label: 'PUBLIC SERVICES · MOBILE APPS',
@@ -1424,8 +1448,8 @@ function NewsDetailPage({ newsId }) {
     return (
       <main className="inner-page news-detail-page">
         <div className="container news-detail-status">
-          <p className="eyebrow">MEDIA &amp; NOTICES</p>
-          <p>Loading update...</p>
+          <p className="eyebrow">NEWS</p>
+          <p>Loading article...</p>
         </div>
       </main>
     );
@@ -1435,11 +1459,11 @@ function NewsDetailPage({ newsId }) {
     return (
       <main className="inner-page news-detail-page">
         <div className="container news-detail-status">
-          <p className="eyebrow">MEDIA &amp; NOTICES</p>
-          <h1>Update not found</h1>
-          <p>This update may have been unpublished or removed</p>
-          <a href="/media">
-            Back to Media &amp; Notices <Icon name="arrow" size={16} />
+          <p className="eyebrow">NEWS</p>
+          <h1>Article not found</h1>
+          <p>This article may have been unpublished or removed</p>
+          <a href="/news">
+            Back to News <Icon name="arrow" size={16} />
           </a>
         </div>
       </main>
@@ -1467,9 +1491,9 @@ function NewsDetailPage({ newsId }) {
           <nav className="news-detail-breadcrumbs" aria-label="Breadcrumb">
             <a href="/">Home</a>
             <span aria-hidden="true">/</span>
-            <a href="/media">Media &amp; Notices</a>
+            <a href="/news">News</a>
             <span aria-hidden="true">/</span>
-            <span>News</span>
+            <span>Article</span>
           </nav>
           <span className="news-detail-category">{category}</span>
           <h1>{item.title}</h1>
@@ -1515,8 +1539,8 @@ function NewsDetailPage({ newsId }) {
               {published && <div><dt>Published</dt><dd>{published}</dd></div>}
               {item.author && <div><dt>Author</dt><dd>{item.author}</dd></div>}
             </dl>
-            <a href="/media" className="news-detail-back">
-              <Icon name="arrow" size={16} /> Back to all updates
+            <a href="/news" className="news-detail-back">
+              <Icon name="arrow" size={16} /> Back to all news
             </a>
           </aside>
         </div>
@@ -2235,32 +2259,64 @@ const divisionPages = {
 
 const additionalOperationPages = {
   '/bunkering': {
+    theme: 'marine',
     eyebrow: 'MARINE FUEL SERVICES',
-    heading: 'Supporting vessels at sea and in port',
-    copy: 'CEYPETCO includes bunkering among its marine fuel activities. Its published business reports identify marine diesel and fuel oil within this area. For current products, specifications and supply arrangements, contact the corporation directly.',
-    image: '/images/operations/bunkering.jpg',
-    points: ['Marine fuel enquiries', 'Product specifications and supply arrangements', 'Coordination with the relevant operations team'],
+    heading: 'Fuel support for vessels and port operations',
+    copy: 'Ceypetco has identified bunkering as a marine fuel business and reported sales of marine diesel and marine fuel oil to ships. Our team can confirm current product availability, specifications and supply arrangements for a planned call.',
+    facts: ['Marine diesel', 'Marine fuel oil', 'Vessel supply enquiries'],
+    cards: [
+      { title: 'Marine diesel', text: 'Discuss the grade, required quantity and technical specification for your vessel.' },
+      { title: 'Marine fuel oil', text: 'Request current fuel oil specifications and confirm whether your required grade can be supplied.' },
+      { title: 'Supply coordination', text: 'Share the vessel, port, expected arrival and delivery window so the relevant team can assess the request.' },
+    ],
+    steps: ['Identify the vessel and port of call', 'Provide fuel type, grade and estimated quantity', 'Confirm timing and delivery arrangements with Ceypetco'],
+    note: 'Products, delivery locations and commercial terms are confirmed for each enquiry.',
+    source: { label: 'CPC Annual Report 2021 · Bunkering Business', href: 'https://ceypetco.gov.lk/wp-content/uploads/2025/08/2021-_English.pdf' },
   },
   '/ev-charging': {
+    theme: 'electric',
     eyebrow: 'ELECTRIC MOBILITY',
-    heading: 'Information for a changing transport landscape',
-    copy: 'Electric vehicle charging is part of the broader energy transition. Contact CEYPETCO for current information about any charging services, locations or partnerships. This page does not list live chargers or accept payments.',
-    image: '/images/operations/ev-charging.jpg',
-    points: ['Current service information on request', 'Location and availability confirmation', 'Electric mobility enquiries'],
+    heading: 'Explore the next chapter of mobility',
+    copy: 'Electric vehicle charging is an evolving part of Sri Lanka’s energy landscape. For any Ceypetco charging initiative, location or partnership, ask our team for the latest confirmed information before planning a visit.',
+    facts: ['Charging enquiries', 'Location confirmation', 'Partnership discussions'],
+    cards: [
+      { title: 'Charging locations', text: 'Ask whether a Ceypetco charging location is currently available and confirm its opening hours.' },
+      { title: 'Vehicle compatibility', text: 'Before travelling, confirm connector type, charging power and access requirements with the site operator.' },
+      { title: 'Future collaboration', text: 'Organisations can enquire about electric mobility and potential service partnerships.' },
+    ],
+    steps: ['Tell us your location or proposed site', 'Include your vehicle or charging requirements', 'Request confirmation of current availability and access'],
+    note: 'This page is informational. It is not a live charger map, booking service or payment gateway.',
+    source: { label: 'Sri Lanka Sustainable Energy Authority · EV charging initiatives', href: 'https://www.energy.gov.lk/en/' },
   },
   '/special-chemicals': {
+    theme: 'chemicals',
     eyebrow: 'INDUSTRIAL PRODUCTS',
-    heading: 'Specialist products for industry',
-    copy: 'CEYPETCO’s industrial product portfolio has included solvents such as SBP alongside other petroleum products. Contact the team for current product availability, specifications and handling information.',
-    image: '/images/operations/special-chemicals.jpg',
-    points: ['Solvent and specialist product enquiries', 'Technical specifications', 'Industrial customer support'],
+    heading: 'Specialist petroleum products for industry',
+    copy: 'Ceypetco identifies Special Boiling Point (SBP) solvent among its industrial products. Industrial customers can request current specifications, availability and the appropriate route for supply.',
+    facts: ['SBP solvent', 'Technical information', 'Bulk customer guidance'],
+    cards: [
+      { title: 'SBP solvent', text: 'Request the current product specification and confirm suitability for your intended industrial process.' },
+      { title: 'Technical documents', text: 'Ask for the latest specification and safety information before storing or handling a product.' },
+      { title: 'Customer registration', text: 'CPC provides a bulk consumer registration route for qualifying industrial users of SBP and other fuels.' },
+    ],
+    steps: ['Describe the product and intended industrial use', 'State the quantity and delivery location', 'Request current technical documents and supply guidance'],
+    note: 'Product suitability and safe handling should be checked against the current official documents.',
+    source: { label: 'CPC · Bulk Consumer Registration', href: 'https://ceypetco.gov.lk/consumer-reg/' },
   },
   '/bitumen': {
+    theme: 'bitumen',
     eyebrow: 'BITUMEN',
-    heading: 'Materials that support infrastructure',
-    copy: 'CEYPETCO supplies petroleum bitumen for industrial and road applications. Product grades, specifications and availability should be confirmed with the corporation before planning a purchase.',
-    image: '/images/operations/bitumen.jpg',
-    points: ['Bitumen product enquiries', 'Grade and specification guidance', 'Supply information for customers'],
+    heading: 'The material behind durable infrastructure',
+    copy: 'Petroleum bitumen is used in road construction and other industrial applications. Ceypetco’s published specifications include penetration grades 60/70 and 80/100; confirm the grade, current specification and supply terms for your project.',
+    facts: ['Grade 60/70', 'Grade 80/100', 'Project supply enquiries'],
+    cards: [
+      { title: '60/70 penetration grade', text: 'A grade named for its specified penetration range. Review the current CPC specification for test limits.' },
+      { title: '80/100 penetration grade', text: 'An alternative penetration grade listed in CPC procurement specifications for bitumen.' },
+      { title: 'Project planning', text: 'Confirm the required grade, quantity, packaging, delivery location and schedule before procurement.' },
+    ],
+    steps: ['Specify the bitumen grade and quantity', 'Share the project location and delivery schedule', 'Confirm current specification, packaging and availability'],
+    note: 'Grades shown here are based on published CPC specifications and do not indicate live stock.',
+    source: { label: 'CPC · Bitumen 60/70 and 80/100 specifications', href: 'https://ceypetco.gov.lk/wp-content/uploads/2026/01/AS-02-2026.pdf' },
   },
 };
 
@@ -2319,36 +2375,141 @@ function SubsidiariesPage() {
   );
 }
 
+const energyInstitutions = [
+  {
+    category: 'ENERGY POLICY',
+    name: 'Ministry of Energy',
+    description: 'National energy policy, sector coordination and information relevant to petroleum supply.',
+    image: '/images/institutions/energy.jpg',
+    website: 'https://energymin.gov.lk/index.php/main/',
+  },
+  {
+    category: 'PUBLIC FINANCE',
+    name: 'Ministry of Finance',
+    description: 'Public finance, national budgets and economic planning for state-sector investment.',
+    image: '/images/institutions/finance.jpg',
+    website: 'https://www.treasury.gov.lk/',
+  },
+  {
+    category: 'PORTS & AVIATION',
+    name: 'Ministry of Ports and Civil Aviation',
+    description: 'Policy for ports and aviation, sectors served by marine and aviation fuel operations.',
+    image: '/images/institutions/aviation.jpg',
+    website: 'https://www.slpa.lk/port-colombo/ministry',
+    linkLabel: 'View ministry profile',
+  },
+  {
+    category: 'ROAD INFRASTRUCTURE',
+    name: 'Road Development Authority',
+    description: 'Development and maintenance of national roads that support transport and fuel logistics.',
+    image: '/images/institutions/roads.jpg',
+    website: 'https://www.rda.gov.lk/',
+  },
+  {
+    category: 'UPSTREAM PETROLEUM',
+    name: 'Petroleum Development Authority of Sri Lanka',
+    description: 'PDASL regulates petroleum exploration, development and production in Sri Lanka.',
+    image: '/images/institutions/pdasl-hero.jpg',
+    website: 'https://pdasl.gov.lk/',
+  },
+];
+
+function EnergyMinistriesPage() {
+  return (
+    <section className="energy-institutions-section content-section">
+      <div className="container">
+        <div className="energy-institutions-intro">
+          <p className="eyebrow">PUBLIC INSTITUTIONS</p>
+          <h2>Connected across energy and infrastructure</h2>
+          <p>Explore the ministries and statutory authorities whose distinct responsibilities connect with Sri Lanka’s energy system, transport network and petroleum resources.</p>
+        </div>
+        <div className="energy-institutions-grid">
+          {energyInstitutions.map((institution) => (
+            <a className="energy-institution-card" href={institution.website} target="_blank" rel="noopener noreferrer" key={institution.name}>
+              <img src={institution.image} alt="" loading="lazy" decoding="async" />
+              <span className="energy-institution-shade" aria-hidden="true" />
+              <div className="energy-institution-body">
+                <span>{institution.category}</span>
+                <h3>{institution.name}</h3>
+                <p>{institution.description}</p>
+                <span className="energy-institution-arrow" aria-label="Visit official website"><Icon name="arrow" size={21} /></span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div className="energy-institutions-context">
+          <div>
+            <p className="eyebrow">HOW THE ROLES CONNECT</p>
+            <h2>From policy to petroleum resources</h2>
+            <p>These organisations serve different parts of the national system. Ministries set policy and coordinate sectors. Authorities carry out specialist mandates for roads and upstream petroleum resources.</p>
+            <p>PDASL is the independent statutory body under the Ministry of Energy responsible for regulating petroleum exploration, development and production under the Petroleum Resources Act No. 21 of 2021.</p>
+            <a href="https://pdasl.gov.lk/" target="_blank" rel="noopener noreferrer">Explore PDASL <Icon name="arrow" size={17} /></a>
+          </div>
+          <figure>
+            <img src="/images/institutions/pdasl-map.jpg" alt="PDASL map of Sri Lanka’s offshore petroleum basins and well locations" loading="lazy" />
+            <figcaption>Offshore basin map published by <a href="https://pdasl.gov.lk/" target="_blank" rel="noopener noreferrer">PDASL</a>.</figcaption>
+          </figure>
+        </div>
+        <p className="energy-institutions-note">Card imagery illustrates each sector. The PDASL image and basin map are from its official website; cards link to the institutions’ official sites.</p>
+      </div>
+    </section>
+  );
+}
+
 function AdditionalOperationPage({ data }) {
   return (
-    <>
+    <div className={`additional-operation-page additional-operation-page--${data.theme}`}>
       <section className="content-section additional-operation">
-        <div className="container division-story">
+        <div className="container additional-operation-intro">
           <div className="additional-operation-copy">
             <p className="eyebrow">{data.eyebrow}</p>
             <h2>{data.heading}</h2>
             <p>{data.copy}</p>
             <a className="text-link" href={`/contact?subject=${encodeURIComponent(data.eyebrow)}`}>
-              Contact CEYPETCO <Icon name="arrow" size={17} />
+              Make an enquiry <Icon name="arrow" size={17} />
             </a>
           </div>
-          <div className="division-feature-image">
-            <img src={data.image} alt="Illustrative view of this service area" />
-          </div>
+          <aside className="additional-operation-facts">
+            <span>AT A GLANCE</span>
+            {data.facts.map((fact, index) => <p key={fact}><small>0{index + 1}</small>{fact}</p>)}
+          </aside>
         </div>
       </section>
       <section className="additional-operation-info content-section">
         <div className="container">
-          <p className="eyebrow">HOW WE CAN HELP</p>
-          <h2>Find the information you need</h2>
+          <p className="eyebrow">SERVICE INFORMATION</p>
+          <h2>What to explore</h2>
           <div className="additional-operation-points">
-            {data.points.map((point) => (
-              <div key={point}><Icon name="shield" size={20} /><span>{point}</span></div>
+            {data.cards.map((card, index) => (
+              <article key={card.title}>
+                <span>0{index + 1}</span>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
-    </>
+      <section className="content-section additional-operation-enquiry">
+        <div className="container additional-operation-enquiry-grid">
+          <div>
+            <p className="eyebrow">PLAN YOUR ENQUIRY</p>
+            <h2>Start with the right details</h2>
+            <p>{data.note}</p>
+            <a className="additional-operation-button" href={`/contact?subject=${encodeURIComponent(data.eyebrow)}`}>
+              Contact Ceypetco <Icon name="arrow" size={17} />
+            </a>
+          </div>
+          <ol>
+            {data.steps.map((step) => <li key={step}>{step}</li>)}
+          </ol>
+        </div>
+        <div className="container additional-operation-source">
+          <span>REFERENCE</span>
+          <a href={data.source.href} target="_blank" rel="noopener noreferrer">{data.source.label} ↗</a>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -3260,29 +3421,33 @@ function AgroChemicalsPage() {
       <section className="agro-flipper">
         <div className="container agro-flipper-grid">
           <div>
-            <span>BIO-PESTICIDE</span>
+            <span>BIO-INSECTICIDE</span>
             <h2>Flipper</h2>
             <p>
-              Supporting the transition toward greener agriculture with a
-              new-generation bio-insecticide solution for modern crop
-              protection
+              A contact crop-protection option based on potassium salts of fatty
+              acids, developed to help manage soft-bodied pests.
             </p>
             <a
               href="/documents/agro/Flipper.pdf"
               target="_blank"
               rel="noreferrer"
             >
-              View Flipper product information{' '}
+              Read the Flipper product leaflet{' '}
               <Icon name="download" size={18} />
             </a>
           </div>
           <div>
-            <p className="eyebrow light">GREEN AGRICULTURE</p>
-            <h3>A progressive addition to the Ceypetco Agro portfolio</h3>
+            <p className="eyebrow light">CROP PROTECTION</p>
+            <h3>More choice for responsible pest management</h3>
             <p>
-              Flipper was planned as part of the organisation’s response to the
-              newly introduced Green Agriculture concept, complementing
-              established insecticide, fungicide and weed-control solutions
+              Flipper adds a bio-insecticide to the Ceypetco Agro range,
+              complementing its insecticide, fungicide and weed-control products.
+              It acts through direct contact with target pests.
+            </p>
+            <p>
+              The product leaflet identifies aphids and whiteflies among its
+              targets. Check the leaflet for approved crops, application rates
+              and safe-use instructions before use.
             </p>
           </div>
         </div>
@@ -3702,7 +3867,7 @@ function InnerPage({ type }) {
   const [historyPage, setHistoryPage] = useState(defaultHistoryPage);
   const page = type === '/history'
     ? { label: historyPage.heroLabel, title: historyPage.heroTitle, intro: historyPage.heroIntro, image: historyPage.heroImage }
-    : pageData[type] || pageData['/about'];
+    : pageData[type === '/publications' ? '/annual-reports' : type] || pageData['/about'];
   useEffect(() => {
     if (type !== '/history') return undefined;
     let cancelled = false;
@@ -3839,7 +4004,7 @@ function InnerPage({ type }) {
     new URLSearchParams(window.location.search).get('from') === 'services';
 
   useEffect(() => {
-    if (type !== '/media') return undefined;
+    if (type !== '/news') return undefined;
     let cancelled = false;
     const loadNews = async () => {
       setNewsLoading(true);
@@ -3957,7 +4122,7 @@ function InnerPage({ type }) {
   }, [type]);
 
   useEffect(() => {
-    if (type !== '/careers') return undefined;
+    if (type !== '/current-opportunities') return undefined;
     let cancelled = false;
     const loadCareers = async () => {
       setCareersLoading(true);
@@ -3980,7 +4145,7 @@ function InnerPage({ type }) {
   }, [type]);
 
   useEffect(() => {
-    if (type !== '/annual-reports') return undefined;
+    if (type !== '/annual-reports' && type !== '/publications') return undefined;
     let cancelled = false;
     const loadAnnualReports = async () => {
       setAnnualReportsLoading(true);
@@ -3990,7 +4155,7 @@ function InnerPage({ type }) {
         });
         if (!cancelled)
           setAnnualReports(
-            res.data && res.data.data ? res.data.data : []
+            (res.data && res.data.data ? res.data.data : []).filter((report) => Boolean(report.url))
           );
       } catch (err) {
         if (!cancelled) setAnnualReports([]);
@@ -4027,6 +4192,12 @@ function InnerPage({ type }) {
     };
   }, [type]);
 
+  const todayLocal = new Date();
+  todayLocal.setHours(0, 0, 0, 0);
+  const currentCareers = careers.filter((job) =>
+    !job.applicationDeadline || new Date(job.applicationDeadline) >= todayLocal,
+  );
+
   return (
     <main className="inner-page">
       <section className="page-hero">
@@ -4042,16 +4213,31 @@ function InnerPage({ type }) {
           </div>
         </div>
       </section>
+      {['/news', '/notices', '/publications', '/annual-reports'].includes(type) && (
+        <nav className="media-section-nav" aria-label="Media sections">
+          <div className="container">
+            <a className={type === '/news' ? 'active' : ''} href="/news">News</a>
+            <a className={type === '/notices' ? 'active' : ''} href="/notices">Notices</a>
+            <a className={['/publications', '/annual-reports'].includes(type) ? 'active' : ''} href="/publications">Publications</a>
+          </div>
+        </nav>
+      )}
+      {['/careers', '/corporate-life', '/current-opportunities'].includes(type) && (
+        <nav className="media-section-nav" aria-label="Careers sections">
+          <div className="container">
+            <a className={type === '/corporate-life' ? 'active' : ''} href="/corporate-life">Corporate Life</a>
+            <a className={type === '/current-opportunities' ? 'active' : ''} href="/current-opportunities">Current Opportunities</a>
+          </div>
+        </nav>
+      )}
       {[
         '/regional-offices',
         '/consumer-registration',
-        '/notices',
         '/projects',
-        '/annual-reports',
         '/right-to-information',
         '/tenders',
         '/online-banking',
-      ].includes(type) && (
+      ].includes(type) || (cameFromServices && ['/notices', '/annual-reports'].includes(type)) ? (
         <div className="public-access-backbar">
           <div className="container">
             <a href={cameFromServices ? '/services' : '/#services'}>
@@ -4062,8 +4248,8 @@ function InnerPage({ type }) {
             </a>
           </div>
         </div>
-      )}
-      {['/about', '/management', '/history', '/subsidiaries'].includes(type) && (
+      ) : null}
+      {['/about', '/management', '/history', '/subsidiaries', '/energy-ministries'].includes(type) && (
         <div className="subpage-nav">
           <div className="container">
             <span>{type === '/history' ? 'Discover Ceypetco' : t('discover')}</span>
@@ -4078,6 +4264,9 @@ function InnerPage({ type }) {
             </a>
             <a className={type === '/subsidiaries' ? 'active' : ''} href="/subsidiaries">
               Subsidiaries
+            </a>
+            <a className={type === '/energy-ministries' ? 'active' : ''} href="/energy-ministries">
+              Energy ministries
             </a>
           </div>
         </div>
@@ -4098,6 +4287,7 @@ function InnerPage({ type }) {
       {type === '/lubricants' && <LubricantsPage />}
       {type === '/history' && <HistoryPage data={historyPage} />}
       {type === '/subsidiaries' && <SubsidiariesPage />}
+      {type === '/energy-ministries' && <EnergyMinistriesPage />}
       {type === '/management' && (
         <>
           <ManagementTeam />
@@ -4607,7 +4797,7 @@ function InnerPage({ type }) {
           </div>
         </section>
       )}
-      {type === '/annual-reports' && (
+      {['/annual-reports', '/publications'].includes(type) && (
         <section className="annual-reports-page content-section">
           <div className="container">
             <div className="annual-reports-heading">
@@ -4616,8 +4806,8 @@ function InnerPage({ type }) {
                 <h2>Annual reports</h2>
               </div>
               <p>
-                A chronological archive of CPC corporate reports covering
-                operational performance, governance and financial reporting
+                Published CPC annual reports covering operational performance,
+                governance and financial reporting, arranged by year
               </p>
             </div>
 
@@ -4801,6 +4991,15 @@ function InnerPage({ type }) {
                 customers, dealers, partners and the public
               </p>
             </div>
+            {noticesLoading && (
+              <div className="notices-featured" role="status">
+                <div className="notice-featured-index">···</div>
+                <div>
+                  <p className="eyebrow light">PUBLIC INFORMATION</p>
+                  <h3>Loading notices...</h3>
+                </div>
+              </div>
+            )}
             {!noticesLoading && notices.length === 0 && (
               <div className="notices-featured">
                 <div className="notice-featured-index">01</div>
@@ -4816,9 +5015,10 @@ function InnerPage({ type }) {
                 <div className="notices-featured">
                   <div className="notice-featured-index">01</div>
                   <div>
-                    <p className="eyebrow light">{notices[0].category}</p>
+                    <p className="eyebrow light">{(notices[0].category || 'Notice').replace(/-/g, ' ')}</p>
                     <h3>{notices[0].title}</h3>
                     <p>{notices[0].summary || notices[0].content}</p>
+                    {notices[0].publishedDate && <small>Published {new Date(notices[0].publishedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</small>}
                     {notices[0].document ? (
                       <a
                         href={notices[0].document}
@@ -4842,8 +5042,9 @@ function InnerPage({ type }) {
                           size={22}
                         />
                       </div>
-                      <p className="eyebrow">{notice.category}</p>
+                      <p className="eyebrow">{(notice.category || 'Notice').replace(/-/g, ' ')}</p>
                       <h3>{notice.title}</h3>
+                      {notice.publishedDate && <time className="notice-document-date" dateTime={notice.publishedDate}>{new Date(notice.publishedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time>}
                       <p>{notice.summary || notice.content}</p>
                       {notice.document ? (
                         <a
@@ -4855,7 +5056,7 @@ function InnerPage({ type }) {
                         </a>
                       ) : (
                         <span className="notice-unavailable">
-                          Document not available
+                          Official notice
                         </span>
                       )}
                     </article>
@@ -4877,20 +5078,46 @@ function InnerPage({ type }) {
         </section>
       )}
       {type === '/media' && (
-        <section className="content-section">
+        <section className="media-hub content-section">
+          <div className="container">
+            <div className="media-hub-heading">
+              <p className="eyebrow">MEDIA CENTRE</p>
+              <h2>Explore Ceypetco updates</h2>
+              <p>Find the right source for stories, public information and published reports.</p>
+            </div>
+            <div className="media-hub-grid">
+              {[
+                { number: '01', title: 'News', description: 'Corporate announcements, activities and stories.', href: '/news', action: 'Browse news' },
+                { number: '02', title: 'Notices', description: 'Current official notices, circulars and documents.', href: '/notices', action: 'Read notices' },
+                { number: '03', title: 'Publications', description: 'Annual reports and published corporate records.', href: '/publications', action: 'View publications' },
+              ].map((item) => (
+                <a href={item.href} className="media-hub-card" key={item.title}>
+                  <span>{item.number}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <b>{item.action} <Icon name="arrow" size={17} /></b>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+      {type === '/news' && (
+        <section className="media-news-page content-section">
           <div className="container">
             <div className="page-title-row">
               <div>
-                <p className="eyebrow">LATEST UPDATES</p>
-                <h2>Media & notices</h2>
+                <p className="eyebrow">LATEST STORIES</p>
+                <h2>News and updates</h2>
               </div>
+              <p>Published announcements and stories from Ceylon Petroleum Corporation.</p>
             </div>
             <div className="news-grid">
               {newsLoading ? (
                 <p className="news-grid-empty">Loading latest updates...</p>
               ) : news.length === 0 ? (
                 <p className="news-grid-empty">
-                  No published updates available yet
+                  No published news available yet
                 </p>
               ) : (
                 news.map((item) => (
@@ -4911,6 +5138,7 @@ function InnerPage({ type }) {
                           .replace(/-/g, ' ')
                           .replace(/\b\w/g, (c) => c.toUpperCase())}
                       </p>
+                      {item.publishedDate && <time className="media-news-date" dateTime={item.publishedDate}>{new Date(item.publishedDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time>}
                       <h3>{item.title}</h3>
                       <p className="news-preview">{getNewsPreview(item)}</p>
                       <a href={`/news/${item._id}`}>
@@ -5114,52 +5342,82 @@ function InnerPage({ type }) {
         </section>
       )}
       {type === '/careers' && (
-        <section className="content-section">
-          <div className="container career-grid">
-            <div>
+        <section className="content-section careers-hub">
+          <div className="container">
+            <div className="careers-intro">
               <p className="eyebrow">WORK WITH US</p>
               <h2>Build the future of energy</h2>
-              <p>
-                Be at the forefront of national development with a team
-                committed to safety, reliability and meaningful public service
-              </p>
-              <a className="career-button" href="#opportunities">
-                View current opportunities <Icon name="arrow" size={17} />
+              <p>Contribute to the work that keeps Sri Lanka moving. Explore life across the corporation or find a role that matches your skills.</p>
+            </div>
+            <div className="careers-hub-grid">
+              <a href="/corporate-life" className="careers-hub-card">
+                <span>01 / OUR PEOPLE</span>
+                <h3>Corporate Life</h3>
+                <p>See how teams across operations, technical services and support functions contribute to a shared public purpose.</p>
+                <b>Explore corporate life <Icon name="arrow" size={18} /></b>
+              </a>
+              <a href="/current-opportunities" className="careers-hub-card">
+                <span>02 / JOIN US</span>
+                <h3>Current Opportunities</h3>
+                <p>Browse published vacancies and review role details, requirements and deadlines.</p>
+                <b>View opportunities <Icon name="arrow" size={18} /></b>
               </a>
             </div>
-            <div className="opportunity-card" id="opportunities">
+          </div>
+        </section>
+      )}
+      {type === '/corporate-life' && (
+        <>
+          <section className="content-section corporate-life-intro">
+            <div className="container corporate-life-lead">
               <div>
-                <span>NOW HIRING</span>
-                <small>Current opportunities</small>
+                <p className="eyebrow">LIFE AT CEYPETCO</p>
+                <h2>Many disciplines. One national purpose.</h2>
               </div>
-              {careersLoading ? (
-                <article>
-                  <h3>Loading opportunities...</h3>
-                  <p>Please wait</p>
-                </article>
-              ) : careers.length === 0 ? (
-                <article>
-                  <h3>No current openings</h3>
-                  <p>Please check back later for new vacancies</p>
-                </article>
-              ) : (
-                careers.map((job) => (
-                  <article key={job._id}>
-                    <h3>{job.title}</h3>
-                    <p>
-                      {[job.department, job.location, job.type]
-                        .filter(Boolean)
-                        .join(' · ') || 'Ceypetco Careers'}
-                    </p>
-                    <a
-                      href={`/contact?subject=${encodeURIComponent(job.title)}`}
-                    >
-                      <Icon name="arrow" size={18} />
-                    </a>
-                  </article>
-                ))
-              )}
+              <p>Ceylon Petroleum Corporation brings together people in refining, supply, distribution, commercial services and essential support roles. Their work connects technical expertise with the everyday needs of communities and businesses across Sri Lanka.</p>
             </div>
+            <div className="container corporate-life-pillars">
+              <article><span>01</span><h3>Meaningful work</h3><p>Contribute to the reliable supply of petroleum products and services that support the country’s transport, industry and daily life.</p></article>
+              <article><span>02</span><h3>Learning and development</h3><p>Technical knowledge, professional development and practical experience help people grow across a range of disciplines.</p></article>
+              <article><span>03</span><h3>Safety and responsibility</h3><p>Safety, quality and environmental care are integral to work across facilities, field operations and offices.</p></article>
+            </div>
+          </section>
+          <section className="content-section corporate-life-paths">
+            <div className="container">
+              <p className="eyebrow">WHERE TEAMS CONTRIBUTE</p>
+              <h2>Work across the energy value chain</h2>
+              <div className="corporate-life-path-grid">
+                <article><span>01</span><h3>Refining and technical operations</h3><p>Plant operations, engineering, maintenance, laboratory work and safety.</p></article>
+                <article><span>02</span><h3>Supply and distribution</h3><p>Planning, logistics and the coordination needed to move products nationwide.</p></article>
+                <article><span>03</span><h3>Customer and commercial services</h3><p>Supporting the people and organisations that depend on Ceypetco products.</p></article>
+                <article><span>04</span><h3>Corporate support</h3><p>Finance, people, procurement, digital services and administration.</p></article>
+              </div>
+              <div className="corporate-life-cta"><div><span>YOUR NEXT STEP</span><h3>See where you could contribute</h3><p>Explore current vacancies and review the requirements for each role.</p></div><a className="career-button" href="/current-opportunities">View current opportunities <Icon name="arrow" size={17} /></a></div>
+            </div>
+          </section>
+        </>
+      )}
+      {type === '/current-opportunities' && (
+        <section className="content-section current-opportunities">
+          <div className="container">
+            <div className="careers-intro">
+              <p className="eyebrow">WORK WITH US</p>
+              <h2>Build the future of energy</h2>
+              <p>Review available positions below, including role details, requirements and application deadlines where provided.</p>
+            </div>
+            <div className="current-opportunities-heading"><div><span>OPEN POSITIONS</span><h3>Current opportunities</h3></div></div>
+            {careersLoading ? <div className="careers-status">Loading opportunities…</div> : currentCareers.length === 0 ? <div className="careers-status"><h3>No current openings</h3><p>Please check back later for new vacancies.</p></div> : (
+              <div className="career-vacancy-list">
+                {currentCareers.map((job) => (
+                  <article className="career-vacancy" key={job._id}>
+                    <div className="career-vacancy-top"><div><span>{job.reference || 'CEYPETCO VACANCY'}</span><h3>{job.title}</h3></div>{job.applicationDeadline && <div className="career-deadline"><small>APPLICATION DEADLINE</small><strong>{new Date(job.applicationDeadline).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</strong></div>}</div>
+                    <div className="career-vacancy-meta">{[job.department, job.location, job.type].filter(Boolean).map((item) => <span key={item}>{item}</span>)}</div>
+                    {job.description && <p className="career-vacancy-description">{job.description}</p>}
+                    {(job.responsibilities || job.requirements) && <div className="career-vacancy-details">{job.responsibilities && <div><h4>What the role involves</h4><p>{job.responsibilities}</p></div>}{job.requirements && <div><h4>What you will need</h4><p>{job.requirements}</p></div>}</div>}
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -5229,6 +5487,8 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navDropClosed, setNavDropClosed] = useState(true);
   const [navAboutDropClosed, setNavAboutDropClosed] = useState(true);
+  const [navMediaDropClosed, setNavMediaDropClosed] = useState(true);
+  const [navCareersDropClosed, setNavCareersDropClosed] = useState(true);
   const [slide, setSlide] = useState(0);
   const [news, setNews] = useState([]);
   const [newsLoading, setNewsLoading] = useState(true);
@@ -5275,6 +5535,8 @@ function App() {
     setMenuOpen(false);
     setNavDropClosed(true);
     setNavAboutDropClosed(true);
+    setNavMediaDropClosed(true);
+    setNavCareersDropClosed(true);
     scrollAfterNavigation(url.hash);
   };
 
@@ -5465,8 +5727,8 @@ function App() {
 
   useEffect(() => {
     const selectors = ['.home-news .news-grid article'];
-    if (path === '/media') {
-      selectors.push('section.content-section .news-grid article');
+    if (path === '/news') {
+      selectors.push('.media-news-page .news-grid article');
     }
     const cards = document.querySelectorAll(selectors.join(','));
     if (!cards.length) return undefined;
@@ -5532,7 +5794,7 @@ function App() {
               {t('home')}
             </a>
             <div
-              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/management' || path === '/history' || path === '/subsidiaries' ? 'active' : ''}`}
+              className={`nav-group ${navAboutDropClosed ? 'closed' : ''} ${path === '/about' || path === '/management' || path === '/history' || path === '/subsidiaries' || path === '/energy-ministries' ? 'active' : ''}`}
               onMouseEnter={() => setNavAboutDropClosed(false)}
             >
               <a
@@ -5543,6 +5805,8 @@ function App() {
                   event.preventDefault();
                   setNavAboutDropClosed((closed) => !closed);
                   setNavDropClosed(true);
+                  setNavMediaDropClosed(true);
+                  setNavCareersDropClosed(true);
                 }}
               >
                 {t('discover')}{' '}
@@ -5584,6 +5848,10 @@ function App() {
                     <b>Subsidiaries</b>
                     <small>CPSTL and TPTL</small>
                   </a>
+                  <a href="/energy-ministries">
+                    <b>Energy ministries</b>
+                    <small>Related public institutions</small>
+                  </a>
                 </div>
               </div>
             </div>
@@ -5599,6 +5867,8 @@ function App() {
                   event.preventDefault();
                   setNavDropClosed((closed) => !closed);
                   setNavAboutDropClosed(true);
+                  setNavMediaDropClosed(true);
+                  setNavCareersDropClosed(true);
                 }}
               >
                 {t('services')}{' '}
@@ -5667,15 +5937,74 @@ function App() {
                 </div>
               </div>
             </div>
-            <a className={path === '/media' ? 'active' : ''} href="/media">
-              {t('media')}
-            </a>
+            <div
+              className={`nav-group media-nav-group ${navMediaDropClosed ? 'closed' : ''} ${['/media', '/news', '/notices', '/publications', '/annual-reports'].includes(path) || path.startsWith('/news/') ? 'active' : ''}`}
+              onMouseEnter={() => setNavMediaDropClosed(false)}
+            >
+              <a
+                href="/media"
+                aria-expanded={!navMediaDropClosed}
+                onClick={(event) => {
+                  if (!window.matchMedia('(max-width: 900px)').matches) return;
+                  event.preventDefault();
+                  setNavMediaDropClosed((closed) => !closed);
+                  setNavAboutDropClosed(true);
+                  setNavDropClosed(true);
+                  setNavCareersDropClosed(true);
+                }}
+              >
+                {t('media')}{' '}
+                <span className="chevron" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </span>
+              </a>
+              <div className="nav-dropdown">
+                <div className="dropdown-heading">
+                  <span>MEDIA CENTRE</span>
+                  <b>Stay informed</b>
+                  <p>News, public notices and corporate publications in one place.</p>
+                </div>
+                <div className="dropdown-links">
+                  <a href="/news"><b>News</b><small>Stories and corporate updates</small></a>
+                  <a href="/notices"><b>Notices</b><small>Official public information</small></a>
+                  <a href="/publications"><b>Publications</b><small>Annual reports and records</small></a>
+                </div>
+              </div>
+            </div>
             <a className={path === '/tenders' ? 'active' : ''} href="/tenders">
               {t('tenders')}
             </a>
-            <a className={path === '/careers' ? 'active' : ''} href="/careers">
-              {t('careers')}
-            </a>
+            <div
+              className={`nav-group careers-nav-group ${navCareersDropClosed ? 'closed' : ''} ${['/careers', '/corporate-life', '/current-opportunities'].includes(path) ? 'active' : ''}`}
+              onMouseEnter={() => setNavCareersDropClosed(false)}
+            >
+              <a
+                href="/careers"
+                aria-expanded={!navCareersDropClosed}
+                onClick={(event) => {
+                  if (!window.matchMedia('(max-width: 900px)').matches) return;
+                  event.preventDefault();
+                  setNavCareersDropClosed((closed) => !closed);
+                  setNavAboutDropClosed(true);
+                  setNavDropClosed(true);
+                  setNavMediaDropClosed(true);
+                }}
+              >
+                {t('careers')}{' '}
+                <span className="chevron" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                </span>
+              </a>
+              <div className="nav-dropdown">
+                <div className="dropdown-heading"><span>CAREERS</span><b>Grow with purpose</b><p>Discover our people and explore open positions.</p></div>
+                <div className="dropdown-links">
+                  <a href="/corporate-life"><b>Corporate Life</b><small>People, purpose and pathways</small></a>
+                  <a href="/current-opportunities"><b>Current Opportunities</b><small>Available roles and applications</small></a>
+                </div>
+              </div>
+            </div>
             <GoogleTranslate />
             <a
               className={`nav-cta ${path === '/contact' ? 'current' : ''}`}
@@ -5920,8 +6249,8 @@ function App() {
                 )}
               </div>
               <div className="home-news-footer">
-                <a className="text-link" href="/media">
-                  View all media &amp; notices <Icon name="arrow" size={17} />
+                <a className="text-link" href="/news">
+                  View all news <Icon name="arrow" size={17} />
                 </a>
               </div>
             </div>
@@ -6032,6 +6361,7 @@ function App() {
             <a href="/management">Management</a>
             <a href="/history">{t('ourHistory')}</a>
             <a href="/subsidiaries">Subsidiaries</a>
+            <a href="/energy-ministries">Energy ministries</a>
             <a href="/services">{t('allServices')}</a>
             <a href="/careers">{t('careers')}</a>
             <a href="/contact">{t('contact')}</a>

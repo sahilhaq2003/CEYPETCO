@@ -8,7 +8,16 @@ const crud = createCrudController(Career, {
 
 const getActive = async (req, res, next) => {
   try {
-    const items = await Career.find({ status: "open" }).sort("-publishedDate");
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    const items = await Career.find({
+      status: "open",
+      $or: [
+        { applicationDeadline: { $exists: false } },
+        { applicationDeadline: null },
+        { applicationDeadline: { $gte: today } },
+      ],
+    }).sort("-publishedDate");
     res.status(200).json({
       success: true,
       data: items,

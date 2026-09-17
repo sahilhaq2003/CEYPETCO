@@ -3113,6 +3113,19 @@ footer {
   height: 100%;
   object-fit: cover;
 }
+.page-hero::after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: min(1120px, 84vw);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 30, 38, 0.64) 0%,
+    rgba(5, 30, 38, 0.52) 78%,
+    transparent 100%
+  );
+  pointer-events: none;
+  content: '';
+}
 @media (max-width: 1100px) and (min-width: 901px) {
   .division-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -3121,6 +3134,7 @@ footer {
 .page-hero-copy {
   height: 100%;
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3242,11 +3256,9 @@ footer {
   content: '';
 }
 .vision-grid article:first-child {
-  border-color: var(--navy);
-  background:
-    radial-gradient(circle at 100% 0, rgba(255, 255, 255, 0.1), transparent 42%),
-    var(--navy);
-  color: #fff;
+  border-color: #dce4e4;
+  background: #eef2f2;
+  color: var(--ink);
 }
 .vision-grid article:hover {
   border-color: rgba(213, 16, 28, 0.3);
@@ -3262,14 +3274,14 @@ footer {
   letter-spacing: -0.06em;
 }
 .vision-grid article:first-child > span {
-  color: rgba(255, 255, 255, 0.1);
+  color: #d2dcdc;
 }
 .vision-grid .eyebrow {
   position: relative;
   margin-bottom: 18px;
 }
 .vision-grid article:first-child .eyebrow {
-  color: #ff6e77;
+  color: #b70f1d;
 }
 .vision-grid h3 {
   position: relative;
@@ -7065,7 +7077,7 @@ html {
 }
 .refinery-importance {
   padding: 90px 0;
-  background: var(--navy);
+  background: #60666a;
   color: #fff;
 }
 .refinery-importance-heading {
@@ -8380,6 +8392,53 @@ html {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--oil-color) 16%, transparent);
 }
 
+/* Lubricants page: dark orange with warm, restrained accents. */
+:is(.lubricant-intro, .lubricant-purpose, .oil-types-section, .lubricant-products) .eyebrow {
+  color: #9a410c;
+}
+.lubricant-image > span,
+.lubricant-purpose article:nth-child(2),
+.lubricant-table-head {
+  background: #9a410c;
+}
+.lubricant-purpose article:nth-child(2) {
+  border-color: #9a410c;
+}
+.lubricant-purpose {
+  background: #fff2e7;
+}
+.lubricant-purpose article:first-child {
+  border-color: #d98235;
+  background: #fff8f1;
+}
+.lubricant-purpose article:nth-child(2) .eyebrow {
+  color: #ffe0be;
+}
+.lubricant-purpose article:nth-child(2) > p:last-child {
+  color: #ffead7;
+}
+.lubricant-standards span {
+  border-color: #f0bb91;
+  color: #9a410c;
+  background: #fff8f1;
+}
+.lubricant-products-heading input:focus {
+  border-color: #9a410c;
+  box-shadow: 0 0 0 3px rgba(154, 65, 12, 0.12);
+}
+.lubricant-table article:hover {
+  background: #fff7ef;
+}
+.lubricant-table article > div:not(:first-child) a {
+  border-color: #efbc93;
+  color: #9a410c;
+}
+.lubricant-table article > div:not(:first-child) a:hover {
+  background: #9a410c;
+  border-color: #9a410c;
+  color: #fff;
+}
+
 /* Trilingual public-site controls */
 html[lang='si'] .site-shell {
   font-family: 'Noto Sans Sinhala', 'DM Sans', sans-serif;
@@ -8751,7 +8810,7 @@ body > iframe.goog-te-banner-frame {
 .oil-chart-wrap:after {
   content: '';
   position: absolute;
-  border: 1px solid #e8ebea;
+  border: 1px solid #efd9c5;
   border-radius: 50%;
 }
 .oil-chart-wrap:before {
@@ -8811,7 +8870,7 @@ body > iframe.goog-te-banner-frame {
 }
 .oil-chart-centre b {
   font: 800 54px/1 'Manrope';
-  color: var(--red);
+  color: #9a410c;
 }
 .oil-chart-centre span {
   margin-top: 8px;
@@ -9577,6 +9636,60 @@ body > iframe.goog-te-banner-frame {
   }
 }
 
+/* Aviation page palette */
+:is(
+  .aviation-opening,
+  .aviation-price-section,
+  .aviation-fuel,
+  .aviation-gallery-section,
+  .aviation-locations
+) .eyebrow {
+  color: #006199;
+}
+.aviation-opening blockquote,
+.aviation-fuel-grid article,
+.aviation-contact-list {
+  border-color: #006199;
+}
+.aviation-stats b,
+.aviation-price-table article > b,
+.aviation-fuel-grid article > small,
+.aviation-contact-list a {
+  color: #006199;
+}
+.aviation-price-section,
+.aviation-gallery-section,
+.aviation-locations {
+  background: #f1f7fb;
+}
+.aviation-price-unit,
+.aviation-price-head,
+.aviation-fuel-grid .aviation-provider,
+.aviation-payment,
+.aviation-location-title {
+  background: #006199;
+}
+.aviation-fuel-grid .aviation-provider {
+  border-color: #006199;
+}
+.aviation-price-unit span,
+.aviation-payment-grid > div:first-child > p:not(.eyebrow),
+.aviation-payment-grid > div:first-child > small,
+.aviation-payment-contact > span,
+.aviation-payment-contact p,
+.aviation-fuel-grid .aviation-provider > p:last-child {
+  color: #d8eaf4;
+}
+.aviation-payment-grid > div:first-child > small {
+  border-color: #85c7e9;
+}
+.aviation-location-title > span {
+  background: #2580b3;
+}
+.aviation-location-title small {
+  color: #d8eaf4;
+}
+
 /* Ceypetco Agrochemicals */
 .agro-opening {
   background: #fff;
@@ -9631,8 +9744,11 @@ body > iframe.goog-te-banner-frame {
 }
 .agro-standards {
   padding: 85px 0;
-  background: var(--navy);
-  color: #fff;
+  background: #eaf4ec;
+  color: #183c2a;
+}
+.agro-standards .eyebrow.light {
+  color: #39734c;
 }
 .agro-standards-heading {
   display: grid;
@@ -9648,23 +9764,23 @@ body > iframe.goog-te-banner-frame {
 .agro-standards-heading > p:last-child {
   font-size: 12px;
   line-height: 1.7;
-  color: #afc0c5;
+  color: #42634d;
 }
 .agro-cert-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid #cbded0;
+  border-left: 1px solid #cbded0;
 }
 .agro-cert-grid article {
   min-height: 150px;
   padding: 28px;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid #cbded0;
+  border-bottom: 1px solid #cbded0;
 }
 .agro-cert-grid span {
   font-size: 9px;
-  color: #ed6b73;
+  color: #39734c;
 }
 .agro-cert-grid h3 {
   font: 700 21px 'Manrope';
@@ -9672,7 +9788,7 @@ body > iframe.goog-te-banner-frame {
 }
 .agro-cert-grid p {
   font-size: 11px;
-  color: #adbec3;
+  color: #42634d;
 }
 .agro-role {
   background: #f5f6f4;
@@ -9757,10 +9873,10 @@ body > iframe.goog-te-banner-frame {
   font: 700 25px/1.4 'Manrope';
   margin: 0;
 }
-.agro-flipper-grid > div:last-child > p:last-child {
+.agro-flipper-grid > div:last-child > p:not(.eyebrow) {
   font-size: 12px;
   line-height: 1.7;
-  color: #bbccca;
+  color: #d7e9dd;
 }
 .agro-products-section {
   background: #fff;
@@ -13708,6 +13824,10 @@ html[lang="ta"] .site-language {
     object-position: center;
   }
 
+  .page-hero::after {
+    width: 100%;
+  }
+
   .page-hero-copy {
     justify-content: flex-end;
     padding-bottom: 42px;
@@ -14628,55 +14748,195 @@ html[lang="ta"] .site-language {
   max-height: none;
 }
 
+.additional-operation-page {
+  --operation-accent: #982067;
+  --operation-tint: #fbedf5;
+}
+.additional-operation-page--electric {
+  --operation-accent: #217458;
+  --operation-tint: #edf7f2;
+}
+.additional-operation-page--chemicals {
+  --operation-accent: #526784;
+  --operation-tint: #f1f4f8;
+}
+.additional-operation-page--bitumen {
+  --operation-accent: #171717;
+  --operation-tint: #f3f3f3;
+}
+.additional-operation-page .eyebrow {
+  color: var(--operation-accent);
+}
+.additional-operation-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(270px, 0.75fr);
+  gap: clamp(35px, 7vw, 110px);
+  align-items: center;
+}
+.additional-operation-copy h2 {
+  max-width: 750px;
+  margin: 12px 0 24px;
+  font: 800 clamp(34px, 4.2vw, 58px)/1.12 'Manrope', sans-serif;
+  letter-spacing: -0.035em;
+}
 .additional-operation-copy > p:not(.eyebrow) {
-  max-width: 600px;
+  max-width: 670px;
   color: var(--muted);
+  font-size: 16px;
   line-height: 1.8;
 }
-
 .additional-operation-copy .text-link {
+  display: inline-flex;
   gap: 10px;
   align-items: center;
-  color: var(--red);
+  margin-top: 18px;
+  color: var(--operation-accent);
   font-weight: 750;
 }
-
+.additional-operation-facts {
+  padding: clamp(28px, 3vw, 46px);
+  border-radius: 16px;
+  background: var(--operation-accent);
+  color: #fff;
+}
+.additional-operation-facts > span,
+.additional-operation-source > span {
+  font: 800 11px 'Manrope', sans-serif;
+  letter-spacing: 0.15em;
+}
+.additional-operation-facts > span {
+  color: rgba(255, 255, 255, 0.75);
+}
+.additional-operation-facts p {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin: 0;
+  padding: 21px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font: 700 clamp(16px, 1.6vw, 21px)/1.4 'Manrope', sans-serif;
+}
+.additional-operation-facts p:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.additional-operation-facts small {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+}
 .additional-operation-info {
-  background: var(--cream);
+  background: var(--operation-tint);
 }
-
-.additional-operation-info h2 {
-  margin: 8px 0 28px;
-  font: 800 clamp(28px, 3vw, 38px)/1.2 'Manrope', sans-serif;
+.additional-operation-info h2,
+.additional-operation-enquiry h2 {
+  margin: 8px 0 30px;
+  font: 800 clamp(30px, 3.2vw, 43px)/1.2 'Manrope', sans-serif;
+  letter-spacing: -0.025em;
 }
-
 .additional-operation-points {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
-
-.additional-operation-points > div {
-  display: flex;
-  gap: 13px;
-  align-items: center;
-  min-height: 100px;
-  padding: 22px;
+.additional-operation-points article {
+  min-height: 225px;
+  padding: 30px;
   border: 1px solid var(--line);
+  border-top: 4px solid var(--operation-accent);
   border-radius: 10px;
   background: #fff;
-  color: var(--ink);
+}
+.additional-operation-points article > span {
+  color: var(--operation-accent);
+  font: 800 12px 'Manrope', sans-serif;
+}
+.additional-operation-points h3 {
+  margin: 28px 0 12px;
+  font: 750 20px/1.3 'Manrope', sans-serif;
+}
+.additional-operation-points p,
+.additional-operation-enquiry-grid > div > p:not(.eyebrow) {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.additional-operation-enquiry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 8vw, 130px);
+  align-items: center;
+}
+.additional-operation-enquiry-grid > div > p:not(.eyebrow) {
+  max-width: 560px;
+}
+.additional-operation-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  padding: 15px 20px;
+  border-radius: 6px;
+  background: var(--operation-accent);
+  color: #fff;
   font-weight: 700;
 }
-
-.additional-operation-points svg {
-  flex: 0 0 auto;
-  color: var(--red);
+.additional-operation-enquiry ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: operation-step;
 }
-
-@media (max-width: 700px) {
+.additional-operation-enquiry li {
+  counter-increment: operation-step;
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  font: 650 16px/1.5 'Manrope', sans-serif;
+}
+.additional-operation-enquiry li::before {
+  content: counter(operation-step, decimal-leading-zero);
+  color: var(--operation-accent);
+  font-size: 12px;
+  font-weight: 800;
+}
+.additional-operation-source {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-top: 60px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.additional-operation-source > span {
+  color: var(--muted);
+}
+.additional-operation-source a {
+  color: var(--operation-accent);
+  font-size: 13px;
+  font-weight: 700;
+}
+@media (max-width: 800px) {
+  .additional-operation-intro,
+  .additional-operation-enquiry-grid {
+    grid-template-columns: 1fr;
+  }
+  .additional-operation-points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
   .additional-operation-points {
     grid-template-columns: 1fr;
+  }
+  .additional-operation-points article {
+    min-height: 0;
+  }
+  .additional-operation-facts {
+    padding: 28px;
   }
 }
 
@@ -14848,4 +15108,409 @@ html[lang="ta"] .site-language {
   .subsidiaries-intro {
     margin-bottom: 28px;
   }
+}
+
+/* Discover: energy ministries and related agencies */
+.energy-institutions-section {
+  background: #fff;
+}
+
+.energy-institutions-intro {
+  max-width: 860px;
+  margin-bottom: 42px;
+}
+
+.energy-institutions-intro h2 {
+  margin: 10px 0 16px;
+  color: var(--ink);
+}
+
+.energy-institutions-intro > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.energy-institutions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.energy-institution-card {
+  position: relative;
+  display: block;
+  min-width: 0;
+  height: clamp(410px, 35vw, 540px);
+  overflow: hidden;
+  border-radius: 7px 52px 7px 7px;
+  background: #16343f;
+  color: #fff;
+  isolation: isolate;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.energy-institution-card:hover,
+.energy-institution-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 46px rgba(6, 46, 59, 0.2);
+}
+
+.energy-institution-card > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.energy-institution-card:hover > img {
+  transform: scale(1.04);
+}
+
+.energy-institution-shade {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 29, 38, 0) 23%, rgba(8, 29, 38, 0.38) 49%, rgba(8, 29, 38, 0.95) 100%);
+}
+
+.energy-institution-body {
+  position: absolute;
+  z-index: 2;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(20px, 2vw, 30px);
+}
+
+.energy-institution-body > span {
+  margin-bottom: 10px;
+  color: #deecf0;
+  font: 800 10px/1.3 'Manrope', sans-serif;
+  letter-spacing: 0.11em;
+}
+
+.energy-institution-body h3 {
+  margin: 0 0 9px;
+  color: #fff;
+  font: 800 clamp(19px, 1.7vw, 25px)/1.25 'Manrope', sans-serif;
+}
+
+.energy-institution-body p {
+  margin: 0 0 19px;
+  color: #e1ebed;
+  font-size: clamp(12px, 1vw, 15px);
+  line-height: 1.55;
+}
+
+.energy-institution-body .energy-institution-arrow {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  margin: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--red);
+}
+
+.energy-institutions-context {
+  display: grid;
+  grid-template-columns: 1fr 0.95fr;
+  gap: clamp(35px, 6vw, 100px);
+  align-items: center;
+  margin-top: 76px;
+  padding: clamp(30px, 4vw, 58px);
+  border-radius: 18px;
+  background: #f5f8f8;
+}
+
+.energy-institutions-context h2 {
+  margin: 10px 0 22px;
+  font: 800 clamp(29px, 3vw, 43px)/1.18 'Manrope', sans-serif;
+}
+
+.energy-institutions-context > div > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.energy-institutions-context > div > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  color: var(--red);
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.energy-institutions-context figure {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.energy-institutions-context figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.energy-institutions-context figcaption {
+  padding: 12px 17px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.energy-institutions-context figcaption a {
+  color: var(--red);
+  text-decoration: underline;
+}
+
+.energy-institutions-note {
+  margin: 24px 0 0;
+  color: #687b83;
+  font-size: 12px;
+}
+
+@media (max-width: 1450px) {
+  .energy-institutions-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .energy-institution-card {
+    grid-column: span 2;
+  }
+  .energy-institution-card:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 850px) {
+  .energy-institutions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .energy-institution-card,
+  .energy-institution-card:nth-last-child(-n + 2) {
+    grid-column: auto;
+  }
+  .energy-institution-card:last-child {
+    grid-column: 1 / -1;
+  }
+  .energy-institutions-context {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .energy-institutions-grid {
+    grid-template-columns: 1fr;
+  }
+  .energy-institution-card:last-child {
+    grid-column: auto;
+  }
+
+  .energy-institutions-intro {
+    margin-bottom: 28px;
+  }
+
+  .energy-institution-card {
+    height: 430px;
+  }
+}
+
+/* Media centre navigation and landing page */
+.media-nav-group .nav-dropdown {
+  width: 500px;
+  right: -125px;
+  grid-template-columns: 180px 1fr;
+}
+.media-nav-group .dropdown-links {
+  grid-template-columns: 1fr;
+}
+.media-nav-group .dropdown-links a {
+  min-height: 58px;
+}
+.media-section-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.media-section-nav .container {
+  display: flex;
+  gap: clamp(20px, 4vw, 60px);
+  overflow-x: auto;
+}
+.media-section-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 66px;
+  border-bottom: 3px solid transparent;
+  color: var(--muted);
+  font: 700 14px 'Manrope', sans-serif;
+  white-space: nowrap;
+}
+.media-section-nav a:hover,
+.media-section-nav a.active {
+  border-color: var(--red);
+  color: var(--ink);
+}
+.media-hub {
+  background: #f6f8f8;
+}
+.media-hub-heading {
+  max-width: 760px;
+  margin-bottom: 38px;
+}
+.media-hub-heading h2 {
+  margin: 9px 0 14px;
+  font: 800 clamp(34px, 4vw, 52px)/1.15 'Manrope', sans-serif;
+  letter-spacing: -0.035em;
+}
+.media-hub-heading > p:last-child {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.media-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.media-hub-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 305px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+  background: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.media-hub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(6, 46, 59, 0.09);
+}
+.media-hub-card > span {
+  color: var(--red);
+  font: 800 12px 'Manrope', sans-serif;
+}
+.media-hub-card h3 {
+  margin: 35px 0 10px;
+  font: 800 27px 'Manrope', sans-serif;
+}
+.media-hub-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.media-hub-card b {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 28px;
+  color: var(--red);
+  font-size: 13px;
+}
+.media-news-page .page-title-row {
+  margin-bottom: 35px;
+}
+.media-news-date,
+.notice-document-date {
+  display: block;
+  margin: 0 0 13px;
+  color: #74838a;
+  font-size: 12px;
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .media-nav-group .nav-dropdown {
+    width: 100%;
+    grid-template-columns: 1fr;
+    right: auto;
+  }
+  .media-hub-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .media-section-nav a {
+    min-height: 56px;
+    font-size: 13px;
+  }
+  .media-hub-grid {
+    grid-template-columns: 1fr;
+  }
+  .media-hub-card {
+    min-height: 250px;
+  }
+}
+
+/* Careers */
+.careers-nav-group .nav-dropdown { right: -70px; grid-template-columns: 180px 1fr; }
+.careers-nav-group .dropdown-links { grid-template-columns: 1fr; }
+.careers-nav-group .dropdown-links a { min-height: 58px; }
+.careers-hub, .corporate-life-intro { background: #f7f9f9; }
+.careers-intro { max-width: 780px; margin-bottom: 36px; }
+.careers-intro h2, .corporate-life-lead h2, .corporate-life-paths h2 { margin: 8px 0 16px; font: 800 clamp(32px, 3.8vw, 50px)/1.16 'Manrope', sans-serif; letter-spacing: -.035em; color: var(--ink); }
+.careers-intro > p:last-child, .corporate-life-lead > p { color: var(--muted); font-size: 17px; line-height: 1.8; }
+.careers-hub-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.careers-hub-card { display: flex; flex-direction: column; min-height: 300px; padding: clamp(28px, 3vw, 46px); background: #fff; border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 20px 50px rgba(7, 39, 49, .05); transition: transform .2s ease, box-shadow .2s ease; }
+.careers-hub-card:hover { transform: translateY(-4px); box-shadow: 0 26px 55px rgba(7, 39, 49, .1); }
+.careers-hub-card > span, .corporate-life-cta span, .current-opportunities-heading span, .career-vacancy-top span { color: var(--red); font-size: 11px; font-weight: 800; letter-spacing: .13em; }
+.careers-hub-card h3 { margin: 32px 0 10px; color: var(--ink); font: 800 clamp(24px, 2.5vw, 34px)/1.2 'Manrope', sans-serif; }
+.careers-hub-card p { max-width: 440px; margin: 0 0 28px; color: var(--muted); line-height: 1.75; }
+.careers-hub-card b { display: inline-flex; align-items: center; gap: 10px; margin-top: auto; color: var(--red); font-size: 13px; }
+.corporate-life-lead { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 6vw, 100px); align-items: end; margin-bottom: 48px; }
+.corporate-life-lead > p { margin: 0; }
+.corporate-life-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid #dde5e7; background: #fff; }
+.corporate-life-pillars article { padding: clamp(25px, 3vw, 42px); border-right: 1px solid #dde5e7; }
+.corporate-life-pillars article:last-child { border: 0; }
+.corporate-life-pillars span, .corporate-life-path-grid span { color: var(--red); font-size: 12px; font-weight: 800; }
+.corporate-life-pillars h3, .corporate-life-path-grid h3 { margin: 24px 0 12px; color: var(--ink); font: 800 20px/1.3 'Manrope', sans-serif; }
+.corporate-life-pillars p, .corporate-life-path-grid p { margin: 0; color: var(--muted); line-height: 1.75; }
+.corporate-life-paths h2 { margin-bottom: 35px; }
+.corporate-life-path-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.corporate-life-path-grid article { min-height: 230px; padding: 26px; background: #f4f7f8; border-top: 3px solid #cfdcdf; }
+.corporate-life-cta { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 48px; padding: 30px 36px; background: #eaf0f2; border-radius: 6px; }
+.corporate-life-cta h3 { margin: 8px 0; font: 800 25px 'Manrope', sans-serif; }
+.corporate-life-cta p { margin: 0; color: var(--muted); }
+.corporate-life-cta .career-button { flex: none; margin: 0; }
+.current-opportunities-heading { display: flex; align-items: end; justify-content: space-between; gap: 25px; padding: 25px 30px; background: var(--navy); color: #fff; }
+.current-opportunities-heading h3 { margin: 6px 0 0; font: 800 25px 'Manrope', sans-serif; }
+.careers-status { padding: 38px 30px; border: 1px solid var(--line); color: var(--muted); }
+.careers-status h3 { margin: 0 0 8px; color: var(--ink); }
+.careers-status p { margin: 0; }
+.career-vacancy-list { display: grid; gap: 18px; margin-top: 18px; }
+.career-vacancy { padding: clamp(25px, 3vw, 38px); border: 1px solid var(--line); border-radius: 6px; background: #fff; box-shadow: 0 10px 28px rgba(6, 46, 59, .045); }
+.career-vacancy-top { display: flex; justify-content: space-between; gap: 24px; }
+.career-vacancy-top h3 { margin: 8px 0 0; color: var(--ink); font: 800 clamp(22px, 2.4vw, 30px)/1.3 'Manrope', sans-serif; }
+.career-deadline { flex: none; text-align: right; }
+.career-deadline small { display: block; margin-bottom: 6px; color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .1em; }
+.career-deadline strong { color: var(--ink); font-size: 14px; }
+.career-vacancy-meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.career-vacancy-meta span { padding: 7px 11px; background: #edf2f3; border-radius: 3px; color: #3d5962; font-size: 12px; font-weight: 700; }
+.career-vacancy-description, .career-vacancy-details p { color: var(--muted); line-height: 1.7; white-space: pre-line; }
+.career-vacancy-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; margin: 22px 0; padding-top: 21px; border-top: 1px solid var(--line); }
+.career-vacancy-details h4 { margin: 0 0 8px; font-size: 14px; color: var(--ink); }
+.career-vacancy-details p { margin: 0; font-size: 14px; }
+@media (max-width: 900px) {
+  .careers-nav-group .nav-dropdown { width: 100%; grid-template-columns: 1fr; right: auto; }
+  .corporate-life-path-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  .careers-hub-grid, .corporate-life-lead, .corporate-life-pillars, .corporate-life-path-grid, .career-vacancy-details { grid-template-columns: 1fr; }
+  .corporate-life-pillars article { border-right: 0; border-bottom: 1px solid #dde5e7; }
+  .corporate-life-pillars article:last-child { border-bottom: 0; }
+  .corporate-life-cta, .current-opportunities-heading, .career-vacancy-top { flex-direction: column; align-items: flex-start; }
+  .career-deadline { text-align: left; }
+  .corporate-life-cta .career-button { margin-top: 4px; }
 }
