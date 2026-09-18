@@ -771,7 +771,7 @@ const pageData = {
     label: 'DISCOVER CEYPETCO · PUBLIC INSTITUTIONS',
     title: 'Related ministries & agencies',
     intro: 'Explore the public institutions connected to Sri Lanka’s energy, transport and infrastructure sectors',
-    image: '/images/about-banner.webp',
+    image: '/images/related-ministries-hero-v2.webp',
   },
   '/mobile-app': {
     label: 'PUBLIC SERVICES · MOBILE APPS',
