@@ -15,6 +15,7 @@ import AnnualReportsManagement from "../admin/pages/AnnualReports/AnnualReportsM
 import TeamMembersManagement from "../admin/pages/TeamMembers/TeamMembersManagement";
 import ManagementContactsManagement from "../admin/pages/ManagementContacts/ManagementContactsManagement";
 import FuelPriceManagement from "../admin/pages/FuelPrices/FuelPriceManagement";
+import HistoricalPriceManagement from "../admin/pages/FuelPrices/HistoricalPriceManagement";
 import FuelStationManagement from "../admin/pages/FuelStations/FuelStationManagement";
 import RegionalOfficeManagement from "../admin/pages/RegionalOffices/RegionalOfficeManagement";
 import ContactMessages from "../admin/pages/Messages/ContactMessages";
@@ -56,6 +57,7 @@ const AppRoutes = () => {
         <Route path="services-page/divisions/:slug" element={<DivisionEditor />} />
         <Route path="products-page" element={<Placeholder />} />
         <Route path="fuel-prices" element={<FuelPriceManagement />} />
+        <Route path="historical-prices" element={<HistoricalPriceManagement />} />
         <Route path="fuel-stations" element={<FuelStationManagement />} />
         <Route path="regional-offices" element={<RegionalOfficeManagement />} />
         <Route path="messages" element={<ContactMessages />} />

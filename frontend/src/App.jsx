@@ -8,6 +8,8 @@ import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
 import displayImageUrl from './utils/displayImageUrl.js';
 import MarineBunkeringPage from './components/marine-bunkering/MarineBunkeringPage.jsx';
+import ElectricMobilityContent from './components/electric-mobility/ElectricMobilityContent.jsx';
+import HistoricalPricesPage from './components/HistoricalPricesPage.jsx';
 
 const paymentBanks = [
   { name: 'Bank of Ceylon', branch: 'City Office', logo: 'boc.svg' },
@@ -568,14 +570,14 @@ const pageData = {
     title: 'Built to power national progress',
     intro:
       'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
+    image: '/images/about-energy-infrastructure-v2.webp',
   },
   '/management': {
     label: 'OUR LEADERSHIP',
     title: 'Leadership with purpose',
     intro:
       'Meet the leadership team guiding Ceylon Petroleum Corporation and find key management contacts across the organisation',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
+    image: '/images/management-energy-leadership.webp',
   },
   '/services': {
     label: 'PUBLIC SERVICES',
@@ -592,9 +594,11 @@ const pageData = {
   },
   '/ev-charging': {
     label: 'OUR OPERATIONS · ELECTRIC MOBILITY',
-    title: 'EV Charging',
-    intro: 'Explore electric mobility and request current charging information',
-    image: '/images/operations/ev-charging.jpg',
+    title: 'CEYPETCO EV Charging',
+    intro:
+      "Powering Sri Lanka's Transition to Electric Mobility. Explore reported charging locations and learn how EV charging works.",
+    breadcrumb: 'EV Charging',
+    image: '/images/electric-mobility/ev-charging-hero-1600.webp',
   },
   '/special-chemicals': {
     label: 'OUR OPERATIONS · INDUSTRIAL PRODUCTS',
@@ -716,6 +720,12 @@ const pageData = {
       'An islandwide dealer and distribution network serving transport, industry and communities',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
   },
+  '/marketing-sales/historical-prices': {
+    label: 'MARKETING & SALES · PRICE HISTORY',
+    title: 'Historical fuel prices',
+    intro: 'Explore Ceypetco fuel and bitumen price records across decades',
+    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
+  },
   '/aviation': {
     label: 'OUR SERVICES · AVIATION',
     title: 'Reliable energy for every takeoff',
@@ -748,7 +758,7 @@ const pageData = {
     label: 'DISCOVER CEYPETCO · SUBSIDIARIES',
     title: 'Our subsidiaries',
     intro: 'The companies supporting petroleum storage, distribution and terminal development in Sri Lanka',
-    image: '/images/distribution.jpg',
+    image: '/images/subsidiaries-petroleum-storage.webp',
   },
   '/energy-ministries': {
     label: 'DISCOVER CEYPETCO · PUBLIC INSTITUTIONS',
@@ -3152,6 +3162,14 @@ function MarketingSalesPage() {
               <p>{copy[1]}</p>
             </div>
           </div>
+          <a className="hp-marketing-link" href="/marketing-sales/historical-prices">
+            <span>
+              <small>EXPLORE THE ARCHIVE</small>
+              <b>Historical fuel prices</b>
+              <span>Browse published prices and bitumen revisions dating back to 1990.</span>
+            </span>
+            <Icon name="arrow" size={22} />
+          </a>
         </div>
       </section>
     </>
@@ -4020,6 +4038,8 @@ const bulkConsumerResources = [
 
 function InnerPage({ type }) {
   const { t } = useLanguage();
+  const aboutVideoRef = useRef(null);
+  const [aboutVideoPlaying, setAboutVideoPlaying] = useState(false);
   const [historyPage, setHistoryPage] = useState(defaultHistoryPage);
   const page = type === '/history'
     ? { label: historyPage.heroLabel, title: historyPage.heroTitle, intro: historyPage.heroIntro, image: historyPage.heroImage }
@@ -4370,7 +4390,7 @@ function InnerPage({ type }) {
           <div className="breadcrumbs">
             <a href="/">Home</a>
             <span>/</span>
-            <b>{type === '/about' ? t('aboutLabel') : page.label}</b>
+            <b>{type === '/about' ? t('aboutLabel') : page.breadcrumb || page.label}</b>
           </div>
         </div>
       </section>
@@ -4440,9 +4460,13 @@ function InnerPage({ type }) {
           '/agro-chemicals',
           '/lubricants',
         ].includes(type) && <DivisionPage data={divisionPages[type]} />}
-      {additionalOperationPages[type] && <AdditionalOperationPage data={additionalOperationPages[type]} />}
+      {type === '/ev-charging' && <ElectricMobilityContent />}
+      {type !== '/ev-charging' && additionalOperationPages[type] && (
+        <AdditionalOperationPage data={additionalOperationPages[type]} />
+      )}
       {type === '/refinery' && <RefineryPage />}
       {type === '/marketing-sales' && <MarketingSalesPage />}
+      {type === '/marketing-sales/historical-prices' && <HistoricalPricesPage />}
       {type === '/aviation' && <AviationPage />}
       {type === '/agro-chemicals' && <AgroChemicalsPage />}
       {type === '/lubricants' && <LubricantsPage />}
@@ -4505,11 +4529,15 @@ function InnerPage({ type }) {
               </div>
               <div className="about-video-frame">
                 <video
+                  ref={aboutVideoRef}
                   controls
                   playsInline
                   preload="metadata"
                   poster="/images/about-banner.webp"
                   aria-label="Ceypetco promotional video"
+                  onPlay={() => setAboutVideoPlaying(true)}
+                  onPause={() => setAboutVideoPlaying(false)}
+                  onEnded={() => setAboutVideoPlaying(false)}
                 >
                   <source
                     src="https://ceypetco.gov.lk/wp-content/uploads/2024/12/promo-video.mp4"
@@ -4521,6 +4549,18 @@ function InnerPage({ type }) {
                   </a>
                   .
                 </video>
+                {!aboutVideoPlaying && (
+                  <button
+                    className="about-video-play"
+                    type="button"
+                    aria-label="Play Ceypetco promotional video"
+                    onClick={() => aboutVideoRef.current?.play()}
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M8 5.5v13l10-6.5z" fill="currentColor" />
+                    </svg>
+                  </button>
+                )}
               </div>
             </div>
           </section>
@@ -5872,6 +5912,20 @@ function App() {
         '.mb-faq-grid > *',
         '.mb-enquiry-grid > *',
         '.mb-cta-inner',
+        '.em-section-heading',
+        '.em-about-grid > *',
+        '.em-stat-card',
+        '.em-location-card',
+        '.em-notice-inner',
+        '.em-tech-card',
+        '.em-process-step',
+        '.em-development-step',
+        '.em-safety-card',
+        '.em-benefit-card',
+        '.em-sustainability-grid > *',
+        '.em-enquiry-grid > *',
+        '.em-faq-grid > *',
+        '.em-cta-inner',
       ].join(','),
     );
 
@@ -6100,7 +6154,7 @@ function App() {
                   </a>
                   <a href="/ev-charging">
                     <b>EV Charging</b>
-                    <small>Electric mobility enquiries</small>
+                    <small>Charging locations and guidance</small>
                   </a>
                   <a href="/special-chemicals">
                     <b>Special Chemicals</b>

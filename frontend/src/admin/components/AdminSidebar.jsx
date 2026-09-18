@@ -30,6 +30,7 @@ const sidebarSections = [
   ] },
   { label: "Operations", items: [
     { to: "/admin/fuel-prices", icon: Droplets, text: "Fuel Prices" },
+    { to: "/admin/historical-prices", icon: BookOpen, text: "Historical Prices" },
     { to: "/admin/fuel-stations", icon: MapPin, text: "Fuel Stations" },
     { to: "/admin/regional-offices", icon: Building2, text: "Regional Offices" },
   ] },
