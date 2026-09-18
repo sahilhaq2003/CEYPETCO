@@ -115,7 +115,7 @@ const seedDivisions = async () => {
       stats: [
         { value: "24/7", label: "International airport refuelling" },
         { value: "1.3M L", label: "Current daily demand" },
-        { value: "03", label: "Operating locations" },
+        { value: "04", label: "Operating locations" },
         { value: "Sole", label: "Into-plane operator in Sri Lanka" },
       ],
       features: [
@@ -128,6 +128,7 @@ const seedDivisions = async () => {
         { name: "Katunayake", value: "2.6M litres each", unit: "Three JET A-1 tanks" },
         { name: "Mattala", value: "1.0M litres each", unit: "Three JET A-1 tanks" },
         { name: "Ratmalana", value: "280,000 litres total", unit: "Five tanks" },
+        { name: "Palali", value: "JET A-1 supply", unit: "Jaffna International Airport" },
       ],
       keyFacts: [
         "To be the region's leading service-oriented, customer-focused and environmentally responsible aviation fuel supplier",
@@ -166,6 +167,16 @@ const seedDivisions = async () => {
             { role: "Shift Superintendent", phone: "+94 11 2637755 · +94 11 5664707", email: "cpcavirat@ceypetco.gov.lk" },
             { role: "Commercial Manager", phone: "+94 11 5455115 · +94 76 3842287", email: "mria.cm@ceypetco.gov.lk" },
             { role: "Accountant · Aviation", phone: "+94 11 5455191", email: "acc.aviation@ceypetco.gov.lk" },
+          ],
+        },
+        {
+          name: "Palali",
+          code: "Jaffna International Airport · JAF / VCCJ",
+          service: "JET A-1 aviation fuel supply",
+          capacity: "",
+          avgas: "",
+          contacts: [
+            { role: "Ceypetco Aviation · general enquiries", phone: "+94 11 2253039", email: "" },
           ],
         },
       ],

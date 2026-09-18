@@ -637,7 +637,7 @@ const pageData = {
     title: 'Official notices and circulars',
     intro:
       'Read current notices and official documents published by Ceypetco',
-    image: '/images/media-3.jpg',
+    image: '/images/notices-hero-v2.webp',
   },
   '/projects': {
     label: 'STRATEGIC PROJECTS · SOREM',
@@ -652,6 +652,13 @@ const pageData = {
     intro:
       'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years',
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/about-banner.webp',
+  },
+  '/publications': {
+    label: 'CORPORATE PUBLICATIONS · ANNUAL REPORTS',
+    title: 'Performance documented with clarity',
+    intro:
+      'Access Ceylon Petroleum Corporation annual reports and review our operational and financial record across the years',
+    image: '/images/publications-hero-v2.webp',
   },
   '/right-to-information': {
     label: 'PUBLIC INFORMATION · RTI',
@@ -671,7 +678,7 @@ const pageData = {
     label: 'MEDIA CENTRE · NEWS',
     title: 'Latest news and stories',
     intro: 'Follow Ceypetco announcements, activities and stories from across the corporation',
-    image: '/images/media-2.jpg',
+    image: '/images/news-hero-v2.webp',
   },
   '/tenders': {
     label: 'PROCUREMENT',
@@ -3191,7 +3198,7 @@ function AviationPage() {
     stats: [
       { value: '24/7', label: 'International airport refuelling' },
       { value: '1.3M L', label: 'Current daily demand' },
-      { value: '03', label: 'Operating locations' },
+      { value: '04', label: 'Operating locations' },
       { value: 'Sole', label: 'Into-plane operator in Sri Lanka' },
     ],
     gallery: [1, 2, 3, 4, 5, 6].map(
@@ -3237,6 +3244,16 @@ function AviationPage() {
           { role: 'Accountant · Aviation', phone: '+94 11 5455191', email: 'acc.aviation@ceypetco.gov.lk' },
         ],
       },
+      {
+        name: 'Palali',
+        code: 'Jaffna International Airport · JAF / VCCJ',
+        service: 'JET A-1 aviation fuel supply',
+        capacity: '',
+        avgas: '',
+        contacts: [
+          { role: 'Ceypetco Aviation · general enquiries', phone: '+94 11 2253039', email: '' },
+        ],
+      },
     ],
   });
   const prices = [
@@ -3247,7 +3264,19 @@ function AviationPage() {
     { customer: 'All Contract Customers · Foreign', location: 'BIA, CIAR & MRIA', price: '2.43' },
     { customer: 'All Contract Customers · Foreign', location: 'JIA', price: '2.54' },
   ];
-  const locations = (div.locations || []).map((loc) => ({
+  const palaliLocation = {
+    name: 'Palali',
+    code: 'Jaffna International Airport · JAF / VCCJ',
+    service: 'JET A-1 aviation fuel supply',
+    capacity: '',
+    avgas: '',
+    contacts: [{ role: 'Ceypetco Aviation · general enquiries', phone: '+94 11 2253039', email: '' }],
+  };
+  const configuredLocations = div.locations || [];
+  const allLocations = configuredLocations.some((loc) => /palali|palaly|jaffna/i.test(loc.name || ''))
+    ? configuredLocations
+    : [...configuredLocations, palaliLocation];
+  const locations = allLocations.map((loc) => ({
     ...loc,
     contacts: (loc.contacts || []).map((c) => (Array.isArray(c) ? c : [c.role, c.phone, c.email])),
   }));
@@ -3278,7 +3307,7 @@ function AviationPage() {
         <div className="container aviation-stats">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <b>{stat.value}</b>
+              <b>{stat.label === 'Operating locations' ? String(locations.length).padStart(2, '0') : stat.value}</b>
               <span>{stat.label}</span>
             </div>
           ))}
@@ -3325,8 +3354,8 @@ function AviationPage() {
               <h2>International specifications at every location</h2>
             </div>
             <p>
-              JET A-1 and Aviation Gasoline 100LL are supported across all three
-              aviation locations
+              JET A-1 is supplied across Ceypetco aviation locations. Confirm
+              Aviation Gasoline 100LL availability before your flight.
             </p>
           </div>
           <div className="aviation-fuel-grid">
@@ -3437,14 +3466,14 @@ function AviationPage() {
                     <dt>Service</dt>
                     <dd>{location.service}</dd>
                   </div>
-                  <div>
+                  {location.capacity && <div>
                     <dt>JET A-1 Storage</dt>
                     <dd>{location.capacity}</dd>
-                  </div>
-                  <div>
+                  </div>}
+                  {location.avgas && <div>
                     <dt>AV GAS</dt>
                     <dd>{location.avgas}</dd>
-                  </div>
+                  </div>}
                 </dl>
                 <div className="aviation-contact-list">
                   {location.contacts.map(([role, phone, email]) => (
@@ -4043,7 +4072,7 @@ function InnerPage({ type }) {
   const [historyPage, setHistoryPage] = useState(defaultHistoryPage);
   const page = type === '/history'
     ? { label: historyPage.heroLabel, title: historyPage.heroTitle, intro: historyPage.heroIntro, image: historyPage.heroImage }
-    : pageData[type === '/publications' ? '/annual-reports' : type] || pageData['/about'];
+    : pageData[type] || pageData['/about'];
   useEffect(() => {
     if (type !== '/history') return undefined;
     let cancelled = false;
