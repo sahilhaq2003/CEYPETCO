@@ -7,6 +7,7 @@ import GoogleTranslate from './components/GoogleTranslate.jsx';
 import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
 import displayImageUrl from './utils/displayImageUrl.js';
+import MarineBunkeringPage from './components/marine-bunkering/MarineBunkeringPage.jsx';
 
 const paymentBanks = [
   { name: 'Bank of Ceylon', branch: 'City Office', logo: 'boc.svg' },
@@ -5856,6 +5857,21 @@ function App() {
         '.oil-chart-wrap',
         '.lubricant-products-heading > *',
         '.lubricant-table article',
+        '.mb-section-heading',
+        '.mb-intro-grid > *',
+        '.mb-vessel-card',
+        '.mb-fuel-card',
+        '.mb-why-card',
+        '.mb-infra-grid > *',
+        '.mb-process-step',
+        '.mb-quality-card',
+        '.mb-safety-item',
+        '.mb-compliance-grid > *',
+        '.mb-stat-card',
+        '.mb-timeline-item',
+        '.mb-faq-grid > *',
+        '.mb-enquiry-grid > *',
+        '.mb-cta-inner',
       ].join(','),
     );
 
@@ -6016,7 +6032,7 @@ function App() {
               </div>
             </div>
             <div
-              className={`nav-group services-nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || path === '/online-banking' || divisionPages[path] || additionalOperationPages[path] ? 'active' : ''}`}
+              className={`nav-group services-nav-group ${navDropClosed ? 'closed' : ''} ${path === '/services' || path === '/online-banking' || path === '/services/marine-bunkering' || divisionPages[path] || additionalOperationPages[path] ? 'active' : ''}`}
               onMouseEnter={() => setNavDropClosed(false)}
             >
               <a
@@ -6078,8 +6094,8 @@ function App() {
                     <b>{t('lubricants')}</b>
                     <small>Automotive and industrial oils</small>
                   </a>
-                  <a href="/bunkering">
-                    <b>Bunkering</b>
+                  <a href="/services/marine-bunkering">
+                    <b>Marine Bunkering</b>
                     <small>Marine fuel information</small>
                   </a>
                   <a href="/ev-charging">
@@ -6516,6 +6532,8 @@ function App() {
         <NewsDetailPage key={path} newsId={path.split('/').pop()} />
       ) : path === '/mobile-app' ? (
         <MobileAppsPage />
+      ) : path === '/services/marine-bunkering' || path === '/bunkering' ? (
+        <MarineBunkeringPage />
       ) : (
         <InnerPage type={path} />
       )}
