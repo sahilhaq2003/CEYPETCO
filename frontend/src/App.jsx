@@ -570,7 +570,7 @@ const pageData = {
     title: 'Built to power national progress',
     intro:
       'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape',
-    image: '/images/about-energy-infrastructure-v2.webp',
+    image: '/images/about-energy-infrastructure-v3.webp',
   },
   '/management': {
     label: 'OUR LEADERSHIP',
