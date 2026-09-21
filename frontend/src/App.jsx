@@ -10,6 +10,7 @@ import aboutHeroImage from './images/about.png';
 import managementHeroImage from './images/management.png';
 import subsidiariesHeroImage from './images/subsidiaries.JPG';
 import ministryHeroImage from './images/ministry.jpeg';
+import allServicesHeroImage from './images/allservices.JPG';
 import displayImageUrl from './utils/displayImageUrl.js';
 import MarineBunkeringPage from './components/marine-bunkering/MarineBunkeringPage.jsx';
 import ElectricMobilityContent from './components/electric-mobility/ElectricMobilityContent.jsx';
@@ -588,7 +589,7 @@ intro:
     title: 'Energy services made accessible',
     intro:
       'Find official registrations, applications, specifications and information from one clear destination',
-    image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/media-2.jpg',
+    image: allServicesHeroImage,
   },
   '/bunkering': {
     label: 'OUR OPERATIONS · MARINE FUELS',
