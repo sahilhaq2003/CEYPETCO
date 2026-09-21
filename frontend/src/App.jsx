@@ -7,6 +7,9 @@ import GoogleTranslate from './components/GoogleTranslate.jsx';
 import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
 import aboutHeroImage from './images/about.png';
+import managementHeroImage from './images/management.png';
+import subsidiariesHeroImage from './images/subsidiaries.JPG';
+import ministryHeroImage from './images/ministry.jpeg';
 import displayImageUrl from './utils/displayImageUrl.js';
 import MarineBunkeringPage from './components/marine-bunkering/MarineBunkeringPage.jsx';
 import ElectricMobilityContent from './components/electric-mobility/ElectricMobilityContent.jsx';
@@ -573,12 +576,12 @@ intro:
       'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape',
     image: aboutHeroImage,
   },
-  '/management': {
+'/management': {
     label: 'OUR LEADERSHIP',
     title: 'Leadership with purpose',
     intro:
       'Meet the leadership team guiding Ceylon Petroleum Corporation and find key management contacts across the organisation',
-    image: '/images/management-energy-leadership.webp',
+    image: managementHeroImage,
   },
   '/services': {
     label: 'PUBLIC SERVICES',
@@ -766,13 +769,13 @@ intro:
     label: 'DISCOVER CEYPETCO · SUBSIDIARIES',
     title: 'Our subsidiaries',
     intro: 'The companies supporting petroleum storage, distribution and terminal development in Sri Lanka',
-    image: '/images/subsidiaries-petroleum-storage.webp',
+    image: subsidiariesHeroImage,
   },
-  '/energy-ministries': {
+'/energy-ministries': {
     label: 'DISCOVER CEYPETCO · PUBLIC INSTITUTIONS',
     title: 'Related ministries & agencies',
     intro: 'Explore the public institutions connected to Sri Lanka’s energy, transport and infrastructure sectors',
-    image: '/images/related-ministries-hero-v2.webp',
+    image: ministryHeroImage,
   },
   '/mobile-app': {
     label: 'PUBLIC SERVICES · MOBILE APPS',
@@ -4406,7 +4409,7 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-<section className={`page-hero${type === '/about' ? ' page-hero--about' : ''}${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${type === '/tenders' ? ' page-hero--tenders' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
+<section className={`page-hero${type === '/about' ? ' page-hero--about' : ''}${type === '/management' ? ' page-hero--management' : ''}${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${type === '/tenders' ? ' page-hero--tenders' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
         <img src={page.image} alt="" />
         {pageBrandLogos[type] && (
           <div className="page-hero-logo">
@@ -4416,6 +4419,11 @@ function InnerPage({ type }) {
         {type === '/about' && (
           <div className="page-hero-caption">
             09 June 1967 – Hon. Prime Minister Dudley Senanayake laying the foundation stone for the construction of the refinery.
+          </div>
+        )}
+        {type === '/management' && (
+          <div className="page-hero-caption">
+            Hon. Prime Minister Sirimavo Bandaranaike inaugurating the bunkering service.
           </div>
         )}
         <div className="container page-hero-copy">

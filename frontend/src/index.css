@@ -3930,6 +3930,17 @@ footer {
 .page-hero--about > img {
   object-position: center 20%;
 }
+.page-hero--management > img {
+  filter: brightness(1.35);
+}
+.page-hero--management::after {
+  background: linear-gradient(
+    90deg,
+    rgba(5, 30, 38, 0.2) 0%,
+    rgba(5, 30, 38, 0.12) 78%,
+    transparent 100%
+  );
+}
 .page-hero-caption {
   position: absolute;
   right: 3vw;
