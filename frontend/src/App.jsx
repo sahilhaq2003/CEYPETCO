@@ -6,6 +6,7 @@ import { useLanguage } from './i18n/LanguageContext.jsx';
 import GoogleTranslate from './components/GoogleTranslate.jsx';
 import PopupNotice from './components/PopupNotice.jsx';
 import api from './api';
+import aboutHeroImage from './images/about.png';
 import displayImageUrl from './utils/displayImageUrl.js';
 import MarineBunkeringPage from './components/marine-bunkering/MarineBunkeringPage.jsx';
 import ElectricMobilityContent from './components/electric-mobility/ElectricMobilityContent.jsx';
@@ -568,9 +569,9 @@ const pageData = {
   '/about': {
     label: 'ABOUT CEYPETCO',
     title: 'Built to power national progress',
-    intro:
+intro:
       'For more than six decades, Ceylon Petroleum Corporation has served at the centre of Sri Lanka’s energy landscape',
-    image: '/images/about-energy-infrastructure-v3.webp',
+    image: aboutHeroImage,
   },
   '/management': {
     label: 'OUR LEADERSHIP',
@@ -4405,11 +4406,16 @@ function InnerPage({ type }) {
 
   return (
     <main className="inner-page">
-<section className={`page-hero${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${type === '/tenders' ? ' page-hero--tenders' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
+<section className={`page-hero${type === '/about' ? ' page-hero--about' : ''}${type === '/refinery' ? ' page-hero--refinery' : ''}${type === '/lubricants' ? ' page-hero--lubricants' : ''}${type === '/tenders' ? ' page-hero--tenders' : ''}${pageBrandLogos[type] ? ' page-hero--' + type.slice(1) : ''}`}>
         <img src={page.image} alt="" />
         {pageBrandLogos[type] && (
           <div className="page-hero-logo">
             <img src={pageBrandLogos[type]} alt={`${page.title} logo`} />
+          </div>
+        )}
+        {type === '/about' && (
+          <div className="page-hero-caption">
+            09 June 1967 – Hon. Prime Minister Dudley Senanayake laying the foundation stone for the construction of the refinery.
           </div>
         )}
         <div className="container page-hero-copy">

@@ -3927,6 +3927,26 @@ footer {
 .page-hero > img {
   object-position: center;
 }
+.page-hero--about > img {
+  object-position: center 20%;
+}
+.page-hero-caption {
+  position: absolute;
+  right: 3vw;
+  bottom: 20px;
+  max-width: 300px;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: right;
+  text-shadow: 0 1px 6px rgba(0, 20, 28, 0.9);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(5, 30, 38, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
 .inner-page:has(.contact-grid) .page-hero > img {
   object-position: center 55%;
 }
