@@ -2966,30 +2966,6 @@ function RefineryPage() {
           </div>
         </div>
       </section>
-      <section className="process-units content-section">
-        <div className="container process-units-grid">
-          <div>
-            <p className="eyebrow">PROCESS UNITS</p>
-            <h2>Installed production capacity</h2>
-            <p>Rated capacity in metric tonnes per stream day</p>
-          </div>
-          <div className="unit-table">
-            <div className="unit-table-head">
-              <span>Unit</span>
-              <span>Capacity · MT/stream day</span>
-            </div>
-            {units.map(([unit, capacity], index) => (
-              <div className="unit-row" key={unit}>
-                <span>
-                  <small>{String(index + 1).padStart(2, '0')}</small>
-                  {unit}
-                </span>
-                <b>{capacity}</b>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }
@@ -3262,12 +3238,9 @@ function AviationPage() {
     ],
   });
   const prices = [
-    { customer: 'Local Customer with AOC Document', location: 'BIA, CIAR & MRIA', price: '2.43' },
-    { customer: 'Local Customer with AOC Document', location: 'JIA', price: '2.54' },
-    { customer: 'Local Contract Customer without Operating an Airline', location: 'BIA, CIAR & MRIA', price: '2.46' },
-    { customer: 'Local Contract Customer without Operating an Airline', location: 'JIA', price: '2.57' },
-    { customer: 'All Contract Customers · Foreign', location: 'BIA, CIAR & MRIA', price: '2.43' },
-    { customer: 'All Contract Customers · Foreign', location: 'JIA', price: '2.54' },
+    { customer: 'Spot / One-Time Customer', location: 'CMB & RML', price: '3.53' },
+    { customer: 'Spot / One-Time Customer', location: 'HRI', price: '3.51' },
+    { customer: 'Spot / One-Time Customer', location: 'JAF', price: '3.64' },
   ];
   const palaliLocation = {
     name: 'Palali',
@@ -3325,20 +3298,20 @@ function AviationPage() {
               <p className="eyebrow">AVIATION FUEL PRICING</p>
               <h2>Contract customer rates</h2>
               <p>
-                Effective 01 February 2025 · Prices shown in US dollars per US
+                Effective 01 August 2026 · Prices shown in US dollars per US
                 gallon
               </p>
             </div>
             <div className="aviation-price-unit">
               <b>US$/USG</b>
-              <span>Published pricing unit</span>
+              <span>PUBLISHED PRICING UNIT</span>
             </div>
           </div>
           <div className="aviation-price-table">
             <div className="aviation-price-head">
-              <span>Customer category</span>
-              <span>Location</span>
-              <span>Revised price</span>
+              <span>CUSTOMER CATEGORY</span>
+              <span>LOCATION</span>
+              <span>REVISED PRICE</span>
             </div>
             {prices.map((price, index) => (
               <article key={`${price.customer}-${price.location}`}>

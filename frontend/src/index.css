@@ -9232,22 +9232,25 @@ body > iframe.goog-te-banner-frame {
 }
 .aviation-price-table article small {
   position: absolute;
-  left: -34px;
-  color: #aab3b5;
-  font-size: 8px;
+  left: -40px;
+  color: #a2b4be;
+  font-size: 11px;
+  font-weight: 500;
 }
 .aviation-price-table article strong {
-  font: 600 12px/1.45 'Manrope';
+  font: 700 16px/1.4 'Manrope', sans-serif;
+  color: #0a2533;
   padding-right: 20px;
 }
 .aviation-price-table article span {
-  font-size: 11px;
-  color: var(--muted);
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
 }
 .aviation-price-table article > b {
-  font: 800 20px 'Manrope';
+  font: 800 28px/1 'Manrope', sans-serif;
   text-align: right;
-  color: var(--red);
+  color: #006699;
 }
 .aviation-fuel {
   background: #fff;
