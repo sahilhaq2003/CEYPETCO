@@ -6,7 +6,9 @@ const EveryDropSection = () => {
           {/* Left Column: Heading, Copy, Feature Cards, CTA */}
           <div className="every-drop-content-col">
             <h2 className="every-drop-title">
-              Every drop powers national <span className="text-red">progress</span>
+              Every drop powers
+              <br />
+              national <span className="text-red">progress</span>
             </h2>
 
             <p className="every-drop-description">
@@ -67,8 +69,8 @@ const EveryDropSection = () => {
             <div className="every-drop-image-wrapper">
               <div className="image-overlay-gradient"></div>
               <img
-                src="/images/offshore-platform.jpg"
-                alt="Offshore Oil Platform"
+                src="/images/bunkering/jupiter-sun.jpg"
+                alt="Sea Platform"
                 className="every-drop-img"
               />
               {/* Top-right accent stripes */}

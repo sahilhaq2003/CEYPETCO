@@ -37,7 +37,7 @@ const BunkeringIntro = () => (
       </div>
       <figure className="mb-intro-figure">
         <img
-          src="/images/bunkering/marine-fuel-transfer.webp"
+          src="/images/bunkering/jupiter-sun.jpg"
           alt="Marine fuel transfer alongside a commercial vessel"
           loading="lazy"
           decoding="async"
