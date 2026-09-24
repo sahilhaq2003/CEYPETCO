@@ -78,7 +78,7 @@ const Login = () => {
               <Fuel className="w-7 h-7 text-red-600" />
             </div>
             <div>
-              <h1 className="text-white font-extrabold text-xl tracking-wider font-['Manrope']">
+              <h1 className="text-white font-extrabold text-xl tracking-wider font-['League_Spartan']">
                 CEYPETCO
               </h1>
               <p className="text-[#8faab0] text-[10px] tracking-[0.15em] uppercase font-bold font-['Manrope']">
@@ -89,7 +89,7 @@ const Login = () => {
         </div>
 
         <div className="relative z-10">
-          <h2 className="text-white font-extrabold text-4xl leading-tight font-['Manrope'] mb-6">
+          <h2 className="text-white font-extrabold text-4xl leading-tight font-['League_Spartan'] mb-6">
             Official Website
             <br />
             Administration
@@ -128,7 +128,7 @@ const Login = () => {
               <Fuel className="w-5 h-5 text-red-600" />
             </div>
             <div>
-              <h1 className="font-extrabold text-lg tracking-wider font-['Manrope'] text-[#092f3b]">
+              <h1 className="font-extrabold text-lg tracking-wider font-['League_Spartan'] text-[#092f3b]">
                 CEYPETCO
               </h1>
               <p className="text-[10px] tracking-[0.12em] uppercase font-bold text-[#6c7a7e] font-['Manrope']">
@@ -141,7 +141,7 @@ const Login = () => {
             <p className="text-[11px] font-bold tracking-[0.14em] uppercase text-red-600 mb-3 font-['Manrope']">
               ADMIN LOGIN
             </p>
-            <h2 className="text-[#092f3b] font-extrabold text-[28px] leading-tight font-['Manrope'] mb-2">
+            <h2 className="text-[#092f3b] font-extrabold text-[28px] leading-tight font-['League_Spartan'] mb-2">
               Welcome Back
             </h2>
             <p className="text-[#66767d] text-sm">

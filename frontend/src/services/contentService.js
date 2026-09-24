@@ -95,10 +95,26 @@ const supplierSectionService = {
   },
 };
 
+const tenderDownloadService = {
+  recordDownload: async (data) => {
+    const response = await api.post("/tender-downloads", data);
+    return response.data;
+  },
+  getDownloads: async (params = {}) => {
+    const response = await api.get("/tender-downloads/admin", { params });
+    return response.data;
+  },
+  deleteDownload: async (id) => {
+    const response = await api.delete(`/tender-downloads/admin/${id}`);
+    return response.data;
+  },
+};
+
 export {
   newsService,
   noticeService,
   tenderService,
+  tenderDownloadService,
   projectService,
   careerService,
   supplierResourceService,

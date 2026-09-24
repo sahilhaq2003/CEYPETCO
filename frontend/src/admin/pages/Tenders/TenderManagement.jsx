@@ -12,9 +12,13 @@ import {
   FileText,
   Link2,
   X,
+  Mail,
+  Phone,
+  Calendar,
+  Download,
 } from "lucide-react";
 import api from "../../../services/api";
-import { tenderService } from "../../../services/contentService";
+import { tenderService, tenderDownloadService } from "../../../services/contentService";
 import StatusBadge from "../../components/StatusBadge";
 import Pagination from "../../components/Pagination";
 import Modal from "../../components/Modal";
@@ -47,6 +51,7 @@ const getApiOrigin = () =>
     .replace(/\/api$/, "");
 
 const TenderManagement = () => {
+  const [activeTab, setActiveTab] = useState("tenders");
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -54,11 +59,21 @@ const TenderManagement = () => {
   const [total, setTotal] = useState(0);
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
+
+  const [downloadItems, setDownloadItems] = useState([]);
+  const [downloadLoading, setDownloadLoading] = useState(false);
+  const [downloadPage, setDownloadPage] = useState(1);
+  const [downloadTotalPages, setDownloadTotalPages] = useState(1);
+  const [downloadTotal, setDownloadTotal] = useState(0);
+  const [downloadSearch, setDownloadSearch] = useState("");
+  const [downloadSearchInput, setDownloadSearchInput] = useState("");
+
   const [showModal, setShowModal] = useState(false);
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [showDelete, setShowDelete] = useState(null);
+  const [showDownloadDelete, setShowDownloadDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [docs, setDocs] = useState([]);
   const [uploadingDoc, setUploadingDoc] = useState(null);
@@ -80,9 +95,29 @@ const TenderManagement = () => {
     }
   }, [page, search]);
 
+  const loadDownloads = useCallback(async () => {
+    setDownloadLoading(true);
+    try {
+      const params = { page: downloadPage, limit: 10 };
+      if (downloadSearch) params.search = downloadSearch;
+      const res = await tenderDownloadService.getDownloads(params);
+      setDownloadItems(res.data);
+      setDownloadTotal(res.pagination.total);
+      setDownloadTotalPages(res.pagination.pages);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to load download records");
+    } finally {
+      setDownloadLoading(false);
+    }
+  }, [downloadPage, downloadSearch]);
+
   useEffect(() => {
-    load();
-  }, [load]);
+    if (activeTab === "tenders") {
+      load();
+    } else {
+      loadDownloads();
+    }
+  }, [activeTab, load, loadDownloads]);
 
   const openCreate = () => {
     setEditing(null);
@@ -192,147 +227,308 @@ const TenderManagement = () => {
     }
   };
 
+  const handleDownloadDelete = async () => {
+    setDeleting(true);
+    try {
+      await tenderDownloadService.deleteDownload(showDownloadDelete._id);
+      toast.success("Download record deleted");
+      setShowDownloadDelete(null);
+      loadDownloads();
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to delete record");
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
           <h1 className="text-xl font-extrabold text-[#092f3b] font-['Manrope']">
-            Tenders Management
+            Tenders & Downloads Management
           </h1>
           <p className="text-sm text-[#66767d] mt-1">
-            Create and manage tenders advertised by CEYPETCO.
+            Create tenders and view user contact submissions before downloading tender documents.
           </p>
         </div>
+        {activeTab === "tenders" && (
+          <button
+            onClick={openCreate}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-sm font-semibold transition-colors shadow-sm"
+          >
+            <Plus className="w-4 h-4" />
+            New Tender
+          </button>
+        )}
+      </div>
+
+      <div className="flex border-b border-slate-200 mb-6">
         <button
-          onClick={openCreate}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#dc2626] hover:bg-[#b91c1c] text-white text-sm font-semibold transition-colors shadow-sm"
+          onClick={() => setActiveTab("tenders")}
+          className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${
+            activeTab === "tenders"
+              ? "border-[#dc2626] text-[#dc2626]"
+              : "border-transparent text-slate-500 hover:text-slate-700"
+          }`}
         >
-          <Plus className="w-4 h-4" />
-          New Tender
+          All Tenders ({total})
+        </button>
+        <button
+          onClick={() => setActiveTab("downloads")}
+          className={`px-5 py-3 text-sm font-semibold border-b-2 transition-colors ${
+            activeTab === "downloads"
+              ? "border-[#dc2626] text-[#dc2626]"
+              : "border-transparent text-slate-500 hover:text-slate-700"
+          }`}
+        >
+          Download Submissions / Leads ({downloadTotal})
         </button>
       </div>
 
-      <div className="relative mb-4 max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-        <input
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setSearch(searchInput);
-              setPage(1);
-            }
-          }}
-          placeholder="Search tenders..."
-          className="w-full h-11 pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm text-[#092f3b] placeholder-slate-400 outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all"
-        />
-      </div>
-
-      {loading ? (
-        <Loading label="Loading tenders..." />
-      ) : (
+      {activeTab === "tenders" ? (
         <>
-          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="border-b border-slate-200 bg-slate-50">
-                  <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
-                    Title
-                  </th>
-                  <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d] hidden lg:table-cell">
-                    Reference
-                  </th>
-                  <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d] hidden md:table-cell">
-                    Division
-                  </th>
-                  <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d] hidden sm:table-cell">
-                    Closing
-                  </th>
-                  <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
-                    Status
-                  </th>
-                  <th className="px-4 py-3 text-right text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.length === 0 ? (
-                  <tr>
-                    <td colSpan={6} className="px-4 py-12 text-center">
-                      <Newspaper className="w-10 h-10 text-slate-200 mx-auto mb-3" />
-                      <p className="text-sm font-semibold text-[#092f3b]">
-                        No tenders found
-                      </p>
-                      <p className="text-xs text-[#66767d] mt-1">
-                        {search
-                          ? "Try a different search term"
-                          : "Create your first tender to get started"}
-                      </p>
-                    </td>
-                  </tr>
-                ) : (
-                  items.map((item) => (
-                    <tr key={item._id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-                      <td className="px-4 py-4">
-                        <p className="text-sm font-semibold text-[#092f3b] line-clamp-1 max-w-xs">
-                          {item.title}
-                        </p>
-                        {item.documents?.length > 0 && (
-                          <p className="text-xs text-[#66767d] mt-0.5 flex items-center gap-1">
-                            <FileText className="w-3 h-3" />
-                            {item.documents.length} document(s)
-                          </p>
-                        )}
-                      </td>
-                      <td className="px-4 py-4 hidden lg:table-cell">
-                        <span className="text-xs text-[#66767d]">{item.reference || "—"}</span>
-                      </td>
-                      <td className="px-4 py-4 hidden md:table-cell">
-                        <span className="text-xs text-[#66767d]">{item.division || "—"}</span>
-                      </td>
-                      <td className="px-4 py-4 hidden sm:table-cell">
-                        <span className="text-xs text-[#66767d]">
-                          {item.closingDate
-                            ? new Date(item.closingDate).toLocaleDateString()
-                            : "—"}
-                        </span>
-                      </td>
-                      <td className="px-4 py-4">
-                        <StatusBadge status={item.status} />
-                      </td>
-                      <td className="px-4 py-4 text-right">
-                        <div className="inline-flex items-center gap-1">
-                          <button
-                            onClick={() => openEdit(item)}
-                            title="Edit"
-                            className="p-2 rounded-lg text-slate-400 hover:text-[#092f3b] hover:bg-slate-100 transition-colors"
-                          >
-                            <Edit3 className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => setShowDelete(item)}
-                            title="Delete"
-                            className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+          <div className="relative mb-4 max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setSearch(searchInput);
+                  setPage(1);
+                }
+              }}
+              placeholder="Search tenders..."
+              className="w-full h-11 pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm text-[#092f3b] placeholder-slate-400 outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all"
+            />
           </div>
 
-          {items.length > 0 && (
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              total={total}
-              onPageChange={setPage}
+          {loading ? (
+            <Loading label="Loading tenders..." />
+          ) : (
+            <>
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-slate-200 bg-slate-50">
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Title
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d] hidden lg:table-cell">
+                        Reference
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d] hidden md:table-cell">
+                        Division
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d] hidden sm:table-cell">
+                        Closing
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Status
+                      </th>
+                      <th className="px-4 py-3 text-right text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {items.length === 0 ? (
+                      <tr>
+                        <td colSpan={6} className="px-4 py-12 text-center">
+                          <Newspaper className="w-10 h-10 text-slate-200 mx-auto mb-3" />
+                          <p className="text-sm font-semibold text-[#092f3b]">
+                            No tenders found
+                          </p>
+                          <p className="text-xs text-[#66767d] mt-1">
+                            {search
+                              ? "Try a different search term"
+                              : "Create your first tender to get started"}
+                          </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      items.map((item) => (
+                        <tr key={item._id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                          <td className="px-4 py-4">
+                            <p className="text-sm font-semibold text-[#092f3b] line-clamp-1 max-w-xs">
+                              {item.title}
+                            </p>
+                            {item.documents?.length > 0 && (
+                              <p className="text-xs text-[#66767d] mt-0.5 flex items-center gap-1">
+                                <FileText className="w-3 h-3" />
+                                {item.documents.length} document(s)
+                              </p>
+                            )}
+                          </td>
+                          <td className="px-4 py-4 hidden lg:table-cell">
+                            <span className="text-xs text-[#66767d]">{item.reference || "—"}</span>
+                          </td>
+                          <td className="px-4 py-4 hidden md:table-cell">
+                            <span className="text-xs text-[#66767d]">{item.division || "—"}</span>
+                          </td>
+                          <td className="px-4 py-4 hidden sm:table-cell">
+                            <span className="text-xs text-[#66767d]">
+                              {item.closingDate
+                                ? new Date(item.closingDate).toLocaleDateString()
+                                : "—"}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4">
+                            <StatusBadge status={item.status} />
+                          </td>
+                          <td className="px-4 py-4 text-right">
+                            <div className="inline-flex items-center gap-1">
+                              <button
+                                onClick={() => openEdit(item)}
+                                title="Edit"
+                                className="p-2 rounded-lg text-slate-400 hover:text-[#092f3b] hover:bg-slate-100 transition-colors"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </button>
+                              <button
+                                onClick={() => setShowDelete(item)}
+                                title="Delete"
+                                className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              {items.length > 0 && (
+                <Pagination
+                  page={page}
+                  totalPages={totalPages}
+                  total={total}
+                  onPageChange={setPage}
+                />
+              )}
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <div className="relative mb-4 max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              value={downloadSearchInput}
+              onChange={(e) => setDownloadSearchInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  setDownloadSearch(downloadSearchInput);
+                  setDownloadPage(1);
+                }
+              }}
+              placeholder="Search by email, phone, or tender title..."
+              className="w-full h-11 pl-10 pr-4 bg-white border border-slate-200 rounded-lg text-sm text-[#092f3b] placeholder-slate-400 outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all"
             />
+          </div>
+
+          {downloadLoading ? (
+            <Loading label="Loading download submissions..." />
+          ) : (
+            <>
+              <div className="bg-white border border-slate-200 rounded-xl overflow-hidden">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="border-b border-slate-200 bg-slate-50">
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Tender Details
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Email Address
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Mobile Number
+                      </th>
+                      <th className="px-4 py-3 text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Downloaded At
+                      </th>
+                      <th className="px-4 py-3 text-right text-[11px] font-bold tracking-[0.08em] uppercase text-[#66767d]">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {downloadItems.length === 0 ? (
+                      <tr>
+                        <td colSpan={5} className="px-4 py-12 text-center">
+                          <Download className="w-10 h-10 text-slate-200 mx-auto mb-3" />
+                          <p className="text-sm font-semibold text-[#092f3b]">
+                            No download submissions found
+                          </p>
+                          <p className="text-xs text-[#66767d] mt-1">
+                            {downloadSearch
+                              ? "Try a different search term"
+                              : "Submissions from users downloading tenders will appear here"}
+                          </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      downloadItems.map((item) => (
+                        <tr key={item._id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+                          <td className="px-4 py-4">
+                            <p className="text-sm font-semibold text-[#092f3b] line-clamp-1 max-w-xs">
+                              {item.tenderTitle}
+                            </p>
+                            {item.tenderReference && (
+                              <span className="text-xs text-[#66767d]">Ref: {item.tenderReference}</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-4">
+                            <span className="text-sm text-[#092f3b] flex items-center gap-1.5">
+                              <Mail className="w-3.5 h-3.5 text-slate-400" />
+                              <a href={`mailto:${item.email}`} className="hover:underline hover:text-red-600">
+                                {item.email}
+                              </a>
+                            </span>
+                          </td>
+                          <td className="px-4 py-4">
+                            <span className="text-sm text-[#092f3b] flex items-center gap-1.5">
+                              <Phone className="w-3.5 h-3.5 text-slate-400" />
+                              <a href={`tel:${item.mobileNumber}`} className="hover:underline hover:text-red-600">
+                                {item.mobileNumber}
+                              </a>
+                            </span>
+                          </td>
+                          <td className="px-4 py-4">
+                            <span className="text-xs text-[#66767d] flex items-center gap-1.5">
+                              <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                              {new Date(item.createdAt || item.downloadedAt).toLocaleString()}
+                            </span>
+                          </td>
+                          <td className="px-4 py-4 text-right">
+                            <button
+                              onClick={() => setShowDownloadDelete(item)}
+                              title="Delete Record"
+                              className="p-2 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+
+              {downloadItems.length > 0 && (
+                <Pagination
+                  page={downloadPage}
+                  totalPages={downloadTotalPages}
+                  total={downloadTotal}
+                  onPageChange={setDownloadPage}
+                />
+              )}
+            </>
           )}
         </>
       )}
@@ -554,6 +750,39 @@ const TenderManagement = () => {
             </button>
             <button
               onClick={handleDelete}
+              disabled={deleting}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-colors disabled:opacity-50"
+            >
+              <Trash2 className="w-4 h-4" />
+              {deleting ? "Deleting..." : "Delete"}
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal open={!!showDownloadDelete} onClose={() => setShowDownloadDelete(null)} title="Delete Download Submission" size="sm">
+        <div className="text-center">
+          <div className="w-14 h-14 bg-red-50 border border-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <Trash2 className="w-7 h-7 text-red-600" />
+          </div>
+          <p className="text-sm text-[#66767d] mb-2">
+            Are you sure you want to delete this download submission record?
+          </p>
+          <p className="text-sm font-bold text-[#092f3b] mb-1">
+            {showDownloadDelete?.email} ({showDownloadDelete?.mobileNumber})
+          </p>
+          <p className="text-xs text-slate-500 mb-6">
+            For: {showDownloadDelete?.tenderTitle}
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setShowDownloadDelete(null)}
+              className="px-4 py-2.5 rounded-lg border border-slate-200 text-sm font-semibold text-[#092f3b] hover:bg-slate-50 transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleDownloadDelete}
               disabled={deleting}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-sm font-semibold transition-colors disabled:opacity-50"
             >

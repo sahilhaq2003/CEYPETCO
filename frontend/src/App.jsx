@@ -15,6 +15,9 @@ import displayImageUrl from './utils/displayImageUrl.js';
 import MarineBunkeringPage from './components/marine-bunkering/MarineBunkeringPage.jsx';
 import ElectricMobilityContent from './components/electric-mobility/ElectricMobilityContent.jsx';
 import HistoricalPricesPage from './components/HistoricalPricesPage.jsx';
+import TenderDownloadModal from './components/TenderDownloadModal.jsx';
+import LogoMarqueeSection from './components/LogoMarqueeSection.jsx';
+import EveryDropSection from './components/EveryDropSection.jsx';
 
 const paymentBanks = [
   { name: 'Bank of Ceylon', branch: 'City Office', logo: 'boc.svg' },
@@ -259,6 +262,21 @@ const pageBrandLogos = {
   '/ev-charging': '/images/brand-logos/ev-solutions.webp',
 };
 const heroSlides = [
+  {
+    image: 'https://images.squarespace-cdn.com/content/v1/693bf5941493ec4ce40a537d/f2785c86-6ee9-429c-a714-cd0e945aea44/Billboard+Image.jpg',
+    alt: 'Offshore oil rig and support vessels at sunset',
+    eyebrow: 'OFFSHORE EXPLORATION',
+    title: (
+      <>
+        Petroleum Development
+        <br />
+        Authority of Sri Lanka
+      </>
+    ),
+    copy: 'Discover offshore oil and natural gas exploration opportunities with transparent licensing and investment prospects.',
+    cta: 'Learn more about PDASL',
+    href: 'https://www.srilankalicensinground.com/',
+  },
   {
     image: 'https://res.cloudinary.com/e9fb61tl/image/upload/f_auto,q_auto/ceypetco/images/distribution.jpg',
     alt: 'Ceypetco fuel distribution truck travelling through Sri Lanka',
@@ -3041,7 +3059,6 @@ function MarketingSalesPage() {
 
   const categoryOrder = [
     'White Oil',
-    'Black Oil',
     'Lubricants',
     'Aviation Fuel',
   ];
@@ -3127,9 +3144,7 @@ function MarketingSalesPage() {
           ) : (
             grouped.map((g, i) => (
               <div
-                className={`price-category ${
-                  g.category === 'Black Oil' ? 'black-oil' : ''
-                }`}
+                className="price-category"
                 key={g.category}
               >
                 <div className="price-category-title">
@@ -3602,35 +3617,45 @@ function AgroChemicalsPage() {
       </section>
       <section className="agro-flipper">
         <div className="container agro-flipper-grid">
-          <div>
-            <span>BIO-INSECTICIDE</span>
-            <h2>Flipper</h2>
-            <p>
-              A contact crop-protection option based on potassium salts of fatty
-              acids, developed to help manage soft-bodied pests.
-            </p>
-            <a
-              href="/documents/agro/Flipper.pdf"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Read the Flipper product leaflet{' '}
-              <Icon name="download" size={18} />
-            </a>
+          <div className="flipper-left-panel">
+            <div className="flipper-left-text">
+              <span>BIO-INSECTICIDE</span>
+              <h2>Flipper</h2>
+              <p>
+                A contact crop-protection option based on potassium salts of fatty
+                acids, developed to help manage soft-bodied pests.
+              </p>
+              <a
+                href="/documents/agro/Flipper.pdf"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>READ THE FLIPPER PRODUCT LEAFLET</span>
+                <Icon name="download" size={16} />
+              </a>
+            </div>
+            <div className="flipper-left-bottle">
+              <img
+                src="/images/flipper-bottle-transparent.png"
+                alt="Flipper Bio-Insecticide bottle"
+              />
+            </div>
           </div>
-          <div>
-            <p className="eyebrow light">CROP PROTECTION</p>
-            <h3>More choice for responsible pest management</h3>
-            <p>
-              Flipper adds a bio-insecticide to the Ceypetco Agro range,
-              complementing its insecticide, fungicide and weed-control products.
-              It acts through direct contact with target pests.
-            </p>
-            <p>
-              The product leaflet identifies aphids and whiteflies among its
-              targets. Check the leaflet for approved crops, application rates
-              and safe-use instructions before use.
-            </p>
+          <div className="flipper-right-panel">
+            <div className="flipper-right-text">
+              <p className="eyebrow light">CROP PROTECTION</p>
+              <h3>More choice for responsible pest management</h3>
+              <p>
+                Flipper adds a bio-insecticide to the Ceypetco Agro range,
+                complementing its insecticide, fungicide and weed-control products.
+                It acts through direct contact with target pests.
+              </p>
+              <p>
+                The product leaflet identifies aphids and whiteflies among its
+                targets. Check the leaflet for approved crops, application rates
+                and safe-use instructions before use.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -4065,6 +4090,7 @@ function InnerPage({ type }) {
   const [newsLoading, setNewsLoading] = useState(true);
   const [tenders, setTenders] = useState([]);
   const [tendersLoading, setTendersLoading] = useState(true);
+  const [downloadModalItem, setDownloadModalItem] = useState(null);
   const [notices, setNotices] = useState([]);
   const [noticesLoading, setNoticesLoading] = useState(true);
   const [projects, setProjects] = useState([]);
@@ -4667,6 +4693,7 @@ function InnerPage({ type }) {
               </div>
             </div>
           </section>
+          <LogoMarqueeSection />
         </>
       )}
       {type === '/online-banking' && (
@@ -4711,6 +4738,7 @@ function InnerPage({ type }) {
               ))}
             </div>
           </div>
+          <LogoMarqueeSection />
         </section>
       )}
       {type === '/consumer-registration' && (
@@ -5531,17 +5559,13 @@ function InnerPage({ type }) {
                               : 'Open'}
                           </p>
                         </div>
-                        <a
-                          href={
-                            item.documents && item.documents.length
-                              ? item.documents[0].url
-                              : '#'
-                          }
-                          target="_blank"
-                          rel="noreferrer"
+                        <button
+                          type="button"
+                          className="tender-download-btn"
+                          onClick={() => setDownloadModalItem(item)}
                         >
                           Download tender <Icon name="download" size={16} />
-                        </a>
+                        </button>
                       </article>
                     ))}
                   </div>
@@ -5558,6 +5582,11 @@ function InnerPage({ type }) {
                 Request RFQ details <Icon name="arrow" size={17} />
               </a>
             </div>
+            <TenderDownloadModal
+              isOpen={!!downloadModalItem}
+              onClose={() => setDownloadModalItem(null)}
+              tender={downloadModalItem}
+            />
           </div>
         </section>
       )}
@@ -6168,19 +6197,19 @@ function App() {
                     <small>Automotive and industrial oils</small>
                   </a>
                   <a href="/services/marine-bunkering">
-                    <b>Marine Bunkering</b>
+                    <b>Lanka Ceypetco Marine Bunkering</b>
                     <small>Marine fuel information</small>
                   </a>
                   <a href="/ev-charging">
-                    <b>EV Charging</b>
+                    <b>Lanka Ceypetco EV Charging</b>
                     <small>Charging locations and guidance</small>
                   </a>
                   <a href="/special-chemicals">
-                    <b>Special Chemicals</b>
+                    <b>Lanka Ceypetco Special Chemicals</b>
                     <small>Industrial specialty products</small>
                   </a>
                   <a href="/bitumen">
-                    <b>Bitumen</b>
+                    <b>Lanka Ceypetco Bitumen</b>
                     <small>Road and industrial materials</small>
                   </a>
                 </div>
@@ -6351,64 +6380,7 @@ function App() {
               ))}
             </div>
           </section>
-          <section className="about section" id="about">
-            <div className="container about-grid">
-              <div className="image-composition">
-                <div className="image-main">
-                  <img
-                    src="/images/fuel-nozzle-oil-drop.png"
-                    alt="Fuel pump nozzle dispensing a single amber oil drop"
-                  />
-                </div>
-                <div className="experience">
-                  <b>60+</b>
-                  <span>
-                    years serving
-                    <br />
-                    the nation
-                  </span>
-                </div>
-                <div className="red-strokes">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                </div>
-              </div>
-              <div className="about-copy">
-                <h2>
-                  Every drop powers
-                  <br />
-                  national progress
-                </h2>
-                <p>
-                  Ceylon Petroleum Corporation plays a vital role in the
-                  national economy through the continuous supply of petroleum
-                  products. We are committed to assuring uninterrupted fuel
-                  supply so Sri Lanka can keep moving toward resilient economic
-                  growth
-                </p>
-                <div className="promise-grid">
-                  <div>
-                    <Icon name="shield" size={30} />
-                    <h3>Energy Security</h3>
-                    <p>
-                      Safeguarding a reliable petroleum supply for the country
-                    </p>
-                  </div>
-                  <div>
-                    <Icon name="droplet" size={30} />
-                    <h3>Trusted Supply</h3>
-                    <p>
-                      Supporting transport, commerce and communities islandwide
-                    </p>
-                  </div>
-                </div>
-                <a className="text-link" href="#divisions">
-                  See our operations <Icon name="arrow" size={17} />
-                </a>
-              </div>
-            </div>
-          </section>
+          <EveryDropSection />
           <section className="home-services" id="services">
             <div className="container">
               <div className="home-services-heading">
@@ -6538,24 +6510,37 @@ function App() {
           </section>
           <section className="home-brands section" aria-labelledby="home-brands-heading">
             <div className="container">
-              <div className="section-heading">
-                <div>
+              <div className="home-brands-split-layout">
+                <div className="home-brands-info">
                   <p className="eyebrow">CEYPETCO BRANDS</p>
                   <h2 id="home-brands-heading">Built for every journey</h2>
+                  <p className="home-brands-desc">
+                    Explore the Ceypetco brands serving industry, transport,
+                    agriculture and emerging energy needs.
+                  </p>
                 </div>
-                <p>
-                  Explore the Ceypetco brands serving industry, transport,
-                  agriculture and emerging energy needs.
-                </p>
-              </div>
-              <div className="home-brands-marquee">
-                <div className="home-brands-track">
-                  {[...brandLogos, ...brandLogos].map(({ name, image, href }, i) => (
-                    <a className="home-brand-chip" href={href} key={`${name}-${i}`} aria-label={`Explore ${name}`}>
-                      <img src={image} alt={`${name} logo`} loading="lazy" decoding="async" />
-                      <span>{name}</span>
-                    </a>
-                  ))}
+
+                <div className="home-brands-grid-wrapper">
+                  <div className="home-brands-grid">
+                    {brandLogos.map(({ name, image, href }) => (
+                      <a
+                        className="home-brand-grid-card"
+                        href={href}
+                        key={name}
+                        aria-label={`Explore ${name}`}
+                      >
+                        <div className="home-brand-logo-box">
+                          <img
+                            src={image}
+                            alt={`${name} logo`}
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                        <span className="home-brand-name">{name}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
