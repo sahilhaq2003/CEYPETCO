@@ -243,14 +243,14 @@ const divisions = [
   ['Bitumen', 'Petroleum bitumen for road and industrial applications', '/images/operations/bitumen.jpg', '/bitumen'],
 ];
 const brandLogos = [
-  { name: 'Lanka Bunkering', image: '/images/brand-logos/bunkering.webp', href: '/bunkering' },
-  { name: 'Lanka Agro Solutions', image: '/images/brand-logos/agro-solutions.webp', href: '/agro-chemicals' },
-  { name: 'Lanka Lubricants', image: '/images/brand-logos/lubricants.webp', href: '/lubricants' },
+  { name: 'Ceypetco Lanka Bunkering', image: '/images/brand-logos/bunkering.webp', href: '/bunkering' },
+  { name: 'Ceypetco Lanka Agro Solutions', image: '/images/brand-logos/agro-solutions.webp', href: '/agro-chemicals' },
+  { name: 'Ceypetco Lanka Lubricants', image: '/images/brand-logos/lubricants.webp', href: '/lubricants' },
   { name: 'Sustainable Fuel', image: '/images/brand-logos/sustainable-fuel.webp', href: '/services' },
-  { name: 'Lanka Bitumen', image: '/images/brand-logos/bitumen.webp', href: '/bitumen' },
-  { name: 'Lanka Aviation', image: '/images/brand-logos/aviation.webp', href: '/aviation' },
-{ name: 'Refining', image: '/images/brand-logos/refining.webp', href: '/refinery' },
-  { name: 'Lanka EV Solutions', image: '/images/brand-logos/ev-solutions.webp', href: '/ev-charging' },
+  { name: 'Ceypetco Lanka Bitumen', image: '/images/brand-logos/bitumen.webp', href: '/bitumen' },
+  { name: 'Ceypetco Lanka Aviation', image: '/images/brand-logos/aviation.webp', href: '/aviation' },
+  { name: 'Refining', image: '/images/brand-logos/refining.webp', href: '/refinery' },
+  { name: 'Ceypetco Lanka EV Solutions', image: '/images/brand-logos/ev-solutions.webp', href: '/ev-charging' },
 ];
 const pageBrandLogos = {
   '/bunkering': '/images/brand-logos/bunkering.webp',
@@ -6197,19 +6197,19 @@ function App() {
                     <small>Automotive and industrial oils</small>
                   </a>
                   <a href="/services/marine-bunkering">
-                    <b>Lanka Ceypetco Marine Bunkering</b>
+                    <b>Ceypetco Lanka Marine Bunkering</b>
                     <small>Marine fuel information</small>
                   </a>
                   <a href="/ev-charging">
-                    <b>Lanka Ceypetco EV Charging</b>
+                    <b>Ceypetco Lanka EV Charging</b>
                     <small>Charging locations and guidance</small>
                   </a>
                   <a href="/special-chemicals">
-                    <b>Lanka Ceypetco Special Chemicals</b>
+                    <b>Ceypetco Lanka Special Chemicals</b>
                     <small>Industrial specialty products</small>
                   </a>
                   <a href="/bitumen">
-                    <b>Lanka Ceypetco Bitumen</b>
+                    <b>Ceypetco Lanka Bitumen</b>
                     <small>Road and industrial materials</small>
                   </a>
                 </div>
