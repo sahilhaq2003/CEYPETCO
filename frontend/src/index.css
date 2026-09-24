@@ -6764,8 +6764,9 @@
   background: #dc2626;
   border-color: #ef4444;
 }.admin-sidebar .admin-sidebar-brand-subtitle, .admin-sidebar .admin-sidebar-footer{ color: #8fb0b7; }.admin-sidebar .admin-sidebar-close{ color: #cbd5e1; }.admin-sidebar .admin-sidebar-close:hover{ color: #fff; }.oil-types-legend span{
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 600;
+  color: var(--ink);
 }.oil-chart-wrap{
   display: grid;
   place-items: center;
@@ -8395,14 +8396,16 @@
     width: 210px;
   }
 }.oil-types-legend > div{
-  min-height: 50px;
-  gap: 13px;
+  min-height: 52px;
+  gap: 14px;
 }.oil-types-legend span{
-  font-size: 13px;
-  line-height: 1.35;
+  font-size: 16px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--ink);
 }.oil-types-legend i{
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--oil-color) 16%, transparent);
 }/* Open, low-contrast payment partner showcase */ .legacy-banking{
   display: none;
@@ -11988,21 +11991,21 @@
 }.every-drop-image-wrapper{
   position: relative;
   width: 100%;
-  border-radius: 4px;
+  border-radius: 70px 0 70px 0;
 }.image-overlay-gradient{
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(2, 29, 38, 0.5) 0%, rgba(2, 29, 38, 0) 50%);
+  background: linear-gradient(0deg, rgba(2, 29, 38, 0.35) 0%, rgba(2, 29, 38, 0) 50%);
   z-index: 1;
-  border-radius: 4px;
+  border-radius: 70px 0 70px 0;
   pointer-events: none;
 }.every-drop-img{
   width: 100%;
   height: 420px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 70px 0 70px 0;
   display: block;
-  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.22);
   transition: none !important;
   transform: none !important;
   animation: none !important;
@@ -12010,14 +12013,14 @@
   transform: none !important;
 }.every-drop-accents{
   position: absolute;
-  top: -14px;
-  right: -12px;
+  top: -16px;
+  right: -14px;
   display: flex;
   gap: 6px;
   z-index: 2;
 }.every-drop-accents span{
   width: 6px;
-  height: 32px;
+  height: 34px;
   background-color: #dc2626;
   transform: rotate(35deg);
   border-radius: 4px;

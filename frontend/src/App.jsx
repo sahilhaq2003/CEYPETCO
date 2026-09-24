@@ -268,12 +268,12 @@ const heroSlides = [
     eyebrow: 'OFFSHORE EXPLORATION',
     title: (
       <>
-        Petroleum Development
+        Unlocking Sri Lanka’s Offshore
         <br />
-        Authority of Sri Lanka
+        Oil & Natural Gas Potential
       </>
     ),
-    copy: 'Discover offshore oil and natural gas exploration opportunities with transparent licensing and investment prospects.',
+    copy: 'The Petroleum Development Authority of Sri Lanka (PDASL) invites qualified energy companies to participate in the Sri Lanka Licensing Round 2026 – offering access to one of South Asia’s most prospective basins.',
     cta: 'Learn more about PDASL',
     href: 'https://www.srilankalicensinground.com/',
   },
