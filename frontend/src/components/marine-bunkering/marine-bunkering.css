@@ -131,20 +131,36 @@
 }.mb-page .mb-intro-figure{
   position: relative;
   margin: 0;
+  border-radius: 70px 0 70px 0;
 }.mb-page .mb-intro-figure img{
   display: block;
   width: 100%;
   aspect-ratio: 4 / 3.4;
   object-fit: cover;
-  border-radius: 6px;
-  box-shadow: 0 26px 60px rgba(64, 18, 56, 0.16);
-}.mb-page .mb-intro-figure figcaption{
+  border-radius: 70px 0 70px 0;
+  box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.22);
+}.mb-page .mb-intro-accents{
+  position: absolute;
+  top: -16px;
+  right: -14px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}.mb-page .mb-intro-accents span{
+  width: 6px;
+  height: 34px;
+  background-color: #dc2626;
+  transform: rotate(35deg);
+  border-radius: 4px;
+  display: block;
+}
+.mb-page .mb-intro-figure figcaption{
   position: absolute;
   right: 20px;
   bottom: 20px;
   left: 20px;
   padding: 18px 20px;
-  border-radius: 4px;
+  border-radius: 12px 12px 50px 12px;
   background: rgba(64, 18, 56, 0.93);
   color: #ffffff;
 }.mb-page .mb-intro-figure figcaption span{

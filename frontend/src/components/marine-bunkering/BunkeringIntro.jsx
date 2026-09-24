@@ -42,6 +42,12 @@ const BunkeringIntro = () => (
           loading="lazy"
           decoding="async"
         />
+        {/* Top-right accent stripes */}
+        <div className="mb-intro-accents" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
         <figcaption>
           <span>Vessel supply</span>
           <b>Coordinated fuel delivery at the port</b>
