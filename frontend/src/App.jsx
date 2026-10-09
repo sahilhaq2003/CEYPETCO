@@ -699,6 +699,12 @@ intro:
       'Explore our latest news, official notices and corporate publications',
     image: '/images/media-1.jpg',
   },
+  '/gallery': {
+    label: 'MEDIA CENTRE · GALLERY',
+    title: 'Ceypetco in focus',
+    intro: 'Explore photographs and videos from across our people, operations and services',
+    image: '/images/aviation-gallery-2.jpg',
+  },
   '/news': {
     label: 'MEDIA CENTRE · NEWS',
     title: 'Latest news and stories',
@@ -4072,6 +4078,100 @@ const bulkConsumerResources = [
   ['Fuel Ordering Mobile App', 'https://fuelup.cpstl.lk/apk/'],
 ];
 
+const galleryMedia = [
+  { type: 'image', src: '/images/aviation-gallery-2.jpg', title: 'Aviation operations', category: 'Aviation', description: 'Safe, dependable aviation fuel services supporting Sri Lanka’s airports.' },
+  { type: 'image', src: '/images/refinery-detail-1.jpg', title: 'Refinery at work', category: 'Operations', description: 'Inside the systems that support the nation’s energy supply.' },
+  { type: 'image', src: '/images/media-3.jpg', title: 'Islandwide distribution', category: 'Distribution', description: 'Keeping communities and industries moving across Sri Lanka.' },
+  { type: 'image', src: '/images/agro-production-1.webp', title: 'Agrochemical production', category: 'Agrochemicals', description: 'Quality-focused production for Sri Lanka’s agricultural sector.' },
+  { type: 'image', src: '/images/bunkering/marine-terminal.webp', title: 'Marine bunkering', category: 'Marine', description: 'Specialist marine energy services at a strategic regional location.' },
+  { type: 'image', src: '/images/electric-mobility/ev-charging-station-1448.webp', title: 'Electric mobility', category: 'Future energy', description: 'Supporting cleaner journeys through modern charging infrastructure.' },
+  { type: 'image', src: '/images/aviation-gallery-4.jpg', title: 'Precision on the apron', category: 'Aviation', description: 'Professional teams delivering round-the-clock airport services.' },
+  { type: 'image', src: '/images/history-3.jpg', title: 'Our legacy', category: 'Heritage', description: 'Moments from more than six decades of service to the nation.' },
+  { type: 'video', src: 'https://www.youtube-nocookie.com/embed/3IRLp1Ae1EY', poster: '/images/career-team.jpg', title: 'Careers at Ceypetco', category: 'Video', description: 'An overview of career opportunities at Ceylon Petroleum Corporation.' },
+];
+
+function GalleryPage() {
+  const [filter, setFilter] = useState('all');
+  const [activeIndex, setActiveIndex] = useState(null);
+  const visibleItems = galleryMedia.filter((item) => filter === 'all' || item.type === filter);
+  const activeItem = activeIndex === null ? null : visibleItems[activeIndex];
+
+  useEffect(() => {
+    if (!activeItem) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setActiveIndex(null);
+      if (event.key === 'ArrowRight') setActiveIndex((current) => (current + 1) % visibleItems.length);
+      if (event.key === 'ArrowLeft') setActiveIndex((current) => (current - 1 + visibleItems.length) % visibleItems.length);
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [activeItem, visibleItems.length]);
+
+  const selectFilter = (nextFilter) => {
+    setFilter(nextFilter);
+    setActiveIndex(null);
+  };
+
+  return (
+    <section className="gallery-page content-section" aria-labelledby="gallery-title">
+      <div className="container">
+        <div className="gallery-page-heading">
+          <div>
+            <p className="eyebrow">VISUAL STORIES</p>
+            <h2 id="gallery-title">Inside Ceypetco</h2>
+          </div>
+          <p>A curated view of the people, places and operations powering everyday life.</p>
+        </div>
+        <div className="gallery-filter" role="group" aria-label="Filter gallery">
+          {[['all', 'All media'], ['image', 'Photos'], ['video', 'Videos']].map(([value, label]) => (
+            <button type="button" className={filter === value ? 'active' : ''} aria-pressed={filter === value} onClick={() => selectFilter(value)} key={value}>{label}</button>
+          ))}
+        </div>
+        <div className="professional-gallery">
+          {visibleItems.map((item, index) => (
+            <button type="button" className={`gallery-media-card gallery-media-card--${item.type}`} onClick={() => setActiveIndex(index)} key={`${item.type}-${item.src}`} aria-label={`Open ${item.title}`}>
+              <img src={item.poster || item.src} alt={item.type === 'image' ? item.title : ''} loading="lazy" />
+              {item.type === 'video' && <span className="gallery-play" aria-hidden="true"><span>▶</span></span>}
+              <span className="gallery-media-overlay">
+                <small>{item.category}</small>
+                <strong>{item.title}</strong>
+                <span>{item.type === 'video' ? 'Watch video' : 'View photo'} →</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+      {activeItem && (
+        <div className="gallery-viewer" role="dialog" aria-modal="true" aria-label={activeItem.title} onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveIndex(null); }}>
+          <div className="gallery-viewer-panel">
+            <div className="gallery-viewer-top">
+              <span>{String(activeIndex + 1).padStart(2, '0')} / {String(visibleItems.length).padStart(2, '0')}</span>
+              <button type="button" onClick={() => setActiveIndex(null)} aria-label="Close gallery viewer">×</button>
+            </div>
+            <div className="gallery-viewer-media">
+              {activeItem.type === 'video' ? (
+                <iframe src={`${activeItem.src}?autoplay=1&rel=0`} title={activeItem.title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+              ) : <img src={activeItem.src} alt={activeItem.title} />}
+            </div>
+            <div className="gallery-viewer-caption">
+              <div><small>{activeItem.category}</small><h3>{activeItem.title}</h3></div>
+              <p>{activeItem.description}</p>
+            </div>
+            {visibleItems.length > 1 && <div className="gallery-viewer-controls">
+              <button type="button" onClick={() => setActiveIndex((activeIndex - 1 + visibleItems.length) % visibleItems.length)} aria-label="Previous item">←</button>
+              <button type="button" onClick={() => setActiveIndex((activeIndex + 1) % visibleItems.length)} aria-label="Next item">→</button>
+            </div>}
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function InnerPage({ type }) {
   const { t } = useLanguage();
   const aboutVideoRef = useRef(null);
@@ -4441,12 +4541,13 @@ function InnerPage({ type }) {
           </div>
         </div>
       </section>
-      {['/news', '/notices', '/publications', '/annual-reports'].includes(type) && (
+      {['/news', '/notices', '/publications', '/annual-reports', '/gallery'].includes(type) && (
         <nav className="media-section-nav" aria-label="Media sections">
           <div className="container">
             <a className={type === '/news' ? 'active' : ''} href="/news">News</a>
             <a className={type === '/notices' ? 'active' : ''} href="/notices">Notices</a>
             <a className={['/publications', '/annual-reports'].includes(type) ? 'active' : ''} href="/publications">Publications</a>
+            <a className={type === '/gallery' ? 'active' : ''} href="/gallery">Gallery</a>
           </div>
         </nav>
       )}
@@ -4518,6 +4619,7 @@ function InnerPage({ type }) {
       {type === '/agro-chemicals' && <AgroChemicalsPage />}
       {type === '/lubricants' && <LubricantsPage />}
       {type === '/history' && <HistoryPage data={historyPage} />}
+      {type === '/gallery' && <GalleryPage />}
       {type === '/subsidiaries' && <SubsidiariesPage />}
       {type === '/energy-ministries' && <EnergyMinistriesPage />}
       {type === '/management' && (
@@ -5340,6 +5442,7 @@ function InnerPage({ type }) {
                 { number: '01', title: 'News', description: 'Corporate announcements, activities and stories.', href: '/news', action: 'Browse news' },
                 { number: '02', title: 'Notices', description: 'Current official notices, circulars and documents.', href: '/notices', action: 'Read notices' },
                 { number: '03', title: 'Publications', description: 'Annual reports and published corporate records.', href: '/publications', action: 'View publications' },
+                { number: '04', title: 'Gallery', description: 'Photography and videos from across Ceypetco.', href: '/gallery', action: 'Explore gallery' },
               ].map((item) => (
                 <a href={item.href} className="media-hub-card" key={item.title}>
                   <span>{item.number}</span>
@@ -6218,7 +6321,7 @@ function App() {
               </div>
             </div>
             <div
-              className={`nav-group media-nav-group ${navMediaDropClosed ? 'closed' : ''} ${['/media', '/news', '/notices', '/publications', '/annual-reports'].includes(path) || path.startsWith('/news/') ? 'active' : ''}`}
+              className={`nav-group media-nav-group ${navMediaDropClosed ? 'closed' : ''} ${['/media', '/news', '/notices', '/publications', '/annual-reports', '/gallery'].includes(path) || path.startsWith('/news/') ? 'active' : ''}`}
               onMouseEnter={() => setNavMediaDropClosed(false)}
             >
               <a
@@ -6250,6 +6353,7 @@ function App() {
                   <a href="/news"><b>News</b><small>Stories and corporate updates</small></a>
                   <a href="/notices"><b>Notices</b><small>Official public information</small></a>
                   <a href="/publications"><b>Publications</b><small>Annual reports and records</small></a>
+                  <a href="/gallery"><b>Gallery</b><small>Photos and videos</small></a>
                 </div>
               </div>
             </div>

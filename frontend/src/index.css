@@ -11600,7 +11600,7 @@
   line-height: 1.7;
 }.media-hub-grid{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }.media-hub-card{
   display: flex;
@@ -12217,7 +12217,7 @@
 }
 .hero-copy-panel {
   position: relative !important;
-  max-width: 880px !important;
+  max-width: 1100px !important;
   width: 100% !important;
   padding-left: 32px !important;
   display: flex !important;
@@ -12421,4 +12421,55 @@
     height: 38px !important;
     background-color: #e31837 !important;
     border-radius: 4px !important;
+}
+
+/* Media gallery */
+.gallery-page { background: #f4f7f7; }
+.gallery-page-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 28px; }
+.gallery-page-heading h2 { margin: 9px 0 0; color: var(--ink); font: 800 clamp(36px, 4.5vw, 58px)/.98 'League Spartan', 'Outfit', sans-serif; letter-spacing: -.04em; }
+.gallery-page-heading > p { max-width: 500px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; }
+.gallery-filter { display: flex; gap: 8px; margin-bottom: 34px; padding-bottom: 18px; border-bottom: 1px solid #dbe3e5; }
+.gallery-filter button { padding: 10px 18px; border: 1px solid #d5dfe1; border-radius: 999px; background: #fff; color: #48616a; font: 700 13px 'Outfit', sans-serif; cursor: pointer; transition: .2s ease; }
+.gallery-filter button:hover, .gallery-filter button.active { border-color: var(--red); background: var(--red); color: #fff; }
+.professional-gallery { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-flow: dense; gap: 18px; }
+.gallery-media-card { position: relative; grid-column: span 4; min-height: 330px; padding: 0; overflow: hidden; border: 0; border-radius: 5px; background: #173943; color: #fff; cursor: pointer; text-align: left; box-shadow: 0 12px 35px rgba(7, 39, 49, .08); }
+.gallery-media-card:nth-child(1), .gallery-media-card:nth-child(6) { grid-column: span 8; }
+.gallery-media-card:nth-child(1) { min-height: 490px; }
+.gallery-media-card:nth-child(4), .gallery-media-card:nth-child(5) { min-height: 390px; }
+.gallery-media-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.2,.75,.25,1), filter .3s; }
+.gallery-media-card:after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(3, 25, 32, .86) 100%); }
+.gallery-media-card:hover img { transform: scale(1.045); filter: saturate(1.08); }
+.gallery-media-overlay { position: absolute; z-index: 2; right: 0; bottom: 0; left: 0; display: flex; flex-direction: column; padding: 26px; }
+.gallery-media-overlay small { margin-bottom: 7px; color: #ffd2ca; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.gallery-media-overlay strong { font: 800 clamp(21px, 2vw, 28px)/1.1 'League Spartan', 'Outfit', sans-serif; }
+.gallery-media-overlay > span { margin-top: 12px; font-size: 12px; font-weight: 700; opacity: .86; }
+.gallery-play { position: absolute; z-index: 3; top: 24px; right: 24px; display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; background: rgba(255,255,255,.94); color: var(--red); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+.gallery-play span { margin-left: 3px; font-size: 18px; }
+.gallery-viewer { position: fixed; z-index: 10020; inset: 0; display: grid; place-items: center; padding: 28px; background: rgba(2, 17, 22, .94); backdrop-filter: blur(10px); }
+.gallery-viewer-panel { position: relative; width: min(1180px, 100%); max-height: calc(100vh - 56px); color: #fff; }
+.gallery-viewer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; color: #b8c8cd; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.gallery-viewer-top button { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: transparent; color: #fff; font-size: 29px; line-height: 1; cursor: pointer; }
+.gallery-viewer-media { display: grid; width: 100%; height: min(68vh, 720px); place-items: center; background: #071d24; box-shadow: 0 25px 80px rgba(0,0,0,.35); }
+.gallery-viewer-media img { width: 100%; height: 100%; object-fit: contain; }
+.gallery-viewer-media iframe { width: 100%; height: 100%; border: 0; }
+.gallery-viewer-caption { display: grid; grid-template-columns: minmax(240px, .8fr) 1.2fr; gap: 40px; padding: 20px 84px 0 0; }
+.gallery-viewer-caption small { color: #f49b8b; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.gallery-viewer-caption h3 { margin: 5px 0 0; font: 800 25px 'League Spartan', 'Outfit', sans-serif; }
+.gallery-viewer-caption p { margin: 0; color: #b8c8cd; font-size: 14px; line-height: 1.65; }
+.gallery-viewer-controls { position: absolute; right: 0; bottom: 2px; display: flex; gap: 7px; }
+.gallery-viewer-controls button { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.25); background: transparent; color: #fff; cursor: pointer; }
+
+@media (max-width: 900px) {
+  .gallery-page-heading { align-items: flex-start; flex-direction: column; gap: 18px; }
+  .gallery-media-card, .gallery-media-card:nth-child(1), .gallery-media-card:nth-child(6) { grid-column: span 6; min-height: 360px; }
+  .gallery-viewer-caption { grid-template-columns: 1fr; gap: 8px; padding-right: 90px; }
+}
+@media (max-width: 600px) {
+  .professional-gallery { display: block; }
+  .gallery-media-card, .gallery-media-card:nth-child(1), .gallery-media-card:nth-child(4), .gallery-media-card:nth-child(5), .gallery-media-card:nth-child(6) { display: block; width: 100%; min-height: 0; height: 340px; margin-bottom: 14px; }
+  .gallery-viewer { padding: 14px; }
+  .gallery-viewer-panel { max-height: calc(100vh - 28px); }
+  .gallery-viewer-media { height: 55vh; }
+  .gallery-viewer-caption { padding: 16px 0 48px; grid-template-columns: 1fr; }
+  .gallery-viewer-controls { right: auto; bottom: 0; }
 }
