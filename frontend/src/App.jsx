@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import sriLankaMap from './assets/sri-lanka-districts.svg?raw';
 import fuelStations from './data/fuelStations.json';
 import lubricantProducts from './data/lubricants.json';
@@ -4080,21 +4081,44 @@ const bulkConsumerResources = [
 
 const galleryMedia = [
   { type: 'image', src: '/images/aviation-gallery-2.jpg', title: 'Aviation operations', category: 'Aviation', description: 'Safe, dependable aviation fuel services supporting Sri Lanka’s airports.' },
+  { type: 'image', src: '/images/aviation-aircraft-refuelling.jpg', title: 'Aircraft refuelling', category: 'Aviation', description: 'Specialist teams deliver precise, safety-led aircraft refuelling services.' },
+  { type: 'image', src: '/images/aviation-gallery-1.jpg', title: 'Ready for departure', category: 'Aviation', description: 'Supporting reliable flight operations at Sri Lanka’s international airports.' },
+  { type: 'image', src: '/images/aviation-gallery-5.jpg', title: 'Airside service', category: 'Aviation', description: 'Round-the-clock aviation fuel handling backed by trained professionals.' },
   { type: 'image', src: '/images/refinery-detail-1.jpg', title: 'Refinery at work', category: 'Operations', description: 'Inside the systems that support the nation’s energy supply.' },
+  { type: 'image', src: '/images/refinery-detail-2.jpg', title: 'Process infrastructure', category: 'Operations', description: 'Integrated refinery infrastructure designed for dependable production.' },
   { type: 'image', src: '/images/media-3.jpg', title: 'Islandwide distribution', category: 'Distribution', description: 'Keeping communities and industries moving across Sri Lanka.' },
+  { type: 'image', src: '/images/fuel-train.jpg', title: 'Fuel by rail', category: 'Distribution', description: 'Moving essential energy products efficiently through the national network.' },
   { type: 'image', src: '/images/agro-production-1.webp', title: 'Agrochemical production', category: 'Agrochemicals', description: 'Quality-focused production for Sri Lanka’s agricultural sector.' },
+  { type: 'image', src: '/images/agro-production-2.webp', title: 'Production quality', category: 'Agrochemicals', description: 'Controlled production processes supporting consistent product standards.' },
+  { type: 'image', src: '/images/agro-products.jpg', title: 'Crop-care solutions', category: 'Agrochemicals', description: 'A trusted range developed for farming communities across the island.' },
   { type: 'image', src: '/images/bunkering/marine-terminal.webp', title: 'Marine bunkering', category: 'Marine', description: 'Specialist marine energy services at a strategic regional location.' },
+  { type: 'image', src: '/images/bunkering/marine-fuel-transfer.webp', title: 'Marine fuel transfer', category: 'Marine', description: 'Carefully coordinated fuel transfers supported by rigorous operating standards.' },
+  { type: 'image', src: '/images/bunkering/jupiter-sun.jpg', title: 'Serving international shipping', category: 'Marine', description: 'Reliable bunkering support for vessels calling across the region.' },
   { type: 'image', src: '/images/electric-mobility/ev-charging-station-1448.webp', title: 'Electric mobility', category: 'Future energy', description: 'Supporting cleaner journeys through modern charging infrastructure.' },
+  { type: 'image', src: '/images/electric-mobility/ev-charging-hero-1600.webp', title: 'Charging the future', category: 'Future energy', description: 'Expanding energy choices for Sri Lanka’s changing transport landscape.' },
   { type: 'image', src: '/images/aviation-gallery-4.jpg', title: 'Precision on the apron', category: 'Aviation', description: 'Professional teams delivering round-the-clock airport services.' },
   { type: 'image', src: '/images/history-3.jpg', title: 'Our legacy', category: 'Heritage', description: 'Moments from more than six decades of service to the nation.' },
+  { type: 'image', src: '/images/history-1.jpg', title: 'Foundations of service', category: 'Heritage', description: 'A visual record of the people and milestones that shaped Ceypetco.' },
+  { type: 'image', src: '/images/history-7.jpg', title: 'A national journey', category: 'Heritage', description: 'Preserving important moments from Ceypetco’s history.' },
   { type: 'video', src: 'https://www.youtube-nocookie.com/embed/3IRLp1Ae1EY', poster: '/images/career-team.jpg', title: 'Careers at Ceypetco', category: 'Video', description: 'An overview of career opportunities at Ceylon Petroleum Corporation.' },
 ];
 
 function GalleryPage() {
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState('All');
   const [activeIndex, setActiveIndex] = useState(null);
-  const visibleItems = galleryMedia.filter((item) => filter === 'all' || item.type === filter);
+  const [items, setItems] = useState(galleryMedia);
+  const galleryFilters = ['All', 'Photos', 'Videos', ...Array.from(new Set(items.map((item) => item.category).filter((category) => category && category !== 'Video')))];
+  const visibleItems = items.filter((item) => filter === 'All' || (filter === 'Photos' && item.type === 'image') || (filter === 'Videos' && item.type === 'video') || item.category === filter);
   const activeItem = activeIndex === null ? null : visibleItems[activeIndex];
+
+  useEffect(() => {
+    let cancelled = false;
+    api.get('/admin/gallery').then((response) => {
+      const managedItems = response.data?.data;
+      if (!cancelled && Array.isArray(managedItems) && managedItems.length > 0) setItems(managedItems);
+    }).catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
 
   useEffect(() => {
     if (!activeItem) return undefined;
@@ -4127,14 +4151,14 @@ function GalleryPage() {
           <p>A curated view of the people, places and operations powering everyday life.</p>
         </div>
         <div className="gallery-filter" role="group" aria-label="Filter gallery">
-          {[['all', 'All media'], ['image', 'Photos'], ['video', 'Videos']].map(([value, label]) => (
-            <button type="button" className={filter === value ? 'active' : ''} aria-pressed={filter === value} onClick={() => selectFilter(value)} key={value}>{label}</button>
+          {galleryFilters.map((value) => (
+            <button type="button" className={filter === value ? 'active' : ''} aria-pressed={filter === value} onClick={() => selectFilter(value)} key={value}>{value === 'All' ? 'All media' : value}</button>
           ))}
         </div>
         <div className="professional-gallery">
           {visibleItems.map((item, index) => (
             <button type="button" className={`gallery-media-card gallery-media-card--${item.type}`} onClick={() => setActiveIndex(index)} key={`${item.type}-${item.src}`} aria-label={`Open ${item.title}`}>
-              <img src={item.poster || item.src} alt={item.type === 'image' ? item.title : ''} loading="lazy" />
+              <img src={displayImageUrl(item.poster || item.src)} alt={item.type === 'image' ? (item.alt || item.title) : ''} loading="lazy" />
               {item.type === 'video' && <span className="gallery-play" aria-hidden="true"><span>▶</span></span>}
               <span className="gallery-media-overlay">
                 <small>{item.category}</small>
@@ -4145,21 +4169,34 @@ function GalleryPage() {
           ))}
         </div>
       </div>
-      {activeItem && (
+      {activeItem && createPortal((
         <div className="gallery-viewer" role="dialog" aria-modal="true" aria-label={activeItem.title} onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveIndex(null); }}>
           <div className="gallery-viewer-panel">
             <div className="gallery-viewer-top">
               <span>{String(activeIndex + 1).padStart(2, '0')} / {String(visibleItems.length).padStart(2, '0')}</span>
               <button type="button" onClick={() => setActiveIndex(null)} aria-label="Close gallery viewer">×</button>
             </div>
-            <div className="gallery-viewer-media">
-              {activeItem.type === 'video' ? (
-                <iframe src={`${activeItem.src}?autoplay=1&rel=0`} title={activeItem.title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
-              ) : <img src={activeItem.src} alt={activeItem.title} />}
+            <div className="gallery-viewer-stage">
+              <div className="gallery-viewer-media">
+                {activeItem.type === 'video' ? (
+                  <iframe src={`${activeItem.src}?autoplay=1&rel=0`} title={activeItem.title} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen />
+                ) : <img src={displayImageUrl(activeItem.src)} alt={activeItem.alt || activeItem.title} />}
+              </div>
+              <aside className="gallery-viewer-caption">
+                <span className="gallery-viewer-category">{activeItem.category}</span>
+                <h3>{activeItem.title}</h3>
+                <p>{activeItem.description}</p>
+                <div className="gallery-viewer-detail"><span>Media type</span><strong>{activeItem.type === 'video' ? 'Video feature' : 'Photography'}</strong></div>
+                <div className="gallery-viewer-detail"><span>Collection</span><strong>Ceypetco Media Centre</strong></div>
+              </aside>
             </div>
-            <div className="gallery-viewer-caption">
-              <div><small>{activeItem.category}</small><h3>{activeItem.title}</h3></div>
-              <p>{activeItem.description}</p>
+            <div className="gallery-viewer-thumbnails" aria-label="More media in this category">
+              {visibleItems.map((item, index) => (
+                <button type="button" className={index === activeIndex ? 'active' : ''} onClick={() => setActiveIndex(index)} aria-label={`View ${item.title}`} aria-current={index === activeIndex ? 'true' : undefined} key={`thumb-${item.src}`}>
+                  <img src={displayImageUrl(item.poster || item.src)} alt="" />
+                  {item.type === 'video' && <span>▶</span>}
+                </button>
+              ))}
             </div>
             {visibleItems.length > 1 && <div className="gallery-viewer-controls">
               <button type="button" onClick={() => setActiveIndex((activeIndex - 1 + visibleItems.length) % visibleItems.length)} aria-label="Previous item">←</button>
@@ -4167,7 +4204,7 @@ function GalleryPage() {
             </div>}
           </div>
         </div>
-      )}
+      ), document.body)}
     </section>
   );
 }

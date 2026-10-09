@@ -27,6 +27,7 @@ import DivisionManagement from "../admin/pages/Services/DivisionManagement";
 import DivisionEditor from "../admin/pages/Services/DivisionEditor";
 import PopupNoticeManagement from "../admin/pages/Popups/PopupNoticeManagement";
 import HistoryManagement from "../admin/pages/History/HistoryManagement";
+import GalleryManagement from "../admin/pages/Gallery/GalleryManagement";
 
 const AppRoutes = () => {
   return (
@@ -61,7 +62,7 @@ const AppRoutes = () => {
         <Route path="fuel-stations" element={<FuelStationManagement />} />
         <Route path="regional-offices" element={<RegionalOfficeManagement />} />
         <Route path="messages" element={<ContactMessages />} />
-        <Route path="media" element={<Placeholder />} />
+        <Route path="media" element={<GalleryManagement />} />
         <Route path="users" element={<UserManagement />} />
         <Route path="popup-notices" element={<PopupNoticeManagement />} />
         <Route path="settings" element={<Placeholder />} />

@@ -31,6 +31,7 @@ const popupNoticeRoutes = require("./routes/popupNoticeRoutes");
 const mobileAppRoutes = require("./routes/mobileAppRoutes");
 const historyPageRoutes = require("./routes/historyPageRoutes");
 const googleDriveImageRoutes = require("./routes/googleDriveImageRoutes");
+const galleryRoutes = require("./routes/galleryRoutes");
 const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
@@ -148,6 +149,7 @@ app.use("/api/admin/divisions", divisionRoutes);
 app.use("/api/admin/popup-notices", popupNoticeRoutes);
 app.use("/api/admin/mobile-apps", mobileAppRoutes);
 app.use("/api/admin/history-page", historyPageRoutes);
+app.use("/api/admin/gallery", galleryRoutes);
 app.use("/api/images/google-drive", googleDriveImageRoutes);
 
 app.use((req, res) => {

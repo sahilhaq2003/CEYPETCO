@@ -40,6 +40,10 @@ const userService = createResourceService("/admin/users");
 const homeServiceService = createResourceService("/admin/home-services");
 const serviceService = createResourceService("/admin/services");
 const mobileAppService = createResourceService("/admin/mobile-apps");
+const galleryService = {
+  ...createResourceService("/admin/gallery"),
+  getAll: async (params = {}) => (await api.get("/admin/gallery/manage", { params })).data,
+};
 const historyPageService = {
   get: async () => (await api.get("/admin/history-page")).data,
   update: async (data) => (await api.put("/admin/history-page", data)).data,
@@ -130,6 +134,7 @@ export {
   homeServiceService,
   serviceService,
   mobileAppService,
+  galleryService,
   historyPageService,
   divisionService,
   popupNoticeService,

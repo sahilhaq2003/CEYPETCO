@@ -5,7 +5,7 @@ import {
   Fuel, LayoutDashboard, FileText, FolderOpen, GraduationCap, BookOpen,
   Wrench, Droplets, MapPin, Building2, Mail, Users,
   ChevronDown, ChevronRight, X, Newspaper, ClipboardList, BadgeAlert,
-  Megaphone, Layers, Smartphone,
+  Megaphone, Layers, Smartphone, Images,
 } from "lucide-react";
 
 const sidebarSections = [
@@ -20,6 +20,7 @@ const sidebarSections = [
   ] },
   { label: "Content", items: [
     { to: "/admin/news", icon: Newspaper, text: "News" },
+    { to: "/admin/media", icon: Images, text: "Media Gallery" },
     { to: "/admin/notices", icon: BadgeAlert, text: "Notices" },
     { to: "/admin/projects", icon: FolderOpen, text: "Projects" },
     { to: "/admin/tenders", icon: ClipboardList, text: "Tenders" },

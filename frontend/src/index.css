@@ -12428,7 +12428,7 @@
 .gallery-page-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 28px; }
 .gallery-page-heading h2 { margin: 9px 0 0; color: var(--ink); font: 800 clamp(36px, 4.5vw, 58px)/.98 'League Spartan', 'Outfit', sans-serif; letter-spacing: -.04em; }
 .gallery-page-heading > p { max-width: 500px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; }
-.gallery-filter { display: flex; gap: 8px; margin-bottom: 34px; padding-bottom: 18px; border-bottom: 1px solid #dbe3e5; }
+.gallery-filter { display: flex; gap: 8px; margin-bottom: 34px; padding-bottom: 18px; overflow-x: auto; border-bottom: 1px solid #dbe3e5; scrollbar-width: thin; }
 .gallery-filter button { padding: 10px 18px; border: 1px solid #d5dfe1; border-radius: 999px; background: #fff; color: #48616a; font: 700 13px 'Outfit', sans-serif; cursor: pointer; transition: .2s ease; }
 .gallery-filter button:hover, .gallery-filter button.active { border-color: var(--red); background: var(--red); color: #fff; }
 .professional-gallery { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-flow: dense; gap: 18px; }
@@ -12445,31 +12445,47 @@
 .gallery-media-overlay > span { margin-top: 12px; font-size: 12px; font-weight: 700; opacity: .86; }
 .gallery-play { position: absolute; z-index: 3; top: 24px; right: 24px; display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; background: rgba(255,255,255,.94); color: var(--red); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
 .gallery-play span { margin-left: 3px; font-size: 18px; }
-.gallery-viewer { position: fixed; z-index: 10020; inset: 0; display: grid; place-items: center; padding: 28px; background: rgba(2, 17, 22, .94); backdrop-filter: blur(10px); }
-.gallery-viewer-panel { position: relative; width: min(1180px, 100%); max-height: calc(100vh - 56px); color: #fff; }
+.gallery-viewer { position: fixed !important; z-index: 10020; inset: 0 !important; width: 100vw !important; height: 100vh !important; margin: 0 !important; padding: 0 !important; overflow: hidden; background: rgba(2, 17, 22, .94); backdrop-filter: blur(10px); transform: none !important; }
+.gallery-viewer-panel { position: fixed !important; top: 50vh !important; left: 50vw !important; width: min(1180px, calc(100vw - 64px)) !important; max-width: calc(100vw - 64px) !important; max-height: calc(100vh - 48px); margin: 0 !important; color: #fff; transform: translate(-50%, -50%) !important; box-sizing: border-box; }
 .gallery-viewer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; color: #b8c8cd; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
 .gallery-viewer-top button { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: transparent; color: #fff; font-size: 29px; line-height: 1; cursor: pointer; }
-.gallery-viewer-media { display: grid; width: 100%; height: min(68vh, 720px); place-items: center; background: #071d24; box-shadow: 0 25px 80px rgba(0,0,0,.35); }
-.gallery-viewer-media img { width: 100%; height: 100%; object-fit: contain; }
+.gallery-viewer-stage { display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(255,255,255,.12); border-radius: 6px; background: #0a242c; box-shadow: 0 25px 80px rgba(0,0,0,.35); }
+.gallery-viewer-media { display: flex; width: 100%; height: min(62vh, 650px); align-items: center; justify-content: center; overflow: hidden; padding: 18px; background: #04161c; }
+.gallery-viewer-media img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; margin: auto; object-fit: contain; object-position: center; }
 .gallery-viewer-media iframe { width: 100%; height: 100%; border: 0; }
-.gallery-viewer-caption { display: grid; grid-template-columns: minmax(240px, .8fr) 1.2fr; gap: 40px; padding: 20px 84px 0 0; }
-.gallery-viewer-caption small { color: #f49b8b; font-size: 10px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
-.gallery-viewer-caption h3 { margin: 5px 0 0; font: 800 25px 'League Spartan', 'Outfit', sans-serif; }
-.gallery-viewer-caption p { margin: 0; color: #b8c8cd; font-size: 14px; line-height: 1.65; }
-.gallery-viewer-controls { position: absolute; right: 0; bottom: 2px; display: flex; gap: 7px; }
+.gallery-viewer-caption { display: grid; grid-template-columns: auto minmax(180px, .8fr) minmax(260px, 1.5fr) minmax(170px, .7fr); align-items: center; gap: 22px; padding: 18px 24px; border-top: 1px solid rgba(255,255,255,.1); }
+.gallery-viewer-category { align-self: flex-start; padding: 7px 10px; border-radius: 3px; background: var(--red); color: #fff; font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.gallery-viewer-caption h3 { margin: 0; font: 800 25px/1.05 'League Spartan', 'Outfit', sans-serif; }
+.gallery-viewer-caption p { margin: 0; color: #b8c8cd; font-size: 13px; line-height: 1.55; }
+.gallery-viewer-caption .gallery-viewer-detail { display: none; }
+.gallery-viewer-detail { display: flex; justify-content: space-between; gap: 15px; padding: 13px 0; border-top: 1px solid rgba(255,255,255,.1); font-size: 11px; }
+.gallery-viewer-detail span { color: #829ba3; }
+.gallery-viewer-detail strong { color: #eaf0f1; font-weight: 700; text-align: right; }
+.gallery-viewer-thumbnails { display: flex; gap: 9px; margin-top: 14px; padding: 2px 82px 4px 0; overflow-x: auto; scrollbar-width: thin; }
+.gallery-viewer-thumbnails button { position: relative; flex: 0 0 78px; width: 78px; height: 52px; padding: 0; overflow: hidden; border: 2px solid transparent; border-radius: 3px; background: #102e37; cursor: pointer; opacity: .55; transition: .2s ease; }
+.gallery-viewer-thumbnails button:hover, .gallery-viewer-thumbnails button.active { border-color: var(--red); opacity: 1; }
+.gallery-viewer-thumbnails img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-viewer-thumbnails span { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; background: rgba(4,22,28,.35); }
+.gallery-viewer-controls { position: absolute; right: 0; bottom: 5px; display: flex; gap: 7px; }
 .gallery-viewer-controls button { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.25); background: transparent; color: #fff; cursor: pointer; }
 
 @media (max-width: 900px) {
   .gallery-page-heading { align-items: flex-start; flex-direction: column; gap: 18px; }
   .gallery-media-card, .gallery-media-card:nth-child(1), .gallery-media-card:nth-child(6) { grid-column: span 6; min-height: 360px; }
-  .gallery-viewer-caption { grid-template-columns: 1fr; gap: 8px; padding-right: 90px; }
+  .gallery-viewer-stage { max-height: 72vh; overflow-y: auto; }
+  .gallery-viewer-media { height: 48vh; }
+  .gallery-viewer-caption { grid-template-columns: auto 1fr; padding: 18px 22px; }
+  .gallery-viewer-caption p { grid-column: 1 / -1; }
+  .gallery-viewer-caption h3 { margin: 0; }
+  .gallery-viewer-caption p { margin-bottom: 18px; }
 }
 @media (max-width: 600px) {
   .professional-gallery { display: block; }
   .gallery-media-card, .gallery-media-card:nth-child(1), .gallery-media-card:nth-child(4), .gallery-media-card:nth-child(5), .gallery-media-card:nth-child(6) { display: block; width: 100%; min-height: 0; height: 340px; margin-bottom: 14px; }
-  .gallery-viewer { padding: 14px; }
-  .gallery-viewer-panel { max-height: calc(100vh - 28px); }
-  .gallery-viewer-media { height: 55vh; }
-  .gallery-viewer-caption { padding: 16px 0 48px; grid-template-columns: 1fr; }
+  .gallery-viewer-panel { width: calc(100vw - 24px) !important; max-width: calc(100vw - 24px) !important; max-height: calc(100vh - 24px); }
+  .gallery-viewer-media { height: 42vh; }
+  .gallery-viewer-caption { padding: 20px; }
+  .gallery-viewer-caption h3 { font-size: 25px; }
+  .gallery-viewer-thumbnails { padding-right: 0; }
   .gallery-viewer-controls { right: auto; bottom: 0; }
 }
