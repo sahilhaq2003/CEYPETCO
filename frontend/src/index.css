@@ -12426,16 +12426,13 @@
 /* Media gallery */
 .gallery-page { background: #f4f7f7; }
 .gallery-page-heading { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 28px; }
-.gallery-page-heading h2 { margin: 9px 0 0; color: var(--ink); font: 800 clamp(36px, 4.5vw, 58px)/.98 'League Spartan', 'Outfit', sans-serif; letter-spacing: -.04em; }
+.gallery-page-heading h2 { margin: 9px 0 0; color: var(--ink); font: 800 clamp(30px, 3.2vw, 44px)/1 'League Spartan', 'Outfit', sans-serif; letter-spacing: -.035em; }
 .gallery-page-heading > p { max-width: 500px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; }
 .gallery-filter { display: flex; gap: 8px; margin-bottom: 34px; padding-bottom: 18px; overflow-x: auto; border-bottom: 1px solid #dbe3e5; scrollbar-width: thin; }
 .gallery-filter button { padding: 10px 18px; border: 1px solid #d5dfe1; border-radius: 999px; background: #fff; color: #48616a; font: 700 13px 'Outfit', sans-serif; cursor: pointer; transition: .2s ease; }
 .gallery-filter button:hover, .gallery-filter button.active { border-color: var(--red); background: var(--red); color: #fff; }
-.professional-gallery { display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-flow: dense; gap: 18px; }
-.gallery-media-card { position: relative; grid-column: span 4; min-height: 330px; padding: 0; overflow: hidden; border: 0; border-radius: 5px; background: #173943; color: #fff; cursor: pointer; text-align: left; box-shadow: 0 12px 35px rgba(7, 39, 49, .08); }
-.gallery-media-card:nth-child(1), .gallery-media-card:nth-child(6) { grid-column: span 8; }
-.gallery-media-card:nth-child(1) { min-height: 490px; }
-.gallery-media-card:nth-child(4), .gallery-media-card:nth-child(5) { min-height: 390px; }
+.professional-gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.gallery-media-card { position: relative; width: 100%; height: 270px; min-height: 0; padding: 0; overflow: hidden; border: 0; border-radius: 5px; background: #173943; color: #fff; cursor: pointer; text-align: left; box-shadow: 0 12px 35px rgba(7, 39, 49, .08); }
 .gallery-media-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s cubic-bezier(.2,.75,.25,1), filter .3s; }
 .gallery-media-card:after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(3, 25, 32, .86) 100%); }
 .gallery-media-card:hover img { transform: scale(1.045); filter: saturate(1.08); }
@@ -12471,7 +12468,8 @@
 
 @media (max-width: 900px) {
   .gallery-page-heading { align-items: flex-start; flex-direction: column; gap: 18px; }
-  .gallery-media-card, .gallery-media-card:nth-child(1), .gallery-media-card:nth-child(6) { grid-column: span 6; min-height: 360px; }
+  .professional-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-media-card { height: 280px; }
   .gallery-viewer-stage { max-height: 72vh; overflow-y: auto; }
   .gallery-viewer-media { height: 48vh; }
   .gallery-viewer-caption { grid-template-columns: auto 1fr; padding: 18px 22px; }
@@ -12480,8 +12478,8 @@
   .gallery-viewer-caption p { margin-bottom: 18px; }
 }
 @media (max-width: 600px) {
-  .professional-gallery { display: block; }
-  .gallery-media-card, .gallery-media-card:nth-child(1), .gallery-media-card:nth-child(4), .gallery-media-card:nth-child(5), .gallery-media-card:nth-child(6) { display: block; width: 100%; min-height: 0; height: 340px; margin-bottom: 14px; }
+  .professional-gallery { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .gallery-media-card { width: 100%; height: 260px; margin: 0; }
   .gallery-viewer-panel { width: calc(100vw - 24px) !important; max-width: calc(100vw - 24px) !important; max-height: calc(100vh - 24px); }
   .gallery-viewer-media { height: 42vh; }
   .gallery-viewer-caption { padding: 20px; }
